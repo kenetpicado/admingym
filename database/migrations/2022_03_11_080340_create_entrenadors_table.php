@@ -17,7 +17,7 @@ class CreateEntrenadorsTable extends Migration
             $table->id();
             $table->string('nombre', 50);
             $table->string('telefono', 8);
-            $table->string('horario', 30);
+            $table->string('horario', 10);
             $table->timestamps();
         });
     }

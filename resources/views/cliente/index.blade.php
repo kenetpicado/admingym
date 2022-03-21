@@ -5,14 +5,9 @@
 @section('contenido')
 <div class="content-body">
     <div class="container-fluid">
+        {{-- SI HAY MENSAJE DE NOTIFICACION --}}
         @if (session('info')) 
-            <div class="row page-titles mx-0">
-                <div class="col-sm-6 p-md-0">
-                    <div class="welcome-text">
-                        <h4>{{session('info')}}</h4>
-                    </div>
-                </div>
-            </div> 
+        <div class="alert alert-primary"><strong>Mensaje:</strong> {{session('info')}}</div>
         @endif
         <!-- row -->
         <div class="row">
@@ -28,10 +23,10 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Nombre</th>
-                                        <th>Telefono</th>
-                                        <th>Edad</th>
+                                        <th>Teléfono</th>
+                                        <th>Fecha de nacimiento</th>
                                         <th>Sexo</th>
-                                        <th>Opciones</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,9 +35,9 @@
                                         <td>{{$cliente->id}}</td>
                                         <td>{{$cliente->nombre}}</td>
                                         <td>{{$cliente->telefono}}</td>
-                                        <td>{{$cliente->edad}}</td>
+                                        <td>{{$cliente->fecha}}</td>
                                         <td>{{$cliente->sexo}}</td>
-                                        <td style="text-align: center;"><a href="{{route('clientes.edit', $cliente)}}" class="btn btn-outline-primary">Editar</a></td>
+                                        <td><a href="{{route('cliente.edit', $cliente)}}" class="btn btn-outline-primary">Editar</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

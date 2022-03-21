@@ -10,10 +10,10 @@ use App\Models\Reporte;
 
 class CajaController extends Controller
 {
-    public function __construct()
+    /* public function __construct()
     {
         $this->middleware('auth');
-    }
+    } */
     /**
      * Display a listing of the resource.
      *
@@ -21,35 +21,31 @@ class CajaController extends Controller
      */
     public function index()
     {
-        //MOSTRAR TODOS LOS CLINTES
-        $clientes = Cliente::all();
-        return view('caja.index', compact('clientes', $clientes));
-    }
-
-    //FUNCION PARA OBTENER TODOS LOS REGISTROS DE CAJA
-    public function actives()
-    {
         //  OBTENGO TODOS LOS ACTIVOS
-        $caja = Caja::all();
-        foreach ($caja as $item) {
+        $cajas = Caja::all();
+        
+        foreach ($cajas as $caja) {
             //SI LA FECHA ACTUAL ES MAYOR O IGUAL
             //A LA FECHA DE FIN: ELIMINA
-            if (date('Y-m-d') >= $item->fecha_fin) {
-                $reporte = new Reporte();
-                $reporte->mensaje = "Ha expirado el plan de: " . $item->nombre;
-                $reporte->cliente_id = $item->cliente_id;
-                $reporte->save();
+            if (date('Y-m-d') >= $caja->fecha_fin) {
+                Reporte::create([
+                    'mensaje' =>  "Ha expirado el plan de: " . $caja->cliente->nombre,
+                    'cliente_id' =>  $caja->cliente_id
+                ]);
 
-                CajaController::destroy($item);
+                CajaController::destroy($caja);
             }
         }
 
         //VUELVO A OBTENER LOS DATOS Y MUESTRO
-        $caja = Caja::all();
-        return view('caja.actives', compact('caja', $caja));
+        $cajas = Caja::all();
+        return view('caja.index', compact('cajas', $cajas));
     }
 
-    //FUNCION PARA ENCONTRAR EL 
+    public function pagar(Cliente $cliente)
+    {
+        return view('caja.pagar', compact('cliente', $cliente));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -58,7 +54,8 @@ class CajaController extends Controller
      */
     public function create()
     {
-        //return dd($cliente);
+        $clientes = Cliente::all();
+        return view('caja.create', compact('clientes', $clientes));
     }
 
     /**
@@ -69,6 +66,8 @@ class CajaController extends Controller
      */
     public function store(StoreCajaRequest $request)
     {
+        Reporte::destroy(Reporte::where('cliente_id', '=', $request->cliente_id)->get());
+        
         //OBTENER FECHA DE HOY
         $today = date('Y-m-d');
 
@@ -91,7 +90,6 @@ class CajaController extends Controller
         //GUARDAR DATOS
         Caja::create([
             'cliente_id' => $request->cliente_id,
-            'nombre' => $request->nombre,
             'servicio' => $request->servicio,
             'plan' => $request->plan,
             'monto' => $request->monto,
@@ -101,7 +99,7 @@ class CajaController extends Controller
             'fecha_fin' => $end
         ]);
 
-        return redirect()->route('actives')->with('info', 'Se ha guardado el pago!');
+        return redirect()->route('caja.create')->with('info', 'Se ha guardado el pago!' );
     }
 
     /**

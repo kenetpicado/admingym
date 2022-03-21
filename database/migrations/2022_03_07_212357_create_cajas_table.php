@@ -15,15 +15,15 @@ class CreateCajasTable extends Migration
     {
         Schema::create('cajas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 50);
 
             $table->enum('servicio', ['PESAS', 'SPINNING', 'ZUMBA', 'TAEKWONDO']);
             $table->enum('plan', ['MENSUAL', 'QUINCENAL', 'SEMANAL', 'DIA']);
-            $table->string('monto', 4); //PRECIO
-            $table->string('beca', 3)->default('0'); //PORCENTAJE
-            $table->string('nota', 50)->nullable(); //PORCENTAJE
-            $table->date('fecha_inicio')->default(date('Y-m-d')); //FECHA EN QUE SE PAGA
-            $table->date('fecha_fin'); //FECHA EN QUE EXPIRA
+            $table->float('monto'); 
+            $table->float('beca')->default(0); 
+            $table->string('nota', 30)->nullable(); 
+            $table->date('fecha_inicio')->default(date('Y-m-d'));
+            $table->date('fecha_fin');
+            
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes');
 

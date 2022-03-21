@@ -25,6 +25,9 @@ class StoreClienteRequest extends FormRequest
     {
         return [
             //
+            'nombre' => 'required|max:50',
+            'telefono' => 'required|max:8|min:8',
+            'fecha' => 'required|date'
         ];
     }
 }

@@ -9,10 +9,6 @@ use App\Models\Evento;
 
 class EntrenadorController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +16,7 @@ class EntrenadorController extends Controller
      */
     public function index()
     {
-        //
-        $entrenadors = Entrenador::all();
-        return view('entrenador.index', compact('entrenadors', $entrenadors));
+
     }
 
     /**
@@ -32,8 +26,8 @@ class EntrenadorController extends Controller
      */
     public function create()
     {
-        //
-        return view('entrenador.create');
+        $entrenadors = Entrenador::all();
+        return view('entrenador.create', compact('entrenadors', $entrenadors));
     }
 
     /**
@@ -85,7 +79,7 @@ class EntrenadorController extends Controller
     {
         //
         $entrenador->update($request->all());
-        return redirect()->route('entrenador.index');
+        return redirect()->route('entrenador.create')->with('info', 'Se han actualizado los datos!');
     }
 
     /**

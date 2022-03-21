@@ -8,10 +8,6 @@ use App\Http\Requests\UpdateClienteRequest;
 
 class ClienteController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +15,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //MOSTRAR TODOS LOS CLINTES
         $clientes = Cliente::all();
-        return view('clientes.index', compact('clientes', $clientes));
+        return view('cliente.index', compact('clientes', $clientes));
     }
 
     /**
@@ -31,8 +26,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //VER FORMULARIO PARA AGREGAR NUEVA PERSONA
-        return view('clientes.create');
+        return view('cliente.create');
     }
 
     /**
@@ -45,7 +39,7 @@ class ClienteController extends Controller
     {
         //GUARDAR DATOS PROVENIENTES DEL FORM 
         Cliente::create($request->all());
-        return redirect()->route('clientes.create')->with('info', 'Se ha guardado el cliente!');
+        return redirect()->route('cliente.create')->with('info', 'Se ha guardado el cliente!');
     }
 
     /**
@@ -57,7 +51,7 @@ class ClienteController extends Controller
     public function show(Cliente $cliente)
     {
         //
-        return view('caja.create', compact('cliente', $cliente));
+        //return view('caja.create', compact('cliente', $cliente));
     }
 
     /**
@@ -68,8 +62,7 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
-        return view('clientes.edit', compact('cliente', $cliente));
+        return view('cliente.edit', compact('cliente', $cliente));
     }
 
     /**
@@ -83,7 +76,7 @@ class ClienteController extends Controller
     {
         //
         $cliente->update($request->all());
-        return redirect()->route('clientes.index');
+        return redirect()->route('cliente.index')->with('info', 'Los datos han sido guardados!');
     }
 
     /**

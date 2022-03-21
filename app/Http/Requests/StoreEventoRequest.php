@@ -25,6 +25,7 @@ class StoreEventoRequest extends FormRequest
     {
         return [
             //
+            'monto' => 'nullable|numeric'
         ];
     }
 }

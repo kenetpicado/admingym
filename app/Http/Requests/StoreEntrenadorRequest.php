@@ -25,6 +25,9 @@ class StoreEntrenadorRequest extends FormRequest
     {
         return [
             //
+            'nombre' => 'required|max:50',
+            'telefono' => 'required|max:8|min:8',
+            'horario' => 'required|max:10'
         ];
     }
 }

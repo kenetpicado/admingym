@@ -17,7 +17,7 @@ class CreateEventosTable extends Migration
             $table->id();
             $table->date('fecha')->default(date('Y-m-d'));
             $table->enum('tipo', ['PAGO', 'INASISTENCIA']);
-            $table->string('monto', 5);
+            $table->float('monto')->nullable()->default(0);
             $table->unsignedBigInteger('entrenador_id');
             $table->foreign('entrenador_id')->references('id')->on('entrenadors');
             $table->timestamps();

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Caja;
+use App\Models\Reporte;
 
 class Cliente extends Model
 {
@@ -19,10 +20,10 @@ class Cliente extends Model
     }
 
     public function cajas(){
-        return $this->hasMany('App\Models\Caja');
+        return $this->hasMany(Caja::class);
     }
 
     public function reportes(){
-        return $this->hasMany('App\Models\Reporte');
+        return $this->hasMany(Reporte::class);
     }
 }

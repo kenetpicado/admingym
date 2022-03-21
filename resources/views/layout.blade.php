@@ -11,9 +11,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="">
 
     <!-- Datatable -->
-    <link href="{{asset('vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('css/style.css')}}" >
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
@@ -52,16 +52,20 @@
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-account"></i>
-                                    <small>{{ Auth::user()->name }}</small>
+                                    <small>
+                                        @if (Auth::user())
+                                            {{ Auth::user()->name }}
+                                        @endif
+                                    </small>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -82,51 +86,43 @@
                             <span class="nav-text">Inicio</span>
                         </a>
                     </li>
-                    <li class="nav-label first">CLIENTES</li>
+                    <li class="nav-label first">Clientes</li>
                     <li>
-                        <a class="" href="{{route('clientes.create')}}">
+                        <a class="" href="{{ route('cliente.create') }}">
                             <i class="icon icon-single-04"></i>
-                            <span class="nav-text">Agregar cliente</span>
+                            <span class="nav-text">Clientes</span>
                         </a>
                     </li>
                     <li>
-                        <a class="" href="{{route('clientes.index')}}">
+                        <a class="" href="{{ route('cliente.index') }}">
                             <i class="icon icon-form"></i>
                             <span class="nav-text">Ver clientes</span>
                         </a>
                     </li>
                     <li>
-                        <a class="" href="{{route('actives')}}">
+                        <a class="" href="{{ route('caja.index') }}">
                             <i class="icon icon-plug"></i>
                             <span class="nav-text">Planes activos</span>
                         </a>
                     </li>
                     <li class="nav-label first">Administración</li>
                     <li>
-                        <a class="" href="{{route('caja.index')}}">
+                        <a class="" href="{{ route('caja.create') }}">
                             <i class="icon icon-single-copy-06"></i>
                             <span class="nav-text">Caja</span>
                         </a>
                     </li>
                     <li>
-                        <a class="" href="{{route('reportes.index')}}">
+                        <a class="" href="{{ route('reporte.index') }}">
                             <i class="icon icon-single-copy-06"></i>
                             <span class="nav-text">Reportes</span></a>
                     </li>
-                    <li class="nav-label first">Entrenadores</li>
                     <li>
-                        <a class="" href="{{route('entrenador.create')}}">
+                        <a class="" href="{{ route('entrenador.create') }}">
                             <i class="icon icon-single-04"></i>
-                            <span class="nav-text">Agregar entrenador</span>
+                            <span class="nav-text">Entrenadores</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="" href="{{route('entrenador.index')}}">
-                            <i class="icon icon-form"></i>
-                            <span class="nav-text">Ver entrenadores</span>
-                        </a>
-                    </li>
-                    
                 </ul>
             </div>
         </div>
@@ -137,13 +133,13 @@
     </div>
 
     <!-- Required vendors -->
-    <script src="{{asset('vendor/global/global.min.js')}}"></script>
-    <script src="{{asset('js/quixnav-init.js')}}"></script>
-    <script src="{{asset('js/custom.min.js')}}"></script>
+    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('js/quixnav-init.js') }}"></script>
+    <script src="{{ asset('js/custom.min.js') }}"></script>
 
     <!-- Datatable -->
-    <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('js/plugins-init/datatables.init.js')}}"></script>
+    <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
 
 </body>
 

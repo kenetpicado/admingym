@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CajaController;
 use App\Http\Controllers\ClienteController;
-use App\Models\Caja;
-use App\Models\Cliente;
+use App\Http\Controllers\EntrenadorController;
+use App\Http\Controllers\EventoController;
+use App\Http\Controllers\ReporteController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,31 +20,17 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    $cant = Cliente::all()->count();
-    $cant2 = Caja::all()->count();
-    $ganancias = 0;
-
-    $caja = Caja::all();
-
-    foreach ($caja as $item) {
-        $ganancias = $ganancias + $item->monto;
-    }
-    return view('index', compact('cant', 'ganancias', 'cant2', $cant, $ganancias, $cant2));
-})->middleware('auth');
+    return view('blank');
+});
 
 //RUTAS EXTRAS
-Route::get('reportes/delete', 'ReporteController@delete')->name('reportes.delete');
+Route::get('delete',  [ReporteController::class, 'delete'])->name('reporte.delete');
 
-//RECURSOS DE RUTAS PREDEFINIDAS
-Route::resource('clientes', 'ClienteController');
-Route::resource('caja', 'CajaController');
-Route::resource('reportes', 'ReporteController');
-Route::resource('entrenador', 'EntrenadorController');
-Route::resource('evento', 'EventoController');
+Route::get('pagar/{cliente}', [CajaController::class, 'pagar'])->name('pagar');
 
-//RUTA PARA VER LOS CLIENTES ACTIVOS
-Route::get('actives', 'CajaController@actives')->name('actives');
-
-//RUTAAS QUE PROVEE EL SERVICIO DE AUTENTICACION
+Route::resource('cliente', ClienteController::class);
+Route::resource('caja', CajaController::class);
+Route::resource('entrenador', EntrenadorController::class);
+Route::resource('evento', EventoController::class);
+Route::resource('reporte', ReporteController::class);
 Auth::routes();
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

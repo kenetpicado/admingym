@@ -17,13 +17,13 @@
                             foreach ($reportes as $reporte) {
                             ?>
                             <div class='alert alert-dark'>{{ $reporte->fecha_reporte }}: {{ $reporte->mensaje }}
-                                <a href='{{ route('clientes.show', $reporte->cliente_id) }}'>: Volver a pagar</a>
+                                <a href='{{ route('pagar', $reporte->cliente) }}'>: Volver a pagar</a>
                             </div>
                             <?php
                             }
                             ?>
                             <hr>
-                            <a href="{{ route('reportes.delete') }}" class="btn btn-outline-danger">
+                            <a href="{{ route('reporte.delete') }}" class="btn btn-outline-danger">
                                 Borrar todos los reportes
                             </a>
                         </div>
