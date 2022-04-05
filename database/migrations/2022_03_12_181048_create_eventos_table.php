@@ -15,11 +15,14 @@ class CreateEventosTable extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha')->default(date('Y-m-d'));
             $table->enum('tipo', ['PAGO', 'INASISTENCIA']);
-            $table->float('monto')->nullable()->default(0);
+            $table->float('monto')->default(0);
+            
             $table->unsignedBigInteger('entrenador_id');
-            $table->foreign('entrenador_id')->references('id')->on('entrenadors');
+            $table->foreign('entrenador_id')
+            ->references('id')
+            ->on('entrenadors')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

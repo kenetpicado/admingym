@@ -21,7 +21,7 @@ class CajaController extends Controller
      */
     public function index()
     {
-        //  OBTENGO TODOS LOS ACTIVOS
+        // OBTENGO TODOS LOS ACTIVOS
         $cajas = Caja::all();
         
         foreach ($cajas as $caja) {
@@ -29,7 +29,7 @@ class CajaController extends Controller
             //A LA FECHA DE FIN: ELIMINA
             if (date('Y-m-d') >= $caja->fecha_fin) {
                 Reporte::create([
-                    'mensaje' =>  "Ha expirado el plan de: " . $caja->cliente->nombre,
+                    'mensaje' =>  $caja->cliente->nombre,
                     'cliente_id' =>  $caja->cliente_id
                 ]);
 
@@ -37,14 +37,16 @@ class CajaController extends Controller
             }
         }
 
-        //VUELVO A OBTENER LOS DATOS Y MUESTRO
+        $reportes = Reporte::all();
+
+        //PLANES ACTIVOS
         $cajas = Caja::all();
-        return view('caja.index', compact('cajas', $cajas));
+        return view('caja.index', compact('cajas'))->with('reportes', $reportes);
     }
 
     public function pagar(Cliente $cliente)
     {
-        return view('caja.pagar', compact('cliente', $cliente));
+        return view('caja.create', compact('cliente', $cliente));
     }
 
     /**
@@ -54,8 +56,7 @@ class CajaController extends Controller
      */
     public function create()
     {
-        $clientes = Cliente::all();
-        return view('caja.create', compact('clientes', $clientes));
+        //
     }
 
     /**
@@ -66,7 +67,7 @@ class CajaController extends Controller
      */
     public function store(StoreCajaRequest $request)
     {
-        Reporte::destroy(Reporte::where('cliente_id', '=', $request->cliente_id)->get());
+        //Reporte::destroy(Reporte::where('cliente_id', '=', $request->cliente_id)->get());
         
         //OBTENER FECHA DE HOY
         $today = date('Y-m-d');
@@ -87,19 +88,15 @@ class CajaController extends Controller
                 break;
         }
 
-        //GUARDAR DATOS
-        Caja::create([
-            'cliente_id' => $request->cliente_id,
-            'servicio' => $request->servicio,
-            'plan' => $request->plan,
-            'monto' => $request->monto,
-            'beca' => $request->beca,
-            'nota' => $request->nota,
-            'fecha_inicio' => $today,
+        //Agregar fecha de fin
+        $request->merge([
             'fecha_fin' => $end
         ]);
 
-        return redirect()->route('caja.create')->with('info', 'Se ha guardado el pago!' );
+        //GUARDAR DATOS
+        Caja::create($request->all());
+
+        return redirect()->route('cliente.index')->with('status', 'ok' );
     }
 
     /**

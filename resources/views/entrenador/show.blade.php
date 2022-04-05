@@ -1,84 +1,63 @@
 @extends('layout')
 
-@section('title', 'Ver detalles')
+@section('title', 'Eventos')
 
 @section('contenido')
-    <div class="content-body">
-        <div class="container-fluid">
-            {{-- SI HAY MENSAJE DE NOTIFICACION --}}
-            @if (session('info'))
-                <div class="alert alert-primary"><strong>Mensaje:</strong> {{ session('info') }}</div>
-            @endif
-            <!-- row -->
-            <div class="row">
-                <div class="col-xl-6 col-xxl-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">ENTRENADOR: {{ $entrenador->nombre }}</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="basic-form">
-                                <form action="{{ route('evento.store') }}" method="POST">
-                                    @csrf
-                                    <div class="form-row">
-                                        <div class="form-group col-md-3">
-                                            <label>Seleccione un evento</label>
-                                            <select name="tipo" class="form-control" required>
-                                                <option selected value="PAGO">REGISTRAR PAGO</option>
-                                                <option value="INASISTENCIA">INASISTENCIA</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label>Monto C$</label>
-                                            <input type="number" name="monto"
-                                                class="form-control  @error('monto') is-invalid @enderror"
-                                                autocomplete="off" value="{{ old('monto', 0) }}">
+    <div class="container-fluid">
 
-                                            @error('monto')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between m-2">
+            <h1 class="h3 mb-0 text-gray-800">Eventos del entrenador: {{ $entrenador->nombre }}</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                data-target="#agregarEvento">
+                <i class="fas fa-download fa-sm text-white-50"></i>
+                Agregar
+            </a>
+        </div>
 
-                                    </div>
-                                    <input type="hidden" name="entrenador_id" value="{{ $entrenador->id }}">
-                                    <button type="submit" class="btn btn-outline-primary">Agregar evento</button>
-                                </form>
-                            </div>
-                            <hr>
-                            <div class="table-responsive">
-                                <table id="example" class="display" style="min-width: 845px">
-                                    <thead>
-                                        <tr>
-                                            <th>Fecha</th>
-                                            <th>Evento</th>
-                                            <th>Monto</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($eventos as $evento)
-                                            <tr>
-                                                <td>{{ $evento->fecha }}</td>
-                                                <td>
-                                                    @php
-                                                        if ($evento->tipo == 'PAGO') {
-                                                            echo "<div class='alert alert-primary'>Se ha registrado: $evento->tipo</div>";
-                                                        } else {
-                                                            echo "<div class='alert alert-danger'>Se ha registrado: $evento->tipo</div>";
-                                                        }
-                                                    @endphp
-                                                <td>{{ $evento->monto }}</td>
-                                            </tr>
-                                        @endforeach
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+        <!-- DataTales -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Todos los eventos</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Evento</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($entrenador->eventos as $evento)
+                                <tr>
+                                    <td>{{date("d - F - Y",  strtotime($evento->created_at))}}</td>
+                                    @if ($evento->tipo == 'PAGO')
+                                        <td>Se ha registrado un pago por la cantidad de: </td>
+                                        <td><strong>C$ {{ $evento->monto }}</strong> </td>
+                                    @else
+                                        <td><span class="badge badge-danger">Inasistencia</span></td>
+                                        <td>-</td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+
+        @include('entrenador.modal')
+
     </div>
 @endsection('contenido')
+
+@section('re-open')
+    @if ($errors->any())
+        <script>
+            $('#agregarEvento').modal('show')
+        </script>
+    @endif
+@endsection

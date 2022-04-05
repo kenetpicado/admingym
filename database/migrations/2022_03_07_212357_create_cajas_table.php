@@ -20,8 +20,7 @@ class CreateCajasTable extends Migration
             $table->enum('plan', ['MENSUAL', 'QUINCENAL', 'SEMANAL', 'DIA']);
             $table->float('monto'); 
             $table->float('beca')->default(0); 
-            $table->string('nota', 30)->nullable(); 
-            $table->date('fecha_inicio')->default(date('Y-m-d'));
+            $table->string('nota', 30)->nullable();
             $table->date('fecha_fin');
             
             $table->unsignedBigInteger('cliente_id');

@@ -15,8 +15,13 @@ class Entrenador extends Model
     {
         $this->attributes['nombre'] = trim(strtoupper($value));
     }
-
-    public function eventos(){
+    //FUNCION PARA CONVERTIR EL NOMBRE EN MAYUSCULA
+    public function setHorarioAttribute($value)
+    {
+        $this->attributes['horario'] = trim(strtoupper($value));
+    }
+    public function eventos()
+    {
         return $this->hasMany('App\Models\Evento');
     }
 }

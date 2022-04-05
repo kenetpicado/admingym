@@ -15,6 +15,9 @@ class EntrenadorFactory extends Factory
     {
         return [
             //
+            'nombre' => $this->faker->name(),
+            'telefono' => $this->faker->numerify('8#######'),
+            'horario' => $this->faker->numerify('# am - # pm'),
         ];
     }
 }

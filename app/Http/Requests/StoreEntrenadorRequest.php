@@ -27,7 +27,7 @@ class StoreEntrenadorRequest extends FormRequest
             //
             'nombre' => 'required|max:50',
             'telefono' => 'required|max:8|min:8',
-            'horario' => 'required|max:10'
+            'horario' => 'required|max:20'
         ];
     }
 }

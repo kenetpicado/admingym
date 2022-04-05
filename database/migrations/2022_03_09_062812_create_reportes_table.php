@@ -15,10 +15,14 @@ class CreateReportesTable extends Migration
     {
         Schema::create('reportes', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha_reporte')->default(date('Y-m-d'));
             $table->string('mensaje', 70);
+
             $table->unsignedBigInteger('cliente_id');
-            $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->foreign('cliente_id')
+            ->references('id')
+            ->on('clientes')
+            ->onDelete('cascade');
+            
             $table->timestamps();
         });
     }

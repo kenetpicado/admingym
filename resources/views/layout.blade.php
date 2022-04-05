@@ -1,145 +1,143 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Alonso Gym - @yield('title')</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <title>{{config('app.name')}} - @yield('title')</title>
 
-    <!-- Datatable -->
-    <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <!-- Custom styles for this template -->
+    <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+
+    {{-- SWEETALERT --}}
+    <link href="{{ asset('css/sweetalert2.min.css') }}" rel="stylesheet">
+
 </head>
 
-<body>
+<body id="page-top">
 
-    <!--Preloader start-->
-    <div id="preloader">
-        <div class="sk-three-bounce">
-            <div class="sk-child sk-bounce1"></div>
-            <div class="sk-child sk-bounce2"></div>
-            <div class="sk-child sk-bounce3"></div>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        @include('partials.sidebar')
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                @include('partials.topbar')
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                @yield('contenido')
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            {{-- @include('partials.footer') --}}
+            <!-- End of Footer -->
+
         </div>
-    </div>
+        <!-- End of Content Wrapper -->
 
-    <!--Main wrapper-->
-    <div id="main-wrapper">
-        <div class="nav-header">
-            <a href="" class="brand-logo">
-                ALONSO GYM
-            </a>
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span
-                        class="line"></span>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
-
-        <!--Header-->
-        <div class="header">
-            <div class="header-content">
-                <nav class="navbar navbar-expand">
-                    <div class="collapse navbar-collapse justify-content-between">
-                        <div class="header-left">
-                        </div>
-                        <ul class="navbar-nav header-right">
-                            <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
-                                    <small>
-                                        @if (Auth::user())
-                                            {{ Auth::user()->name }}
-                                        @endif
-                                    </small>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-
-        <!--Sidebar-->
-        <div class="quixnav">
-            <div class="quixnav-scroll">
-                <ul class="metismenu" id="menu">
-                    <li>
-                        <a class="" href="/">
-                            <i class="icon icon-home"></i>
-                            <span class="nav-text">Inicio</span>
-                        </a>
-                    </li>
-                    <li class="nav-label first">Clientes</li>
-                    <li>
-                        <a class="" href="{{ route('cliente.create') }}">
-                            <i class="icon icon-single-04"></i>
-                            <span class="nav-text">Clientes</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="{{ route('cliente.index') }}">
-                            <i class="icon icon-form"></i>
-                            <span class="nav-text">Ver clientes</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="{{ route('caja.index') }}">
-                            <i class="icon icon-plug"></i>
-                            <span class="nav-text">Planes activos</span>
-                        </a>
-                    </li>
-                    <li class="nav-label first">Administración</li>
-                    <li>
-                        <a class="" href="{{ route('caja.create') }}">
-                            <i class="icon icon-single-copy-06"></i>
-                            <span class="nav-text">Caja</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="{{ route('reporte.index') }}">
-                            <i class="icon icon-single-copy-06"></i>
-                            <span class="nav-text">Reportes</span></a>
-                    </li>
-                    <li>
-                        <a class="" href="{{ route('entrenador.create') }}">
-                            <i class="icon icon-single-04"></i>
-                            <span class="nav-text">Entrenadores</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-
-        @yield('contenido')
-
     </div>
 
-    <!-- Required vendors -->
-    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('js/quixnav-init.js') }}"></script>
-    <script src="{{ asset('js/custom.min.js') }}"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
-    <!-- Datatable -->
-    <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/plugins-init/datatables.init.js') }}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
+
+    {{-- sweetalert2 --}}
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+
+    {{--  --}}
+    <script src="{{ asset('js/functions.js') }}"></script>
+
+    @yield('re-open')
+
+    {{-- SI HAY MENSAJE DE CONFIRMACION --}}
+    @if (session('status') == 'ok')
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Se han guardado los datos',
+                showConfirmButton: false,
+                timer: 1000
+            })
+        </script>
+    @endif
+
+    @if (session('status') == 'eliminado')
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Se han eliminado los datos',
+                showConfirmButton: false,
+                timer: 1000
+            })
+        </script>
+    @endif
 
 </body>
 

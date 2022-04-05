@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Cliente;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ClienteFactory extends Factory
@@ -11,10 +12,15 @@ class ClienteFactory extends Factory
      *
      * @return array
      */
+
+
     public function definition()
     {
         return [
-            //
+            'nombre' => $this->faker->name(),
+            'telefono' => $this->faker->numerify('8#######'),
+            'fecha' => $this->faker->date('Y-m-d', 'now'),
+            'sexo' => $this->faker->randomElement(['F', 'M']),
         ];
     }
 }

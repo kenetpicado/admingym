@@ -37,9 +37,10 @@ class ClienteController extends Controller
      */
     public function store(StoreClienteRequest $request)
     {
+        
         //GUARDAR DATOS PROVENIENTES DEL FORM 
         Cliente::create($request->all());
-        return redirect()->route('cliente.create')->with('info', 'Se ha guardado el cliente!');
+        return redirect()->route('cliente.index')->with('status', 'ok');
     }
 
     /**
@@ -76,7 +77,7 @@ class ClienteController extends Controller
     {
         //
         $cliente->update($request->all());
-        return redirect()->route('cliente.index')->with('info', 'Los datos han sido guardados!');
+        return redirect()->route('cliente.index')->with('status', 'ok');
     }
 
     /**
@@ -88,5 +89,7 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+        $cliente->delete();
+        return redirect()->route('cliente.index')->with('status', 'eliminado');
     }
 }

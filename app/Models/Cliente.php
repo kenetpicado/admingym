@@ -9,7 +9,7 @@ use App\Models\Reporte;
 
 class Cliente extends Model
 {
-    //use HasFactory;
+    use HasFactory;
     //AL INSERTAR LOS DATOS NO GENERA ERROR EL _TOKEN DE CSRF QUE SE HA ENVIADO
     protected $guarded = [];
 

@@ -38,10 +38,16 @@ class EventoController extends Controller
     public function store(StoreEventoRequest $request)
     {
         //
+        if ($request->tipo == 'PAGO') {
+            $request->validate([
+                'monto' => 'required|numeric|gt:0',
+            ]);
+        }
+
         $entrenador = Entrenador::find($request->entrenador_id);
-        
+
         Evento::create($request->all());
-        return redirect()->route('entrenador.show', compact('entrenador', $entrenador))->with('info', 'Se ha guardado el evento!');
+        return redirect()->route('entrenador.show', compact('entrenador', $entrenador))->with('status', 'ok');
     }
 
     /**

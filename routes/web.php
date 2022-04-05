@@ -5,6 +5,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EntrenadorController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\ReporteController;
+use App\Models\Entrenador;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,7 +26,6 @@ Route::get('/', function () {
 
 //RUTAS EXTRAS
 Route::get('delete',  [ReporteController::class, 'delete'])->name('reporte.delete');
-
 Route::get('pagar/{cliente}', [CajaController::class, 'pagar'])->name('pagar');
 
 Route::resource('cliente', ClienteController::class);

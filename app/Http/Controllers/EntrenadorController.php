@@ -16,7 +16,8 @@ class EntrenadorController extends Controller
      */
     public function index()
     {
-
+        $entrenadors = Entrenador::all();
+        return view('entrenador.index', compact('entrenadors', $entrenadors));
     }
 
     /**
@@ -26,8 +27,7 @@ class EntrenadorController extends Controller
      */
     public function create()
     {
-        $entrenadors = Entrenador::all();
-        return view('entrenador.create', compact('entrenadors', $entrenadors));
+        
     }
 
     /**
@@ -40,7 +40,7 @@ class EntrenadorController extends Controller
     {
         //GUARDAR DATOS PROVENIENTES DEL FORM 
         Entrenador::create($request->all());
-        return redirect()->route('entrenador.create')->with('info', 'Se ha guardado el entrenador!');
+        return redirect()->route('entrenador.index')->with('status', 'ok');
     }
 
     /**
@@ -52,8 +52,7 @@ class EntrenadorController extends Controller
     public function show(Entrenador $entrenador)
     {
         //
-        $eventos = $entrenador->eventos;
-        return view('entrenador.show', compact('entrenador', 'eventos', $entrenador, $eventos));
+        return view('entrenador.show', compact('entrenador'));
     }
 
     /**
@@ -65,7 +64,7 @@ class EntrenadorController extends Controller
     public function edit(Entrenador $entrenador)
     {
         //
-        return view('entrenador.edit', compact('entrenador', $entrenador));
+        return view('entrenador.edit', compact('entrenador'));
     }
 
     /**
@@ -79,7 +78,7 @@ class EntrenadorController extends Controller
     {
         //
         $entrenador->update($request->all());
-        return redirect()->route('entrenador.create')->with('info', 'Se han actualizado los datos!');
+        return redirect()->route('entrenador.index')->with('status', 'ok');
     }
 
     /**
@@ -91,5 +90,7 @@ class EntrenadorController extends Controller
     public function destroy(Entrenador $entrenador)
     {
         //
+        $entrenador->delete();
+        return redirect()->route('entrenador.index')->with('status', 'eliminado');
     }
 }
