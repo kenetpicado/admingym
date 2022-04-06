@@ -15,14 +15,4 @@ class Caja extends Model
     public function cliente(){
         return $this->belongsTo(Cliente::class);
     }
-
-    public function getFechaFinAttribute($value)
-    {
-        return date("d - F - Y",  strtotime($value));
-    }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return date("d - F - Y",  strtotime($value));
-    }
 }
