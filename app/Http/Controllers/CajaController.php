@@ -6,6 +6,7 @@ use App\Models\Caja;
 use App\Models\Cliente;
 use App\Http\Requests\StoreCajaRequest;
 use App\Http\Requests\UpdateCajaRequest;
+use App\Models\Ingreso;
 use App\Models\Reporte;
 
 class CajaController extends Controller
@@ -95,6 +96,9 @@ class CajaController extends Controller
 
         //GUARDAR DATOS
         Caja::create($request->all());
+
+        //Guardar ingreso
+        Ingreso::create(['monto' => $request->monto]);
 
         return redirect()->route('cliente.index')->with('status', 'ok' );
     }

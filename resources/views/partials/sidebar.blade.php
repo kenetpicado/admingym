@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('home.index')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -45,6 +45,13 @@
         <a class="nav-link" href="{{ route('entrenador.index') }}">
             <i class="fas fa-fw fa-users"></i>
             <span>Entrenadores</span></a>
+    </li>
+
+    <!-- Nav Item - entrenadores -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('ingreso.index') }}">
+            <i class="fas fa-fw fa-coins"></i>
+            <span>Ingresos</span></a>
     </li>
 
     <!-- Divider -->
