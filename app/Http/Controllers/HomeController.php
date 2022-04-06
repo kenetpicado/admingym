@@ -6,6 +6,7 @@ use App\Models\Caja;
 use App\Models\Cliente;
 use App\Models\Entrenador;
 use Illuminate\Http\Request;
+use App\Models\Reporte;
 
 class HomeController extends Controller
 {
@@ -76,7 +77,8 @@ class HomeController extends Controller
             'porcentaje' => $porcentaje
         ]);
 
-        return view('index', compact('sexo', 'servicios', 'ver'));
+        $reportes = Reporte::all();
+        return view('index', compact('sexo', 'servicios', 'ver', 'reportes'));
         
     }
 }

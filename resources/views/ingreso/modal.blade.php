@@ -13,8 +13,7 @@
                 <div class="modal-body">
                     <p>
                         <strong>
-                            En esta sección podra consultar los ingresos totales en un rango
-                            de fechas especifico. Seleccione la fecha de inicio y fin de la consulta.
+                            Seleccione la fecha de inicio y fin de la consulta.
                         </strong>
 
                     </p>
@@ -32,7 +31,7 @@
                     <div class="form-group">
                         <label>Fecha fin</label>
                         <input type="date" name="fin" class="form-control @error('fin') is-invalid @enderror"
-                            autocomplete="off" value="{{ old('fin') }}">
+                            autocomplete="off" value="{{ old('fin', date('Y-m-d')) }}">
                         @error('fin')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

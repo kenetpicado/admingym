@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Reporte;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 
@@ -15,8 +16,9 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        $reportes = Reporte::all();
         $clientes = Cliente::all();
-        return view('cliente.index', compact('clientes', $clientes));
+        return view('cliente.index', compact('clientes', 'reportes'));
     }
 
     /**

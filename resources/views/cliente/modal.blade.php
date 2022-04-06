@@ -24,11 +24,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Número de teléfono</label>
-                        <input type="number" name="telefono"
-                            class="form-control @error('telefono') is-invalid @enderror" autocomplete="off"
-                            value="{{ old('telefono') }}" placeholder="86006856">
-                        @error('telefono')
+                        <label>Correo</label>
+                        <input type="email" name="email"
+                            class="form-control @error('email') is-invalid @enderror" autocomplete="off"
+                            value="{{ old('email') }}">
+                        @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label>Fecha de nacimiento</label>
                         <input type="date" name="fecha" class="form-control @error('fecha') is-invalid @enderror"
-                            autocomplete="off" value="{{ old('fecha') }}">
+                            autocomplete="off" value="{{ old('fecha', '2001-01-01') }}">
                         @error('fecha')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

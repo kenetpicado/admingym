@@ -1,4 +1,4 @@
-@extends('layout')
+email@extends('layout')
 
 @section('title', 'Editar cliente')
 
@@ -36,11 +36,11 @@
 
                     <div class="row">
                         <div class="form-group col-6">
-                            <label>Número de teléfono</label>
-                            <input type="number" name="telefono"
-                                class="form-control is-valid @error('telefono') is-invalid @enderror" autocomplete="off"
-                                value="{{ old('telefono', $cliente->telefono) }}" placeholder="86006856">
-                            @error('telefono')
+                            <label>Correo</label>
+                            <input type="number" name="email"
+                                class="form-control is-valid @error('email') is-invalid @enderror" autocomplete="off"
+                                value="{{ old('email', $cliente->email) }}">
+                            @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

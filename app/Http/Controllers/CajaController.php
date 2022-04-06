@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateCajaRequest;
 use App\Models\Ingreso;
 use App\Models\Reporte;
 
+use function PHPUnit\Framework\isEmpty;
+
 class CajaController extends Controller
 {
     /* public function __construct()
@@ -24,7 +26,7 @@ class CajaController extends Controller
     {
         // OBTENGO TODOS LOS ACTIVOS
         $cajas = Caja::all();
-        
+
         foreach ($cajas as $caja) {
             //SI LA FECHA ACTUAL ES MAYOR O IGUAL
             //A LA FECHA DE FIN: ELIMINA
@@ -68,8 +70,11 @@ class CajaController extends Controller
      */
     public function store(StoreCajaRequest $request)
     {
-        //Reporte::destroy(Reporte::where('cliente_id', '=', $request->cliente_id)->get());
-        
+        //SI UN CLIENTE TIENE REPORTE BORRAR
+        if (Reporte::where('cliente_id', '=', $request->cliente_id)->get()->count() > 0) {
+            Reporte::destroy(Reporte::where('cliente_id', '=', $request->cliente_id)->get());
+        }
+
         //OBTENER FECHA DE HOY
         $today = date('Y-m-d');
 
@@ -98,9 +103,12 @@ class CajaController extends Controller
         Caja::create($request->all());
 
         //Guardar ingreso
-        Ingreso::create(['monto' => $request->monto]);
+        Ingreso::create([
+            'monto' => $request->monto,
+            'servicio' => $request->servicio
+        ]);
 
-        return redirect()->route('cliente.index')->with('status', 'ok' );
+        return redirect()->route('cliente.index')->with('status', 'ok');
     }
 
     /**

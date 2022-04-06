@@ -27,7 +27,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Teléfono</th>
+                                <th>Correo</th>
                                 <th>Fecha de nacimiento</th>
                                 <th>Sexo</th>
                                 <th></th>
@@ -38,7 +38,7 @@
                                 <tr>
                                     <td>{{$cliente->id}}</td>
                                     <td>{{ $cliente->nombre }}</td>
-                                    <td>{{ $cliente->telefono }}</td>
+                                    <td>{{ $cliente->email }}</td>
                                     <td>{{date("d - F - Y",  strtotime($cliente->fecha))}}</td>
                                     <td>{{ $cliente->sexo }}</td>
                                     <td>

@@ -31,8 +31,8 @@ class IngresoController extends Controller
     {
         $request->validate([
             'inicio' => 'required|date',
-            'fin' => 'required|date|after_or_equal:inicio|before_or_equal:tomorrow'
-        ],[],[
+            'fin' => 'required|date|after_or_equal:inicio'
+        ], [], [
             'fin' => 'fecha fin',
             'inicio' => 'fecha inicio',
         ]);
@@ -40,12 +40,21 @@ class IngresoController extends Controller
         $inicio = $request->input('inicio');
         $fin = $request->input('fin');
 
+        $i2 = date('Y-m-d', strtotime($inicio . ' - 1 days'));
+        $f2 = date('Y-m-d', strtotime($fin . ' + 1 days'));
 
-        $monto = Ingreso::where('created_at', '>=', $inicio)
-        ->where('created_at', '<=', $fin)->get()->sum('monto');
+
+        $ingresos = Ingreso::where('created_at', '>=', $i2)
+            ->where('created_at', '<=', $f2)->get();
+
+        $mensaje = 'De ' . 
+        date('d - F - Y', strtotime($inicio)) . ' a ' . 
+        date('d - F - Y', strtotime($fin)) . ' se han encontrado ' . 
+        $ingresos->count() . ' registros, con un total de C$ ' .
+        $ingresos->sum('monto');
 
         return redirect()->route('ingreso.index')
-        ->with('monto', 'Se han registrado C$ ' . $monto);
+            ->with('ingresos', $ingresos)->with('mensaje', $mensaje);
     }
 
     /**
