@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="form-group col-6">
                             <label>Correo</label>
-                            <input type="number" name="email"
+                            <input type="email" name="email"
                                 class="form-control is-valid @error('email') is-invalid @enderror" autocomplete="off"
                                 value="{{ old('email', $cliente->email) }}">
                             @error('email')

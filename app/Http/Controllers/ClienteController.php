@@ -6,6 +6,8 @@ use App\Models\Cliente;
 use App\Models\Reporte;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
+use App\Mail\Bienvenido;
+use Illuminate\Support\Facades\Mail;
 
 class ClienteController extends Controller
 {
@@ -38,10 +40,13 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreClienteRequest $request)
-    {
-        
+    {  
         //GUARDAR DATOS PROVENIENTES DEL FORM 
         Cliente::create($request->all());
+
+        $cliente = new Cliente($request->all());
+
+        Mail::to($request->email)->send(new Bienvenido($cliente));
         return redirect()->route('cliente.index')->with('status', 'ok');
     }
 

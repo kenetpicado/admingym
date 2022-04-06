@@ -6,8 +6,10 @@ use App\Models\Caja;
 use App\Models\Cliente;
 use App\Http\Requests\StoreCajaRequest;
 use App\Http\Requests\UpdateCajaRequest;
+use App\Mail\Pago;
 use App\Models\Ingreso;
 use App\Models\Reporte;
+use Illuminate\Support\Facades\Mail;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -107,6 +109,11 @@ class CajaController extends Controller
             'monto' => $request->monto,
             'servicio' => $request->servicio
         ]);
+
+        $caja = new Caja($request->all());
+
+        $correo = Cliente::find($request->cliente_id)->email;
+        Mail::to($correo)->send(new Pago($caja));
 
         return redirect()->route('cliente.index')->with('status', 'ok');
     }
