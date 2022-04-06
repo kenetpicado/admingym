@@ -66,11 +66,12 @@
                 </div>
             </div>
         </div>
-
-        @include('cliente.modal')
-
     </div>
 @endsection('contenido')
+
+@section('agregarModal')
+    @include('cliente.modal')
+@endsection
 
 @section('re-open')
     @if ($errors->any())

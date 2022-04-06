@@ -7,13 +7,6 @@
         </button>
     </form>
 
-    <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div class="input-group">
-            <label for="">{{config('app.name')}}</label>
-        </div>
-    </form>
-
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
@@ -63,7 +56,8 @@
                             </div>
                         </a>
                     @endif
-                    <a class="dropdown-item text-center small text-gray-500" href="#">Borrar todo</a>
+                    <a class="dropdown-item text-center small text-gray-500" href="" data-toggle="modal"
+                        data-target="#eliminarTodo">Borrar todo</a>
                 </div>
             </li>
         @endif

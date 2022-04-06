@@ -26,7 +26,7 @@ class StoreClienteRequest extends FormRequest
         return [
             //
             'nombre' => 'required|max:50',
-            'email' => 'required|max:50|email:rfc,dns',
+            'email' => 'nullable|max:50|email:rfc,dns',
             'fecha' => 'required|date'
         ];
     }

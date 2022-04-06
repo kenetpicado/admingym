@@ -112,9 +112,12 @@
                 </div>
             </div>
         </div>
-        @include('ingreso.modal')
     </div>
 @endsection('contenido')
+
+@section('agregarModal')
+    @include('ingreso.modal')
+@endsection
 
 @section('re-open')
     @if ($errors->any())

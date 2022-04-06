@@ -48,7 +48,8 @@
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                 aria-labelledby="dropdownMenuLink">
 
-                                                <a href="{{route('entrenador.edit', $entrenador)}}" class="dropdown-item">Editar</a>
+                                                <a href="{{ route('entrenador.edit', $entrenador) }}"
+                                                    class="dropdown-item">Editar</a>
 
                                                 <a href="{{ route('entrenador.show', $entrenador) }}"
                                                     class="dropdown-item">Eventos</a>
@@ -66,10 +67,13 @@
             </div>
         </div>
 
-        @include('entrenador.modal')
 
     </div>
 @endsection('contenido')
+
+@section('agregarModal')
+    @include('entrenador.modal')
+@endsection
 
 @section('re-open')
     @if ($errors->any())

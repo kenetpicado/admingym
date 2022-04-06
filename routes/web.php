@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 //RUTAS EXTRAS
-Route::get('delete',  [ReporteController::class, 'delete'])->name('reporte.delete');
+Route::delete('delete',  [ReporteController::class, 'delete'])->name('reporte.delete');
 Route::get('pagar/{cliente}', [CajaController::class, 'pagar'])->name('pagar');
 Route::post('consulta', [IngresoController::class, 'consulta'])->name('consulta');
 

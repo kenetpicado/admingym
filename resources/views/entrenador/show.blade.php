@@ -48,11 +48,12 @@
                 </div>
             </div>
         </div>
-
-        @include('entrenador.modal')
-
     </div>
 @endsection('contenido')
+
+@section('agregarModal')
+    @include('entrenador.modal')
+@endsection
 
 @section('re-open')
     @if ($errors->any())

@@ -26,7 +26,7 @@ class UpdateClienteRequest extends FormRequest
         return [
             //
             'nombre' => 'required|max:50',
-            'email' => 'required|max:50|email:rfc,dns',
+            'nullable' => 'required|max:50|email:rfc,dns',
             'fecha' => 'required|date'
         ];
     }

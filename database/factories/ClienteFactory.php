@@ -18,7 +18,7 @@ class ClienteFactory extends Factory
     {
         return [
             'nombre' => $this->faker->name(),
-            'telefono' => $this->faker->numerify('8#######'),
+            'email' => $this->faker->email(),
             'fecha' => $this->faker->date('Y-m-d', 'now'),
             'sexo' => $this->faker->randomElement(['F', 'M']),
         ];

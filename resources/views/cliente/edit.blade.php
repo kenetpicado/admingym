@@ -1,4 +1,4 @@
-email@extends('layout')
+@extends('layout')
 
 @section('title', 'Editar cliente')
 
@@ -22,9 +22,9 @@ email@extends('layout')
                     <div class="row">
                         <div class="form-group col-6">
                             <label>Nombre completo</label>
-                            <input type="text" name="nombre" class="form-control is-valid @error('nombre') is-invalid @enderror"
-                                autocomplete="off" value="{{ old('nombre', $cliente->nombre) }}"
-                                placeholder="Escriba su nombre completo">
+                            <input type="text" name="nombre"
+                                class="form-control is-valid @error('nombre') is-invalid @enderror" autocomplete="off"
+                                value="{{ old('nombre', $cliente->nombre) }}" placeholder="Escriba su nombre completo">
 
                             @error('nombre')
                                 <span class="invalid-feedback" role="alert">
@@ -51,33 +51,29 @@ email@extends('layout')
                     <div class="row">
                         <div class="form-group col-3">
                             <label>Fecha de nacimiento</label>
-                            <input type="date" name="fecha" class="form-control is-valid @error('fecha') is-invalid @enderror"
-                                autocomplete="off" value="{{ old('fecha', $cliente->fecha) }}">
+                            <input type="date" name="fecha"
+                                class="form-control is-valid @error('fecha') is-invalid @enderror" autocomplete="off"
+                                value="{{ old('fecha', $cliente->fecha) }}">
                             @error('fecha')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-    
+
                         <div class="form-group col-3">
                             <label>Sexo</label>
                             <select name="sexo" class="form-control is-valid" value="{{ old('sexo', $cliente->sexo) }}">
-                                @if ($cliente->sexo == "M")
-                                <option selected value="M">M</option>
-                                <option value="F">F</option>
-                                @else 
-                                <option value="M">M</option>
-                                <option selected value="F">F</option>
+                                @if ($cliente->sexo == 'M')
+                                    <option selected value="M">M</option>
+                                    <option value="F">F</option>
+                                @else
+                                    <option value="M">M</option>
+                                    <option selected value="F">F</option>
                                 @endif
-                                
                             </select>
                         </div>
                     </div>
-                    <div class="row">
-                        
-                    </div>
-
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
