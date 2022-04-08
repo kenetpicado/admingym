@@ -38,7 +38,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Ingresos activos</div>
+                                Ingresos mensuales</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">C$ {{$ver['ingresos']}}</div>
                         </div>
                         <div class="col-auto">
@@ -117,13 +117,12 @@
                         <div class="progress-bar bg-primary" role="progressbar" style="width: {{$ver['activos']}}%"
                             aria-valuenow="{{$ver['activos']}}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <h4 class="small font-weight-bold">Becas<span
-                            class="float-right">{{$ver['becas']}} ({{$ver['porcentaje']}} % de los activos)</span></h4>
+                    <h4 class="small font-weight-bold">Beca C$ {{$ver['becas']}} <span
+                            class="float-right">{{$ver['porcentaje']}} % del ingreso mensual</span><small>{{$ver['personas']}} becas</small></h4>
                     <div class="progress mb-4">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: {{$ver['porcentaje']}}%"
-                            aria-valuenow="{{$ver['porcentaje']}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            aria-valuenow="{{$ver['porcentaje']}}" aria-valuemin="0" aria-valuemax="100"></div> 
                     </div>
-                    
                 </div>
             </div>
         </div>

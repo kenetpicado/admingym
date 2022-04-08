@@ -21,7 +21,7 @@ class IngresoController extends Controller
         //
         $ver = ([
             'total' => Ingreso::all()->sum('monto'),
-            'activo' => Caja::all()->sum('monto'),
+            'activo' => Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->get()->sum('monto'),
             'entrenadores' => Evento::all()->sum('monto'),
         ]);
 
@@ -51,7 +51,7 @@ class IngresoController extends Controller
         date('d - F - Y', strtotime($inicio)) . ' a ' . 
         date('d - F - Y', strtotime($fin)) . ' se han encontrado ' . 
         $ingresos->count() . ' registros, con un total de C$ ' .
-        $ingresos->sum('monto');
+        $ingresos->sum('monto') . ' y C$ ' . $ingresos->sum('beca') . ' en becas';
 
         return redirect()->route('ingreso.index')
             ->with('ingresos', $ingresos)->with('mensaje', $mensaje);

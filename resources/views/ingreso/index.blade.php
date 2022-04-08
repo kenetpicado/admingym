@@ -42,7 +42,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Ingresos activos</div>
+                                    Ingresos mensuales</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">C$ {{ $ver['activo'] }}</div>
                             </div>
                             <div class="col-auto">
@@ -95,6 +95,7 @@
                                 <th>Fecha</th>
                                 <th>Servicio</th>
                                 <th>Monto</th>
+                                <th>Beca</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,7 +104,8 @@
                                     <tr>
                                         <td>{{ date('d - F - Y', strtotime($ingreso->created_at)) }}</td>
                                         <td>{{ $ingreso->servicio }}</td>
-                                        <td>{{ $ingreso->monto }}</td>
+                                        <td>C$ {{ $ingreso->monto }}</td>
+                                        <td>C$ {{ $ingreso->beca }}</td>
                                     </tr>
                                 @endforeach
                             @endif

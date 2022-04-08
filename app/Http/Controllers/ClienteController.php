@@ -46,7 +46,7 @@ class ClienteController extends Controller
 
         $cliente = new Cliente($request->all());
 
-        Mail::to($request->email)->send(new Bienvenido($cliente));
+        //Mail::to($request->email)->send(new Bienvenido($cliente));
         return redirect()->route('cliente.index')->with('status', 'ok');
     }
 

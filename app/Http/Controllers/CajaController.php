@@ -101,19 +101,32 @@ class CajaController extends Controller
             'fecha_fin' => $end
         ]);
 
+        $beca = 0;
+        
+        if($request->beca > 0)
+        {
+            $beca = $request->monto * $request->beca / 100;
+            $nuevo_monto = $request->monto - $beca;
+
+            $request->merge([
+                'monto' => $nuevo_monto
+            ]);
+        }
+        
         //GUARDAR DATOS
         Caja::create($request->all());
 
         //Guardar ingreso
         Ingreso::create([
             'monto' => $request->monto,
-            'servicio' => $request->servicio
+            'servicio' => $request->servicio,
+            'beca' => $beca
         ]);
 
         $caja = new Caja($request->all());
 
         $correo = Cliente::find($request->cliente_id)->email;
-        Mail::to($correo)->send(new Pago($caja));
+        //Mail::to($correo)->send(new Pago($caja));
 
         return redirect()->route('cliente.index')->with('status', 'ok');
     }
