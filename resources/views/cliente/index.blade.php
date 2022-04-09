@@ -6,12 +6,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between m-2">
-            <h1 class="h3 mb-0 text-gray-800">Clientes</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+        <div class="d-flex align-items-center justify-content-between m-2">
+            <h1 class="h3 mb-0 text-gray-800 d-inline">Clientes</h1>
+            <a href="#" class="d-inline btn btn-sm btn-primary shadow-sm" data-toggle="modal"
                 data-target="#agregarCliente">
-                <i class="fas fa-download fa-sm text-white-50"></i>
-                Agregar
+                <i class="fas fa-plus fa-sm text-white-50"></i>
+                <label class="m-0 d-none d-lg-inline">Agregar</label>
             </a>
         </div>
 
@@ -22,7 +22,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-striped dt-responsive nowrap" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>ID</th>

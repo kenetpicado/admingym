@@ -10,7 +10,7 @@
             <h1 class="h3 mb-0 text-gray-800">Ingresos</h1>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
                 data-target="#ver">
-                <i class="fas fa-download fa-sm text-white-50"></i>
+                <i class="fas fa-plus fa-sm text-white-50"></i>
                 Establecer rango
             </a>
         </div>

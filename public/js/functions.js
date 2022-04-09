@@ -35,3 +35,7 @@ $('.eliminar').submit(function (e) {
     }
   })
 })
+
+$(document).ready(function() {
+  $('#dataTable').DataTable();
+} );

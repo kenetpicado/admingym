@@ -17,7 +17,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-striped dt-responsive nowrap" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -39,9 +39,9 @@
                                     <td>C$ {{ $caja->monto }}</td>
                                     <td>
                                         @if ($caja->beca > 0)
-                                        <div class="badge badge-success">
-                                            {{ $caja->beca }} %
-                                        </div>
+                                            <div class="badge badge-success">
+                                                {{ $caja->beca }} %
+                                            </div>
                                         @endif
                                     </td>
                                     <td>{{ date('d-F-y', strtotime($caja->created_at)) }}</td>

@@ -38,7 +38,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
@@ -51,11 +52,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'username' => ['required', 'string', 'max:10', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ], [], [
             'name' => 'nombre',
-            'email' => 'correo',
+            'username' => 'nombre de usuario',
             'password' => 'contraseña'
         ]);
     }
@@ -71,7 +72,7 @@ class RegisterController extends Controller
         $nombre = trim(ucwords($data['name']));
         return User::create([
             'name' => $nombre,
-            'email' => $data['email'],
+            'username' => $data['username'],
             'password' => Hash::make($data['password']),
         ]);
     }

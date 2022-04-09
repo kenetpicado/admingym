@@ -20,12 +20,12 @@
                     @csrf
                     
                     <div class="row">
-                        <div class="form-group col-3">
+                        <div class="form-group col-lg-3">
                             <label>ID</label>
                             <input type="text" name="cliente_id" class="form-control is-valid"
                                 value="{{ $cliente->id }}" readonly>
                         </div>
-                        <div class="form-group col-3">
+                        <div class="form-group col-lg-3">
                             <label>Servicio</label>
                             <select name="servicio" class="form-control" required>
                                 <option selected value="PESAS">PESAS</option>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-3">
+                        <div class="form-group col-lg-3">
                             <label>Plan</label>
                             <select name="plan" class="form-control" required>
                                 <option selected value="MENSUAL">MENSUAL</option>
@@ -45,7 +45,7 @@
                                 <option value="DIA">DIA</option>
                             </select>
                         </div>
-                        <div class="form-group col-3">
+                        <div class="form-group col-lg-3">
                             <label>Monto C$</label>
                             <input type="number" name="monto"
                                 class="form-control @error('monto') is-invalid @enderror" autocomplete="off"
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-3">
+                        <div class="form-group col-lg-3">
                             <label>Beca (%)</label>
                             <input type="number" name="beca"
                                 class="form-control @error('beca') is-invalid @enderror" autocomplete="off"
@@ -69,7 +69,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group col-3">
+                        <div class="form-group col-lg-3">
                             <label>Nota</label>
                             <input type="text" name="nota"
                                 class="form-control @error('nota') is-invalid @enderror" autocomplete="off"

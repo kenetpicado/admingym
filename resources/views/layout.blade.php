@@ -26,6 +26,8 @@
     {{-- SWEETALERT --}}
     <link href="{{ asset('css/sweetalert2.min.css') }}" rel="stylesheet">
 
+    {{-- DATATABLE RESPONSIVE --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">
 </head>
 
 <body id="page-top">
@@ -137,6 +139,12 @@
 
     {{--  --}}
     <script src="{{ asset('js/functions.js') }}"></script>
+
+    {{-- DATATABLE RESPONSIVE --}}
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
+
+
 
     @yield('re-open')
 

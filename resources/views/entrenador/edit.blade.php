@@ -20,7 +20,7 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-lg-6">
                             <label>Nombre completo</label>
                             <input type="text" name="nombre" class="form-control is-valid @error('nombre') is-invalid @enderror"
                                 autocomplete="off" value="{{ old('nombre', $entrenador->nombre) }}"
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-lg-6">
                             <label>Número de teléfono</label>
                             <input type="number" name="telefono"
                                 class="form-control is-valid @error('telefono') is-invalid @enderror" autocomplete="off"
@@ -49,7 +49,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-lg-6">
                             <label>Horario</label>
                             <input type="text" name="horario" class="form-control is-valid @error('horario') is-invalid @enderror"
                                 autocomplete="off" value="{{ old('horario', $entrenador->horario) }}"
