@@ -58,8 +58,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
-        //return view('caja.create', compact('cliente', $cliente));
+        return view('cliente.show', compact('cliente', $cliente));
     }
 
     /**

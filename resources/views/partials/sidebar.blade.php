@@ -2,8 +2,10 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon">
+            {{-- <i class="fas fa-laugh-wink"></i> --}}
+            <i class="fas fa-dumbbell"></i>
+            
         </div>
         <div class="sidebar-brand-text mx-3">{{ config('app.name') }}</div>
     </a>
@@ -43,7 +45,7 @@
     <!-- Nav Item - entrenadores -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('entrenador.index') }}">
-            <i class="fas fa-fw fa-users"></i>
+            <i class="fas fa-fw fa-walking"></i>
             <span>Entrenadores</span></a>
     </li>
 

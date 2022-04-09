@@ -49,11 +49,9 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                 aria-labelledby="dropdownMenuLink">
-
-                                                <a href="{{route('cliente.edit', $cliente)}}" class="dropdown-item">Editar</a>
-                                                
                                                 <a href="{{route('pagar', $cliente->id)}}" class="dropdown-item">Pagar</a>
-
+                                                <a href="{{route('cliente.show', $cliente->id)}}" class="dropdown-item">Peso</a>
+                                                <a href="{{route('cliente.edit', $cliente)}}" class="dropdown-item">Editar</a>
                                                 <a href="" class="dropdown-item" data-toggle="modal"
                                                     data-target="#eliminarCliente">Eliminar</a>
                                             </div>

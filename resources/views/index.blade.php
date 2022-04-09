@@ -118,7 +118,7 @@
                             aria-valuenow="{{$ver['activos']}}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <h4 class="small font-weight-bold">Beca C$ {{$ver['becas']}} <span
-                            class="float-right">{{$ver['porcentaje']}} % del ingreso mensual</span><small>{{$ver['personas']}} becas</small></h4>
+                            class="float-right">{{$ver['porcentaje']}} % del ingreso mensual</span><small>{{$ver['personas']}} beca(s)</small></h4>
                     <div class="progress mb-4">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: {{$ver['porcentaje']}}%"
                             aria-valuenow="{{$ver['porcentaje']}}" aria-valuemin="0" aria-valuemax="100"></div> 

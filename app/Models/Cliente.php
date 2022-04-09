@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Caja;
 use App\Models\Reporte;
+use App\Models\Peso;
 
 class Cliente extends Model
 {
@@ -25,5 +26,8 @@ class Cliente extends Model
 
     public function reportes(){
         return $this->hasMany(Reporte::class);
+    }
+    public function pesos(){
+        return $this->hasMany(Peso::class);
     }
 }
