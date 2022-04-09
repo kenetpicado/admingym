@@ -81,7 +81,7 @@
                             @enderror
                         </div>
                     </div>
-
+                    <input type="hidden" name="nombre" value="{{ $cliente->nombre }}">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>

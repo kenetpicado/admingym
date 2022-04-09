@@ -119,6 +119,7 @@ class CajaController extends Controller
         //Guardar ingreso
         Ingreso::create([
             'monto' => $request->monto,
+            'nombre' => $request->nombre,
             'servicio' => $request->servicio,
             'beca' => $beca
         ]);

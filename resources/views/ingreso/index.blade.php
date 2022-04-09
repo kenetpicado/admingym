@@ -93,6 +93,7 @@
                         <thead>
                             <tr>
                                 <th>Fecha</th>
+                                <th>Nombre</th>
                                 <th>Servicio</th>
                                 <th>Monto</th>
                                 <th>Beca</th>
@@ -102,10 +103,17 @@
                             @if (session('ingresos'))
                                 @foreach (session('ingresos') as $ingreso)
                                     <tr>
-                                        <td>{{ date('d - F - Y', strtotime($ingreso->created_at)) }}</td>
+                                        <td>{{ date('d-F-Y', strtotime($ingreso->created_at)) }}</td>
+                                        <td>{{ $ingreso->nombre }}</td>
                                         <td>{{ $ingreso->servicio }}</td>
                                         <td>C$ {{ $ingreso->monto }}</td>
-                                        <td>C$ {{ $ingreso->beca }}</td>
+                                        <td>
+                                            @if ($ingreso->beca > 0)
+                                            <div class="badge badge-success">
+                                                C$ {{ $ingreso->beca }}
+                                            </div>
+                                        @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             @endif

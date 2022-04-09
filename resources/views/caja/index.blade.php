@@ -23,6 +23,8 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Servicio</th>
+                                <th>Monto</th>
+                                <th>Beca</th>
                                 <th>Inicio</th>
                                 <th>Expira</th>
                                 <th>Nota</th>
@@ -31,16 +33,24 @@
                         <tbody>
                             @foreach ($cajas as $caja)
                                 <tr>
-                                    <td>{{$caja->id}}</td>
+                                    <td>{{ $caja->id }}</td>
                                     <td>{{ $caja->cliente->nombre }}</td>
                                     <td>{{ $caja->servicio }}</td>
-                                    <td>{{date("d - F - Y",  strtotime($caja->created_at))}}</td>
+                                    <td>{{ $caja->monto }}</td>
+                                    <td>
+                                        @if ($caja->beca > 0)
+                                        <div class="badge badge-success">
+                                            {{ $caja->beca }} %
+                                        </div>
+                                        @endif
+                                    </td>
+                                    <td>{{ date('d-F-y', strtotime($caja->created_at)) }}</td>
                                     <td>
                                         <div class="badge badge-danger">
-                                            {{date("d - F - Y",  strtotime($caja->fecha_fin))}}
+                                            {{ date('d-F-y', strtotime($caja->fecha_fin)) }}
 
                                         </div>
-                                        </td>
+                                    </td>
                                     <td>{{ $caja->nota }}</td>
                                 </tr>
                             @endforeach

@@ -9,7 +9,7 @@ use App\Models\Cliente;
 class Caja extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = ['nombre'];
     
     //RELACION UNO A MUCHOS INVERSA
     public function cliente(){
