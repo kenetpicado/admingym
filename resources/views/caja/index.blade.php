@@ -36,7 +36,7 @@
                                     <td>{{ $caja->id }}</td>
                                     <td>{{ $caja->cliente->nombre }}</td>
                                     <td>{{ $caja->servicio }}</td>
-                                    <td>{{ $caja->monto }}</td>
+                                    <td>C$ {{ $caja->monto }}</td>
                                     <td>
                                         @if ($caja->beca > 0)
                                         <div class="badge badge-success">

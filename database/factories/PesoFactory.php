@@ -15,6 +15,8 @@ class PesoFactory extends Factory
     {
         return [
             //
+            'peso' => $this->faker->numerify('2##'),
+            'cliente_id' => $this->faker->numberBetween(1, 15)
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Entrenador;
 use App\Models\Evento;
 use App\Models\Caja;
 use App\Models\Ingreso;
+use App\Models\Peso;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,12 +19,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        //$this->call(UserSeeder::class);
-        Cliente::factory(20)->create();
-        Entrenador::factory(10)->create();
-        Evento::factory(20)->create();
-        Caja::factory(20)->create();
-        Ingreso::factory(20)->create();
+        //$this->call(ClienteSeeder::class);
+        Cliente::factory(15)->create();
+        Entrenador::factory(15)->create();
+        Evento::factory(30)->create();
+        Peso::factory(30)->create();
+        // Caja::factory(20)->create();
     }
 }

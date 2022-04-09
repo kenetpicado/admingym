@@ -15,9 +15,6 @@ class IngresoFactory extends Factory
     {
         return [
             //
-            'monto' => $this->faker->numerify('###'),
-            'servicio' => $this->faker->randomElement(['PESAS', 'SPINNING', 'ZUMBA', 'TAEKWONDO']),
-            'created_at' => $this->faker->dateTimeInInterval('-20 days', '+ 20 days', null),
         ];
     }
 }

@@ -21,7 +21,7 @@ class CajaFactory extends Factory
             'beca' => $this->faker->randomFloat(1, 0, 100),
             'nota' => $this->faker->text(20),
             'fecha_fin' => $this->faker->dateTimeInInterval('- 5 days', '+ 20 days', null),
-            'cliente_id' => $this->faker->numberBetween(1, 10)
+            'cliente_id' => $this->faker->numberBetween(1, 20)
         ];
     }
 }

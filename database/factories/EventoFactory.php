@@ -18,7 +18,7 @@ class EventoFactory extends Factory
             //
             'tipo' => $this->faker->randomElement(['PAGO', 'INASISTENCIA']),
             'monto' => $this->faker->numerify('###'),
-            'entrenador_id' => $this->faker->numberBetween(1, 10)
+            'entrenador_id' => $this->faker->numberBetween(1, 15)
         ];
     }
 }
