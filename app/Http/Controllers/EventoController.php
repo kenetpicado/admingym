@@ -44,10 +44,10 @@ class EventoController extends Controller
             ]);
         }
 
-        $entrenador = Entrenador::find($request->entrenador_id);
+        $entrenador = Entrenador::find($request->entrenador_id, ['id']);
 
         Evento::create($request->all());
-        return redirect()->route('entrenador.show', compact('entrenador', $entrenador))->with('status', 'ok');
+        return redirect()->route('entrenador.show', $entrenador->id)->with('status', 'ok');
     }
 
     /**

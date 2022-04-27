@@ -5,15 +5,10 @@
 @section('contenido')
     <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between m-2">
-            <h1 class="h3 mb-0 text-gray-800">Entrenadores</h1>
-        </div>
-
         <!-- form -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">{{ $entrenador->nombre }}</h6>
+                <h6 class="m-0 font-weight-bold text-primary">EDITAR: {{ $entrenador->nombre }}</h6>
             </div>
             <div class="card-body">
                 <form action="{{ route('entrenador.update', $entrenador) }}" method="POST">
@@ -22,7 +17,7 @@
                     <div class="row">
                         <div class="form-group col-lg-6">
                             <label>Nombre completo</label>
-                            <input type="text" name="nombre" class="form-control is-valid @error('nombre') is-invalid @enderror"
+                            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
                                 autocomplete="off" value="{{ old('nombre', $entrenador->nombre) }}"
                                 placeholder="Escriba su nombre completo">
 
@@ -38,7 +33,7 @@
                         <div class="form-group col-lg-6">
                             <label>Número de teléfono</label>
                             <input type="number" name="telefono"
-                                class="form-control is-valid @error('telefono') is-invalid @enderror" autocomplete="off"
+                                class="form-control @error('telefono') is-invalid @enderror" autocomplete="off"
                                 value="{{ old('telefono', $entrenador->telefono) }}" placeholder="86006856">
                             @error('telefono')
                                 <span class="invalid-feedback" role="alert">
@@ -51,7 +46,7 @@
                     <div class="row">
                         <div class="form-group col-lg-6">
                             <label>Horario</label>
-                            <input type="text" name="horario" class="form-control is-valid @error('horario') is-invalid @enderror"
+                            <input type="text" name="horario" class="form-control @error('horario') is-invalid @enderror"
                                 autocomplete="off" value="{{ old('horario', $entrenador->horario) }}"
                                 placeholder="12m-8pm">
                             @error('horario')

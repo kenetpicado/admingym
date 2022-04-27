@@ -10,6 +10,11 @@ class Entrenador extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function getCreatedAtAttribute($value)
+    {
+        return date("d-F-Y", strtotime($value));
+    }
+
     //FUNCION PARA CONVERTIR EL NOMBRE EN MAYUSCULA
     public function setNombreAttribute($value)
     {

@@ -26,32 +26,34 @@ class CajaController extends Controller
      */
     public function index()
     {
-        // OBTENGO TODOS LOS ACTIVOS
-        $cajas = Caja::all();
+        //OBTENGO TODOS LOS ACTIVOS
+        $cajas = Caja::with('cliente:id,nombre')
+        ->get(['id', 'fecha_fin', 'cliente_id']);
 
         foreach ($cajas as $caja) {
-            //SI LA FECHA ACTUAL ES MAYOR O IGUAL
-            //A LA FECHA DE FIN: ELIMINA
-            if (date('Y-m-d') >= $caja->fecha_fin) {
+
+            if (date('Y-m-d') >= $caja->fecha_fin) 
+            {
                 Reporte::create([
                     'mensaje' =>  $caja->cliente->nombre,
                     'cliente_id' =>  $caja->cliente_id
                 ]);
-
-                CajaController::destroy($caja);
+                $caja->delete();
             }
         }
 
         $reportes = Reporte::all();
 
         //PLANES ACTIVOS
-        $cajas = Caja::all();
-        return view('caja.index', compact('cajas'))->with('reportes', $reportes);
+        $cajas = Caja::with('cliente:id,nombre')
+        ->get(['id', 'beca', 'servicio', 'nota', 'created_at', 'fecha_fin', 'cliente_id']);
+
+        return view('caja.index', compact('cajas', 'reportes'));
     }
 
     public function pagar(Cliente $cliente)
     {
-        return view('caja.create', compact('cliente', $cliente));
+        return view('caja.create', compact('cliente'));
     }
 
     /**
@@ -74,7 +76,7 @@ class CajaController extends Controller
     {
         //SI UN CLIENTE TIENE REPORTE BORRAR
         if (Reporte::where('cliente_id', '=', $request->cliente_id)->get()->count() > 0) {
-            Reporte::destroy(Reporte::where('cliente_id', '=', $request->cliente_id)->get());
+            Reporte::destroy(Reporte::where('cliente_id', $request->cliente_id)->get());
         }
 
         //OBTENER FECHA DE HOY
@@ -124,9 +126,7 @@ class CajaController extends Controller
             'beca' => $beca
         ]);
 
-        $caja = new Caja($request->all());
-
-        $correo = Cliente::find($request->cliente_id)->email;
+        //$correo = Cliente::find($request->cliente_id)->email;
         //Mail::to($correo)->send(new Pago($caja));
 
         return redirect()->route('cliente.index')->with('status', 'ok');
@@ -172,9 +172,8 @@ class CajaController extends Controller
      * @param  \App\Models\Caja  $caja
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Caja $caja)
+    public function destroy($caja_id)
     {
         //
-        $caja->delete();
     }
 }

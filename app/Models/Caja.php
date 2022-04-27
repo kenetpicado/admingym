@@ -15,4 +15,9 @@ class Caja extends Model
     public function cliente(){
         return $this->belongsTo(Cliente::class);
     }
+
+    public function setNotaAttribute($value)
+    {
+        $this->attributes['nota'] = trim(strtoupper($value));
+    }
 }

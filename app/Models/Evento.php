@@ -13,4 +13,9 @@ class Evento extends Model
     public function entrenador(){
         return $this->belongsTo('App\Models\Entrenador');
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return date("d-F-Y", strtotime($value));
+    }
 }

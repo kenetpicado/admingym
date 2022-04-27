@@ -20,13 +20,14 @@ class IngresoController extends Controller
     {
         //
         $ver = ([
-            'total' => Ingreso::all()->sum('monto'),
-            'activo' => Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->get()->sum('monto'),
+            'total' => Ingreso::all('monto')->sum('monto'),
+            'activo' => Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->get('monto')->sum('monto'),
             'entrenadores' => Evento::all()->sum('monto'),
         ]);
 
         return view('ingreso.index', compact('ver'));
     }
+
     public function consulta(Request $request)
     {
         $request->validate([
@@ -37,8 +38,8 @@ class IngresoController extends Controller
             'inicio' => 'fecha inicio',
         ]);
 
-        $inicio = $request->input('inicio');
-        $fin = $request->input('fin');
+        $inicio = $request->inicio;
+        $fin = $request->fin;
 
         $i2 = date('Y-m-d', strtotime($inicio . ' - 1 days'));
         $f2 = date('Y-m-d', strtotime($fin . ' + 1 days'));
@@ -48,8 +49,8 @@ class IngresoController extends Controller
             ->where('created_at', '<=', $f2)->get();
 
         $mensaje = 'De ' . 
-        date('d - F - Y', strtotime($inicio)) . ' a ' . 
-        date('d - F - Y', strtotime($fin)) . ' se han encontrado ' . 
+        date('d-m-Y', strtotime($inicio)) . ' a ' . 
+        date('d-m-Y', strtotime($fin)) . ' se han encontrado ' . 
         $ingresos->count() . ' registros, con un total de C$ ' .
         $ingresos->sum('monto') . ' y C$ ' . $ingresos->sum('beca') . ' en becas';
 

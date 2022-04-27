@@ -5,26 +5,25 @@
 @section('contenido')
     <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between m-2">
-            <h1 class="h3 mb-0 text-gray-800">Eventos del entrenador: {{ $entrenador->nombre }}</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal"
-                data-target="#agregarEvento">
-                <i class="fas fa-download fa-sm text-white-50"></i>
-                Agregar
-            </a>
-        </div>
-
         <!-- DataTales -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Todos los eventos</h6>
+
+            <!-- Card Header -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">EVENTOS: {{ $entrenador->nombre }}</h6>
+                <a href="#" class="d-inline btn btn-sm btn-primary shadow-sm" data-toggle="modal"
+                    data-target="#agregarEvento">
+                    <i class="fas fa-plus fa-sm text-white-50"></i>
+                    <label class="m-0 d-none d-lg-inline">Agregar</label>
+                </a>
             </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Fecha</th>
                                 <th>Evento</th>
                                 <th>Monto</th>
@@ -33,10 +32,11 @@
                         <tbody>
                             @foreach ($entrenador->eventos as $evento)
                                 <tr>
-                                    <td>{{date("d - F - Y",  strtotime($evento->created_at))}}</td>
+                                    <td>{{ $evento->id }}</td>
+                                    <td>{{ $evento->created_at }}</td>
                                     @if ($evento->tipo == 'PAGO')
                                         <td>Se ha registrado un pago por la cantidad de: </td>
-                                        <td><strong>C$ {{ $evento->monto }}</strong> </td>
+                                        <td>C$ {{ $evento->monto }}</td>
                                     @else
                                         <td><span class="badge badge-danger">Inasistencia</span></td>
                                         <td>-</td>

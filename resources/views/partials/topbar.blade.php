@@ -43,6 +43,8 @@
                                 </div>
                             </a>
                         @endforeach
+                        <a class="dropdown-item text-center small text-gray-500" href="" data-toggle="modal"
+                            data-target="#eliminarTodo">Borrar todo</a>
                     @else
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <div class="mr-3">
@@ -56,8 +58,6 @@
                             </div>
                         </a>
                     @endif
-                    <a class="dropdown-item text-center small text-gray-500" href="" data-toggle="modal"
-                        data-target="#eliminarTodo">Borrar todo</a>
                 </div>
             </li>
         @endif
@@ -77,8 +77,7 @@
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="{{ route('logout') }}" 
-                onclick="event.preventDefault();
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">Logout</a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

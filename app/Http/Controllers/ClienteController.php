@@ -22,9 +22,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $reportes = Reporte::all();
-        $clientes = Cliente::all();
-        return view('cliente.index', compact('clientes', 'reportes'));
+        $clientes = Cliente::all(['id', 'nombre', 'email', 'sexo']);
+        return view('cliente.index', compact('clientes'));
     }
 
     /**
@@ -48,8 +47,6 @@ class ClienteController extends Controller
         //GUARDAR DATOS PROVENIENTES DEL FORM 
         Cliente::create($request->all());
 
-        $cliente = new Cliente($request->all());
-
         //Mail::to($request->email)->send(new Bienvenido($cliente));
         return redirect()->route('cliente.index')->with('status', 'ok');
     }
@@ -60,9 +57,11 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show($cliente_id)
     {
-        return view('cliente.show', compact('cliente', $cliente));
+        //Mostrar formulario de agregar pagos
+        $cliente = Cliente::find($cliente_id, ['id', 'nombre']);
+        return view('cliente.show', compact('cliente'));
     }
 
     /**
@@ -99,7 +98,5 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
-        $cliente->delete();
-        return redirect()->route('cliente.index')->with('status', 'eliminado');
     }
 }

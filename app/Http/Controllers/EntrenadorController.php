@@ -16,8 +16,8 @@ class EntrenadorController extends Controller
      */
     public function index()
     {
-        $entrenadors = Entrenador::all();
-        return view('entrenador.index', compact('entrenadors', $entrenadors));
+        $entrenadors = Entrenador::all(['id', 'nombre', 'telefono', 'horario']);
+        return view('entrenador.index', compact('entrenadors'));
     }
 
     /**
@@ -38,7 +38,6 @@ class EntrenadorController extends Controller
      */
     public function store(StoreEntrenadorRequest $request)
     {
-        //GUARDAR DATOS PROVENIENTES DEL FORM 
         Entrenador::create($request->all());
         return redirect()->route('entrenador.index')->with('status', 'ok');
     }
@@ -49,9 +48,12 @@ class EntrenadorController extends Controller
      * @param  \App\Models\Entrenador  $entrenador
      * @return \Illuminate\Http\Response
      */
-    public function show(Entrenador $entrenador)
+    public function show($entrenador_id)
     {
         //
+        $entrenador = Entrenador::with('eventos:id,created_at,tipo,monto,entrenador_id')
+        ->find($entrenador_id, ['id', 'nombre']);
+        
         return view('entrenador.show', compact('entrenador'));
     }
 
@@ -90,7 +92,5 @@ class EntrenadorController extends Controller
     public function destroy(Entrenador $entrenador)
     {
         //
-        $entrenador->delete();
-        return redirect()->route('entrenador.index')->with('status', 'eliminado');
     }
 }

@@ -22,8 +22,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
-
 //BORRA TODOS LOS REPORTES
 Route::delete('delete',  [ReporteController::class, 'delete'])->name('reporte.delete');
 
@@ -45,5 +43,6 @@ Route::resource('evento', EventoController::class);
 Route::resource('reporte', ReporteController::class);
 Route::resource('ingreso', IngresoController::class);
 Route::resource('peso', PesoController::class);
+Route::resource('/', HomeController::class);
 
 Auth::routes();

@@ -39,9 +39,7 @@ class PesoController extends Controller
     {
         //
         Peso::create($request->all());
-        $cliente = Cliente::find($request->cliente_id);
-
-        return redirect()->route('cliente.show', compact('cliente'))->with('status', 'ok');
+        return redirect()->route('cliente.show', $request->cliente_id)->with('status', 'ok');
     }
 
     /**

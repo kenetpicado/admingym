@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -13,9 +13,6 @@
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -140,16 +137,10 @@
     {{--  --}}
     <script src="{{ asset('js/functions.js') }}"></script>
 
-    {{-- DATATABLE RESPONSIVE --}}
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
-
-
-
     @yield('re-open')
 
     {{-- SI HAY MENSAJE DE CONFIRMACION --}}
-    @if (session('status') == 'ok')
+    {{-- @if (session('status') == 'ok')
         <script>
             Swal.fire({
                 position: 'center',
@@ -159,7 +150,7 @@
                 timer: 1000
             })
         </script>
-    @endif
+    @endif --}}
 
     @if (session('status') == 'eliminado')
         <script>

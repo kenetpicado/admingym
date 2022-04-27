@@ -45,7 +45,7 @@ class ReporteController extends Controller
 
     public function delete() {
         Reporte::destroy(Reporte::all());
-        return redirect()->route('home.index')->with('status', 'eliminado');
+        return redirect()->route('index')->with('status', 'eliminado');
     }
 
     /**

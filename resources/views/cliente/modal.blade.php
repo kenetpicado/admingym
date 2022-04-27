@@ -1,10 +1,10 @@
 <!-- Agregar -->
-<div class="modal fade" id="agregarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="agregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar cliente</h5>
+                <h5 class="modal-title" id="exampleModalLabel">AGREGAR CLENTE</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <label>Nombre completo</label>
                         <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
-                            autocomplete="off" value="{{ old('nombre') }}" placeholder="Escriba su nombre completo">
+                            autocomplete="off" value="{{ old('nombre') }}">
                         @error('nombre')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -64,41 +64,13 @@
     </div>
 </div>
 
-<!-- Elimiar-->
-<div class="modal fade" id="eliminarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar entrenador</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <form action="{{ route('cliente.destroy', $cliente->id ?? '') }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                    <p>
-                        Esta acción no se puede deshacer.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <!-- Peso -->
 <div class="modal fade" id="agregarPeso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar peso</h5>
+                <h5 class="modal-title" id="exampleModalLabel">AGREGAR PESO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

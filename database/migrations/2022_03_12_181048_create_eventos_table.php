@@ -16,13 +16,14 @@ class CreateEventosTable extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->enum('tipo', ['PAGO', 'INASISTENCIA']);
-            $table->float('monto')->default(0);
+            $table->float('monto')->default(0)->nullable();
             
             $table->unsignedBigInteger('entrenador_id');
             $table->foreign('entrenador_id')
             ->references('id')
             ->on('entrenadors')
             ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -40,7 +40,7 @@ class HomeController extends Controller
             $spinning = HomeController::get_percent($cajas, 'servicio', 'SPINNING');
             $zumba = HomeController::get_percent($cajas, 'servicio', 'ZUMBA');
             $taek = HomeController::get_percent($cajas, 'servicio', 'TAEKWONDO');
-;
+            
             $activos = round(Cliente::has('cajas')->get()->count() * 100 / $clientes->count(), 1);
             $porcentaje = HomeController::percent_becas();
             $personas = HomeController::personas();
@@ -95,6 +95,6 @@ class HomeController extends Controller
     //FUNCION PARA OBTENER EL PORCENTAJE
     public function get_percent($objeto, $columna, $valor)
     {
-        return round($objeto->where($columna, '=', $valor)->count() * 100 / $objeto->count(), 1);
+        return round($objeto->where($columna, $valor)->count() * 100 / $objeto->count(), 1);
     }
 }
