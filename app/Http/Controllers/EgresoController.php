@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEgresoRequest;
+use App\Http\Requests\UpdateEgresoRequest;
+use App\Models\Egreso;
 use App\Http\Requests\ConsultaRequest;
-use App\Http\Requests\StoreIngresoRequest;
-use App\Http\Requests\UpdateIngresoRequest;
-use App\Models\Ingreso;
-use App\Models\Caja;
-use App\Models\Evento;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 
-class IngresoController extends Controller
+class EgresoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,13 +17,22 @@ class IngresoController extends Controller
     public function index()
     {
         //
+        $total = Egreso::all('monto')->sum('monto');
+        $mes = Egreso::where('created_at', '>=', date('Y-m-' . '01'))->get('monto')->sum('monto');
+
         $ver = ([
-            'total' => Ingreso::all('monto')->sum('monto'),
-            'activo' => Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->get('monto')->sum('monto'),
-            'entrenadores' => Evento::all()->sum('monto'),
+            'total' =>  $total,
+            'mes' =>  $mes,
         ]);
 
-        return view('ingreso.index', compact('ver'));
+        return view('egreso.index', compact('ver'));
+    }
+
+    public function ver($value)
+    {
+        //
+        $egresos = Egreso::where('tipo', $value)->get(['created_at', 'monto']);
+        return view('egreso.ver', compact('egresos', 'value'));
     }
 
     public function consulta(ConsultaRequest $request)
@@ -35,17 +40,17 @@ class IngresoController extends Controller
         $inicio = date('Y-m-d', strtotime($request->inicio . ' - 1 days'));
         $fin = date('Y-m-d', strtotime($request->fin . ' + 1 days'));
 
-        $ingresos = Ingreso::where('created_at', '>=', $inicio)
+        $egresos = Egreso::where('created_at', '>=', $inicio)
             ->where('created_at', '<=', $fin)->get();
 
         $mensaje = 'De ' . 
         date('d-m-Y', strtotime($request->inicio)) . ' a ' . 
         date('d-m-Y', strtotime($request->fin)) . ' se han encontrado ' . 
-        $ingresos->count() . ' registros, con un total de C$ ' .
-        $ingresos->sum('monto') . ' y C$ ' . $ingresos->sum('beca') . ' en becas';
+        $egresos->count() . ' registros, con un total de C$ ' .
+        $egresos->sum('monto');
 
-        return redirect()->route('ingreso.index')
-            ->with('ingresos', $ingresos)->with('mensaje', $mensaje);
+        return redirect()->route('egresos.index')
+            ->with('egresos', $egresos)->with('mensaje', $mensaje);
     }
 
     /**
@@ -61,21 +66,23 @@ class IngresoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreIngresoRequest  $request
+     * @param  \App\Http\Requests\StoreEgresoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreIngresoRequest $request)
+    public function store(StoreEgresoRequest $request)
     {
         //
+        Egreso::create($request->all());
+        return redirect()->route('egreso.ver', $request->tipo);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Egreso  $egreso
      * @return \Illuminate\Http\Response
      */
-    public function show(Ingreso $ingreso)
+    public function show(Egreso $egreso)
     {
         //
     }
@@ -83,10 +90,10 @@ class IngresoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Egreso  $egreso
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ingreso $ingreso)
+    public function edit(Egreso $egreso)
     {
         //
     }
@@ -94,11 +101,11 @@ class IngresoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateIngresoRequest  $request
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Http\Requests\UpdateEgresoRequest  $request
+     * @param  \App\Models\Egreso  $egreso
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateIngresoRequest $request, Ingreso $ingreso)
+    public function update(UpdateEgresoRequest $request, Egreso $egreso)
     {
         //
     }
@@ -106,10 +113,10 @@ class IngresoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ingreso  $ingreso
+     * @param  \App\Models\Egreso  $egreso
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ingreso $ingreso)
+    public function destroy(Egreso $egreso)
     {
         //
     }

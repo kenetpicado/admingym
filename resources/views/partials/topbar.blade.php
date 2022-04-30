@@ -38,7 +38,7 @@
                                 </div>
                                 <div>
                                     <div class="small text-gray-500">
-                                        {{ date('d - F - Y', strtotime($reporte->created_at)) }}</div>
+                                        {{ $reporte->created_at }}</div>
                                     <span class="font-weight-bold">{{ $reporte->mensaje }}</span>
                                 </div>
                             </a>
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="small text-gray-500">{{ date('d-F-Y') }}</div>
+                                <div class="small text-gray-500">{{ date('d-m-Y') }}</div>
                                 <span class="font-weight-bold">No hay notificaciones</span>
                             </div>
                         </a>

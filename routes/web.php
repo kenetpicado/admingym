@@ -7,6 +7,7 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\IngresoController;
+use App\Http\Controllers\EgresoController;
 use App\Http\Controllers\PesoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -23,11 +24,16 @@ use Illuminate\Support\Facades\Auth;
 */
 
 //BORRA TODOS LOS REPORTES
-Route::delete('delete',  [ReporteController::class, 'delete'])->name('reporte.delete');
+Route::delete('reporte/delete',  [ReporteController::class, 'delete'])->name('reporte.delete');
 
 //EFECTUA EL PAGO DE 1 CLIENTE
-Route::get('pagar/{cliente}', [CajaController::class, 'pagar'])->name('pagar');
-Route::post('consulta', [IngresoController::class, 'consulta'])->name('consulta');
+Route::get('caja/{cliente}/pagar', [CajaController::class, 'pagar'])->name('pagar');
+
+//Consulta personalizada
+Route::post('ingreso/consulta', [IngresoController::class, 'consulta'])->name('consulta');
+Route::post('egreso/consulta', [EgresoController::class, 'consulta'])->name('egreso.consulta');
+
+Route::get('egreso/{value}/ver', [EgresoController::class, 'ver'])->name('egreso.ver');
 
 //RUTA PARA PROBAR LAS INTERFACES DE LOS CORREOS
 // Route::get('/mailable', function () {
@@ -42,6 +48,7 @@ Route::resource('entrenador', EntrenadorController::class);
 Route::resource('evento', EventoController::class);
 Route::resource('reporte', ReporteController::class);
 Route::resource('ingreso', IngresoController::class);
+Route::resource('egresos', EgresoController::class);
 Route::resource('peso', PesoController::class);
 Route::resource('/', HomeController::class);
 

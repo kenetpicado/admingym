@@ -5,6 +5,14 @@
 @section('contenido')
     <div class="container-fluid">
 
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{{route('cliente.index')}}">Clientes</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Editar</li>
+            </ol>
+        </nav>
+
         <!-- form -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">

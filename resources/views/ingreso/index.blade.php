@@ -5,6 +5,13 @@
 @section('contenido')
     <div class="container-fluid">
 
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('index') }}">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ingresos</li>
+            </ol>
+        </nav>
+
         <div class="row">
             <!-- Earnings (Annual) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
@@ -48,8 +55,7 @@
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">CONSULTA</h6>
-                <a href="#" class="d-inline btn btn-sm btn-primary shadow-sm" data-toggle="modal"
-                    data-target="#ver">
+                <a href="#" class="d-inline btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#ver">
                     <i class="fas fa-plus fa-sm text-white-50"></i>
                     <label class="m-0 d-none d-lg-inline">Establecer rango</label>
                 </a>

@@ -5,6 +5,14 @@
 @section('contenido')
     <div class="container-fluid">
 
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{{route('entrenador.index')}}">Entrenadores</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Eventos</li>
+            </ol>
+        </nav>
+
         <!-- DataTales -->
         <div class="card shadow mb-4">
 
