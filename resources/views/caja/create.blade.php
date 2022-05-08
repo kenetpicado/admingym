@@ -60,7 +60,7 @@
                         <div class="form-group col-lg-3">
                             <label>Beca (%)</label>
                             <input type="number" name="beca" class="form-control @error('beca') is-invalid @enderror"
-                                autocomplete="off" value="0">
+                                autocomplete="off" value="{{ old('beca', '0') }}">
                             @error('beca')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

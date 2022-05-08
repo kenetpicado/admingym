@@ -6,10 +6,6 @@ use App\Http\Requests\ConsultaRequest;
 use App\Http\Requests\StoreIngresoRequest;
 use App\Http\Requests\UpdateIngresoRequest;
 use App\Models\Ingreso;
-use App\Models\Caja;
-use App\Models\Evento;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class IngresoController extends Controller
 {
@@ -24,7 +20,6 @@ class IngresoController extends Controller
         $ver = ([
             'total' => Ingreso::all('monto')->sum('monto'),
             'activo' => Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->get('monto')->sum('monto'),
-            'entrenadores' => Evento::all()->sum('monto'),
         ]);
 
         return view('ingreso.index', compact('ver'));
@@ -32,15 +27,11 @@ class IngresoController extends Controller
 
     public function consulta(ConsultaRequest $request)
     {
-        $inicio = date('Y-m-d', strtotime($request->inicio . ' - 1 days'));
-        $fin = date('Y-m-d', strtotime($request->fin . ' + 1 days'));
+        $ingresos = Ingreso::where('created_at', '>=', $request->inicio)
+            ->where('created_at', '<=', $request->fin)->get();
 
-        $ingresos = Ingreso::where('created_at', '>=', $inicio)
-            ->where('created_at', '<=', $fin)->get();
-
-        $mensaje = 'De ' . 
-        date('d-m-Y', strtotime($request->inicio)) . ' a ' . 
-        date('d-m-Y', strtotime($request->fin)) . ' se han encontrado ' . 
+        $mensaje = 'De ' . $request->inicio . ' a ' . 
+        $request->fin . ' se han encontrado ' . 
         $ingresos->count() . ' registros, con un total de C$ ' .
         $ingresos->sum('monto') . ' y C$ ' . $ingresos->sum('beca') . ' en becas';
 

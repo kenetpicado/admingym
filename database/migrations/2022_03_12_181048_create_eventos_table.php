@@ -24,7 +24,7 @@ class CreateEventosTable extends Migration
             ->on('entrenadors')
             ->onDelete('cascade');
 
-            $table->timestamps();
+            $table->date('created_at')->default(date('Y-m-d'));
         });
     }
 

@@ -10,6 +10,7 @@ class Caja extends Model
 {
     use HasFactory;
     protected $guarded = ['nombre'];
+    public $timestamps = false;
     
     //RELACION UNO A MUCHOS INVERSA
     public function cliente(){

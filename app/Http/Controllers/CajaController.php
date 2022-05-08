@@ -11,14 +11,12 @@ use App\Models\Ingreso;
 use App\Models\Reporte;
 use Illuminate\Support\Facades\Mail;
 
-use function PHPUnit\Framework\isEmpty;
-
 class CajaController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-    } 
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,12 +26,11 @@ class CajaController extends Controller
     {
         //OBTENGO TODOS LOS ACTIVOS
         $cajas = Caja::with('cliente:id,nombre')
-        ->get(['id', 'fecha_fin', 'cliente_id']);
+            ->get(['id', 'fecha_fin', 'cliente_id']);
 
         foreach ($cajas as $caja) {
 
-            if (date('Y-m-d') >= $caja->fecha_fin) 
-            {
+            if (date('Y-m-d') >= $caja->fecha_fin) {
                 Reporte::create([
                     'mensaje' =>  $caja->cliente->nombre,
                     'cliente_id' =>  $caja->cliente_id
@@ -44,9 +41,8 @@ class CajaController extends Controller
 
         $reportes = Reporte::all();
 
-        //PLANES ACTIVOS
-        $cajas = Caja::with('cliente:id,nombre')
-        ->get(['id', 'beca', 'servicio', 'nota', 'created_at', 'fecha_fin', 'cliente_id']);
+        //VOLVER A OBTENER PLANES ACTIVOS
+        $cajas = Caja::with('cliente:id,nombre')->get();
 
         return view('caja.index', compact('cajas', 'reportes'));
     }
@@ -75,38 +71,19 @@ class CajaController extends Controller
     public function store(StoreCajaRequest $request)
     {
         //SI UN CLIENTE TIENE REPORTE BORRAR
-        if (Reporte::where('cliente_id', '=', $request->cliente_id)->get()->count() > 0) {
+        if (Reporte::where('cliente_id', $request->cliente_id)->get()->count() > 0) {
             Reporte::destroy(Reporte::where('cliente_id', $request->cliente_id)->get());
-        }
-
-        //OBTENER FECHA DE HOY
-        $today = date('Y-m-d');
-
-        //CALCULAR FECHA SIGUIENTE SEGUN EL PLAN
-        switch ($request->plan) {
-            case 'MENSUAL':
-                $end = date('Y-m-d', strtotime($today . ' + 1 month'));
-                break;
-            case 'QUINCENAL':
-                $end = date('Y-m-d', strtotime($today . ' + 15 days'));
-                break;
-            case 'SEMANAL':
-                $end = date('Y-m-d', strtotime($today . ' + 7 days'));
-                break;
-            case 'DIA':
-                $end = date('Y-m-d', strtotime($today . ' + 1 days'));
-                break;
         }
 
         //Agregar fecha de fin
         $request->merge([
-            'fecha_fin' => $end
+            'fecha_fin' => $this->get_end($request->plan)
         ]);
 
         $beca = 0;
-        
-        if($request->beca > 0)
-        {
+
+        //Aplicar descuento si hay beca
+        if ($request->beca > 0) {
             $beca = $request->monto * $request->beca / 100;
             $nuevo_monto = $request->monto - $beca;
 
@@ -114,7 +91,7 @@ class CajaController extends Controller
                 'monto' => $nuevo_monto
             ]);
         }
-        
+
         //GUARDAR DATOS
         Caja::create($request->all());
 
@@ -175,5 +152,27 @@ class CajaController extends Controller
     public function destroy($caja_id)
     {
         //
+    }
+
+    public function get_end($value)
+    {
+        //OBTENER FECHA DE HOY
+        $today = date('Y-m-d');
+
+        //CALCULAR FECHA SIGUIENTE SEGUN EL PLAN
+        switch ($value) {
+            case 'MENSUAL':
+                return date('Y-m-d', strtotime($today . ' + 1 month'));
+                break;
+            case 'QUINCENAL':
+                return date('Y-m-d', strtotime($today . ' + 15 days'));
+                break;
+            case 'SEMANAL':
+                return date('Y-m-d', strtotime($today . ' + 7 days'));
+                break;
+            case 'DIA':
+                return date('Y-m-d', strtotime($today . ' + 1 days'));
+                break;
+        }
     }
 }

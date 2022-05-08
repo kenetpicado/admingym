@@ -19,7 +19,6 @@ class CreateClientesTable extends Migration
             $table->string('email', 50)->nullable();
             $table->date('fecha');
             $table->enum('sexo', ['M', 'F']);
-            $table->timestamps();
         });
     }
 

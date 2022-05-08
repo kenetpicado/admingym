@@ -11,13 +11,9 @@ class Peso extends Model
     use HasFactory;
 
     protected $guarded = [];
+    public $timestamps = false;
 
     public function cliente(){
         return $this->belongsTo(Cliente::class);
-    }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return date("d-F-Y", strtotime($value));
     }
 }

@@ -9,22 +9,18 @@ class Entrenador extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public $timestamps = false;
 
-    public function getCreatedAtAttribute($value)
-    {
-        return date("d-F-Y", strtotime($value));
-    }
-
-    //FUNCION PARA CONVERTIR EL NOMBRE EN MAYUSCULA
     public function setNombreAttribute($value)
     {
         $this->attributes['nombre'] = trim(strtoupper($value));
     }
-    //FUNCION PARA CONVERTIR EL NOMBRE EN MAYUSCULA
+
     public function setHorarioAttribute($value)
     {
         $this->attributes['horario'] = trim(strtoupper($value));
     }
+
     public function eventos()
     {
         return $this->hasMany('App\Models\Evento');

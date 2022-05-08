@@ -6,7 +6,6 @@ use App\Models\Reporte;
 use App\Http\Requests\StoreReporteRequest;
 use App\Http\Requests\UpdateReporteRequest;
 
-use function PHPUnit\Framework\returnSelf;
 
 class ReporteController extends Controller
 {

@@ -26,7 +26,7 @@ class StoreCajaRequest extends FormRequest
         return [
             //
             'monto' => 'required|numeric',
-            'beca' => 'nullable|numeric',
+            'beca' => 'nullable|numeric|min:0|max:100',
             'nota' => 'nullable|max:30'
         ];
     }

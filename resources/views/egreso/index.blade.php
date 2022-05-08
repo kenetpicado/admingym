@@ -163,7 +163,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="{{ route('egreso.ver', 'SALARIOS') }}" class="col-lg-2 mb-4">
+                    <a href="{{ route('egreso.ver', 'SALARIO') }}" class="col-lg-2 mb-4">
                         <div class="card bg-primary text-white shadow">
                             <div class="card-body">
                                 Salarios
@@ -212,7 +212,7 @@
                                     <tr>
                                         <td>{{ date('d-m-Y', strtotime($egreso->created_at)) }}</td>
                                         <td>{{ $egreso->tipo }}</td>
-                                        <td>{{ $egreso->monto }}</td>
+                                        <td>C$ {{ $egreso->monto }}</td>
                                     </tr>
                                 @endforeach
                             @endif

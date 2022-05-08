@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Peso;
 use App\Http\Requests\StorePesoRequest;
 use App\Http\Requests\UpdatePesoRequest;
-use App\Models\Cliente;
 
 class PesoController extends Controller
 {

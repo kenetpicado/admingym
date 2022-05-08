@@ -8,14 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Evento extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
+    public $timestamps = false;
 
     public function entrenador(){
         return $this->belongsTo('App\Models\Entrenador');
-    }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return date("d-F-Y", strtotime($value));
     }
 }

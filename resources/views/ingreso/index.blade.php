@@ -88,7 +88,7 @@
                             @if (session('ingresos'))
                                 @foreach (session('ingresos') as $ingreso)
                                     <tr>
-                                        <td>{{ date('d-F-Y', strtotime($ingreso->created_at)) }}</td>
+                                        <td>{{ $ingreso->created_at }}</td>
                                         <td>{{ $ingreso->nombre }}</td>
                                         <td>{{ $ingreso->servicio }}</td>
                                         <td>C$ {{ $ingreso->monto }}</td>

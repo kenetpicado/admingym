@@ -10,4 +10,5 @@ class Egreso extends Model
     use HasFactory;
 
     protected $fillable = ['tipo', 'monto'];
+    public $timestamps = false;
 }

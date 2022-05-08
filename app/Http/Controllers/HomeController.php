@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Caja;
 use App\Models\Cliente;
-use App\Models\Entrenador;
 use App\Models\Ingreso;
-use Illuminate\Http\Request;
 use App\Models\Reporte;
+use App\Models\Egreso;
 
 class HomeController extends Controller
 {
@@ -41,7 +40,7 @@ class HomeController extends Controller
             $zumba = HomeController::get_percent($cajas, 'servicio', 'ZUMBA');
             $taek = HomeController::get_percent($cajas, 'servicio', 'TAEKWONDO');
             
-            $activos = round(Cliente::has('cajas')->get()->count() * 100 / $clientes->count(), 1);
+            $activos = round(Cliente::has('cajas')->get(['id'])->count() * 100 / $clientes->count(), 1);
             $porcentaje = HomeController::percent_becas();
             $personas = HomeController::personas();
         }
@@ -58,10 +57,10 @@ class HomeController extends Controller
 
         $ver = ([
             'clientes' => $clientes->count(),
-            'entrenadores' => Entrenador::all()->count(),
             'cajas' => $cajas->count(),
             'activos' => $activos,
             'ingresos' => HomeController::suma_mensual('monto'),
+            'egresos' => Egreso::where('created_at', '>=', date('Y-m-' . '01'))->get()->sum('monto'),
             'becas' => HomeController::suma_mensual('beca'),
             'porcentaje' => $porcentaje,
             'personas' => $personas
@@ -74,13 +73,13 @@ class HomeController extends Controller
     //PERSONAS QUE TIENEN BECA
     public function personas()
     {
-        return Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->where('beca', '>', '0')->get()->count();
+        return Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->where('beca', '>', '0')->get('id')->count();
     }
 
     //SUMA MENSUAL DE UN CAMPO
     public function suma_mensual($field)
     {
-        return Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->get()->sum($field);
+        return Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->get(['id', $field])->sum($field);
     }
 
     public function percent_becas()

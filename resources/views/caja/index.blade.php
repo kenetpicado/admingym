@@ -24,7 +24,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Servicio</th>
-                                <th>Beca</th>
+                                <th>Monto - Beca</th>
                                 <th>Rango</th>
                                 <th>Nota</th>
                             </tr>
@@ -35,6 +35,7 @@
                                     <td>{{ $caja->cliente->nombre }}</td>
                                     <td>{{ $caja->servicio }}</td>
                                     <td>
+                                        C$ {{ $caja->monto }}
                                         @if ($caja->beca > 0)
                                             <div class="badge badge-success">
                                                 {{ $caja->beca }} %

@@ -11,8 +11,8 @@ use App\Models\Peso;
 class Cliente extends Model
 {
     use HasFactory;
-    //AL INSERTAR LOS DATOS NO GENERA ERROR EL _TOKEN DE CSRF QUE SE HA ENVIADO
     protected $guarded = [];
+    public $timestamps = false;
 
     //FUNCION PARA CONVERTIR EL NOMBRE EN MAYUSCULA
     public function setNombreAttribute($value)

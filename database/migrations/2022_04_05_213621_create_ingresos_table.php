@@ -19,7 +19,7 @@ class CreateIngresosTable extends Migration
             $table->string('nombre', 50);
             $table->float('beca')->default(0);
             $table->enum('servicio', ['PESAS', 'SPINNING', 'ZUMBA', 'TAEKWONDO']);
-            $table->timestamps();
+            $table->date('created_at')->default(date('Y-m-d'));
         });
     }
 

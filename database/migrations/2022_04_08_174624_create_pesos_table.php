@@ -19,7 +19,8 @@ class CreatePesosTable extends Migration
             
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-            $table->timestamps();
+            
+            $table->date('created_at')->default(date('Y-m-d'));
         });
     }
 

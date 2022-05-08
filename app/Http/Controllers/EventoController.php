@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Http\Requests\StoreEventoRequest;
 use App\Http\Requests\UpdateEventoRequest;
+use App\Models\Egreso;
 use App\Models\Entrenador;
 
 class EventoController extends Controller
@@ -41,6 +42,11 @@ class EventoController extends Controller
         if ($request->tipo == 'PAGO') {
             $request->validate([
                 'monto' => 'required|numeric|gt:0',
+            ]);
+            //Si es pago guardar en egresos
+            Egreso::create([
+                'monto' => $request->monto,
+                'tipo' => 'SALARIO'
             ]);
         }
 

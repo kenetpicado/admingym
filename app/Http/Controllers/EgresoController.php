@@ -16,7 +16,7 @@ class EgresoController extends Controller
      */
     public function index()
     {
-        //
+        //Ventana principal
         $total = Egreso::all('monto')->sum('monto');
         $mes = Egreso::where('created_at', '>=', date('Y-m-' . '01'))->get('monto')->sum('monto');
 
@@ -28,25 +28,22 @@ class EgresoController extends Controller
         return view('egreso.index', compact('ver'));
     }
 
+    //Ver un tipo de egreso
     public function ver($value)
     {
-        //
         $egresos = Egreso::where('tipo', $value)->get(['created_at', 'monto']);
         return view('egreso.ver', compact('egresos', 'value'));
     }
 
+    //Consulta personalizada
     public function consulta(ConsultaRequest $request)
     {
-        $inicio = date('Y-m-d', strtotime($request->inicio . ' - 1 days'));
-        $fin = date('Y-m-d', strtotime($request->fin . ' + 1 days'));
+        $egresos = Egreso::where('created_at', '>=', $request->inicio)
+            ->where('created_at', '<=', $request->fin)->get();
 
-        $egresos = Egreso::where('created_at', '>=', $inicio)
-            ->where('created_at', '<=', $fin)->get();
-
-        $mensaje = 'De ' . 
-        date('d-m-Y', strtotime($request->inicio)) . ' a ' . 
-        date('d-m-Y', strtotime($request->fin)) . ' se han encontrado ' . 
-        $egresos->count() . ' registros, con un total de C$ ' .
+        $mensaje = 'De ' . $request->inicio . ' a ' . 
+        $request->fin . ' se han encontrado ' . $egresos->count() . 
+        ' registros, con un total de C$ ' .
         $egresos->sum('monto');
 
         return redirect()->route('egresos.index')

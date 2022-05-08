@@ -17,8 +17,7 @@ class CreateEgresosTable extends Migration
             $table->id();
             $table->string('tipo', 30);
             $table->float('monto');
-            
-            $table->timestamps();
+            $table->date('created_at')->default(date('Y-m-d'));
         });
     }
 
