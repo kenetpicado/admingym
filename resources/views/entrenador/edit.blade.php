@@ -8,6 +8,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{{route('egresos.index')}}">Egresos</a></li>
                 <li class="breadcrumb-item"><a href="{{route('entrenador.index')}}">Entrenadores</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>

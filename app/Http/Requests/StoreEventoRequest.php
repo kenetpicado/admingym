@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreEventoRequest extends FormRequest
 {
@@ -25,6 +26,7 @@ class StoreEventoRequest extends FormRequest
     {
         return [
             //
+            'monto' => [Rule::requiredIf($this->tipo == 'PAGO')]
         ];
     }
 }

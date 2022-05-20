@@ -67,14 +67,6 @@
                         <p>
                             Se muestran todos los ingresos en un rango de fechas especifico.
                         </p>
-                        @if (session('ingresos'))
-                            <p>
-                                <strong>
-                                    {{ session('mensaje') }}
-                                </strong>
-                            </p>
-                        @endif
-
                         <thead>
                             <tr>
                                 <th>Fecha</th>
@@ -95,7 +87,7 @@
                                         <td>
                                             @if ($ingreso->beca > 0)
                                                 <div class="badge badge-success">
-                                                    C$ {{ $ingreso->beca }}
+                                                    {{ $ingreso->beca }} %
                                                 </div>
                                             @endif
                                         </td>
@@ -103,6 +95,13 @@
                                 @endforeach
                             @endif
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="text-align-last: right" colspan="3">Total</th>
+                                <th>C$ {{ session('mensaje') }}</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

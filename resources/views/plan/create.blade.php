@@ -19,7 +19,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">PAGAR: {{ $cliente->nombre }}</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('caja.store') }}" method="POST">
+                <form action="{{ route('planes.store') }}" method="POST">
                     @csrf
 
                     <div class="row">
@@ -83,6 +83,7 @@
                     </div>
                     <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
                     <input type="hidden" name="nombre" value="{{ $cliente->nombre }}">
+                    <input type="hidden" name="email" value="{{ $cliente->email }}">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>

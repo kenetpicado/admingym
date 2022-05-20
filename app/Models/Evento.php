@@ -9,7 +9,12 @@ class Evento extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'tipo',
+        'monto',
+        'entrenador_id',
+    ];
+    
     public $timestamps = false;
 
     public function entrenador(){

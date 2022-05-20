@@ -8,7 +8,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{route('cliente.index')}}">Clientes</a></li>
+                <li class="breadcrumb-item"><a href="{{route('clientes.index')}}">Clientes</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>
         </nav>
@@ -19,7 +19,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">EDITAR: {{ $cliente->nombre }}</h6>
             </div>
             <div class="card-body">
-                <form action="{{ route('cliente.update', $cliente) }}" method="POST">
+                <form action="{{ route('clientes.update', $cliente) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="row">

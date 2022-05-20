@@ -30,23 +30,16 @@
 
     <!-- Nav Item - clientes -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('cliente.index') }}">
+        <a class="nav-link" href="{{ route('clientes.index') }}">
             <i class="fas fa-fw fa-users"></i>
             <span>Clientes</span></a>
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('caja.index') }}">
+        <a class="nav-link" href="{{ route('planes.index') }}">
             <i class="fas fa-fw fa-dollar-sign"></i>
             <span>Planes activos</span></a>
-    </li>
-
-    <!-- Nav Item - entrenadores -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('entrenador.index') }}">
-            <i class="fas fa-fw fa-walking"></i>
-            <span>Entrenadores</span></a>
     </li>
 
     <!-- Nav Item - entrenadores -->

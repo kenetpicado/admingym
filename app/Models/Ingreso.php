@@ -9,6 +9,12 @@ class Ingreso extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'monto',
+        'nombre',
+        'beca',
+        'servicio',
+    ];
+    
     public $timestamps = false;
 }

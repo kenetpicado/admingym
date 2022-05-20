@@ -40,7 +40,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Egresos mensuales</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">C$ {{ $ver['mes'] }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">C$ {{ $ver['activo'] }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -163,10 +163,17 @@
                             </div>
                         </div>
                     </a>
-                    <a href="{{ route('egreso.ver', 'SALARIO') }}" class="col-lg-2 mb-4">
+                    <a href="{{ route('egreso.ver', 'SALARIO-ADMIN') }}" class="col-lg-2 mb-4">
                         <div class="card bg-primary text-white shadow">
                             <div class="card-body">
-                                Salarios
+                                Administración
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{{ route('entrenador.index') }}" class="col-lg-2 mb-4">
+                        <div class="card bg-primary text-white shadow">
+                            <div class="card-body">
+                                Entrenadores
                             </div>
                         </div>
                     </a>
@@ -191,13 +198,6 @@
                         <p>
                             Se muestran todos los egresos en un rango de fechas especifico.
                         </p>
-                        @if (session('egresos'))
-                            <p>
-                                <strong>
-                                    {{ session('mensaje') }}
-                                </strong>
-                            </p>
-                        @endif
 
                         <thead>
                             <tr>
@@ -217,6 +217,13 @@
                                 @endforeach
                             @endif
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="text-align-last: right" colspan="2">Total</th>
+                                <th>C$ {{ session('mensaje') }}</th>
+
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

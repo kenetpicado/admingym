@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Caja;
+use App\Models\Plan;
 use App\Models\Cliente;
 use App\Models\Ingreso;
 use App\Models\Reporte;
@@ -10,22 +10,11 @@ use App\Models\Egreso;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         //OBTENER DATOS
         $clientes = Cliente::all();
-        $cajas = Caja::all();
+        $cajas = Plan::all();
         $m = $f = $activos = $porcentaje = $personas = 0;
         $pesas = $spinning = $zumba = $taek = 0;
  
@@ -40,7 +29,7 @@ class HomeController extends Controller
             $zumba = HomeController::get_percent($cajas, 'servicio', 'ZUMBA');
             $taek = HomeController::get_percent($cajas, 'servicio', 'TAEKWONDO');
             
-            $activos = round(Cliente::has('cajas')->get(['id'])->count() * 100 / $clientes->count(), 1);
+            $activos = round(Cliente::has('planes')->get(['id'])->count() * 100 / $clientes->count(), 1);
             $porcentaje = HomeController::percent_becas();
             $personas = HomeController::personas();
         }

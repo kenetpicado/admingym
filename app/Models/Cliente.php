@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Caja;
+use App\Models\Plan;
 use App\Models\Reporte;
 use App\Models\Peso;
 
@@ -14,20 +14,27 @@ class Cliente extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    //FUNCION PARA CONVERTIR EL NOMBRE EN MAYUSCULA
+    public static function getData($cliente_id)
+    {
+        return Cliente::find($cliente_id, ['id', 'nombre', 'email']);
+    }
+
     public function setNombreAttribute($value)
     {
         $this->attributes['nombre'] = trim(strtoupper($value));
     }
 
-    public function cajas(){
-        return $this->hasMany(Caja::class);
+    public function planes()
+    {
+        return $this->hasMany(Plan::class);
     }
 
-    public function reportes(){
+    public function reportes()
+    {
         return $this->hasMany(Reporte::class);
     }
-    public function pesos(){
+    public function pesos()
+    {
         return $this->hasMany(Peso::class);
     }
 }

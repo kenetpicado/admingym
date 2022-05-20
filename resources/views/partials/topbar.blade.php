@@ -30,7 +30,7 @@
                     @if (count($reportes) > 0)
                         @foreach ($reportes as $reporte)
                             <a class="dropdown-item d-flex align-items-center"
-                                href="{{ route('pagar', $reporte->cliente_id) }}">
+                                href="{{ route('planes.create', $reporte->cliente_id) }}">
                                 <div class="mr-3">
                                     <div class="icon-circle bg-danger">
                                         <i class="fas fa-exclamation text-white"></i>

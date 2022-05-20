@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CajaController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EntrenadorController;
 use App\Http\Controllers\EventoController;
@@ -16,30 +16,25 @@ use Illuminate\Support\Facades\Auth;
 //BORRA TODOS LOS REPORTES
 Route::delete('reporte/delete',  [ReporteController::class, 'delete'])->name('reporte.delete');
 
-//EFECTUA EL PAGO DE 1 CLIENTE
-Route::get('caja/{cliente}/pagar', [CajaController::class, 'pagar'])->name('pagar');
+//PLANES
+Route::get('planes', [PlanController::class, 'index'])->name('planes.index');
+Route::get('planes/{cliente}/create', [PlanController::class, 'create'])->name('planes.create');
+Route::post('planes', [PlanController::class, 'store'])->name('planes.store');
 
 //Consulta personalizada
 Route::post('ingreso/consulta', [IngresoController::class, 'consulta'])->name('consulta');
 Route::post('egreso/consulta', [EgresoController::class, 'consulta'])->name('egreso.consulta');
 
+//PESOS
+Route::post('peso', [PesoController::class, 'store'])->name('peso.store');
+
 Route::get('egreso/{value}/ver', [EgresoController::class, 'ver'])->name('egreso.ver');
 
-//RUTA PARA PROBAR LAS INTERFACES DE LOS CORREOS
-// Route::get('/mailable', function () {
-//     $invoice = Caja::all()->first();
- 
-//     return new Pago($invoice);
-// });
-
-Route::resource('cliente', ClienteController::class);
-Route::resource('caja', CajaController::class);
+Route::resource('clientes', ClienteController::class);
 Route::resource('entrenador', EntrenadorController::class);
 Route::resource('evento', EventoController::class);
-Route::resource('reporte', ReporteController::class);
 Route::resource('ingreso', IngresoController::class);
 Route::resource('egresos', EgresoController::class);
-Route::resource('peso', PesoController::class);
 Route::resource('/', HomeController::class);
 
 Auth::routes();

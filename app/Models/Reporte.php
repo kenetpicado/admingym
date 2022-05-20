@@ -12,9 +12,16 @@ class Reporte extends Model
 
     protected $guarded = [];
     public $timestamps = false;
-    
-    //RELACION UNO A MUCHOS INVERSA
-    public function cliente(){
+
+    public static function deleteByUser($cliente_id)
+    {
+        if (Reporte::where('cliente_id', $cliente_id)->get()->count() > 0) {
+            Reporte::destroy(Reporte::where('cliente_id', $cliente_id)->get());
+        }
+    }
+
+    public function cliente()
+    {
         return $this->belongsTo(Cliente::class);
     }
 

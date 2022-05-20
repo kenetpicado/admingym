@@ -51,13 +51,13 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                                 aria-labelledby="dropdownMenuLink">
-                                                <a href="{{ route('pagar', $cliente->id) }}"
+                                                <a href="{{ route('planes.create', $cliente->id) }}"
                                                     class="dropdown-item">Pagar</a>
 
-                                                <a href="{{ route('cliente.show', $cliente->id) }}"
+                                                <a href="{{ route('clientes.show', $cliente->id) }}"
                                                     class="dropdown-item">Peso</a>
                                                     
-                                                <a href="{{ route('cliente.edit', $cliente->id) }}"
+                                                <a href="{{ route('clientes.edit', $cliente->id) }}"
                                                     class="dropdown-item">Editar</a>
                                             </div>
                                         </div>

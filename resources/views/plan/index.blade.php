@@ -30,27 +30,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cajas as $caja)
+                            @foreach ($planes as $planes)
                                 <tr>
-                                    <td>{{ $caja->cliente->nombre }}</td>
-                                    <td>{{ $caja->servicio }}</td>
+                                    <td>{{ $planes->cliente->nombre }}</td>
+                                    <td>{{ $planes->servicio }}</td>
                                     <td>
-                                        C$ {{ $caja->monto }}
-                                        @if ($caja->beca > 0)
+                                        C$ {{ $planes->monto }}
+                                        @if ($planes->beca > 0)
                                             <div class="badge badge-success">
-                                                {{ $caja->beca }} %
+                                                {{ $planes->beca }} %
                                             </div>
                                         @endif
                                     </td>
                                     <td> 
                                         <div class="badge badge-primary">
-                                            {{ date('d-F-y', strtotime($caja->created_at)) }}
+                                            {{ date('d-F-y', strtotime($planes->created_at)) }}
                                         </div>
                                         <div class="badge badge-danger">
-                                            {{ date('d-F-y', strtotime($caja->fecha_fin)) }}
+                                            {{ date('d-F-y', strtotime($planes->fecha_fin)) }}
                                         </div>
                                     </td>
-                                    <td>{{ $caja->nota }}</td>
+                                    <td>{{ $planes->nota }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
