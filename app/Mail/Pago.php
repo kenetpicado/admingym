@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Caja;
+use App\Models\Plan;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,16 +12,16 @@ class Pago extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $caja;
+    public $plan;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Caja $caja)
+    public function __construct(Plan $plan)
     {
         //
-        $this->caja = $caja;
+        $this->plan = $plan;
     }
 
     /**

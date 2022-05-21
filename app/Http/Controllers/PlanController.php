@@ -45,10 +45,12 @@ class PlanController extends Controller
             ]);
         }
 
-        $caja = Plan::create($request->all());
+        $plan = Plan::create($request->all());
         Ingreso::create($request->all());
 
-        Mail::to($request->email)->send(new Pago($caja));
+        if ($request->email != "") {
+            Mail::to($request->email)->send(new Pago($plan));
+        }
 
         return redirect()->route('clientes.index')->with('status', 'ok');
     }
