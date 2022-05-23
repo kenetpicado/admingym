@@ -26,6 +26,11 @@ class EgresoController extends Controller
         return view('egreso.ver', compact('egresos', 'value'));
     }
 
+    public function create()
+    {
+        return view('egreso.create');
+    }
+
     //Consulta personalizada
     public function consulta(ConsultaRequest $request)
     {
@@ -40,6 +45,6 @@ class EgresoController extends Controller
     public function store(StoreEgresoRequest $request)
     {
         Egreso::create($request->all());
-        return redirect()->route('egreso.ver', $request->tipo);
+        return redirect()->route('egresos.index');
     }
 }

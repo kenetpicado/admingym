@@ -25,6 +25,7 @@ class StoreEgresoRequest extends FormRequest
     {
         return [
             //
+            'tipo' => 'required',
             'monto' => 'required|numeric|gt:0'
         ];
     }

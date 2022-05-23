@@ -21,6 +21,7 @@ class Plan extends Model
         'beca',
         'nota',
         'fecha_fin',
+        'created_at',
         'cliente_id'
     ];
 

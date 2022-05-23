@@ -27,20 +27,20 @@
                         <div class="form-group col-lg-3">
                             <label>Servicio</label>
                             <select name="servicio" class="form-control" required>
-                                <option selected value="PESAS">PESAS</option>
-                                <option value="ZUMBA">ZUMBA</option>
-                                <option value="SPINNING">SPINNING</option>
-                                <option value="TAEKWONDO">TAEKWONDO</option>
+                                <option value="PESAS" {{ old('servicio') == 'PESAS' ? 'selected' : '' }}>PESAS</option>
+                                <option value="ZUMBA" {{ old('servicio') == 'ZUMBA' ? 'selected' : '' }}>ZUMBA</option>
+                                <option value="SPINNING" {{ old('servicio') == 'SPINNING' ? 'selected' : '' }}>SPINNING</option>
+                                <option value="TAEKWONDO" {{ old('servicio') == 'TAEKWONDO' ? 'selected' : '' }}>TAEKWONDO</option>
                             </select>
                         </div>
 
                         <div class="form-group col-lg-3">
                             <label>Plan</label>
                             <select name="plan" class="form-control" required>
-                                <option selected value="MENSUAL">MENSUAL</option>
-                                <option value="QUINCENAL">QUINCENAL</option>
-                                <option value="SEMANAL">SEMANAL</option>
-                                <option value="DIA">DIA</option>
+                                <option value="MENSUAL" {{ old('plan') == 'MENSUAL' ? 'selected' : '' }}>MENSUAL</option>
+                                <option value="QUINCENAL" {{ old('plan') == 'QUINCENAL' ? 'selected' : '' }}>QUINCENAL</option>
+                                <option value="SEMANAL" {{ old('plan') == 'SEMANAL' ? 'selected' : '' }}>SEMANAL</option>
+                                <option value="DIA" {{ old('plan') == 'DIA' ? 'selected' : '' }}>DIA</option>
                             </select>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                         <div class="form-group col-lg-3">
                             <label>Monto C$</label>
                             <input type="number" name="monto" class="form-control @error('monto') is-invalid @enderror"
-                                autocomplete="off">
+                                autocomplete="off" value="{{ old('monto') }}" autofocus>
                             @error('monto')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

@@ -55,9 +55,9 @@
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">CONSULTA</h6>
-                <a href="#" class="d-inline btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#ver">
+                <a href="{{ route('ingreso.create') }}" class="d-inline btn btn-sm btn-primary shadow-sm">
                     <i class="fas fa-plus fa-sm text-white-50"></i>
-                    <label class="m-0 d-none d-lg-inline">Establecer rango</label>
+                    <label class="m-0 d-none d-lg-inline">Otro ingreso</label>
                 </a>
             </div>
 
@@ -65,7 +65,10 @@
                 <div class="table-responsive">
                     <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
                         <p>
-                            Se muestran todos los ingresos en un rango de fechas especifico.
+                            Se muestran todos los ingresos en un rango de fechas especifico:
+                            <a href="#" data-toggle="modal" data-target="#ver">
+                                <label>Establecer rango</label>
+                            </a>
                         </p>
                         <thead>
                             <tr>

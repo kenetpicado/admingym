@@ -79,13 +79,6 @@
                             </div>
                         </div>
                     </a>
-                    <a href="{{ route('egreso.ver', 'LIMPIEZA') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Limpieza
-                            </div>
-                        </div>
-                    </a>
                     <a href="{{ route('egreso.ver', 'SUPLEMENTOS-LIMPIEZA') }}" class="col-lg-2 mb-4">
                         <div class="card bg-primary text-white shadow">
                             <div class="card-body">
@@ -163,13 +156,6 @@
                             </div>
                         </div>
                     </a>
-                    <a href="{{ route('egreso.ver', 'SALARIO-ADMIN') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Administración
-                            </div>
-                        </div>
-                    </a>
                     <a href="{{ route('entrenador.index') }}" class="col-lg-2 mb-4">
                         <div class="card bg-primary text-white shadow">
                             <div class="card-body">
@@ -186,9 +172,9 @@
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">CONSULTA</h6>
-                <a href="#" class="d-inline btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#ver">
+                <a href="{{ route('egresos.create') }}" class="d-inline btn btn-sm btn-primary shadow-sm">
                     <i class="fas fa-plus fa-sm text-white-50"></i>
-                    <label class="m-0 d-none d-lg-inline">Establecer rango</label>
+                    <label class="m-0 d-none d-lg-inline">Otro egreso</label>
                 </a>
             </div>
 
@@ -197,6 +183,9 @@
                     <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
                         <p>
                             Se muestran todos los egresos en un rango de fechas especifico.
+                            <a href="#" data-toggle="modal" data-target="#ver">
+                                <label>Establecer rango</label>
+                            </a>
                         </p>
 
                         <thead>

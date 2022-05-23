@@ -18,7 +18,7 @@ class CreateIngresosTable extends Migration
             $table->float('monto');
             $table->string('nombre', 50);
             $table->float('beca')->default(0);
-            $table->enum('servicio', ['PESAS', 'SPINNING', 'ZUMBA', 'TAEKWONDO']);
+            $table->string('servicio', 100);
             $table->date('created_at')->default(date('Y-m-d'));
         });
     }

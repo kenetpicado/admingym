@@ -15,6 +15,11 @@ class Ingreso extends Model
         'beca',
         'servicio',
     ];
+
+    public function setServicioAttribute($value)
+    {
+        $this->attributes['servicio'] = trim(strtoupper($value));
+    }
     
     public $timestamps = false;
 }

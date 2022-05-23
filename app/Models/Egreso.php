@@ -11,4 +11,9 @@ class Egreso extends Model
 
     protected $fillable = ['tipo', 'monto'];
     public $timestamps = false;
+
+    public function setTipoAttribute($value)
+    {
+        $this->attributes['tipo'] = trim(strtoupper($value));
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCajaRequest;
 use App\Mail\Pago;
 use App\Models\Ingreso;
 use App\Models\Reporte;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class PlanController extends Controller
@@ -35,7 +36,8 @@ class PlanController extends Controller
         Reporte::deleteByUser($request->cliente_id);
 
         $request->merge([
-            'fecha_fin' => $this->get_month($request->plan)
+            'fecha_fin' => $this->get_end($request->plan),
+            'created_at' => Carbon::now()->format('Y-m-d')
         ]);
 
         //Aplicar descuento si hay beca
@@ -48,30 +50,31 @@ class PlanController extends Controller
         $plan = Plan::create($request->all());
         Ingreso::create($request->all());
 
-        if ($request->email != "") {
-            Mail::to($request->email)->send(new Pago($plan));
-        }
+        // if ($request->email != "") {
+        //     Mail::to($request->email)->send(new Pago($plan));
+        // }
 
         return redirect()->route('clientes.index')->with('status', 'ok');
     }
 
-    public function get_month($value)
+    public function get_end($value)
     {
-        $today = date('Y-m-d');
+        $date = Carbon::now();
 
         switch ($value) {
             case 'MENSUAL':
-                return date('Y-m-d', strtotime($today . ' + 1 month'));
+                $new = $date->addMonth(1)->format('Y-m-d');
                 break;
             case 'QUINCENAL':
-                return date('Y-m-d', strtotime($today . ' + 15 days'));
+                $new = $date->addDays(15)->format('Y-m-d');
                 break;
             case 'SEMANAL':
-                return date('Y-m-d', strtotime($today . ' + 7 days'));
+                $new = $date->addDays(7)->format('Y-m-d');
                 break;
             case 'DIA':
-                return date('Y-m-d', strtotime($today . ' + 1 days'));
+                $new = $date->addDay()->format('Y-m-d');
                 break;
         }
+        return $new;
     }
 }
