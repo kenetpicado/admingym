@@ -45,6 +45,6 @@ class EgresoController extends Controller
     public function store(StoreEgresoRequest $request)
     {
         Egreso::create($request->all());
-        return redirect()->route('egresos.index');
+        return redirect()->route('egresos.index')->with('status', 'ok');
     }
 }

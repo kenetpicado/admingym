@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Http\Requests\StoreCajaRequest;
 use App\Mail\Pago;
 use App\Models\Ingreso;
+use App\Models\Precio;
 use App\Models\Reporte;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -35,17 +36,29 @@ class PlanController extends Controller
     {
         Reporte::deleteByUser($request->cliente_id);
 
-        $request->merge([
-            'fecha_fin' => $this->get_end($request->plan),
-            'created_at' => Carbon::now()->format('Y-m-d')
-        ]);
+        $precio = Precio::getPrice($request->servicio, $request->plan);
+
+        if ($precio == 'none')
+            return redirect()->route('clientes.index')->with('status', 'noprice');
+
+        if ($request->created_at != '') {
+            $start = $request->created_at;
+            $end = $request->fecha_fin;
+        } else {
+            $start = Carbon::now()->format('Y-m-d');
+            $end = $this->get_end($request->plan);
+        }
 
         //Aplicar descuento si hay beca
         if ($request->beca > 0) {
-            $request->merge([
-                'monto' => $request->monto - ($request->monto * $request->beca / 100)
-            ]);
+            $precio = $precio - $request->beca;
         }
+
+        $request->merge([
+            'created_at' => $start,
+            'fecha_fin' => $end,
+            'monto' => $precio,
+        ]);
 
         $plan = Plan::create($request->all());
         Ingreso::create($request->all());

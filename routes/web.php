@@ -9,6 +9,7 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\IngresoController;
 use App\Http\Controllers\EgresoController;
 use App\Http\Controllers\PesoController;
+use App\Http\Controllers\PrecioController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +36,7 @@ Route::resource('entrenador', EntrenadorController::class);
 Route::resource('evento', EventoController::class);
 Route::resource('ingreso', IngresoController::class);
 Route::resource('egresos', EgresoController::class);
+Route::resource('precios', PrecioController::class);
 Route::resource('/', HomeController::class);
 
 Auth::routes();

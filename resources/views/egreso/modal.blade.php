@@ -25,6 +25,18 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="form-group">
+                        <label>Fecha</label>
+                            <input type="date" name="created_at"
+                                class="form-control @error('created_at') is-invalid @enderror" autocomplete="off"
+                                value="{{ old('created_at', date('Y-m-d')) }}">
+                            @error('created_at')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                    </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>

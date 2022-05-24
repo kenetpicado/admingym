@@ -16,8 +16,8 @@ class CreatePlanesTable extends Migration
         Schema::create('planes', function (Blueprint $table) {
             $table->id();
 
-            $table->enum('servicio', ['PESAS', 'SPINNING', 'ZUMBA', 'TAEKWONDO']);
-            $table->enum('plan', ['MENSUAL', 'QUINCENAL', 'SEMANAL', 'DIA']);
+            $table->string('servicio', 30);
+            $table->string('plan', 30);
             $table->float('monto'); 
             $table->float('beca')->default(0); 
             $table->string('nota', 30)->nullable();

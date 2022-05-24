@@ -14,6 +14,7 @@ class Ingreso extends Model
         'nombre',
         'beca',
         'servicio',
+        'created_at'
     ];
 
     public function setServicioAttribute($value)

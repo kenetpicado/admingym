@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEgresoRequest extends FormRequest
+class StoreIngresoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,16 @@ class StoreEgresoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'tipo' => 'required|max:50',
+            'servicio' => 'required|max:50',
             'monto' => 'required|numeric|gt:0',
-            'created_at' => 'required|date'
+            'created_at' => 'required|date',
         ];
     }
 
     public function attributes()
     {
         return [
-            'created_at' => 'fecha'
-        ];
+            'created_at' => 'fecha',
+        ];   
     }
 }

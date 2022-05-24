@@ -56,6 +56,20 @@
             <span>Egresos</span></a>
     </li>
 
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Ajustes
+    </div>
+
+    <!-- Nav Item - clientes -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('precios.index') }}">
+            <i class="fas fa-fw fa-dollar-sign"></i>
+            <span>Precios</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

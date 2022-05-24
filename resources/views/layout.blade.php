@@ -140,17 +140,18 @@
     @yield('re-open')
 
     {{-- SI HAY MENSAJE DE CONFIRMACION --}}
-    {{-- @if (session('status') == 'ok')
+    @if (session('status') == 'ok')
         <script>
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Se han guardado los datos',
+                title: 'Éxito!',
+                text: 'Se han guardado los datos',
                 showConfirmButton: false,
                 timer: 1000
             })
         </script>
-    @endif --}}
+    @endif
 
     @if (session('status') == 'eliminado')
         <script>
@@ -160,6 +161,18 @@
                 title: 'Se han eliminado los datos',
                 showConfirmButton: false,
                 timer: 1000
+            })
+        </script>
+    @endif
+
+    @if (session('status') == 'noprice')
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Error',
+                text: 'No se ha encontrado el servicio / plan seleccionado',
+                showConfirmButton: true,
             })
         </script>
     @endif

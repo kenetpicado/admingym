@@ -27,7 +27,7 @@ class HomeController extends Controller
             $pesas = HomeController::get_percent($cajas, 'servicio', 'PESAS');
             $spinning = HomeController::get_percent($cajas, 'servicio', 'SPINNING');
             $zumba = HomeController::get_percent($cajas, 'servicio', 'ZUMBA');
-            $taek = HomeController::get_percent($cajas, 'servicio', 'TAEKWONDO');
+            $taek = HomeController::get_percent($cajas, 'servicio', 'ZUMBA+PESAS');
             
             $activos = round(Cliente::has('planes')->get(['id'])->count() * 100 / $clientes->count(), 1);
             $porcentaje = HomeController::percent_becas();
@@ -41,7 +41,7 @@ class HomeController extends Controller
             'PESAS' => $pesas,
             'SPINNING' => $spinning,
             'ZUMBA' => $zumba,
-            'TAEKWONDO' => $taek,
+            'ZUMBA+PESAS' => $taek,
         ]);
 
         $ver = ([

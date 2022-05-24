@@ -171,11 +171,11 @@
                         <div class="progress-bar bg-success" role="progressbar" style="width: {{$servicios['ZUMBA']}}%"
                             aria-valuenow="{{$servicios['ZUMBA']}}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <h4 class="small font-weight-bold">Taekwondo<span
-                            class="float-right">{{$servicios['TAEKWONDO']}} %</span></h4>
+                    <h4 class="small font-weight-bold">ZUMBA+PESAS<span
+                            class="float-right">{{$servicios['ZUMBA+PESAS']}} %</span></h4>
                     <div class="progress mb-4">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: {{$servicios['TAEKWONDO']}}%"
-                            aria-valuenow="{{$servicios['TAEKWONDO']}}" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{$servicios['ZUMBA+PESAS']}}%"
+                            aria-valuenow="{{$servicios['ZUMBA+PESAS']}}" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     
                 </div>

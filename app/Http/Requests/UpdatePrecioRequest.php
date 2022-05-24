@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePesoRequest extends FormRequest
+class UpdatePrecioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdatePesoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,7 @@ class UpdatePesoRequest extends FormRequest
     {
         return [
             //
+            'monto' => 'required|numeric|gt:0'
         ];
     }
 }

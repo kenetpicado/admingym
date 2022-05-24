@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCajaRequest extends FormRequest
 {
@@ -25,10 +26,20 @@ class StoreCajaRequest extends FormRequest
     {
         return [
             //
-            'monto' => 'required|numeric',
-            'beca' => 'nullable|numeric|min:0|max:100',
+            'beca' => 'nullable|numeric|min:0',
             'nota' => 'nullable|max:30',
-            'servicio' => 'required'
+            'servicio' => 'required|max:30',
+            'created_at' => ['nullable', Rule::requiredIf($this->fecha_fin != ''), 'date'],
+            'fecha_fin' => ['nullable', Rule::requiredIf($this->created_at != ''), 'date', 'after_or_equal:created_at'],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            //
+            'created_at' => 'inicia',
+            'fecha_fin' => 'expira',
         ];
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ConsultaRequest;
+use App\Http\Requests\StoreIngresoRequest;
 use App\Models\Ingreso;
 use App\Models\Info;
-use Illuminate\Http\Request;
 
 class IngresoController extends Controller
 {
@@ -34,18 +34,13 @@ class IngresoController extends Controller
             ->with('ingresos', $ingresos)->with('mensaje', $mensaje);
     }
 
-    public function store(Request $request)
+    public function store(StoreIngresoRequest $request)
     {
-        $request->validate([
-            'servicio' => 'required',
-            'monto' => 'required|numeric|gt:0'
-        ]);
-
         $request->merge([
             'nombre' => '-'
         ]);
 
         Ingreso::create($request->all());
-        return redirect()->route('ingreso.index');
+        return redirect()->route('ingreso.index')->with('status', 'ok');
     }
 }

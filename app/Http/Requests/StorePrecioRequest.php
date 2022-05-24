@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEgresoRequest extends FormRequest
+class StorePrecioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreEgresoRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,16 +25,6 @@ class StoreEgresoRequest extends FormRequest
     {
         return [
             //
-            'tipo' => 'required|max:50',
-            'monto' => 'required|numeric|gt:0',
-            'created_at' => 'required|date'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'created_at' => 'fecha'
         ];
     }
 }

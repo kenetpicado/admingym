@@ -9,7 +9,7 @@ class Egreso extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tipo', 'monto'];
+    protected $fillable = ['tipo', 'monto', 'created_at'];
     public $timestamps = false;
 
     public function setTipoAttribute($value)
