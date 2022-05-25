@@ -25,6 +25,7 @@
                     <table class="table table-striped dt-responsive nowrap" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Nombre</th>
                                 <th>Servicio</th>
                                 <th>Monto - Beca</th>
@@ -33,8 +34,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($planes as $planes)
+                            @foreach ($planes as $key => $planes)
                                 <tr>
+                                    <td>{{ $key + 1 }}</td>
                                     <td>{{ $planes->cliente->nombre }}</td>
                                     <td>{{ $planes->servicio }}</td>
                                     <td>

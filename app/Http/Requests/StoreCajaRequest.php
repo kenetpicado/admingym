@@ -29,8 +29,7 @@ class StoreCajaRequest extends FormRequest
             'beca' => 'nullable|numeric|min:0',
             'nota' => 'nullable|max:30',
             'servicio' => 'required|max:30',
-            'created_at' => ['nullable', Rule::requiredIf($this->fecha_fin != ''), 'date'],
-            'fecha_fin' => ['nullable', Rule::requiredIf($this->created_at != ''), 'date', 'after_or_equal:created_at'],
+            'created_at' => 'required|date'
         ];
     }
 

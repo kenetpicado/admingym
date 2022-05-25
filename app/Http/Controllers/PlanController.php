@@ -41,22 +41,14 @@ class PlanController extends Controller
         if ($precio == 'none')
             return redirect()->route('clientes.index')->with('status', 'noprice');
 
-        if ($request->created_at != '') {
-            $start = $request->created_at;
-            $end = $request->fecha_fin;
-        } else {
-            $start = Carbon::now()->format('Y-m-d');
-            $end = $this->get_end($request->plan);
-        }
-
         //Aplicar descuento si hay beca
         if ($request->beca > 0) {
             $precio = $precio - $request->beca;
         }
 
         $request->merge([
-            'created_at' => $start,
-            'fecha_fin' => $end,
+            'created_at' => $request->created_at,
+            'fecha_fin' => $this->get_end($request->plan, $request->created_at),
             'monto' => $precio,
         ]);
 
@@ -70,9 +62,9 @@ class PlanController extends Controller
         return redirect()->route('clientes.index')->with('status', 'ok');
     }
 
-    public function get_end($value)
+    public function get_end($value, $fecha)
     {
-        $date = Carbon::now();
+        $date =  Carbon::create($fecha);
 
         switch ($value) {
             case 'MENSUAL':

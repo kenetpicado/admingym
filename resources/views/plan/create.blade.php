@@ -77,20 +77,8 @@
                             <label>Inicia</label>
                             <input type="date" name="created_at"
                                 class="form-control @error('created_at') is-invalid @enderror" autocomplete="off"
-                                value="{{ old('created_at') }}">
+                                value="{{ old('created_at', date('Y-m-d')) }}">
                             @error('created_at')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-lg-3">
-                            <label>Expira</label>
-                            <input type="date" name="fecha_fin"
-                                class="form-control @error('fecha_fin') is-invalid @enderror" autocomplete="off"
-                                value="{{ old('fecha_fin') }}">
-                            @error('fecha_fin')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
