@@ -26,8 +26,8 @@ class ClienteController extends Controller
 
     public function store(StoreClienteRequest $request)
     {
-        Cliente::create($request->all());
-        return redirect()->route('clientes.index')->with('status', 'ok');
+        $cliente = Cliente::create($request->all());
+        return redirect()->route('planes.create', $cliente->id);
     }
 
     public function show($cliente_id)
