@@ -40,7 +40,14 @@
                             @foreach ($clientes as $cliente)
                                 <tr>
                                     <td>{{ $cliente->id }}</td>
-                                    <td>{{ $cliente->nombre }}</td>
+                                    <td>
+                                        {{ $cliente->nombre }}
+                                        @if ($cliente->planes_count > 0)
+                                                    <i class="fas fa-circle fa-xs" style="color:limegreen"></i>
+                                                @else
+                                                    <i class="fas fa-circle fa-xs"></i>
+                                                @endif
+                                    </td>
                                     <td>{{ $cliente->email }}</td>
                                     <td>{{ $cliente->sexo }}</td>
                                     <td>

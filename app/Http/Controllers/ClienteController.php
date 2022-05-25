@@ -15,7 +15,7 @@ class ClienteController extends Controller
 
     public function index()
     {
-        $clientes = Cliente::all(['id', 'nombre', 'email', 'sexo']);
+        $clientes = Cliente::withCount('planes')->get(['id', 'nombre', 'email', 'sexo']);
         return view('cliente.index', compact('clientes'));
     }
 
