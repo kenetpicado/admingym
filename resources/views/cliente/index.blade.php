@@ -29,7 +29,7 @@
                     <table class="table table-striped dt-responsive nowrap" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Correo</th>
                                 <th>Sexo</th>
