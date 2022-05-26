@@ -29,19 +29,22 @@
                     <h6 class="dropdown-header">Planes expirados</h6>
                     @if (count($reportes) > 0)
                         @foreach ($reportes as $reporte)
-                            <a class="dropdown-item d-flex align-items-center"
-                                href="{{ route('planes.create', $reporte->cliente_id) }}">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-danger">
-                                        <i class="fas fa-exclamation text-white"></i>
-                                    </div>
+                            <div class="dropdown-item d-flex align-items-center">
+                                <div class="mr-2">
+                                    <a href="{{ route('reporte.destroy', $reporte->id) }}" class="icon-circle bg-danger">
+                                        <i class="fas fa-trash text-white"></i>
+                                    </a>
                                 </div>
                                 <div>
                                     <div class="small text-gray-500">
-                                        {{ $reporte->created_at }}</div>
-                                    <span class="font-weight-bold">{{ $reporte->mensaje }}</span>
+                                        {{ $reporte->created_at }}
+                                    </div>
+                                    <a href="{{ route('planes.create', $reporte->cliente_id) }}"
+                                        class="text-gray-800">
+                                        {{ $reporte->cliente->nombre }}
+                                    </a>
                                 </div>
-                            </a>
+                            </div>
                         @endforeach
                         <a class="dropdown-item text-center small text-gray-500" href="" data-toggle="modal"
                             data-target="#eliminarTodo">Borrar todo</a>
@@ -53,10 +56,11 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="small text-gray-500">{{ date('d-m-Y') }}</div>
+                                <div class="small text-gray-500">{{ date('Y-m-d') }}</div>
                                 <span class="font-weight-bold">No hay notificaciones</span>
                             </div>
                         </a>
+                        <div class="dropdown-item text-center small text-gray-500">Vacio</div>
                     @endif
                 </div>
             </li>

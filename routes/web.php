@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Auth;
 
 
 //BORRA TODOS LOS REPORTES
-Route::delete('reporte/delete',  [ReporteController::class, 'delete'])->name('reporte.delete');
+Route::delete('reporte',  [ReporteController::class, 'delete'])->name('reporte.delete');
+Route::get('reporte/{reporte}',  [ReporteController::class, 'deleteThis'])->name('reporte.destroy');
 
 //PLANES
 Route::get('planes', [PlanController::class, 'index'])->name('planes.index');

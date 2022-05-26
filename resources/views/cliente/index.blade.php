@@ -7,7 +7,7 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('index') }}">Inicio</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Clientes</li>
             </ol>
         </nav>
@@ -41,19 +41,20 @@
                                 <tr>
                                     <td>{{ $cliente->id }}</td>
                                     <td>
-                                        {{ $cliente->nombre }}
                                         @if ($cliente->planes_count > 0)
-                                                    <i class="fas fa-circle fa-xs" style="color:limegreen"></i>
-                                                @else
-                                                    <i class="fas fa-circle fa-xs"></i>
-                                                @endif
+                                            <i class="fas fa-circle fa-xs" style="color:limegreen"></i>
+                                        @else
+                                            <i class="fas fa-circle fa-xs"></i>
+                                        @endif
+                                        {{ $cliente->nombre }}
                                     </td>
                                     <td>{{ $cliente->email }}</td>
                                     <td>{{ $cliente->sexo }}</td>
                                     <td>
                                         <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle btn btn-primary btn-sm" href="#" role="button" id="dropdownMenuLink"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <a class="dropdown-toggle btn btn-primary btn-sm" href="#" role="button"
+                                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
                                                 <i class="fas fa-cog"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
@@ -63,7 +64,7 @@
 
                                                 <a href="{{ route('clientes.show', $cliente->id) }}"
                                                     class="dropdown-item">Peso</a>
-                                                    
+
                                                 <a href="{{ route('clientes.edit', $cliente->id) }}"
                                                     class="dropdown-item">Editar</a>
                                             </div>

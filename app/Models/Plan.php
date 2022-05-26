@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cliente;
 use App\Models\Reporte;
+use Carbon\Carbon;
 
 class Plan extends Model
 {
@@ -34,7 +35,8 @@ class Plan extends Model
             if (date('Y-m-d') >= $plan->fecha_fin) {
                 Reporte::create([
                     'mensaje' =>  $plan->cliente->nombre,
-                    'cliente_id' =>  $plan->cliente_id
+                    'cliente_id' =>  $plan->cliente_id,
+                    'created_at' => Carbon::now(),
                 ]);
                 $plan->delete();
             }

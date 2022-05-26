@@ -87,7 +87,7 @@
                     </div>
                     <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
                     <input type="hidden" name="nombre" value="{{ $cliente->nombre }}">
-                    <input type="hidden" name="email" value="{{ $cliente->email }}">
+                    {{-- <input type="hidden" name="email" value="{{ $cliente->email }}"> --}}
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>

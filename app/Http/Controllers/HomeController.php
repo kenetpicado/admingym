@@ -55,8 +55,8 @@ class HomeController extends Controller
             'personas' => $personas
         ]);
 
-        $reportes = Reporte::all();
-        return view('index', compact('sexo', 'servicios', 'ver', 'reportes'));
+        //$reportes = Reporte::all();
+        return view('index', compact('sexo', 'servicios', 'ver'));
     }
 
     //PERSONAS QUE TIENEN BECA

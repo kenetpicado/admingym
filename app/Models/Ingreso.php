@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ingreso extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $fillable = [
         'monto',
         'nombre',
@@ -22,5 +22,5 @@ class Ingreso extends Model
         $this->attributes['servicio'] = trim(strtoupper($value));
     }
     
-    public $timestamps = false;
+    
 }

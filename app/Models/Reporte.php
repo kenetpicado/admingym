@@ -24,9 +24,4 @@ class Reporte extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return date('d-m-Y', strtotime($value));
-    }
 }

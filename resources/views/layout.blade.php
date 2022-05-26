@@ -145,8 +145,7 @@
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Éxito!',
-                text: 'Se han guardado los datos',
+                title: 'Guardado',
                 showConfirmButton: false,
                 timer: 1000
             })
