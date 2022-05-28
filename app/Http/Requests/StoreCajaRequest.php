@@ -38,7 +38,6 @@ class StoreCajaRequest extends FormRequest
         return [
             //
             'created_at' => 'inicia',
-            'fecha_fin' => 'expira',
         ];
     }
 }

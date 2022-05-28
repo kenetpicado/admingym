@@ -62,6 +62,44 @@ class PlanController extends Controller
         return redirect()->route('clientes.index')->with('status', 'ok');
     }
 
+    //Editar un plan
+    public function edit($plan_id)
+    {
+        $plan = Plan::find($plan_id);
+        return view('plan.edit', compact('plan'));
+    }
+
+    //Actualizar plan
+    public function update(StoreCajaRequest $request, $plan_id)
+    {
+        $precio = Precio::getPrice($request->servicio, $request->plan);
+
+        if ($precio == 'none')
+            return redirect()->route('planes.index')->with('status', 'noprice');
+
+        //Aplicar descuento si hay beca
+        if ($request->beca > 0) {
+            $precio = $precio - $request->beca;
+        }
+
+        $request->merge([
+            'fecha_fin' => $this->get_end($request->plan, $request->created_at),
+            'monto' => $precio,
+        ]);
+
+        $plan = Plan::find($plan_id);
+
+        $ingreso = Ingreso::where('nombre', $plan->cliente->nombre)
+            ->where('servicio', $plan->servicio)
+            ->where('created_at', $plan->created_at)
+            ->first();
+
+        $plan->update($request->all());
+        $ingreso->update($request->all());
+
+        return redirect()->route('planes.index')->with('status', 'ok');
+    }
+
     public function get_end($value, $fecha)
     {
         $date =  Carbon::create($fecha);

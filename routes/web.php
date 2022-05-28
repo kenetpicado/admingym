@@ -19,9 +19,8 @@ Route::delete('reporte',  [ReporteController::class, 'delete'])->name('reporte.d
 Route::get('reporte/{reporte}',  [ReporteController::class, 'deleteThis'])->name('reporte.destroy');
 
 //PLANES
-Route::get('planes', [PlanController::class, 'index'])->name('planes.index');
 Route::get('planes/{cliente}/create', [PlanController::class, 'create'])->name('planes.create');
-Route::post('planes', [PlanController::class, 'store'])->name('planes.store');
+
 
 //Consulta personalizada
 Route::post('ingreso/consulta', [IngresoController::class, 'consulta'])->name('consulta');
@@ -39,5 +38,8 @@ Route::resource('ingreso', IngresoController::class);
 Route::resource('egresos', EgresoController::class);
 Route::resource('precios', PrecioController::class);
 Route::resource('/', HomeController::class);
+
+Route::resource('planes', PlanController::class)
+    ->except(['create']);
 
 Auth::routes();

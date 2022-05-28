@@ -7,8 +7,8 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Planes activos</li>
+                <li class="breadcrumb-item"><a href="{{ route('index') }}">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">plan activos</li>
             </ol>
         </nav>
 
@@ -17,7 +17,7 @@
 
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">PLANES ACTIVOS</h6>
+                <h6 class="m-0 font-weight-bold text-primary">plan ACTIVOS</h6>
             </div>
 
             <div class="card-body">
@@ -34,23 +34,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($planes as $planes)
+                            @foreach ($planes as $plan)
                                 <tr>
-                                    <td>{{ $planes->cliente->id }}</td>
-                                    <td>{{ $planes->cliente->nombre }}</td>
-                                    <td>{{ $planes->servicio }}</td>
+                                    <td>{{ $plan->cliente->id }}</td>
                                     <td>
-                                        C$ {{ $planes->monto }} - <small>C$ {{ $planes->beca }}</small> 
+                                        {{ $plan->cliente->nombre }}
                                     </td>
-                                    <td> 
+                                    <td>
+                                        <a href="{{route('planes.edit', $plan->id)}}">
+                                            <i class="fas fa-cog"></i>
+                                        </a>
+                                        {{ $plan->servicio }}
+                                    </td>
+                                    <td>
+                                        C$ {{ $plan->monto }} - <small>C$ {{ $plan->beca }}</small>
+                                    </td>
+                                    <td>
                                         <div class="badge badge-primary">
-                                            {{ date('d-F-y', strtotime($planes->created_at)) }}
+                                            {{ date('d-F-y', strtotime($plan->created_at)) }}
                                         </div>
                                         <div class="badge badge-danger">
-                                            {{ date('d-F-y', strtotime($planes->fecha_fin)) }}
+                                            {{ date('d-F-y', strtotime($plan->fecha_fin)) }}
                                         </div>
                                     </td>
-                                    <td>{{ $planes->nota }}</td>
+                                    <td>{{ $plan->nota }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

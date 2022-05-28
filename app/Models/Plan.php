@@ -42,7 +42,7 @@ class Plan extends Model
             }
         }
 
-        return $planes;
+        return Plan::all();
     }
 
     public function cliente()
