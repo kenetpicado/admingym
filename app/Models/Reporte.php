@@ -15,9 +15,7 @@ class Reporte extends Model
 
     public static function deleteByUser($cliente_id)
     {
-        if (Reporte::where('cliente_id', $cliente_id)->get()->count() > 0) {
-            Reporte::destroy(Reporte::where('cliente_id', $cliente_id)->get());
-        }
+        Reporte::where('cliente_id', $cliente_id)->delete();
     }
 
     public function cliente()
