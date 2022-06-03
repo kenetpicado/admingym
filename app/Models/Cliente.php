@@ -24,6 +24,16 @@ class Cliente extends Model
         $this->attributes['nombre'] = trim(strtoupper($value));
     }
 
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = trim(strtolower($value));
+    }
+
+    public function getNombreAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
     public function planes()
     {
         return $this->hasMany(Plan::class);
