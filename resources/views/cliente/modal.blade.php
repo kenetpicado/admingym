@@ -25,9 +25,8 @@
 
                     <div class="form-group">
                         <label>Correo</label>
-                        <input type="email" name="email"
-                            class="form-control @error('email') is-invalid @enderror" autocomplete="off"
-                            value="{{ old('email') }}">
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                            autocomplete="off" value="{{ old('email') }}">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -75,15 +74,26 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('peso.store') }}" method="POST">
+            <form action="{{ route('pesos.store') }}" method="POST">
                 <div class="modal-body">
                     @csrf
                     <input type="hidden" name="cliente_id" value="{{ $cliente->id ?? '' }}">
                     <div class="form-group">
                         <label>Peso en libras</label>
-                        <input type="number" name="peso" class="form-control @error('peso') is-invalid @enderror"
+                        <input type="text" name="peso" class="form-control @error('peso') is-invalid @enderror"
                             autocomplete="off" value="{{ old('peso') }}">
                         @error('peso')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha</label>
+                        <input type="date" name="created_at"
+                            class="form-control @error('created_at') is-invalid @enderror" autocomplete="off"
+                            value="{{ old('created_at', date('Y-m-d')) }}">
+                        @error('created_at')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

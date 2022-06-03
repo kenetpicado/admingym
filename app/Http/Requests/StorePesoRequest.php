@@ -24,7 +24,8 @@ class StorePesoRequest extends FormRequest
     public function rules()
     {
         return [
-            'peso' => 'required|numeric|gt:0'
+            'peso' => 'required|numeric|gt:0',
+            'created_at' => 'required|date',
         ];
     }
 }

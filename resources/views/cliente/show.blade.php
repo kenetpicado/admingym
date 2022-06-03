@@ -7,8 +7,8 @@
 
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{route('clientes.index')}}">Clientes</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('index') }}">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('clientes.index') }}">Clientes</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Pesos</li>
             </ol>
         </nav>
@@ -33,14 +33,20 @@
                                 <th>#</th>
                                 <th>Fecha de registro</th>
                                 <th>Peso en libras</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cliente->pesos as $peso)
+                            @foreach ($cliente->pesos as $key => $peso)
                                 <tr>
-                                    <td>{{ $peso->id }}</td>
+                                    <td>{{ $key + 1 }}</td>
                                     <td>{{ $peso->created_at }}</td>
                                     <td>{{ $peso->peso }} libras</td>
+                                    <td>
+                                        <a href="{{ route('pesos.edit', $peso->id) }}">
+                                            <i class="fas fa-cog"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

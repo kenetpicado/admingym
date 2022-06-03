@@ -27,7 +27,7 @@ Route::post('ingreso/consulta', [IngresoController::class, 'consulta'])->name('c
 Route::post('egreso/consulta', [EgresoController::class, 'consulta'])->name('egreso.consulta');
 
 //PESOS
-Route::post('peso', [PesoController::class, 'store'])->name('peso.store');
+Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
 
 Route::get('egreso/{value}/ver', [EgresoController::class, 'ver'])->name('egreso.ver');
 
