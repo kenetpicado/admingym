@@ -14,6 +14,7 @@ class EgresoController extends Controller
         $ver = ([
             'total' => Info::getTotal(new Egreso()),
             'activo' => Info::getMonthly(new Egreso()),
+            'mes' => HomeController::current_month(),
         ]);
 
         return view('egreso.index', compact('ver'));

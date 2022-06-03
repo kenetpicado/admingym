@@ -8,7 +8,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('index') }}">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">plan activos</li>
+                <li class="breadcrumb-item active" aria-current="page">Planes activos</li>
             </ol>
         </nav>
 
@@ -17,7 +17,7 @@
 
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">plan ACTIVOS</h6>
+                <h6 class="m-0 font-weight-bold text-primary">PLANES ACTIVOS</h6>
             </div>
 
             <div class="card-body">

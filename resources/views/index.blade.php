@@ -7,7 +7,7 @@
 
         <!-- Page Heading -->
         <div class="alert alert-success" role="alert">
-            Bienvenido de nuevo {{auth()->user()->name}}!
+            Bienvenido de nuevo {{ auth()->user()->name }}!
         </div>
 
         <!-- Content Row -->
@@ -38,7 +38,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Ingresos mensuales</div>
+                                    Ingresos {{ $ver['mes'] }}</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">C$ {{ $ver['ingresos'] }}</div>
                             </div>
                             <div class="col-auto">
@@ -74,7 +74,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                    Egresos mensuales</div>
+                                    Egresos {{ $ver['mes'] }}</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">C$ {{ $ver['egresos'] }}</div>
                             </div>
                             <div class="col-auto">
@@ -91,7 +91,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                                    Ganancia mensual</div>
+                                    Ganancia {{ $ver['mes'] }}</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">C$
                                     {{ $ver['ingresos'] - $ver['egresos'] }}</div>
                             </div>
@@ -167,8 +167,8 @@
                                 class="float-right">{{ $servicios['SPINNING'] }}% </span></h4>
                         <div class="progress mb-4">
                             <div class="progress-bar bg-success" role="progressbar"
-                                style="width: {{ $servicios['SPINNING'] }}%" aria-valuenow="{{ $servicios['SPINNING'] }}"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                                style="width: {{ $servicios['SPINNING'] }}%"
+                                aria-valuenow="{{ $servicios['SPINNING'] }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h4 class="small font-weight-bold">Zumba<span class="float-right">{{ $servicios['ZUMBA'] }}
                                 %</span></h4>

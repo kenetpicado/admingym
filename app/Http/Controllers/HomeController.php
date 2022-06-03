@@ -52,7 +52,8 @@ class HomeController extends Controller
             'egresos' => Egreso::where('created_at', '>=', date('Y-m-' . '01'))->get()->sum('monto'),
             'becas' => HomeController::suma_mensual('beca'),
             'porcentaje' => $porcentaje,
-            'personas' => $personas
+            'personas' => $personas,
+            'mes' => $this->current_month(),
         ]);
 
         //$reportes = Reporte::all();
@@ -84,5 +85,11 @@ class HomeController extends Controller
     public function get_percent($objeto, $columna, $valor)
     {
         return round($objeto->where($columna, $valor)->count() * 100 / $objeto->count(), 1);
+    }
+
+    public static function current_month()
+    {
+        $meses = array("ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE");
+        return $meses[date('n') - 1];
     }
 }

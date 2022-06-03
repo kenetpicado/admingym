@@ -14,6 +14,7 @@ class IngresoController extends Controller
         $ver = ([
             'total' => Info::getTotal(new Ingreso()),
             'activo' => Info::getMonthly(new Ingreso()),
+            'mes' => HomeController::current_month(),
         ]);
 
         return view('ingreso.index', compact('ver'));

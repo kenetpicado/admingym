@@ -42,6 +42,8 @@
                                     <a href="{{ route('planes.create', $reporte->cliente_id) }}"
                                         class="text-gray-800">
                                         {{ $reporte->cliente->nombre }}
+                                        <small>({{ $reporte->mensaje }})</small>
+                                        
                                     </a>
                                 </div>
                             </div>
