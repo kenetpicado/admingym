@@ -51,122 +51,6 @@
             </div>
         </div>
 
-        <!-- Content Row -->
-        <div class="row">
-
-            <!-- Content Column -->
-            <div class="col-lg-12 mb-4">
-                <!-- Color System -->
-                <div class="row">
-                    <a href="{{ route('egreso.ver', 'AGUA') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Agua
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'ENERGIA') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Energia
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'INTERNET') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Internet
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'SUPLEMENTOS-LIMPIEZA') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Supl. Limpieza
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'RENTA') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Renta
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'IMPUESTOS') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Impuestos
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'PUBLICIDAD') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Publicidad
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'MEMBRESIA') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Membresia
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'PAPELERIA') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Papeleria
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'EQUIPOS') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Equipos
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'INFRAESTRUCTURA') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Infraestructura
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'TIENDA') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Tienda
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'SUPLEMENTOS') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Suplementos
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('egreso.ver', 'BAR') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Bar
-                            </div>
-                        </div>
-                    </a>
-                    <a href="{{ route('entrenador.index') }}" class="col-lg-2 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Entrenadores
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
         <div class="card shadow mb-4">
 
             <!-- Card Header -->
@@ -174,7 +58,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">CONSULTA</h6>
                 <a href="{{ route('egresos.create') }}" class="d-inline btn btn-sm btn-primary shadow-sm">
                     <i class="fas fa-plus fa-sm text-white-50"></i>
-                    <label class="m-0 d-none d-lg-inline">Otro egreso</label>
+                    <label class="m-0 d-none d-lg-inline">Registrar egreso</label>
                 </a>
             </div>
 

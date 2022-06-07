@@ -3,13 +3,11 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('index')}}">
         <div class="sidebar-brand-icon">
-            {{-- <i class="fas fa-laugh-wink"></i> --}}
             <i class="fas fa-dumbbell"></i>
-            
         </div>
         <div class="sidebar-brand-text mx-3">{{ config('app.name') }}</div>
     </a>
-
+    
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
@@ -54,6 +52,13 @@
         <a class="nav-link" href="{{ route('egresos.index') }}">
             <i class="fas fa-fw fa-coins"></i>
             <span>Egresos</span></a>
+    </li>
+
+    <!-- Nav Item - entrenadores -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('entrenador.index') }}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Entrenadores</span></a>
     </li>
 
     <hr class="sidebar-divider">

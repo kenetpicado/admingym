@@ -17,12 +17,13 @@ class CreateEventosTable extends Migration
             $table->id();
             $table->enum('tipo', ['PAGO', 'INASISTENCIA']);
             $table->float('monto')->default(0)->nullable();
-            
+            $table->string('nota', 50)->nullable();
+
             $table->unsignedBigInteger('entrenador_id');
             $table->foreign('entrenador_id')
-            ->references('id')
-            ->on('entrenadors')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('entrenadors')
+                ->onDelete('cascade');
 
             $table->date('created_at')->default(date('Y-m-d'));
         });

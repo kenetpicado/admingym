@@ -14,7 +14,7 @@ class EventoController extends Controller
     {
         if ($request->tipo == 'PAGO') {
             Egreso::create([
-                'tipo' => 'SALARIO-ENTRENADOR',
+                'tipo' => 'Salario: '. $request->name,
                 'monto' => $request->monto
             ]);
         }

@@ -36,6 +36,7 @@
                                 <th>Fecha</th>
                                 <th>Evento</th>
                                 <th>Monto</th>
+                                <th>Nota</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,6 +51,7 @@
                                         <td><span class="badge badge-danger">Inasistencia</span></td>
                                         <td>-</td>
                                     @endif
+                                    <td>{{ $evento->nota }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

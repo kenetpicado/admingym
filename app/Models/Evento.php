@@ -12,6 +12,7 @@ class Evento extends Model
     protected $fillable = [
         'tipo',
         'monto',
+        'nota',
         'entrenador_id',
     ];
     
@@ -19,5 +20,15 @@ class Evento extends Model
 
     public function entrenador(){
         return $this->belongsTo('App\Models\Entrenador');
+    }
+
+    public function setNotaAttribute($value)
+    {
+        $this->attributes['nota'] = trim(strtoupper($value));
+    }
+
+    public function getNotaAttribute($value)
+    {
+        return ucwords(strtolower($value));
     }
 }

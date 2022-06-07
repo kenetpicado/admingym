@@ -57,7 +57,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">CONSULTA</h6>
                 <a href="{{ route('ingreso.create') }}" class="d-inline btn btn-sm btn-primary shadow-sm">
                     <i class="fas fa-plus fa-sm text-white-50"></i>
-                    <label class="m-0 d-none d-lg-inline">Otro ingreso</label>
+                    <label class="m-0 d-none d-lg-inline">Registrar ingreso</label>
                 </a>
             </div>
 

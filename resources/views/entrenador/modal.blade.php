@@ -72,7 +72,8 @@
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="entrenador_id" value="{{ $entrenador->id ?? '' }}">
-                    
+                    <input type="hidden" name="name" value="{{ $entrenador->nombre ?? '' }}">
+
                     <div class="form-group">
                         <label>Seleccione un evento</label>
                         <select name="tipo" class="form-control" required>
@@ -80,6 +81,7 @@
                             <option value="INASISTENCIA">INASISTENCIA</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
                         <label>Monto C$</label>
                         <input type="number" name="monto" class="form-control  @error('monto') is-invalid @enderror"
@@ -91,6 +93,13 @@
                             </span>
                         @enderror
                     </div>
+
+                    <div class="form-group">
+                        <label>Nota</label>
+                        <input type="text" name="nota" class="form-control"
+                            autocomplete="off" value="{{ old('nota') }}">
+                    </div>
+
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>

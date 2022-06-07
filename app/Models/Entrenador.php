@@ -16,6 +16,11 @@ class Entrenador extends Model
         $this->attributes['nombre'] = trim(strtoupper($value));
     }
 
+    public function getNombreAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
     public function setHorarioAttribute($value)
     {
         $this->attributes['horario'] = trim(strtoupper($value));

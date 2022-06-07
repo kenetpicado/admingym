@@ -26,6 +26,7 @@ class StoreEventoRequest extends FormRequest
     {
         return [
             //
+            'nota' => 'nullable',
             'monto' => [Rule::requiredIf($this->tipo == 'PAGO')]
         ];
     }
