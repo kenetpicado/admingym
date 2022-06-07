@@ -14,6 +14,7 @@ class Evento extends Model
         'monto',
         'nota',
         'entrenador_id',
+        'created_at',
     ];
     
     public $timestamps = false;

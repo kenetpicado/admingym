@@ -16,4 +16,9 @@ class Egreso extends Model
     {
         $this->attributes['tipo'] = trim(strtoupper($value));
     }
+
+    public function getTipoAttribute($value)
+    {
+        return strtoupper($value);
+    }
 }
