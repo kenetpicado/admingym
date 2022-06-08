@@ -22,7 +22,7 @@ class PlanController extends Controller
     public function index()
     {
         $planes = Plan::deleteExpired();
-        $reportes = Reporte::with('cliente:id,nombre')->get();
+        $reportes = Reporte::with('cliente:id,nombre')->orderBy('id', 'desc')->get();
         return view('plan.index', compact('planes', 'reportes'));
     }
 

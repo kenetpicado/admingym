@@ -25,13 +25,14 @@
                 </a>
                 <!-- Dropdown - Alerts -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                    aria-labelledby="alertsDropdown">
+                    aria-labelledby="alertsDropdown" style="height:500px; overflow-y: scroll;">
                     <h6 class="dropdown-header">Planes expirados</h6>
+
                     @if (count($reportes) > 0)
                         @foreach ($reportes as $reporte)
-                            <div class="dropdown-item d-flex align-items-center">
+                            <div class="dropdown-item d-flex align-items-center ">
                                 <div class="mr-2">
-                                    <a href="{{ route('reporte.destroy', $reporte->id) }}" class="icon-circle bg-danger">
+                                    <a href="{{ route('reporte.destroy', $reporte->id) }}" class="btn btn-sm btn-circle bg-danger">
                                         <i class="fas fa-trash text-white"></i>
                                     </a>
                                 </div>
