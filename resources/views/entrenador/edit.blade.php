@@ -8,14 +8,13 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{route('egresos.index')}}">Egresos</a></li>
                 <li class="breadcrumb-item"><a href="{{route('entrenador.index')}}">Entrenadores</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>
         </nav>
 
         <!-- form -->
-        <div class="card shadow mb-4">
+        <div class="card mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">EDITAR: {{ $entrenador->nombre }}</h6>
             </div>

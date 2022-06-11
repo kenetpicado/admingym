@@ -13,7 +13,7 @@
         </nav>
 
         <!-- DataTales -->
-        <div class="card shadow mb-4">
+        <div class="card mb-4">
 
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -22,13 +22,13 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped dt-responsive nowrap" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Servicio</th>
-                                <th>Monto - Beca</th>
+                                <th>Monto-Beca</th>
                                 <th>Rango</th>
                                 <th>Nota</th>
                             </tr>
@@ -36,7 +36,7 @@
                         <tbody>
                             @foreach ($planes as $plan)
                                 <tr>
-                                    <td>{{ $plan->cliente->id }}</td>
+                                    <td>{{ substr(str_repeat(0, 4) . $plan->cliente->id, -4) }}</td>
                                     <td>
                                         {{ $plan->cliente->nombre }}
                                     </td>
@@ -47,7 +47,7 @@
                                         {{ $plan->servicio }}
                                     </td>
                                     <td>
-                                        C$ {{ $plan->monto }} - <small>C$ {{ $plan->beca }}</small>
+                                        C${{ $plan->monto }} <small>(C${{ $plan->beca }})</small>
                                     </td>
                                     <td>
                                         <div class="badge badge-primary">

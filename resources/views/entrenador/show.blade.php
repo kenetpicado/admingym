@@ -8,7 +8,6 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{route('egresos.index')}}">Egresos</a></li>
                 <li class="breadcrumb-item"><a href="{{route('entrenador.index')}}">Entrenadores</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Eventos</li>
             </ol>
@@ -29,7 +28,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>#</th>

@@ -8,13 +8,12 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('index')}}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{route('egresos.index')}}">Egresos</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Entrenadores</li>
             </ol>
         </nav>
 
         <!-- DataTales -->
-        <div class="card shadow mb-4">
+        <div class="card mb-4">
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">ENTRENADORES</h6>
@@ -26,13 +25,14 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped dt-responsive nowrap" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Teléfono</th>
                                 <th>Horario</th>
-                                <th></th>
+                                <th>Eventos</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,21 +42,12 @@
                                     <td>{{ $entrenador->telefono }}</td>
                                     <td>{{ $entrenador->horario }}</td>
                                     <td>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle btn btn-primary btn-sm" href="#" role="button" id="dropdownMenuLink"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-cog"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                aria-labelledby="dropdownMenuLink">
-
-                                                <a href="{{ route('entrenador.show', $entrenador->id) }}"
-                                                    class="dropdown-item">Eventos</a>
-
-                                                <a href="{{ route('entrenador.edit', $entrenador) }}"
-                                                    class="dropdown-item">Editar</a>
-                                            </div>
-                                        </div>
+                                        <a href="{{ route('entrenador.show', $entrenador->id) }}"
+                                            class="btn btn-primary btn-sm">Eventos</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('entrenador.edit', $entrenador) }}"
+                                            class="btn btn-secondary btn-sm">Editar</a>
                                     </td>
                                 </tr>
                             @endforeach

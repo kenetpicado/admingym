@@ -15,7 +15,7 @@
         <div class="row">
             <!-- Earnings (Annual) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card border-left-primary h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -33,7 +33,7 @@
 
             <!-- Earnings (Annual) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
+                <div class="card border-left-success h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="card shadow mb-4">
+        <div class="card mb-4">
 
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -63,7 +63,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                         <p>
                             Se muestran todos los ingresos en un rango de fechas especifico:
                             <a href="#" data-toggle="modal" data-target="#ver">
@@ -83,15 +83,13 @@
                             @if (session('ingresos'))
                                 @foreach (session('ingresos') as $ingreso)
                                     <tr>
-                                        <td>{{ $ingreso->created_at }}</td>
+                                        <td>{{ date('d-F-Y', strtotime($ingreso->created_at)) }}</td>
                                         <td>{{ $ingreso->nombre }}</td>
                                         <td>{{ $ingreso->servicio }}</td>
-                                        <td>C$ {{ $ingreso->monto }}</td>
+                                        <td>C${{ $ingreso->monto }}</td>
                                         <td>
                                             @if ($ingreso->beca > 0)
-                                                <div class="badge badge-success">
-                                                    {{ $ingreso->beca }} %
-                                                </div>
+                                                C${{ $ingreso->beca }}
                                             @endif
                                         </td>
                                     </tr>

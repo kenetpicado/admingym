@@ -13,7 +13,7 @@
         </nav>
 
         <!-- DataTales -->
-        <div class="card shadow mb-4">
+        <div class="card mb-4">
 
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -26,49 +26,43 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped dt-responsive nowrap" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Cliente ID</th>
                                 <th>Nombre</th>
                                 <th>Correo</th>
                                 <th>Sexo</th>
-                                <th></th>
+                                <th>Pagos</th>
+                                <th>Pesos</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($clientes as $cliente)
                                 <tr>
-                                    <td>{{ $cliente->id }}</td>
+                                    <td>{{ substr(str_repeat(0, 4) . $cliente->id, -4) }}</td>
                                     <td>
                                         @if ($cliente->planes_count > 0)
-                                            <i class="fas fa-circle fa-xs" style="color:limegreen"></i>
+                                        <i class="fas fa-check-circle" style="color:limegreen"></i>
                                         @else
-                                            <i class="fas fa-circle fa-xs"></i>
+                                        <i class="fas fa-exclamation-circle" style="color:tomato"></i>
                                         @endif
                                         {{ $cliente->nombre }}
                                     </td>
                                     <td>{{ $cliente->email }}</td>
                                     <td>{{ $cliente->sexo }}</td>
                                     <td>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle btn btn-primary btn-sm" href="#" role="button"
-                                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i class="fas fa-cog"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                aria-labelledby="dropdownMenuLink">
-                                                <a href="{{ route('planes.create', $cliente->id) }}"
-                                                    class="dropdown-item">Pagar</a>
-
-                                                <a href="{{ route('clientes.show', $cliente->id) }}"
-                                                    class="dropdown-item">Peso</a>
-
-                                                <a href="{{ route('clientes.edit', $cliente->id) }}"
-                                                    class="dropdown-item">Editar</a>
-                                            </div>
-                                        </div>
+                                        <a href="{{ route('planes.create', $cliente->id) }}"
+                                            class="btn btn-primary btn-sm">Pagar</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('clientes.show', $cliente->id) }}"
+                                            class="btn btn-outline-primary btn-sm">Pesos</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('clientes.edit', $cliente->id) }}"
+                                            class="btn btn-secondary btn-sm">Editar</a>
                                     </td>
                                 </tr>
                             @endforeach

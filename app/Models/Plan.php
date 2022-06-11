@@ -44,7 +44,7 @@ class Plan extends Model
             }
         }
 
-        return Plan::all();
+        return Plan::orderBy('fecha_fin')->get();
     }
 
     public function cliente()

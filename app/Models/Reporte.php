@@ -18,6 +18,16 @@ class Reporte extends Model
         Reporte::where('cliente_id', $cliente_id)->delete();
     }
 
+    public function getMensajeAttribute($value)
+    {
+        return ucfirst(strtolower($value));
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return date('d-F-Y', strtotime($value));
+    }
+
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);

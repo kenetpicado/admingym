@@ -7,6 +7,12 @@ use App\Models\Reporte;
 
 class ReporteController extends Controller
 {
+    public function index()
+    {
+        $reportes = Reporte::with('cliente:id,nombre')->orderBy('id', 'desc')->get();
+        return view('reporte.index', compact('reportes'));
+    }
+
     //Eliminar todos
     public function delete()
     {

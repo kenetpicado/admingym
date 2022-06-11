@@ -32,4 +32,9 @@ class Evento extends Model
     {
         return ucwords(strtolower($value));
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return date('d-F-Y', strtotime($value));
+    }
 }

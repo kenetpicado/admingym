@@ -1,6 +1,7 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
   $('#dataTable').DataTable({
-    "pageLength": 50
+    "pageLength": 50,
+    'ordering':false
   } );
 });
