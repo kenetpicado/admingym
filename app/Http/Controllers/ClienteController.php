@@ -15,7 +15,7 @@ class ClienteController extends Controller
 
     public function index()
     {
-        $clientes = Cliente::withCount('planes')->get(['id', 'nombre', 'email', 'sexo']);
+        $clientes = Cliente::withCount('planes')->get();
         return view('cliente.index', compact('clientes'));
     }
 
@@ -27,7 +27,7 @@ class ClienteController extends Controller
     public function store(StoreClienteRequest $request)
     {
         $cliente = Cliente::create($request->all());
-        return redirect()->route('planes.create', $cliente->id);
+        return redirect()->route('planes.create', $cliente->id)->with('info', config('app.add'));
     }
 
     public function show($cliente_id)
@@ -44,6 +44,6 @@ class ClienteController extends Controller
     public function update(UpdateClienteRequest $request, Cliente $cliente)
     {
         $cliente->update($request->all());
-        return redirect()->route('clientes.index')->with('status', 'ok');
+        return redirect()->route('clientes.index')->with('info', config('app.update'));
     }
 }

@@ -6,7 +6,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-primary" role="alert">
             Bienvenido {{ auth()->user()->name }}!
         </div>
 

@@ -19,7 +19,8 @@
                     <!-- Counter - Alerts -->
                     @if (count($reportes) > 0)
                         <span class="badge badge-danger badge-counter">
-                            {{ count($reportes) }}
+                            {{-- {{ count($reportes) }} --}}
+                            +{{ $inspected->status }}
                         </span>
                     @endif
                 </a>
@@ -28,13 +29,15 @@
                     aria-labelledby="alertsDropdown" style="height:500px; overflow-y: scroll;">
                     <h6 class="dropdown-header">Planes expirados</h6>
 
-                    <a class="dropdown-item text-center small text-gray-500" href="{{route('reportes.index')}}">Ver todas</a>
+                    <a class="dropdown-item text-center small text-gray-500" href="{{ route('reportes.index') }}">Ver
+                        todas</a>
 
                     @if (count($reportes) > 0)
                         @foreach ($reportes as $reporte)
                             <div class="dropdown-item d-flex align-items-center ">
                                 <div class="mr-2">
-                                    <a href="{{ route('reporte.destroy', $reporte->id) }}" class="btn btn-sm btn-circle bg-danger">
+                                    <a href="{{ route('reporte.destroy', $reporte->id) }}"
+                                        class="btn btn-sm btn-circle bg-danger">
                                         <i class="fas fa-trash text-white"></i>
                                     </a>
                                 </div>
@@ -46,7 +49,7 @@
                                         class="text-gray-800">
                                         {{ $reporte->cliente->nombre }}
                                         <small>({{ $reporte->mensaje }})</small>
-                                        
+
                                     </a>
                                 </div>
                             </div>

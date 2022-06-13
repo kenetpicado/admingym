@@ -17,7 +17,7 @@ class EntrenadorController extends Controller
     public function store(StoreEntrenadorRequest $request)
     {
         Entrenador::create($request->all());
-        return redirect()->route('entrenador.index')->with('status', 'ok');
+        return redirect()->route('entrenador.index')->with('info', config('app.add'));
     }
 
     public function show($entrenador_id)
@@ -34,7 +34,7 @@ class EntrenadorController extends Controller
     public function update(UpdateEntrenadorRequest $request, Entrenador $entrenador)
     {
         $entrenador->update($request->all());
-        return redirect()->route('entrenador.index')->with('status', 'ok');
+        return redirect()->route('entrenador.index')->with('info', config('app.update'));
     }
 
     public function destroy(Entrenador $entrenador)

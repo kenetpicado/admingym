@@ -42,6 +42,6 @@ class IngresoController extends Controller
         ]);
 
         Ingreso::create($request->all());
-        return redirect()->route('ingreso.index')->with('status', 'ok');
+        return redirect()->route('ingreso.index')->with('info', config('app.add'));
     }
 }

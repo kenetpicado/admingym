@@ -26,6 +26,7 @@ class StoreEgresoRequest extends FormRequest
         return [
             //
             'tipo' => 'required|max:50',
+            'nota' => 'nullable|max:20',
             'monto' => 'required|numeric|gt:0',
             'created_at' => 'required|date'
         ];
@@ -34,7 +35,8 @@ class StoreEgresoRequest extends FormRequest
     public function attributes()
     {
         return [
-            'created_at' => 'fecha'
+            'created_at' => 'fecha',
+            'tipo' => 'concepto'
         ];
     }
 }

@@ -13,6 +13,18 @@
                 @csrf
                 <div class="modal-body">
                     <input type="hidden" name="tipo" value="{{ $value ?? '' }}">
+                    <input type="hidden" name="category">
+                    <div class="form-group">
+                        <label>Nota</label>
+                        <input type="text" name="nota" class="form-control  @error('nota') is-invalid @enderror"
+                            autocomplete="off" value="{{ old('nota') }}">
+
+                        @error('nota')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                     
                     <div class="form-group">
                         <label>Monto C$</label>

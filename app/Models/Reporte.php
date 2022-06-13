@@ -13,6 +13,11 @@ class Reporte extends Model
     protected $guarded = [];
     public $timestamps = false;
 
+    public static function orderDesc()
+    {
+        return Reporte::with('cliente:id,nombre')->orderBy('id', 'desc')->get();
+    }
+
     public static function deleteByUser($cliente_id)
     {
         Reporte::where('cliente_id', $cliente_id)->delete();
@@ -25,7 +30,7 @@ class Reporte extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return date('d-F-Y', strtotime($value));
+        return date('d F Y', strtotime($value));
     }
 
     public function cliente()

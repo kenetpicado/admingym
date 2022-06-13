@@ -139,50 +139,26 @@
 
     @yield('re-open')
 
-    {{-- SI HAY MENSAJE DE CONFIRMACION --}}
-    @if (session('status') == 'ok')
+    @if (session('info'))
         <script>
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Guardado',
+                title: "<?php echo session('info'); ?>",
                 showConfirmButton: false,
                 timer: 1000
             })
         </script>
     @endif
 
-    @if (session('status') == 'eliminado')
+    @if (session('error'))
         <script>
             Swal.fire({
                 position: 'center',
                 icon: 'error',
-                title: 'Se han eliminado los datos',
-                showConfirmButton: false,
-                timer: 1000
-            })
-        </script>
-    @endif
-
-    @if (session('status') == 'noprice')
-        <script>
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: 'Error',
-                text: 'No se ha encontrado el servicio / plan seleccionado',
+                title: "<?php echo session('error'); ?>",
                 showConfirmButton: true,
             })
-        </script>
-    @endif
-
-    @if (session('monto') != '')
-        <script>
-            Swal.fire(
-                'Resultado',
-                '<?php echo session('monto'); ?>',
-                'success'
-            )
         </script>
     @endif
 

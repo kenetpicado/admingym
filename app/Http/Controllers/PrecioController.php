@@ -74,7 +74,7 @@ class PrecioController extends Controller
     {
         //
         $precio->update($request->all());
-        return redirect()->route('precios.index')->with('status', 'ok');
+        return redirect()->route('precios.index')->with('info', config('app.update'));
     }
 
     /**

@@ -11,7 +11,7 @@ class PesoController extends Controller
     public function store(StorePesoRequest $request)
     {
         Peso::create($request->all());
-        return redirect()->route('clientes.show', $request->cliente_id)->with('status', 'ok');
+        return redirect()->route('clientes.show', $request->cliente_id)->with('info', config('app.add'));
     }
 
     public function edit(Peso $peso)
@@ -22,6 +22,6 @@ class PesoController extends Controller
     public function update(StorePesoRequest $request, Peso $peso)
     {
         $peso->update($request->all());
-        return redirect()->route('clientes.show', $peso->cliente_id)->with('status', 'ok');
+        return redirect()->route('clientes.show', $peso->cliente_id)->with('info', config('app.update'));
     }
 }

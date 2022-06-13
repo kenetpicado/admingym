@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCajaRequest;
 use App\Mail\Pago;
 use App\Models\Ingreso;
 use App\Models\Precio;
+use App\Models\Registro;
 use App\Models\Reporte;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -21,9 +22,11 @@ class PlanController extends Controller
 
     public function index()
     {
-        $planes = Plan::deleteExpired();
-        $reportes = Reporte::with('cliente:id,nombre')->orderBy('id', 'desc')->get();
-        return view('plan.index', compact('planes', 'reportes'));
+        $inspected = Plan::deleteExpired();
+        $reportes = Reporte::orderDesc();
+        $planes = Plan::orderBy('fecha_fin')->get();
+
+        return view('plan.index', compact('planes', 'reportes', 'inspected'));
     }
 
     public function create($cliente_id)
@@ -39,7 +42,7 @@ class PlanController extends Controller
         $precio = Precio::getPrice($request->servicio, $request->plan);
 
         if ($precio == 'none')
-            return redirect()->route('clientes.index')->with('status', 'noprice');
+            return redirect()->route('clientes.index')->with('error', config('app.noprice'));
 
         //Aplicar descuento si hay beca
         if ($request->beca > 0) {
@@ -59,7 +62,7 @@ class PlanController extends Controller
         //     Mail::to($request->email)->send(new Pago($plan));
         // }
 
-        return redirect()->route('clientes.index')->with('status', 'ok');
+        return redirect()->route('clientes.index')->with('info', config('app.add'));
     }
 
     //Editar un plan
@@ -75,7 +78,7 @@ class PlanController extends Controller
         $precio = Precio::getPrice($request->servicio, $request->plan);
 
         if ($precio == 'none')
-            return redirect()->route('planes.index')->with('status', 'noprice');
+            return redirect()->route('planes.index')->with('error',  config('app.noprice'));
 
         //Aplicar descuento si hay beca
         if ($request->beca > 0) {
@@ -97,7 +100,7 @@ class PlanController extends Controller
         $plan->update($request->all());
         $ingreso->update($request->all());
 
-        return redirect()->route('planes.index')->with('status', 'ok');
+        return redirect()->route('planes.index')->with('info', config('app.update'));
     }
 
     public function get_end($value, $fecha)

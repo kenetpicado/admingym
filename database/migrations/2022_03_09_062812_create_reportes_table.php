@@ -19,10 +19,10 @@ class CreateReportesTable extends Migration
 
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')
-            ->references('id')
-            ->on('clientes')
-            ->onDelete('cascade');
-            
+                ->references('id')
+                ->on('clientes')
+                ->onDelete('cascade');
+
             $table->date('created_at')->default(date('Y-m-d'));
         });
     }

@@ -13,7 +13,11 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Alonso Gym'),
+    'name' => 'Alonso Gym',
+    'add' => 'Agregado con éxito',
+    'update' => 'Actualizado con éxito',
+    'deleted' => 'Registro eliminado',
+    'noprice' => 'No hay precio para el plan seleccionado',
 
     /*
     |--------------------------------------------------------------------------

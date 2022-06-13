@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEgresosTable extends Migration
+class CreateRegistrosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateEgresosTable extends Migration
      */
     public function up()
     {
-        Schema::create('egresos', function (Blueprint $table) {
+        Schema::create('registros', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo', 50);
-            $table->string('nota', 20);
-            $table->float('monto');
-            $table->date('created_at')->default(date('Y-m-d'));
+            $table->string('status', 15)->default('inspected');
+            $table->date('created_at');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateEgresosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('egresos');
+        Schema::dropIfExists('registros');
     }
 }

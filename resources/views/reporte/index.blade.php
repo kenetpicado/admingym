@@ -13,7 +13,7 @@
         </nav>
 
         <!-- DataTales -->
-        <div class="card shadow mb-4">
+        <div class="card mb-4">
 
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -40,7 +40,7 @@
                                     <td>{{ $reporte->mensaje }}</td>
                                     <td>
                                         <a href="{{ route('planes.create', $reporte->cliente->id) }}"
-                                            class="btn btn-primary btn-sm">Pagar</a>
+                                            class="btn btn-outline-primary btn-sm">Volver a pagar</a>
                                     </td>
                                     <td>
                                         <a href="{{ route('reporte.destroy', $reporte->id) }}"

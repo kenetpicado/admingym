@@ -41,7 +41,7 @@
                                         {{ $plan->cliente->nombre }}
                                     </td>
                                     <td>
-                                        <a href="{{route('planes.edit', $plan->id)}}">
+                                        <a href="{{ route('planes.edit', $plan->id) }}">
                                             <i class="fas fa-cog"></i>
                                         </a>
                                         {{ $plan->servicio }}

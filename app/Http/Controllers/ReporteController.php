@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plan;
 use App\Models\Reporte;
 
 
 class ReporteController extends Controller
 {
+    //Mostrar todas las notificaciones
     public function index()
     {
-        $reportes = Reporte::with('cliente:id,nombre')->orderBy('id', 'desc')->get();
-        return view('reporte.index', compact('reportes'));
+        $inspected = Plan::deleteExpired();
+        $reportes = Reporte::orderDesc();
+        return view('reporte.index', compact('reportes', 'inspected'));
     }
 
     //Eliminar todos
@@ -25,10 +28,10 @@ class ReporteController extends Controller
         $reporte->delete();
     }
 
-    //Eliminar uno
+    //Eliminar una notificacion
     public function deleteThis(Reporte $reporte)
     {
         $reporte->delete();
-        return back();
+        return back()->with('error', config('app.deleted'));
     }
 }

@@ -9,12 +9,17 @@ class Egreso extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['tipo', 'monto', 'created_at'];
+    protected $fillable = ['tipo', 'nota', 'monto', 'created_at'];
     public $timestamps = false;
 
     public function setTipoAttribute($value)
     {
         $this->attributes['tipo'] = trim(strtoupper($value));
+    }
+
+    public function setNotaAttribute($value)
+    {
+        $this->attributes['nota'] = trim(strtoupper($value));
     }
 
     public function getTipoAttribute($value)

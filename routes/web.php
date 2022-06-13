@@ -31,6 +31,7 @@ Route::post('egreso/consulta', [EgresoController::class, 'consulta'])->name('egr
 Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
 
 Route::get('egreso/{value}/ver', [EgresoController::class, 'ver'])->name('egreso.ver');
+Route::get('egreso/todos', [EgresoController::class, 'all'])->name('egreso.all');
 
 Route::resource('clientes', ClienteController::class);
 Route::resource('entrenador', EntrenadorController::class);

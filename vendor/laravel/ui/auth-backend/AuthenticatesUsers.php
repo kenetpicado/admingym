@@ -72,9 +72,6 @@ trait AuthenticatesUsers
         $request->validate([
             $this->username() => 'required|string',
             'password' => 'required|string',
-        ],[],[
-            'username' => 'nombre de usuario',
-            'password' => 'contraseña'
         ]);
     }
 
@@ -157,7 +154,7 @@ trait AuthenticatesUsers
      */
     public function username()
     {
-        return 'username';
+        return 'email';
     }
 
     /**

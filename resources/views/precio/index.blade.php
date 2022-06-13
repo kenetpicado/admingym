@@ -38,7 +38,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $precio->servicio }}</td>
                                     <td>{{ $precio->plan }}</td>
-                                    <td>{{ $precio->monto }}</td>
+                                    <td>C$ {{ $precio->monto }}</td>
                                     <td>
                                         <a href="{{route('precios.edit', $precio->id)}}" class="btn btn-primary btn-sm">
                                             Editar

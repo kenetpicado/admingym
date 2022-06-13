@@ -21,6 +21,6 @@ class EventoController extends Controller
         }
 
         Evento::create($request->all());
-        return redirect()->route('entrenador.show', $request->entrenador_id)->with('status', 'ok');
+        return redirect()->route('entrenador.show', $request->entrenador_id)->with('info', config('app.add'));
     }
 }

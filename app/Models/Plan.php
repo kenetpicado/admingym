@@ -29,22 +29,32 @@ class Plan extends Model
     //Borrar expirados
     public static function deleteExpired()
     {
-        $planes = Plan::all();
-        //$reportes = Reporte::all();
+        $inspected = Registro::where('created_at', Carbon::now()->format('Y-m-d'))->latest('id')->first();
 
-        foreach ($planes as $plan) {
-            if (date('Y-m-d') >= $plan->fecha_fin) {
-                
-                Reporte::create([
-                    'mensaje' =>  $plan->plan,
-                    'cliente_id' =>  $plan->cliente_id,
-                    'created_at' => Carbon::now(),
-                ]);
-                $plan->delete();
+        if ($inspected == null) {
+
+            $planes = Plan::all(['id', 'fecha_fin', 'plan', 'cliente_id']);
+            $status = 0;
+
+            foreach ($planes as $plan) {
+
+                if (date('Y-m-d') >= $plan->fecha_fin) {
+                    Reporte::create([
+                        'mensaje' =>  $plan->plan,
+                        'cliente_id' =>  $plan->cliente_id,
+                        'created_at' => Carbon::now(),
+                    ]);
+                    $plan->delete();
+                    $status++;
+                }
             }
+            return Registro::create([
+                'created_at' => Carbon::now()->format('Y-m-d'),
+                'status' => $status,
+            ]);
+        } else {
+            return $inspected;
         }
-
-        return Plan::orderBy('fecha_fin')->get();
     }
 
     public function cliente()
