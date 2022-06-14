@@ -14,11 +14,11 @@
         </nav>
 
         <!-- DataTales -->
-        <div class="card shadow mb-4">
+        <div class="card mb-4">
 
             <!-- Card Header -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">PESOS: {{ $cliente->nombre }}</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Pesos: {{ $cliente->nombre }}</h6>
                 <a href="#" class="d-inline btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#agregarPeso">
                     <i class="fas fa-plus fa-sm text-white-50"></i>
                     <label class="m-0 d-none d-lg-inline">Agregar</label>
@@ -27,7 +27,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>#</th>

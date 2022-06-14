@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
 
     <!-- Sidebar Toggle (Topbar) -->
     <form class="form-inline">
@@ -29,8 +29,8 @@
                     aria-labelledby="alertsDropdown" style="height:500px; overflow-y: scroll;">
                     <h6 class="dropdown-header">Planes expirados</h6>
 
-                    <a class="dropdown-item text-center small text-gray-500" href="{{ route('reportes.index') }}">Ver
-                        todas</a>
+                    <a class="dropdown-item text-center small text-gray-500" href="{{ route('reportes.index') }}">
+                        VER TODAS</a>
 
                     @if (count($reportes) > 0)
                         @foreach ($reportes as $reporte)

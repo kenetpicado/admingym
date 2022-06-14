@@ -25,22 +25,22 @@
                     <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Fecha expiración</th>
                                 <th>Cliente</th>
                                 <th>Plan</th>
                                 <th>Pagar</th>
+                                <th>Fecha expiración</th>
                                 <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($reportes as $reporte)
                                 <tr>
-                                    <td>{{ $reporte->created_at }}</td>
                                     <td>{{ $reporte->cliente->nombre }}</td>
                                     <td>{{ $reporte->mensaje }}</td>
+                                    <td>{{ $reporte->created_at }}</td>
                                     <td>
                                         <a href="{{ route('planes.create', $reporte->cliente->id) }}"
-                                            class="btn btn-outline-primary btn-sm">Volver a pagar</a>
+                                            class="btn btn-primary btn-sm">Volver a pagar</a>
                                     </td>
                                     <td>
                                         <a href="{{ route('reporte.destroy', $reporte->id) }}"

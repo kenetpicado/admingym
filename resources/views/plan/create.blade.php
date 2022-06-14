@@ -16,7 +16,7 @@
         <!-- form -->
         <div class="card mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">PAGAR: {{ $cliente->nombre }}</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Pagar: {{ $cliente->nombre }}</h6>
             </div>
             <div class="card-body">
                 <form action="{{ route('planes.store') }}" method="POST">
@@ -26,7 +26,7 @@
 
                         <div class="form-group col-lg-3">
                             <label>Servicio</label>
-                            <select name="servicio" class="form-control" required>
+                            <select name="servicio" class="form-control" required autofocus>
                                 <option value="PESAS" {{ old('servicio') == 'PESAS' ? 'selected' : '' }}>PESAS</option>
                                 <option value="ZUMBA" {{ old('servicio') == 'ZUMBA' ? 'selected' : '' }}>ZUMBA</option>
                                 <option value="SPINNING" {{ old('servicio') == 'SPINNING' ? 'selected' : '' }}>SPINNING
@@ -61,6 +61,20 @@
                         </div>
 
                         <div class="form-group col-lg-3">
+                            <label>Inicia</label>
+                            <input type="date" name="created_at"
+                                class="form-control @error('created_at') is-invalid @enderror" autocomplete="off"
+                                value="{{ old('created_at', date('Y-m-d')) }}">
+                            @error('created_at')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>    
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
                             <label>Nota (opcional)</label>
                             <input type="text" name="nota" class="form-control @error('nota') is-invalid @enderror"
                                 autocomplete="off" value="{{ old('nota') }}">
@@ -71,24 +85,14 @@
                             @enderror
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="form-group col-lg-3">
-                            <label>Inicia</label>
-                            <input type="date" name="created_at"
-                                class="form-control @error('created_at') is-invalid @enderror" autocomplete="off"
-                                value="{{ old('created_at', date('Y-m-d')) }}">
-                            @error('created_at')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
                     <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
                     <input type="hidden" name="nombre" value="{{ $cliente->nombre }}">
                     {{-- <input type="hidden" name="email" value="{{ $cliente->email }}"> --}}
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

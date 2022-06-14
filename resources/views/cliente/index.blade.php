@@ -44,9 +44,9 @@
                                     <td>{{ substr(str_repeat(0, 4) . $cliente->id, -4) }}</td>
                                     <td>
                                         @if ($cliente->planes_count > 0)
-                                        <i class="fas fa-check-circle" style="color:limegreen"></i>
+                                        <i class="fas fa-check-circle text-success"></i>
                                         @else
-                                        <i class="fas fa-exclamation-circle" style="color:tomato"></i>
+                                        <i class="fas fa-exclamation-circle text-danger"></i>
                                         @endif
                                         {{ $cliente->nombre }}
                                     </td>

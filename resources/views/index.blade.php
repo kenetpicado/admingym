@@ -6,9 +6,9 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="alert alert-primary" role="alert">
+        {{-- <div class="alert alert-primary" role="alert">
             Bienvenido {{ auth()->user()->name }}!
-        </div>
+        </div> --}}
 
         <!-- Content Row -->
         <div class="row">
@@ -159,28 +159,28 @@
                         <h4 class="small font-weight-bold">Pesas<span class="float-right">{{ $servicios['PESAS'] }} %
                             </span></h4>
                         <div class="progress mb-4">
-                            <div class="progress-bar bg-success" role="progressbar"
+                            <div class="progress-bar bg-primary" role="progressbar"
                                 style="width: {{ $servicios['PESAS'] }}%" aria-valuenow="{{ $servicios['PESAS'] }}"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h4 class="small font-weight-bold">Spinning<span
                                 class="float-right">{{ $servicios['SPINNING'] }}% </span></h4>
                         <div class="progress mb-4">
-                            <div class="progress-bar bg-success" role="progressbar"
+                            <div class="progress-bar bg-primary" role="progressbar"
                                 style="width: {{ $servicios['SPINNING'] }}%"
                                 aria-valuenow="{{ $servicios['SPINNING'] }}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h4 class="small font-weight-bold">Zumba<span class="float-right">{{ $servicios['ZUMBA'] }}
                                 %</span></h4>
                         <div class="progress mb-4">
-                            <div class="progress-bar bg-success" role="progressbar"
+                            <div class="progress-bar bg-primary" role="progressbar"
                                 style="width: {{ $servicios['ZUMBA'] }}%" aria-valuenow="{{ $servicios['ZUMBA'] }}"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <h4 class="small font-weight-bold">ZUMBA+PESAS<span
                                 class="float-right">{{ $servicios['ZUMBA+PESAS'] }} %</span></h4>
                         <div class="progress mb-4">
-                            <div class="progress-bar bg-success" role="progressbar"
+                            <div class="progress-bar bg-primary" role="progressbar"
                                 style="width: {{ $servicios['ZUMBA+PESAS'] }}%"
                                 aria-valuenow="{{ $servicios['ZUMBA+PESAS'] }}" aria-valuemin="0" aria-valuemax="100">
                             </div>
