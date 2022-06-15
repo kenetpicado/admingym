@@ -52,7 +52,7 @@
         </div>
 
         <div class="accordion mb-4" id="accordionExample">
-            <div class="card">
+            <div class="card border-left-primary">
                 <div class="card-header" id="headingTwo">
                     <h2 class="mb-0">
                         <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
@@ -67,47 +67,50 @@
                             <table class="table table-borderless" width="100%" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'agua') }}">AGUA</a>
+                                        <a href="{{ route('egreso.ver', 'agua') }}" class="btn btn-primary btn-sm btn-block">AGUA</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'energia') }}">ENERGIA</a>
+                                        <a href="{{ route('egreso.ver', 'energia') }}" class="btn btn-primary btn-sm btn-block">ENERGIA</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'internet') }}">INTERNET</a>
+                                        <a href="{{ route('egreso.ver', 'internet') }}" class="btn btn-primary btn-sm btn-block">INTERNET</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'limpieza') }}">LIMPIEZA</a>
+                                        <a href="{{ route('egreso.ver', 'limpieza') }}" class="btn btn-primary btn-sm btn-block">LIMPIEZA</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'articulos-limpieza') }}">ARTICULOS LIMPIEZA</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'impuestos') }}">IMPUESTOS</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'publicidad') }}">PUBLICIDAD</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'membresia') }}">MEMBRESIA</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'papeleria') }}">PAPELERIA</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'equipo-maquinaria') }}">EQUIPO Y MAQUINARIA</a>
+                                        <a href="{{ route('egreso.ver', 'articulos-limpieza') }}" class="btn btn-primary btn-sm btn-block">ARTICULOS LIMPIEZA</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'tienda') }}">TIENDA</a>
+                                        <a href="{{ route('egreso.ver', 'impuestos') }}" class="btn btn-primary btn-sm btn-block">IMPUESTOS</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'suplementos') }}">SUPLEMENTOS</a>
+                                        <a href="{{ route('egreso.ver', 'publicidad') }}" class="btn btn-primary btn-sm btn-block">PUBLICIDAD</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'servicios') }}">SERVICIOS</a>
+                                        <a href="{{ route('egreso.ver', 'membresia') }}" class="btn btn-primary btn-sm btn-block">MEMBRESIA</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'papeleria') }}" class="btn btn-primary btn-sm btn-block">PAPELERIA</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'equipo-maquinaria') }}" class="btn btn-primary btn-sm btn-block">EQUIPO Y MAQUINARIA</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'tienda') }}" class="btn btn-primary btn-sm btn-block">TIENDA</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'suplementos') }}" class="btn btn-primary btn-sm btn-block">SUPLEMENTOS</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'servicios') }}" class="btn btn-primary btn-sm btn-block">SERVICIOS</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'bebidas') }}" class="btn btn-primary btn-sm btn-block">BEBIDAS</a>
                                     </td>
                                 </tr>
                             </table>

@@ -58,7 +58,11 @@
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

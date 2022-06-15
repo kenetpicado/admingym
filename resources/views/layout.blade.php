@@ -9,6 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/logo-ag.png') }}">
+
     <title>{{ config('app.name') }} - @yield('title')</title>
 
     <!-- Custom fonts for this template -->

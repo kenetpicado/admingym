@@ -41,10 +41,11 @@
                                         {{ $plan->cliente->nombre }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('planes.edit', $plan->id) }}">
-                                            <i class="fas fa-cog"></i>
+                                        <a href="{{ route('planes.edit', $plan->id) }}" class="btn btn-primary btn-sm btn-block">
+                                            {{-- <i class="fas fa-cog"></i> --}}
+                                            {{ $plan->servicio }}
                                         </a>
-                                        {{ $plan->servicio }}
+                                       
                                     </td>
                                     <td>
                                         C${{ $plan->monto }} <small>(C${{ $plan->beca }})</small>

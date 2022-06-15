@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/logo-ag.png') }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} - Login</title>
@@ -27,6 +27,9 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <div class="p-5">
+                            <div class="text-center mb-4">
+                                <img src="{{ asset('img/logo-ag.png') }}" alt="" srcset="" width="20%">
+                            </div>
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">{{ config('app.name') }}</h1>
                             </div>
