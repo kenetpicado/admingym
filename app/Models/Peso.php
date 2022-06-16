@@ -16,4 +16,9 @@ class Peso extends Model
     public function cliente(){
         return $this->belongsTo(Cliente::class);
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return date('d F Y', strtotime($value));
+    }
 }

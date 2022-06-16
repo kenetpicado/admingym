@@ -24,8 +24,8 @@ Route::get('planes/{cliente}/create', [PlanController::class, 'create'])->name('
 
 
 //Consulta personalizada
-Route::post('ingreso/consulta', [IngresoController::class, 'consulta'])->name('consulta');
-Route::post('egreso/consulta', [EgresoController::class, 'consulta'])->name('egreso.consulta');
+//Route::post('ingreso/consulta', [IngresoController::class, 'consulta'])->name('consulta');
+//Route::post('egreso/consulta', [EgresoController::class, 'consulta'])->name('egreso.consulta');
 
 //PESOS
 Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
@@ -36,7 +36,7 @@ Route::get('egreso/todos', [EgresoController::class, 'all'])->name('egreso.all')
 Route::resource('clientes', ClienteController::class);
 Route::resource('entrenador', EntrenadorController::class);
 Route::resource('evento', EventoController::class);
-Route::resource('ingreso', IngresoController::class);
+Route::resource('ingresos', IngresoController::class);
 Route::resource('egresos', EgresoController::class);
 Route::resource('precios', PrecioController::class);
 Route::resource('/', HomeController::class);

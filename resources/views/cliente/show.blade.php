@@ -13,58 +13,35 @@
             </ol>
         </nav>
 
-        <!-- DataTales -->
         <div class="card mb-4">
+            <x-header-1 modelo="Pesos"></x-header-1>
 
-            <!-- Card Header -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Pesos: {{ $cliente->nombre }}</h6>
-                <a href="#" class="d-inline btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#agregarPeso">
-                    <i class="fas fa-plus fa-sm text-white-50"></i>
-                    <label class="m-0 d-none d-lg-inline">Agregar</label>
-                </a>
-            </div>
+            {{-- FORM STORE --}}
+            <x-modal-add ruta='pesos.store' title='Peso'>
+                <x-input-form label='peso' text='Peso (lb)'></x-input-form>
+                <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
+            </x-modal-add>
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Fecha de registro</th>
-                                <th>Peso en libras</th>
-                                <th>Editar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($cliente->pesos as $key => $peso)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $peso->created_at }}</td>
-                                    <td>{{ $peso->peso }} libras</td>
-                                    <td>
-                                        <a href="{{ route('pesos.edit', $peso->id) }}">
-                                            <i class="fas fa-cog"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            {{-- INDEX --}}
+            <x-table-head>
+                <x-slot name='title'>
+                    <th>Peso (lb)</th>
+                    <th>Fecha registro</th>
+                    <th>Editar</th>
+                </x-slot>
+                <tbody>
+                    @foreach ($cliente->pesos as $peso)
+                        <tr>
+                            <td>{{ $peso->peso }} libras</td>
+                            <td>{{ $peso->created_at }}</td>
+                            <td>
+                                <a href="{{ route('pesos.edit', $peso->id) }}" class="btn btn-secondary btn-sm">Editar</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </x-table-head>
         </div>
     </div>
-@endsection('contenido')
-
-@section('agregarModal')
-    @include('cliente.modal')
 @endsection
-
-@section('re-open')
-    @if ($errors->any())
-        <script>
-            $('#agregarPeso').modal('show')
-        </script>
-    @endif
-@endsection
+<x-open-modal></x-open-modal>

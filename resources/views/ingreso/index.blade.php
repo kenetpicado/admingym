@@ -51,73 +51,50 @@
         </div>
 
         <div class="card mb-4">
+            <x-header-2 text="Ingresos">
+                <x-dp-item modal="agregar" text="Agregar"></x-dp-item>
+                <a class="dropdown-item" href="#">Rango</a>
+            </x-header-2>
 
-            <!-- Card Header -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">CONSULTA</h6>
-                <a href="{{ route('ingreso.create') }}" class="d-inline btn btn-sm btn-primary shadow-sm">
-                    <i class="fas fa-plus fa-sm text-white-50"></i>
-                    <label class="m-0 d-none d-lg-inline">Registrar ingreso</label>
-                </a>
-            </div>
+            {{-- FORM STORE --}}
+            <x-modal-add ruta='ingresos.store' title='Ingreso'>
+                <x-input-form label='nombre' text="Concepto"></x-input-form>
+                <x-input-form label='servicio' text="Descripción"></x-input-form>
+                <x-input-form label='monto' type='number'></x-input-form>
+                <x-input-form label='created_at' type='date' text="Fecha" :val="date('Y-m-d')"></x-input-form>
+            </x-modal-add>
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
-                        <p>
-                            Se muestran todos los ingresos en un rango de fechas especifico:
-                            <a href="#" data-toggle="modal" data-target="#ver">
-                                <label>Establecer rango</label>
-                            </a>
-                        </p>
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Nombre</th>
-                                <th>Servicio</th>
-                                <th>Monto</th>
-                                <th>Beca</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (session('ingresos'))
-                                @foreach (session('ingresos') as $ingreso)
-                                    <tr>
-                                        <td>{{ date('d-F-Y', strtotime($ingreso->created_at)) }}</td>
-                                        <td>{{ $ingreso->nombre }}</td>
-                                        <td>{{ $ingreso->servicio }}</td>
-                                        <td>C${{ $ingreso->monto }}</td>
-                                        <td>
-                                            @if ($ingreso->beca > 0)
-                                                C${{ $ingreso->beca }}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th style="text-align-last: right" colspan="3">Total</th>
-                                <th>C$ {{ session('mensaje') }}</th>
-                                <th></th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
+            {{-- INDEX --}}
+            <x-table-head>
+                <x-slot name='title'>
+                    <th>Concepto</th>
+                    <th>Descripcion</th>
+                    <th>Monto C$</th>
+                    <th>Beca C$</th>
+                    <th>Fecha</th>
+                    <th>Editar</th>
+                </x-slot>
+                <tbody>
+                    @foreach ($ingresos as $ingreso)
+                        <tr>
+                            <td>{{ $ingreso->nombre }}</td>
+                            <td>{{ $ingreso->servicio }}</td>
+                            <td>{{ $ingreso->monto }}</td>
+                            <td>
+                                @if ($ingreso->beca > 0)
+                                    {{ $ingreso->beca }}
+                                @endif
+                            </td>
+                            <td>{{ date('d F Y', strtotime($ingreso->created_at)) }}</td>
+                            <td>
+                                <a href="{{ route('egresos.edit', $ingreso->id) }}"
+                                    class="btn btn-secondary btn-sm">Editar</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </x-table-head>
         </div>
     </div>
-@endsection('contenido')
-
-@section('agregarModal')
-    @include('ingreso.modal')
 @endsection
-
-@section('re-open')
-    @if ($errors->any())
-        <script>
-            $('#ver').modal('show')
-        </script>
-    @endif
-@endsection
+<x-open-modal></x-open-modal>

@@ -6,23 +6,21 @@ use App\Http\Requests\ConsultaRequest;
 use App\Http\Requests\StoreIngresoRequest;
 use App\Models\Ingreso;
 use App\Models\Info;
+use Illuminate\Support\Facades\DB;
 
 class IngresoController extends Controller
 {
     public function index()
     {
+        $ingresos = DB::table('ingresos')->latest('id')->get();
+
         $ver = ([
-            'total' => Info::getTotal(new Ingreso()),
-            'activo' => Info::getMonthly(new Ingreso()),
+            'total' => $ingresos->sum('monto'),
+            'activo' => $ingresos->where('created_at', '>=', date('Y-m-' . '01'))->sum('monto'),
             'mes' => HomeController::current_month(),
         ]);
 
-        return view('ingreso.index', compact('ver'));
-    }
-
-    public function create()
-    {
-        return view('ingreso.create');
+        return view('ingreso.index', compact('ver', 'ingresos'));
     }
 
     public function consulta(ConsultaRequest $request)
@@ -31,17 +29,13 @@ class IngresoController extends Controller
 
         $mensaje = $ingresos->sum('monto');
 
-        return redirect()->route('ingreso.index')
+        return redirect()->route('ingresos.index')
             ->with('ingresos', $ingresos)->with('mensaje', $mensaje);
     }
 
     public function store(StoreIngresoRequest $request)
     {
-        $request->merge([
-            'nombre' => '-'
-        ]);
-
         Ingreso::create($request->all());
-        return redirect()->route('ingreso.index')->with('info', config('app.add'));
+        return redirect()->route('ingresos.index')->with('info', config('app.add'));
     }
 }

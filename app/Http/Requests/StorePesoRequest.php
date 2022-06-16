@@ -25,7 +25,6 @@ class StorePesoRequest extends FormRequest
     {
         return [
             'peso' => 'required|numeric|gt:0',
-            'created_at' => 'required|date',
         ];
     }
 }

@@ -24,19 +24,20 @@ class StoreEgresoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'tipo' => 'required|max:50',
-            'nota' => 'nullable|max:20',
+            'nota' => 'required|max:20',
             'monto' => 'required|numeric|gt:0',
-            'created_at' => 'required|date'
+            'created_at' => 'required|date',
+            
         ];
     }
 
     public function attributes()
     {
         return [
+            'tipo' => 'concepto',
+            'nota' => 'descripcion',
             'created_at' => 'fecha',
-            'tipo' => 'concepto'
         ];
     }
 }

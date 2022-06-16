@@ -17,10 +17,18 @@ class Ingreso extends Model
         'created_at'
     ];
 
+    public function getNombreAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function getServicioAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
     public function setServicioAttribute($value)
     {
         $this->attributes['servicio'] = trim(strtoupper($value));
-    }
-    
-    
+    } 
 }

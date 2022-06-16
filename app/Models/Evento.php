@@ -35,6 +35,6 @@ class Evento extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return date('d-F-Y', strtotime($value));
+        return date('d F Y', strtotime($value));
     }
 }

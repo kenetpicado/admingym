@@ -13,89 +13,43 @@
             </ol>
         </nav>
 
-        <!-- form -->
-        <div class="card mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Pagar: {{ $cliente->nombre }}</h6>
+        <!-- FORM STORE -->
+        <x-create-form ruta="planes.store" title='Pagar'>
+
+            <div class="row">
+                <div class="form-group col-lg-3">
+                    <label>Servicio</label>
+                    <select name="servicio" class="form-control" autofocus>
+                        <x-option val="PESAS" ctl="servicio"></x-option>
+                        <x-option val="ZUMBA" ctl="servicio"></x-option>
+                        <x-option val="SPINNING" ctl="servicio"></x-option>
+                        <x-option val="ZUMBA+PESAS" ctl="servicio"></x-option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label>Plan</label>
+                    <select name="plan" class="form-control">
+                        <x-option val="MENSUAL" ctl="plan"></x-option>
+                        <x-option val="QUINCENAL" ctl="plan"></x-option>
+                        <x-option val="SEMANAL" ctl="plan"></x-option>
+                        <x-option val="DIA" ctl="plan"></x-option>
+                    </select>
+                </div>
             </div>
-            <div class="card-body">
-                <form action="{{ route('planes.store') }}" method="POST">
-                    @csrf
 
-                    <div class="row">
-
-                        <div class="form-group col-lg-3">
-                            <label>Servicio</label>
-                            <select name="servicio" class="form-control" required autofocus>
-                                <option value="PESAS" {{ old('servicio') == 'PESAS' ? 'selected' : '' }}>PESAS</option>
-                                <option value="ZUMBA" {{ old('servicio') == 'ZUMBA' ? 'selected' : '' }}>ZUMBA</option>
-                                <option value="SPINNING" {{ old('servicio') == 'SPINNING' ? 'selected' : '' }}>SPINNING
-                                </option>
-                                <option value="ZUMBA+PESAS" {{ old('servicio') == 'ZUMBA+PESAS' ? 'selected' : '' }}>
-                                    ZUMBA+PESAS</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-lg-3">
-                            <label>Plan</label>
-                            <select name="plan" class="form-control" required>
-                                <option value="MENSUAL" {{ old('plan') == 'MENSUAL' ? 'selected' : '' }}>MENSUAL</option>
-                                <option value="QUINCENAL" {{ old('plan') == 'QUINCENAL' ? 'selected' : '' }}>QUINCENAL
-                                </option>
-                                <option value="SEMANAL" {{ old('plan') == 'SEMANAL' ? 'selected' : '' }}>SEMANAL</option>
-                                <option value="DIA" {{ old('plan') == 'DIA' ? 'selected' : '' }}>DIA</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-lg-3">
-                            <label>Beca C$</label>
-                            <input type="number" name="beca" class="form-control @error('beca') is-invalid @enderror"
-                                autocomplete="off" value="{{ old('beca', '0') }}">
-                            @error('beca')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group col-lg-3">
-                            <label>Inicia</label>
-                            <input type="date" name="created_at"
-                                class="form-control @error('created_at') is-invalid @enderror" autocomplete="off"
-                                value="{{ old('created_at', date('Y-m-d')) }}">
-                            @error('created_at')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>    
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-lg-6">
-                            <label>Nota (opcional)</label>
-                            <input type="text" name="nota" class="form-control @error('nota') is-invalid @enderror"
-                                autocomplete="off" value="{{ old('nota') }}">
-                            @error('nota')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
-                    <input type="hidden" name="nombre" value="{{ $cliente->nombre }}">
-                    {{-- <input type="hidden" name="email" value="{{ $cliente->email }}"> --}}
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="row">
+                <x-input-form label='beca' class="col-lg-3" type='number' val="0"></x-input-form>
+                <x-input-form label='created_at' class="col-lg-3" type='date' :val="date('Y-m-d')" text="Inicia"></x-input-form>
             </div>
-        </div>
 
+            <div class="row">
+                <x-input-form label='nota' class="col-lg-6"></x-input-form>
+            </div>
+            
+            <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
+            <input type="hidden" name="nombre" value="{{ $cliente->nombre }}">
+             <input type="hidden" name="email" value="{{ $cliente->email }}">
+        </x-create-form>
     </div>
-@endsection('contenido')
+@endsection

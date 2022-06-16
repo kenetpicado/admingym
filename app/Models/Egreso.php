@@ -24,6 +24,11 @@ class Egreso extends Model
 
     public function getTipoAttribute($value)
     {
-        return strtoupper($value);
+        return ucwords(strtolower($value));
+    }
+
+    public function getNotaAttribute($value)
+    {
+        return ucwords(strtolower($value));
     }
 }

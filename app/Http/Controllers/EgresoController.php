@@ -6,18 +6,21 @@ use App\Http\Requests\StoreEgresoRequest;
 use App\Models\Egreso;
 use App\Models\Info;
 use App\Http\Requests\ConsultaRequest;
+use Illuminate\Support\Facades\DB;
 
 class EgresoController extends Controller
 {
     public function index()
     {
+        $egresos = DB::table('egresos')->latest('id')->get();
+
         $ver = ([
-            'total' => Info::getTotal(new Egreso()),
-            'activo' => Info::getMonthly(new Egreso()),
+            'total' => $egresos->sum('monto'),
+            'activo' => $egresos->where('created_at', '>=', date('Y-m-' . '01'))->sum('monto'),
             'mes' => HomeController::current_month(),
         ]);
 
-        return view('egreso.index', compact('ver'));
+        return view('egreso.index', compact('ver', 'egresos'));
     }
 
     //Ver todos los egresos
@@ -35,11 +38,6 @@ class EgresoController extends Controller
         return view('egreso.ver', compact('egresos', 'value'));
     }
 
-    public function create()
-    {
-        return view('egreso.create');
-    }
-
     //Consulta personalizada
     public function consulta(ConsultaRequest $request)
     {
@@ -53,12 +51,14 @@ class EgresoController extends Controller
 
     public function store(StoreEgresoRequest $request)
     {
+        return dd('ss');
         Egreso::create($request->all());
+        return redirect()->route('egresos.index')->with('info', config('app.add'));
 
-        if ($request->has('category'))
-            return redirect()->route('egreso.ver', strtolower($request->tipo))->with('info', config('app.add'));
-        else
-            return redirect()->route('egresos.index')->with('info', config('app.add'));
+        // if ($request->has('category'))
+        //     return redirect()->route('egreso.ver', strtolower($request->tipo))->with('info', config('app.add'));
+        // else
+            
     }
 
     public function edit(Egreso $egreso)

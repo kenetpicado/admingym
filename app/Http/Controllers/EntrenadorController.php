@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Entrenador;
 use App\Http\Requests\StoreEntrenadorRequest;
-use App\Http\Requests\UpdateEntrenadorRequest;
 
 class EntrenadorController extends Controller
 {
@@ -31,7 +30,7 @@ class EntrenadorController extends Controller
         return view('entrenador.edit', compact('entrenador'));
     }
 
-    public function update(UpdateEntrenadorRequest $request, Entrenador $entrenador)
+    public function update(StoreEntrenadorRequest $request, Entrenador $entrenador)
     {
         $entrenador->update($request->all());
         return redirect()->route('entrenador.index')->with('info', config('app.update'));

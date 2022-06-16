@@ -42,7 +42,7 @@
 
     <!-- Nav Item - entrenadores -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('ingreso.index') }}">
+        <a class="nav-link" href="{{ route('ingresos.index') }}">
             <i class="fas fa-fw fa-coins"></i>
             <span>Ingresos</span></a>
     </li>

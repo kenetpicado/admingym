@@ -14,6 +14,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="tipo" value="{{ $value ?? '' }}">
                     <input type="hidden" name="category">
+                    
                     <div class="form-group">
                         <label>Nota</label>
                         <input type="text" name="nota" class="form-control  @error('nota') is-invalid @enderror"

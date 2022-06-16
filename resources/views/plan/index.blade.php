@@ -8,63 +8,55 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('index') }}">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Planes activos</li>
+                <li class="breadcrumb-item active" aria-current="page">Planes</li>
             </ol>
         </nav>
 
-        <!-- DataTales -->
         <div class="card mb-4">
+            <x-header-0 text='Planes'></x-header-0>
 
-            <!-- Card Header -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">PLANES ACTIVOS</h6>
-            </div>
+            {{-- INDEX --}}
+            <x-table-head>
+                <x-slot name='title'>
+                    <th>Cliente</th>
+                    <th>Servicio</th>
+                    <th>Monto-Beca</th>
+                    <th>Rango</th>
+                    <th>Nota</th>
+                </x-slot>
+                <tbody>
+                    @foreach ($planes as $plan)
+                        <tr>
+                            <td>
+                                {{ substr(str_repeat(0, 4) . $plan->cliente->id, -4) }} -
+                                {{ $plan->cliente->nombre }}
+                            </td>
+                            <td>
+                                <a href="{{ route('planes.edit', $plan->id) }}">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                                {{ $plan->servicio }}
+                            </td>
+                            <td>
+                                C$ {{ $plan->monto }}
+                                @if ($plan->beca > 0)
+                                    ({{ $plan->beca }})
+                                @endif
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Servicio</th>
-                                <th>Monto-Beca</th>
-                                <th>Rango</th>
-                                <th>Nota</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($planes as $plan)
-                                <tr>
-                                    <td>{{ substr(str_repeat(0, 4) . $plan->cliente->id, -4) }}</td>
-                                    <td>
-                                        {{ $plan->cliente->nombre }}
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('planes.edit', $plan->id) }}" class="btn btn-primary btn-sm btn-block">
-                                            {{-- <i class="fas fa-cog"></i> --}}
-                                            {{ $plan->servicio }}
-                                        </a>
-                                       
-                                    </td>
-                                    <td>
-                                        C${{ $plan->monto }} <small>(C${{ $plan->beca }})</small>
-                                    </td>
-                                    <td>
-                                        <div class="badge badge-primary">
-                                            {{ date('d-F-y', strtotime($plan->created_at)) }}
-                                        </div>
-                                        <div class="badge badge-danger">
-                                            {{ date('d-F-y', strtotime($plan->fecha_fin)) }}
-                                        </div>
-                                    </td>
-                                    <td>{{ $plan->nota }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                            </td>
+                            <td>
+                                <div class="badge badge-light">
+                                    {{ date('d-F-y', strtotime($plan->created_at)) }}
+                                </div>
+                                <div class="badge badge-primary">
+                                    {{ date('d-F-y', strtotime($plan->fecha_fin)) }}
+                                </div>
+                            </td>
+                            <td>{{ $plan->nota }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </x-table-head>
         </div>
     </div>
-@endsection('contenido')
+@endsection

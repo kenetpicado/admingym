@@ -67,50 +67,64 @@
                             <table class="table table-borderless" width="100%" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'agua') }}" class="btn btn-primary btn-sm btn-block">AGUA</a>
+                                        <a href="{{ route('egreso.ver', 'agua') }}"
+                                            class="btn btn-primary btn-sm btn-block">AGUA</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'energia') }}" class="btn btn-primary btn-sm btn-block">ENERGIA</a>
+                                        <a href="{{ route('egreso.ver', 'energia') }}"
+                                            class="btn btn-primary btn-sm btn-block">ENERGIA</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'internet') }}" class="btn btn-primary btn-sm btn-block">INTERNET</a>
+                                        <a href="{{ route('egreso.ver', 'internet') }}"
+                                            class="btn btn-primary btn-sm btn-block">INTERNET</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'limpieza') }}" class="btn btn-primary btn-sm btn-block">LIMPIEZA</a>
+                                        <a href="{{ route('egreso.ver', 'limpieza') }}"
+                                            class="btn btn-primary btn-sm btn-block">LIMPIEZA</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'articulos-limpieza') }}" class="btn btn-primary btn-sm btn-block">ARTICULOS LIMPIEZA</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'impuestos') }}" class="btn btn-primary btn-sm btn-block">IMPUESTOS</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'publicidad') }}" class="btn btn-primary btn-sm btn-block">PUBLICIDAD</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'membresia') }}" class="btn btn-primary btn-sm btn-block">MEMBRESIA</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'papeleria') }}" class="btn btn-primary btn-sm btn-block">PAPELERIA</a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('egreso.ver', 'equipo-maquinaria') }}" class="btn btn-primary btn-sm btn-block">EQUIPO Y MAQUINARIA</a>
+                                        <a href="{{ route('egreso.ver', 'articulos-limpieza') }}"
+                                            class="btn btn-primary btn-sm btn-block">ARTICULOS LIMPIEZA</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'tienda') }}" class="btn btn-primary btn-sm btn-block">TIENDA</a>
+                                        <a href="{{ route('egreso.ver', 'impuestos') }}"
+                                            class="btn btn-primary btn-sm btn-block">IMPUESTOS</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'suplementos') }}" class="btn btn-primary btn-sm btn-block">SUPLEMENTOS</a>
+                                        <a href="{{ route('egreso.ver', 'publicidad') }}"
+                                            class="btn btn-primary btn-sm btn-block">PUBLICIDAD</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'servicios') }}" class="btn btn-primary btn-sm btn-block">SERVICIOS</a>
+                                        <a href="{{ route('egreso.ver', 'membresia') }}"
+                                            class="btn btn-primary btn-sm btn-block">MEMBRESIA</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('egreso.ver', 'bebidas') }}" class="btn btn-primary btn-sm btn-block">BEBIDAS</a>
+                                        <a href="{{ route('egreso.ver', 'papeleria') }}"
+                                            class="btn btn-primary btn-sm btn-block">PAPELERIA</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'equipo-maquinaria') }}"
+                                            class="btn btn-primary btn-sm btn-block">EQUIPO Y MAQUINARIA</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'tienda') }}"
+                                            class="btn btn-primary btn-sm btn-block">TIENDA</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'suplementos') }}"
+                                            class="btn btn-primary btn-sm btn-block">SUPLEMENTOS</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'servicios') }}"
+                                            class="btn btn-primary btn-sm btn-block">SERVICIOS</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('egreso.ver', 'bebidas') }}"
+                                            class="btn btn-primary btn-sm btn-block">BEBIDAS</a>
                                     </td>
                                 </tr>
                             </table>
@@ -121,112 +135,39 @@
         </div>
 
         <div class="card mb-4">
-            <!-- Card Header -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">CONSULTA</h6>
-                <a href="{{ route('egresos.create') }}" class="d-inline btn btn-sm btn-primary shadow-sm">
-                    <i class="fas fa-plus fa-sm text-white-50"></i>
-                    <label class="m-0 d-none d-lg-inline">Registrar egreso</label>
-                </a>
-            </div>
+            <x-header-2 text="Egresos">
+                <x-dp-item modal="agregar" text="Agregar"></x-dp-item>
+                <a class="dropdown-item" href="#">Rango</a>
+            </x-header-2>
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
-                        <p>
-                            Se muestran todos los egresos en un rango de fechas especifico.
-                            <a href="#" data-toggle="modal" data-target="#ver">
-                                <label>Establecer rango</label>
-                            </a>
-                        </p>
-                        <p>
-                            Para ver todos los egresos haga <a href="{{route('egreso.all')}}">clic aqui</a>
-                        </p>
+            {{-- FORM STORE --}}
+            <x-modal-add ruta='egresos.store' title='Egreso'>
+                <x-input-form label="tipo" text="Concepto"></x-input-form>
+                <x-input-form label='nota' text="Descripción"></x-input-form>
+                <x-input-form label='monto' type='number'></x-input-form>
+                <x-input-form label='created_at' type='date' text="Fecha" :val="date('Y-m-d')"></x-input-form>
+            </x-modal-add>
 
-                        <thead>
-                            <tr>
-                                <th>Concepto</th>
-                                <th>Nota</th>
-                                <th>Monto</th>
-                                <th>Fecha</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (session('egresos'))
-                                @foreach (session('egresos') as $egreso)
-                                    <tr>
-                                        <td>{{ $egreso->tipo }}</td>
-                                        <td>{{ $egreso->nota }}</td>
-                                        <td>C$ {{ $egreso->monto }}</td>
-                                        <td>{{ date('d F Y', strtotime($egreso->created_at)) }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th style="text-align-last: right" colspan="2">Total</th>
-                                <th>C$ {{ session('mensaje') }}</th>
-
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
+            {{-- INDEX --}}
+            <x-table-head>
+                <x-slot name='title'>
+                    <th>Concepto</th>
+                    <th>Descripcion</th>
+                    <th>Monto C$</th>
+                    <th>Fecha</th>
+                </x-slot>
+                <tbody>
+                    @foreach ($egresos as $egreso)
+                        <tr>
+                            <td>{{ $egreso->tipo }}</td>
+                            <td>{{ $egreso->nota }}</td>
+                            <td>{{ $egreso->monto }}</td>
+                            <td>{{ date('d F Y', strtotime($egreso->created_at)) }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </x-table-head>
         </div>
-
-        <!-- ver-->
-        <div class="modal fade" id="ver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Consulta personalizada</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <form action="{{ route('egreso.consulta') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <p>
-                                <strong>
-                                    Seleccione la fecha de inicio y fin de la consulta.
-                                </strong>
-
-                            </p>
-                            <div class="form-group">
-                                <label>Fecha inicio</label>
-                                <input type="date" name="inicio" class="form-control @error('inicio') is-invalid @enderror"
-                                    autocomplete="off" value="{{ old('inicio') }}">
-                                @error('inicio')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label>Fecha fin</label>
-                                <input type="date" name="fin" class="form-control @error('fin') is-invalid @enderror"
-                                    autocomplete="off" value="{{ old('fin', date('Y-m-d')) }}">
-                                @error('fin')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
     </div>
-
 @endsection
+<x-open-modal></x-open-modal>

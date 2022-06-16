@@ -9,36 +9,20 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('index') }}">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('precios.index') }}">Precios</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Cambiar</li>
+                <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>
         </nav>
 
         <!-- form -->
         <div class="card mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">{{$precio->servicio}} - {{$precio->plan}}</h6>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('precios.update', $precio) }}" method="POST">
-                    @csrf
-                    @method('PUT')
+            <x-header-0 :text="$precio->servicio . ' - ' . $precio->plan"></x-header-0>
 
-                    <div class="row">
-                        <div class="form-group col-lg-3">
-                            <label>Monto</label>
-                            <input type="number" name="monto" class="form-control @error('monto') is-invalid @enderror"
-                                autocomplete="off" value="{{ old('monto', $precio->monto) }}" autofocus>
-                            @error('monto')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </form>
-            </div>
+            <!-- FORM EDIT -->
+            <x-edit-form ruta="precios.update" :id="$precio->id">
+                <div class="row">
+                    <x-input-form label='monto' class="col-lg-6" type='number' :val="$precio->monto"></x-input-form>
+                </div>
+            </x-edit-form>
         </div>
-
     </div>
-@endsection('contenido')
+@endsection
