@@ -18,13 +18,17 @@
             \
             <!-- FORM EDIT -->
             <x-edit-form ruta='clientes.update' :id="$cliente->id">
-                <x-input-edit label='nombre' :val="$cliente->nombre"></x-input-edit>
-                <x-input-edit label='email' :val="$cliente->email" type='email'></x-input-edit>
-                <x-input-edit label='fecha' :val="$cliente->fecha" type='date' text='Fecha de nacimiento'>
-                </x-input-edit>
-
                 <div class="row">
-                    <div class="form-group col-lg-6">
+                    <x-input-form label='nombre' class="col-lg-6" :val="$cliente->nombre"></x-input-form>
+                </div>
+                <div class="row">
+                    <x-input-form label='email' class="col-lg-6" :val="$cliente->email" type='email'></x-input-form>
+                </div>
+                <div class="row">
+                    <x-input-form label='fecha' class="col-lg-3" :val="$cliente->fecha" type='date' text='Fecha de nacimiento'>
+                    </x-input-form>
+
+                    <div class="form-group col-lg-3">
                         <label>Sexo</label>
                         <select name="sexo" class="form-control" value="{{ old('sexo', $cliente->sexo) }}">
                             @if ($cliente->sexo == 'M')

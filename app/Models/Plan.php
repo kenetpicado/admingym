@@ -64,7 +64,7 @@ class Plan extends Model
 
     public function setNotaAttribute($value)
     {
-        $this->attributes['nota'] = trim(strtoupper($value));
+        $this->attributes['nota'] = trim(ucfirst(strtolower($value)));
     }
 
     public function getNotaAttribute($value)

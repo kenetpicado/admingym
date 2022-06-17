@@ -1,8 +1,8 @@
-@props(['label', 'class' => '', 'text' => $label, 'type' => 'text', 'val' => ''])
+@props(['label', 'class' => '', 'text' => $label, 'type' => 'text', 'val' => '', 'list' => ''])
 
 <div class="form-group {{ $class }}">
     <label>{{ ucfirst($text) }}</label>
-    <input type={{ $type }} class="form-control @error($label) is-invalid @enderror"
+    <input list={{ $list }} type={{ $type }} class="form-control @error($label) is-invalid @enderror"
         name="{{ $label }}" autocomplete="off" value="{{ old($label, $val) }}">
 
     @error($label)

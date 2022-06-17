@@ -25,14 +25,14 @@
             {{-- INDEX --}}
             <x-table-head>
                 <x-slot name='title'>
-                    <th>Peso (lb)</th>
+                    <th>Peso (libras)</th>
                     <th>Fecha registro</th>
                     <th>Editar</th>
                 </x-slot>
                 <tbody>
                     @foreach ($cliente->pesos as $peso)
                         <tr>
-                            <td>{{ $peso->peso }} libras</td>
+                            <td>{{ $peso->peso }}</td>
                             <td>{{ $peso->created_at }}</td>
                             <td>
                                 <a href="{{ route('pesos.edit', $peso->id) }}" class="btn btn-secondary btn-sm">Editar</a>

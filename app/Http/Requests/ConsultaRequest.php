@@ -29,13 +29,4 @@ class ConsultaRequest extends FormRequest
             'fin' => 'required|date|after_or_equal:inicio'
         ];
     }
-
-    public function attributes()
-    {
-        return [
-            //
-            'fin' => 'fecha fin',
-            'inicio' => 'fecha inicio',
-        ];
-    }
 }

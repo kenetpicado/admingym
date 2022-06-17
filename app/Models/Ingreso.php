@@ -24,11 +24,16 @@ class Ingreso extends Model
 
     public function getServicioAttribute($value)
     {
-        return ucwords(strtolower($value));
+        return ucfirst(strtolower($value));
     }
 
     public function setServicioAttribute($value)
     {
-        $this->attributes['servicio'] = trim(strtoupper($value));
+        $this->attributes['servicio'] = trim(ucfirst(strtolower($value)));
+    }
+
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['nombre'] = trim(ucwords(strtolower($value)));
     } 
 }

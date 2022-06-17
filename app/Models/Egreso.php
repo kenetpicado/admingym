@@ -14,12 +14,12 @@ class Egreso extends Model
 
     public function setTipoAttribute($value)
     {
-        $this->attributes['tipo'] = trim(strtoupper($value));
+        $this->attributes['tipo'] = trim(ucwords(strtolower($value)));
     }
 
     public function setNotaAttribute($value)
     {
-        $this->attributes['nota'] = trim(strtoupper($value));
+        $this->attributes['nota'] = trim(ucfirst(strtolower($value)));
     }
 
     public function getTipoAttribute($value)
@@ -29,6 +29,6 @@ class Egreso extends Model
 
     public function getNotaAttribute($value)
     {
-        return ucwords(strtolower($value));
+        return ucfirst(strtolower($value));
     }
 }

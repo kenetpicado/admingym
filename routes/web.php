@@ -22,26 +22,31 @@ Route::get('reportes',  [ReporteController::class, 'index'])->name('reportes.ind
 //PLANES
 Route::get('planes/{cliente}/create', [PlanController::class, 'create'])->name('planes.create');
 
+//INGRESOS
+Route::get('rango/ingresos', [IngresoController::class, 'rango'])->name('ingresos.rango');
+Route::post('rango/ingresos', [IngresoController::class, 'get_rango'])->name('ingresos.getrango');
+Route::get('categorias/ingresos', [IngresoController::class, 'categorias'])->name('ingresos.categorias');
+Route::post('categorias/ingresos', [IngresoController::class, 'get_categorias'])->name('ingresos.getcategorias');
 
-//Consulta personalizada
-//Route::post('ingreso/consulta', [IngresoController::class, 'consulta'])->name('consulta');
+//EGRESOS
+Route::get('rango/egresos', [EgresoController::class, 'rango'])->name('egresos.rango');
+Route::post('rango/egresos', [EgresoController::class, 'get_rango'])->name('egresos.getrango');
+Route::get('categorias/egresos', [EgresoController::class, 'categorias'])->name('egresos.categorias');
+Route::post('categorias/egresos', [EgresoController::class, 'get_categorias'])->name('egresos.getcategorias');
+
 //Route::post('egreso/consulta', [EgresoController::class, 'consulta'])->name('egreso.consulta');
 
 //PESOS
 Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
 
-Route::get('egreso/{value}/ver', [EgresoController::class, 'ver'])->name('egreso.ver');
-Route::get('egreso/todos', [EgresoController::class, 'all'])->name('egreso.all');
-
 Route::resource('clientes', ClienteController::class);
 Route::resource('entrenador', EntrenadorController::class);
 Route::resource('evento', EventoController::class);
-Route::resource('ingresos', IngresoController::class);
+Route::resource('ingresos', IngresoController::class)->except(['show']);
 Route::resource('egresos', EgresoController::class);
 Route::resource('precios', PrecioController::class);
 Route::resource('/', HomeController::class);
 
-Route::resource('planes', PlanController::class)
-    ->except(['create']);
+Route::resource('planes', PlanController::class)->except(['create']);
 
 Auth::routes();

@@ -53,16 +53,19 @@
         <div class="card mb-4">
             <x-header-2 text="Ingresos">
                 <x-dp-item modal="agregar" text="Agregar"></x-dp-item>
-                <a class="dropdown-item" href="#">Rango</a>
+                <a class="dropdown-item" href="{{ route('ingresos.categorias') }}">Ver categorías</a>
+                <a class="dropdown-item" href="{{ route('ingresos.rango') }}">Ver rango</a>
             </x-header-2>
 
             {{-- FORM STORE --}}
             <x-modal-add ruta='ingresos.store' title='Ingreso'>
-                <x-input-form label='nombre' text="Concepto"></x-input-form>
+                <x-input-list label='nombre' text="Concepto" list="ingresos-categorias"></x-input-list>
                 <x-input-form label='servicio' text="Descripción"></x-input-form>
                 <x-input-form label='monto' type='number'></x-input-form>
                 <x-input-form label='created_at' type='date' text="Fecha" :val="date('Y-m-d')"></x-input-form>
             </x-modal-add>
+
+            <x-cat-ingresos></x-cat-ingresos>
 
             {{-- INDEX --}}
             <x-table-head>
@@ -87,7 +90,7 @@
                             </td>
                             <td>{{ date('d F Y', strtotime($ingreso->created_at)) }}</td>
                             <td>
-                                <a href="{{ route('egresos.edit', $ingreso->id) }}"
+                                <a href="{{ route('ingresos.edit', $ingreso->id) }}"
                                     class="btn btn-secondary btn-sm">Editar</a>
                             </td>
                         </tr>
