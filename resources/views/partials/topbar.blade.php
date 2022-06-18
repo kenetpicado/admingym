@@ -30,7 +30,7 @@
 
 
                     @if (count($reportes) > 0)
-                        <div class="" style="height:350px; overflow-y: scroll;">
+                        <div class="" style="max-height:350px; overflow-y: scroll;">
                             @foreach ($reportes as $reporte)
                                 <div class="dropdown-item d-flex align-items-center ">
                                     <div class="mr-2">
