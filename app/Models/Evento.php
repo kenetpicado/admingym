@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Casts\Ucfirst;
 
 class Evento extends Model
 {
@@ -19,18 +20,12 @@ class Evento extends Model
     
     public $timestamps = false;
 
+    protected $casts = [
+        'nota' => Ucfirst::class,
+    ];
+
     public function entrenador(){
         return $this->belongsTo('App\Models\Entrenador');
-    }
-
-    public function setNotaAttribute($value)
-    {
-        $this->attributes['nota'] = trim(strtoupper($value));
-    }
-
-    public function getNotaAttribute($value)
-    {
-        return ucwords(strtolower($value));
     }
 
     public function getCreatedAtAttribute($value)

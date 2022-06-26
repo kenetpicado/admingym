@@ -8,11 +8,6 @@ use App\Http\Requests\UpdateClienteRequest;
 
 class ClienteController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    } 
-
     public function index()
     {
         $clientes = Cliente::withCount('planes')->get();
@@ -27,12 +22,11 @@ class ClienteController extends Controller
     public function store(StoreClienteRequest $request)
     {
         $cliente = Cliente::create($request->all());
-        return redirect()->route('planes.create', $cliente->id)->with('info', config('app.add'));
+        return redirect()->route('planes.create', $cliente->id);
     }
 
-    public function show($cliente_id)
+    public function show(Cliente $cliente)
     {
-        $cliente = Cliente::find($cliente_id, ['id', 'nombre']);
         return view('cliente.show', compact('cliente'));
     }
 

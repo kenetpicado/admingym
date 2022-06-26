@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'name' => 'Alonso Gym',
-    'add' => 'Agregado con éxito',
-    'update' => 'Actualizado con éxito',
-    'deleted' => 'Registro eliminado',
+    'name' => env('APP_NAME', 'Alonso Gym'),
+    'add' => 'Guardado',
+    'update' => 'Actualizado',
+    'deleted' => 'Eliminado',
     'noprice' => 'No hay precio para el plan seleccionado',
 
     /*

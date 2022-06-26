@@ -9,7 +9,7 @@ class EntrenadorController extends Controller
 {
     public function index()
     {
-        $entrenadors = Entrenador::all(['id', 'nombre', 'telefono', 'horario']);
+        $entrenadors = Entrenador::all();
         return view('entrenador.index', compact('entrenadors'));
     }
 
@@ -21,7 +21,7 @@ class EntrenadorController extends Controller
 
     public function show($entrenador_id)
     {
-        $entrenador = Entrenador::with('eventos')->find($entrenador_id, ['id', 'nombre']);
+        $entrenador = Entrenador::with('eventos')->find($entrenador_id);
         return view('entrenador.show', compact('entrenador'));
     }
 
@@ -34,10 +34,5 @@ class EntrenadorController extends Controller
     {
         $entrenador->update($request->all());
         return redirect()->route('entrenador.index')->with('info', config('app.update'));
-    }
-
-    public function destroy(Entrenador $entrenador)
-    {
-        //
     }
 }

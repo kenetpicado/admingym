@@ -16,22 +16,10 @@ class ReporteController extends Controller
         return view('reporte.index', compact('reportes', 'inspected'));
     }
 
-    //Eliminar todos
-    public function delete()
-    {
-        Reporte::destroy(Reporte::all());
-        return redirect()->route('index');
-    }
-
+    //Eliminar una notificacion
     public function destroy(Reporte $reporte)
     {
         $reporte->delete();
-    }
-
-    //Eliminar una notificacion
-    public function deleteThis(Reporte $reporte)
-    {
-        $reporte->delete();
-        return back()->with('error', config('app.deleted'));
+        return back()->with('info', config('app.deleted'));
     }
 }

@@ -13,6 +13,8 @@
             </ol>
         </nav>
 
+        <x-info></x-info>
+
         <div class="card mb-4">
             <x-header-1 modelo="Pesos"></x-header-1>
 

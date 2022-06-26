@@ -9,7 +9,6 @@ use App\Models\Entrenador;
 
 class EventoController extends Controller
 {
-
     public function store(StoreEventoRequest $request)
     {
         if ($request->tipo == 'PAGO') {

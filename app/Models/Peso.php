@@ -10,7 +10,7 @@ class Peso extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['peso', 'cliente_id', 'created_at'];
     public $timestamps = false;
 
     public function cliente(){

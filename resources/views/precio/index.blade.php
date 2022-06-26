@@ -11,8 +11,8 @@
                 <li class="breadcrumb-item active" aria-current="page">Precios</li>
             </ol>
         </nav>
+        <x-info></x-info>
 
-        <!-- DataTales -->
         <div class="card mb-4">
             <x-header-0 text='Precios'></x-header-0>
 

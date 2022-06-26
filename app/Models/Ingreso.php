@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Casts\Ucfirst;
+use App\Casts\Ucwords;
 
 class Ingreso extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    
     protected $fillable = [
         'monto',
         'nombre',
@@ -17,23 +20,8 @@ class Ingreso extends Model
         'created_at'
     ];
 
-    public function getNombreAttribute($value)
-    {
-        return ucwords(strtolower($value));
-    }
-
-    public function getServicioAttribute($value)
-    {
-        return ucfirst(strtolower($value));
-    }
-
-    public function setServicioAttribute($value)
-    {
-        $this->attributes['servicio'] = trim(ucfirst(strtolower($value)));
-    }
-
-    public function setNombreAttribute($value)
-    {
-        $this->attributes['nombre'] = trim(ucwords(strtolower($value)));
-    } 
+    protected $casts = [
+        'nombre' => Ucwords::class,
+        'servicio' => Ucfirst::class,
+    ];
 }

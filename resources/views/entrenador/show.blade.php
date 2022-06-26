@@ -12,13 +12,14 @@
                 <li class="breadcrumb-item active" aria-current="page">Eventos</li>
             </ol>
         </nav>
+        <x-info></x-info>
 
         <div class="card mb-4">
             <x-header-1 modelo="Eventos"></x-header-1>
 
             {{-- FORM STORE --}}
-            <x-modal-add ruta='evento.store' title='Evento'>
-                
+            <x-modal-add ruta='eventos.store' title='Evento'>
+
                 <div class="form-group">
                     <label>Seleccione un evento</label>
                     <select name="tipo" class="form-control" required>

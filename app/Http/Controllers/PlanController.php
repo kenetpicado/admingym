@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Mail;
 
 class PlanController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $inspected = Plan::deleteExpired();
@@ -31,7 +26,7 @@ class PlanController extends Controller
 
     public function create($cliente_id)
     {
-        $cliente = Cliente::getData($cliente_id);
+        $cliente = Cliente::find($cliente_id);
         return view('plan.create', compact('cliente'));
     }
 
@@ -42,7 +37,7 @@ class PlanController extends Controller
         $precio = Precio::getPrice($request->servicio, $request->plan);
 
         if ($precio == 'none')
-            return redirect()->route('clientes.index')->with('error', config('app.noprice'));
+            return redirect()->route('clientes.index')->with('info', config('app.noprice'));
 
         //Aplicar descuento si hay beca
         if ($request->beca > 0) {
@@ -50,7 +45,6 @@ class PlanController extends Controller
         }
 
         $request->merge([
-            'created_at' => $request->created_at,
             'fecha_fin' => $this->get_end($request->plan, $request->created_at),
             'monto' => $precio,
         ]);

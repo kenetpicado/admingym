@@ -34,10 +34,13 @@
                             @foreach ($reportes as $reporte)
                                 <div class="dropdown-item d-flex align-items-center ">
                                     <div class="mr-2">
-                                        <a href="{{ route('reporte.destroy', $reporte->id) }}"
-                                            class="btn btn-sm btn-circle bg-danger">
-                                            <i class="fas fa-trash text-white"></i>
-                                        </a>
+                                        <form action="{{ route('reportes.destroy', $reporte->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash text-white"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">

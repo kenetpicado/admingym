@@ -12,6 +12,8 @@
             </ol>
         </nav>
 
+        <x-info></x-info>
+
         <div class="card mb-4">
             <x-header-0 text='Planes'></x-header-0>
 

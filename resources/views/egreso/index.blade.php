@@ -12,6 +12,7 @@
                 <li class="breadcrumb-item active" aria-current="page">Egresos</li>
             </ol>
         </nav>
+        <x-info></x-info>
 
         <div class="row">
             <!-- Earnings (Annual) Card Example -->

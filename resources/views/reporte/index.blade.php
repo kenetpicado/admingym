@@ -12,6 +12,8 @@
             </ol>
         </nav>
 
+        <x-info></x-info>
+
         <div class="card mb-4">
             <x-header-0 text='Reportes'></x-header-0>
 
@@ -35,8 +37,11 @@
                                     class="btn btn-primary btn-sm">Pagar</a>
                             </td>
                             <td>
-                                <a href="{{ route('reporte.destroy', $reporte->id) }}"
-                                    class="btn btn-secondary btn-sm">Eliminar</a>
+                                <form action="{{ route('reportes.destroy', $reporte->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-secondary btn-sm">Eliminar</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

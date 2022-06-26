@@ -13,6 +13,8 @@
             </ol>
         </nav>
 
+        <x-info></x-info>
+
         <!-- FORM STORE -->
         <x-create-form ruta="planes.store" title='Pagar'>
 

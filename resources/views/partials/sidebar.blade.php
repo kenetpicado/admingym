@@ -1,12 +1,9 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('index')}}">
-        <div class="sidebar-brand-icon">
-            <i class="fas fa-dumbbell"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">{{ config('app.name') }}</div>
-    </a>
+    <div class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('index')}}">
+        <div class="text-center small">{{ config('app.name') }}</div>
+    </div>
     
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
@@ -15,7 +12,7 @@
     <li class="nav-item">
         <a class="nav-link" href="{{route('index')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>Inicio</span></a>
     </li>
 
     <!-- Divider -->

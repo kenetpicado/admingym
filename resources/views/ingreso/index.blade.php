@@ -12,6 +12,8 @@
             </ol>
         </nav>
 
+        <x-info></x-info>
+
         <div class="row">
             <!-- Earnings (Annual) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">

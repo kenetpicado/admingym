@@ -14,39 +14,32 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
-//REPORTES
-Route::delete('reporte',  [ReporteController::class, 'delete'])->name('reporte.delete');
-Route::get('reporte/{reporte}',  [ReporteController::class, 'deleteThis'])->name('reporte.destroy');
-Route::get('reportes',  [ReporteController::class, 'index'])->name('reportes.index');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
+    Route::resource('reportes',  ReporteController::class)->only(['index', 'destroy']);
+    Route::resource('clientes', ClienteController::class)->except(['destroy']);
+    Route::resource('entrenador', EntrenadorController::class)->except(['create', 'destroy']);
+    Route::resource('precios', PrecioController::class)->only(['index', 'edit', 'update']);
+    Route::resource('eventos', EventoController::class)->only(['store']);
+    Route::resource('ingresos', IngresoController::class)->except(['create', 'show', 'destroy']);
+    Route::resource('egresos', EgresoController::class)->except(['create', 'show', 'destroy']);
+    Route::resource('/', HomeController::class);
+    Route::get('planes/{cliente}/create', [PlanController::class, 'create'])->name('planes.create');
+    Route::resource('planes', PlanController::class)->except(['create']);
 
-//PLANES
-Route::get('planes/{cliente}/create', [PlanController::class, 'create'])->name('planes.create');
+    //INGRESOS
+    Route::view('rango/ingresos', 'ingreso.rango')->name('ingresos.rango');
+    Route::view('categorias/ingresos', 'ingreso.categorias')->name('ingresos.categorias');
 
-//INGRESOS
-Route::get('rango/ingresos', [IngresoController::class, 'rango'])->name('ingresos.rango');
-Route::post('rango/ingresos', [IngresoController::class, 'get_rango'])->name('ingresos.getrango');
-Route::get('categorias/ingresos', [IngresoController::class, 'categorias'])->name('ingresos.categorias');
-Route::post('categorias/ingresos', [IngresoController::class, 'get_categorias'])->name('ingresos.getcategorias');
+    Route::post('rango/ingresos', [IngresoController::class, 'get_rango'])->name('ingresos.getrango');
+    Route::post('categorias/ingresos', [IngresoController::class, 'get_categorias'])->name('ingresos.getcategorias');
 
-//EGRESOS
-Route::get('rango/egresos', [EgresoController::class, 'rango'])->name('egresos.rango');
-Route::post('rango/egresos', [EgresoController::class, 'get_rango'])->name('egresos.getrango');
-Route::get('categorias/egresos', [EgresoController::class, 'categorias'])->name('egresos.categorias');
-Route::post('categorias/egresos', [EgresoController::class, 'get_categorias'])->name('egresos.getcategorias');
+    //EGRESOS
+    Route::view('rango/egresos', 'egreso.rango')->name('egresos.rango');
+    Route::view('categorias/egresos', 'egreso.categorias')->name('egresos.categorias');
 
-//Route::post('egreso/consulta', [EgresoController::class, 'consulta'])->name('egreso.consulta');
+    Route::post('rango/egresos', [EgresoController::class, 'get_rango'])->name('egresos.getrango');
+    Route::post('categorias/egresos', [EgresoController::class, 'get_categorias'])->name('egresos.getcategorias');
+});
 
-//PESOS
-Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
-
-Route::resource('clientes', ClienteController::class);
-Route::resource('entrenador', EntrenadorController::class);
-Route::resource('evento', EventoController::class);
-Route::resource('ingresos', IngresoController::class)->except(['show']);
-Route::resource('egresos', EgresoController::class);
-Route::resource('precios', PrecioController::class);
-Route::resource('/', HomeController::class);
-
-Route::resource('planes', PlanController::class)->except(['create']);
-
-Auth::routes();
+Auth::routes(['register' => false]);

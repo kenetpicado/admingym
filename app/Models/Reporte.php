@@ -10,7 +10,7 @@ class Reporte extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['mensaje', 'cliente_id', 'created_at'];
     public $timestamps = false;
 
     public static function orderDesc()

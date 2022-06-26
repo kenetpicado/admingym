@@ -8,7 +8,6 @@ use Carbon\Carbon;
 
 class PesoController extends Controller
 {
-
     public function store(StorePesoRequest $request)
     {
         $request->merge([

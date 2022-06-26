@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cliente;
 use App\Models\Reporte;
-use Carbon\Carbon;
+use App\Casts\Ucfirst;
 
 class Plan extends Model
 {
@@ -29,7 +29,7 @@ class Plan extends Model
     //Borrar expirados
     public static function deleteExpired()
     {
-        $inspected = Registro::where('created_at', Carbon::now()->format('Y-m-d'))->latest('id')->first();
+        $inspected = Registro::where('created_at', now())->latest('id')->first();
 
         if ($inspected == null) {
 
@@ -38,23 +38,23 @@ class Plan extends Model
 
             foreach ($planes as $plan) {
 
-                if (date('Y-m-d') >= $plan->fecha_fin) {
+                if (now() >= $plan->fecha_fin) {
                     Reporte::create([
-                        'mensaje' =>  $plan->plan,
-                        'cliente_id' =>  $plan->cliente_id,
-                        'created_at' => Carbon::now(),
+                        'mensaje' => $plan->plan,
+                        'cliente_id' => $plan->cliente_id,
+                        'created_at' => now(),
                     ]);
                     $plan->delete();
                     $status++;
                 }
             }
             return Registro::create([
-                'created_at' => Carbon::now()->format('Y-m-d'),
+                'created_at' => now(),
                 'status' => $status,
             ]);
-        } else {
-            return $inspected;
         }
+
+        return $inspected;
     }
 
     public function cliente()
@@ -62,13 +62,7 @@ class Plan extends Model
         return $this->belongsTo(Cliente::class);
     }
 
-    public function setNotaAttribute($value)
-    {
-        $this->attributes['nota'] = trim(ucfirst(strtolower($value)));
-    }
-
-    public function getNotaAttribute($value)
-    {
-        return trim(ucfirst(strtolower($value)));
-    }
+    protected $casts = [
+        'nota' => Ucfirst::class,
+    ];
 }

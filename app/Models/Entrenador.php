@@ -4,27 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Casts\Ucfirst;
+use App\Casts\Ucwords;
 
 class Entrenador extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $fillable = ['nombre', 'telefono', 'horario'];
     public $timestamps = false;
 
-    public function setNombreAttribute($value)
-    {
-        $this->attributes['nombre'] = trim(strtoupper($value));
-    }
-
-    public function getNombreAttribute($value)
-    {
-        return ucwords(strtolower($value));
-    }
-
-    public function setHorarioAttribute($value)
-    {
-        $this->attributes['horario'] = trim(strtoupper($value));
-    }
+    protected $casts = [
+        'nombre' => Ucwords::class,
+        'horario' => Ucfirst::class,
+    ];
 
     public function eventos()
     {
