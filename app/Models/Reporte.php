@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\DB;
 
 class Reporte extends Model
 {
@@ -13,9 +14,19 @@ class Reporte extends Model
     protected $fillable = ['mensaje', 'cliente_id', 'created_at'];
     public $timestamps = false;
 
-    public static function orderDesc()
+    public static function getReportes()
     {
-        return Reporte::with('cliente:id,nombre')->orderBy('id', 'desc')->get();
+        return DB::table('reportes')
+            ->select([
+                'reportes.id',
+                'mensaje',
+                'created_at',
+                'clientes.id as cliente_id',
+                'clientes.nombre as cliente_nombre',
+            ])
+            ->join('clientes', 'reportes.cliente_id', '=', 'clientes.id')
+            ->latest('reportes.id')
+            ->get();
     }
 
     public static function deleteByUser($cliente_id)

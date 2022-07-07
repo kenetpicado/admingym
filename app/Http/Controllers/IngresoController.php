@@ -6,12 +6,13 @@ use App\Http\Requests\ConsultaRequest;
 use App\Http\Requests\StoreIngresoRequest;
 use App\Models\Ingreso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IngresoController extends Controller
 {
     public function index()
     {
-        $ingresos = Ingreso::latest('id')->get();
+        $ingresos = DB::table('ingresos')->latest('id')->get();
 
         $ver = ([
             'total' => $ingresos->sum('monto'),
@@ -41,7 +42,10 @@ class IngresoController extends Controller
 
     public function get_rango(ConsultaRequest $request)
     {
-        $ingresos = Ingreso::whereBetween('created_at', [$request->inicio, $request->fin])->get();
+        $ingresos = DB::table('ingresos')
+            ->whereBetween('created_at', [$request->inicio, $request->fin])
+            ->oldest('created_at')
+            ->get();
 
         $total = $ingresos->sum('monto');
 

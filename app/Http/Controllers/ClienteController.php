@@ -10,7 +10,7 @@ class ClienteController extends Controller
 {
     public function index()
     {
-        $clientes = Cliente::withCount('planes')->get();
+        $clientes = Cliente::getClientes();
         return view('cliente.index', compact('clientes'));
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Cliente;
 use App\Models\Reporte;
 use App\Casts\Ucfirst;
+use Illuminate\Support\Facades\DB;
 
 class Plan extends Model
 {
@@ -29,32 +30,42 @@ class Plan extends Model
     //Borrar expirados
     public static function deleteExpired()
     {
-        $inspected = Registro::where('created_at', now())->latest('id')->first();
+        $planes = Plan::where('fecha_fin', '<=', now()->format('Y-m-d'))->get();
 
-        if ($inspected == null) {
+        $registro = Registro::create([
+            'created_at' => now()->format('Y-m-d'),
+            'status' => $planes->count(),
+        ]);
 
-            $planes = Plan::all(['id', 'fecha_fin', 'plan', 'cliente_id']);
-            $status = 0;
-
-            foreach ($planes as $plan) {
-
-                if (now() >= $plan->fecha_fin) {
-                    Reporte::create([
-                        'mensaje' => $plan->plan,
-                        'cliente_id' => $plan->cliente_id,
-                        'created_at' => now(),
-                    ]);
-                    $plan->delete();
-                    $status++;
-                }
-            }
-            return Registro::create([
-                'created_at' => now(),
-                'status' => $status,
+        foreach ($planes as $plan) {
+            Reporte::create([
+                'mensaje' => $plan->plan,
+                'cliente_id' => $plan->cliente_id,
+                'created_at' => now()->format('Y-m-d'),
             ]);
+            $plan->delete();
         }
 
-        return $inspected;
+        return $registro;
+    }
+
+    public static function getPlanes()
+    {
+        return DB::table('planes')
+            ->select([
+                'planes.id',
+                'clientes.id as cliente_id',
+                'clientes.nombre as cliente_nombre',
+                'monto',
+                'beca',
+                'created_at',
+                'fecha_fin',
+                'nota',
+                'servicio'
+            ])
+            ->join('clientes', 'planes.cliente_id', '=', 'clientes.id')
+            ->orderBy('fecha_fin')
+            ->get();
     }
 
     public function cliente()

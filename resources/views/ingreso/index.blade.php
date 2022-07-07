@@ -82,8 +82,8 @@
                 <tbody>
                     @foreach ($ingresos as $ingreso)
                         <tr>
-                            <td>{{ $ingreso->nombre }}</td>
-                            <td>{{ $ingreso->servicio }}</td>
+                            <td>{{ ucwords(strtolower($ingreso->nombre)) }}</td>
+                            <td>{{ ucwords(strtolower($ingreso->servicio)) }}</td>
                             <td>{{ $ingreso->monto }}</td>
                             <td>
                                 @if ($ingreso->beca > 0)

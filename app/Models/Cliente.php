@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Plan;
 use App\Models\Reporte;
 use App\Models\Peso;
+use Illuminate\Support\Facades\DB;
 
 class Cliente extends Model
 {
@@ -20,6 +21,18 @@ class Cliente extends Model
         'nombre' => Ucwords::class,
         'email' => Ucfirst::class,
     ];
+
+    public static function getClientes()
+    {
+        return DB::table('clientes')
+            ->select([
+                'id',
+                'nombre',
+                'sexo',
+                DB::raw('(select count(*) from `planes` where `clientes`.`id` = `planes`.`cliente_id`) as `planes_count`')
+            ])
+            ->get();
+    }
 
     public function planes()
     {

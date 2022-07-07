@@ -53,7 +53,7 @@
                                 @else
                                     <i class="fas fa-exclamation-circle text-secondary"></i>
                                 @endif
-                                {{ $cliente->nombre }}
+                                {{ ucwords(strtolower($cliente->nombre)) }}
                             </td>
                             <td>{{ $cliente->sexo }}</td>
                             <td>

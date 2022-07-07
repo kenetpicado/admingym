@@ -9,9 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
     <link rel="icon" type="image/x-icon" href="{{ asset('img/logo-ag.png') }}">
 
-    <title>{{ config('app.name') }} - @yield('title')</title>
+    <title>{{ config('app.name') }} | @yield('title')</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">

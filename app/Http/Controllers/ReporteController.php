@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use App\Models\Registro;
 use App\Models\Reporte;
 
 
@@ -11,9 +12,9 @@ class ReporteController extends Controller
     //Mostrar todas las notificaciones
     public function index()
     {
-        $inspected = Plan::deleteExpired();
-        $reportes = Reporte::orderDesc();
-        return view('reporte.index', compact('reportes', 'inspected'));
+        $registro = Registro::getToday();
+        $reportes = Reporte::getReportes();
+        return view('reporte.index', compact('reportes', 'registro'));
     }
 
     //Eliminar una notificacion

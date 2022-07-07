@@ -29,11 +29,11 @@
                 <tbody>
                     @foreach ($reportes as $reporte)
                         <tr>
-                            <td>{{ $reporte->cliente->nombre }}</td>
+                            <td>{{ ucwords(strtolower($reporte->cliente_nombre)) }}</td>
                             <td>{{ $reporte->mensaje }}</td>
-                            <td>{{ $reporte->created_at }}</td>
+                            <td>{{ date('d F Y', strtotime($reporte->created_at)) }}</td>
                             <td>
-                                <a href="{{ route('planes.create', $reporte->cliente->id) }}"
+                                <a href="{{ route('planes.create', $reporte->cliente_id) }}"
                                     class="btn btn-primary btn-sm">Pagar</a>
                             </td>
                             <td>

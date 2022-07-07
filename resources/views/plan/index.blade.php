@@ -30,8 +30,8 @@
                     @foreach ($planes as $plan)
                         <tr>
                             <td>
-                                {{ substr(str_repeat(0, 4) . $plan->cliente->id, -4) }} -
-                                {{ $plan->cliente->nombre }}
+                                {{ substr(str_repeat(0, 4) . $plan->cliente_id, -4) }} -
+                                {{ ucwords(strtolower($plan->cliente_nombre)) }}
                             </td>
                             <td>
                                 <a href="{{ route('planes.edit', $plan->id) }}">
@@ -54,7 +54,7 @@
                                     {{ date('d-F-y', strtotime($plan->fecha_fin)) }}
                                 </div>
                             </td>
-                            <td>{{ $plan->nota }}</td>
+                            <td>{{ ucfirst(strtolower($plan->nota)) }}</td>
                         </tr>
                     @endforeach
                 </tbody>

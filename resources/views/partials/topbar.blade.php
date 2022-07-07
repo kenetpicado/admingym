@@ -1,13 +1,5 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
 
-    <!-- Sidebar Toggle (Topbar) -->
-    <form class="form-inline">
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-        </button>
-    </form>
-
-    <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
         @if (isset($reportes))
@@ -19,7 +11,7 @@
 
                     @if (count($reportes) > 0)
                         <span class="badge badge-danger badge-counter">
-                            +{{ $inspected->status }}
+                            +{{ $registro->status ?? ''}}
                         </span>
                     @endif
                 </a>
@@ -48,7 +40,7 @@
                                         </div>
                                         <a href="{{ route('planes.create', $reporte->cliente_id) }}"
                                             class="text-gray-800">
-                                            {{ $reporte->cliente->nombre }}
+                                            {{ ucwords(strtolower($reporte->cliente_nombre)) }}
                                             <small>({{ $reporte->mensaje }})</small>
 
                                         </a>

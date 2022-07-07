@@ -9,6 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/x-icon" href="{{ asset('img/logo-ag.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} - Login</title>
@@ -16,10 +18,7 @@
 </head>
 
 <body class="bg-primary">
-
-    <div class="container ">
-
-        <!-- Outer Row -->
+    <div class="container">
         <div class="row justify-content-center">
 
             <div class="col-lg-6">
@@ -28,33 +27,16 @@
                     <div class="card-body p-0">
                         <div class="p-5">
                             <div class="text-center mb-4">
-                                <img src="{{ asset('img/logo-ag.png') }}" alt="" srcset="" width="20%">
+                                <img src="{{ asset('img/logo-ag.png') }}" alt="" srcset="" width="15%">
                             </div>
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">{{ config('app.name') }}</h1>
                             </div>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-                                <div class="form-group">
-                                    <label for="">Nombre de usuario</label>
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                        autocomplete="off" name="username" value="{{ old('username') }}">
-                                    @error('username')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Contraseña</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        autocomplete="off" name="password" value="{{ old('password') }}">
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                                <x-input-form label="username" text="Usuario"></x-input-form>
+                                <x-input-form label="password" text="Contraseña" type="password"></x-input-form>
+
                                 <div class="form-group">
                                     <div class="form-check ml-2">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"

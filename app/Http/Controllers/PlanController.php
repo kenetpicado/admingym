@@ -11,17 +11,21 @@ use App\Models\Precio;
 use App\Models\Registro;
 use App\Models\Reporte;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class PlanController extends Controller
 {
     public function index()
     {
-        $inspected = Plan::deleteExpired();
-        $reportes = Reporte::orderDesc();
-        $planes = Plan::orderBy('fecha_fin')->get();
+        $registro = Registro::getToday();
 
-        return view('plan.index', compact('planes', 'reportes', 'inspected'));
+        if ($registro == null)
+            $registro = Plan::deleteExpired();
+
+        $reportes = Reporte::getReportes();
+        $planes = Plan::getPlanes();
+        return view('plan.index', compact('planes', 'reportes', 'registro'));
     }
 
     public function create($cliente_id)
@@ -40,9 +44,8 @@ class PlanController extends Controller
             return redirect()->route('clientes.index')->with('info', config('app.noprice'));
 
         //Aplicar descuento si hay beca
-        if ($request->beca > 0) {
+        if ($request->beca > 0)
             $precio = $precio - $request->beca;
-        }
 
         $request->merge([
             'fecha_fin' => $this->get_end($request->plan, $request->created_at),
