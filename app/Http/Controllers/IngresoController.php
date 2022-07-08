@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ConsultaRequest;
-use App\Http\Requests\StoreIngresoRequest;
 use App\Models\Ingreso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ConsultaRequest;
+use App\Http\Requests\StoreIngresoRequest;
 
 class IngresoController extends Controller
 {
+    //Ver ingresos
     public function index()
     {
         $ingresos = DB::table('ingresos')->latest('id')->get();
@@ -23,30 +24,30 @@ class IngresoController extends Controller
         return view('ingreso.index', compact('ver', 'ingresos'));
     }
 
+    //Guardar ingreso
     public function store(StoreIngresoRequest $request)
     {
         Ingreso::create($request->all());
         return redirect()->route('ingresos.index')->with('info', config('app.add'));
     }
 
+    //Editar ingreso
     public function edit(Ingreso $ingreso)
     {
         return view('ingreso.edit', compact('ingreso'));
     }
 
+    //Actualizar ingreso
     public function update(StoreIngresoRequest $request, Ingreso $ingreso)
     {
         $ingreso->update($request->all());
         return redirect()->route('ingresos.index')->with('info', config('app.update'));
     }
 
+    //Obtener ingresos de un rango de fechas
     public function get_rango(ConsultaRequest $request)
     {
-        $ingresos = DB::table('ingresos')
-            ->whereBetween('created_at', [$request->inicio, $request->fin])
-            ->oldest('created_at')
-            ->get();
-
+        $ingresos = Ingreso::getBetween($request);
         $total = $ingresos->sum('monto');
 
         return redirect()->route('ingresos.rango')
@@ -54,9 +55,10 @@ class IngresoController extends Controller
             ->with('total', $total);
     }
 
+    //Ver ingresos segun caterogia
     public function get_categorias(Request $request)
     {
-        $ingresos = Ingreso::where('nombre', 'like', '%' . $request->categoria . '%')->get();
+        $ingresos = Ingreso::getCategoria($request);
         $total = $ingresos->sum('monto');
 
         return redirect()->route('ingresos.categorias')

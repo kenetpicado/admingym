@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreEgresoRequest;
 use App\Models\Egreso;
-use App\Http\Requests\ConsultaRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ConsultaRequest;
+use App\Http\Requests\StoreEgresoRequest;
 
 class EgresoController extends Controller
 {

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plan;
 use App\Models\Registro;
 use App\Models\Reporte;
-
 
 class ReporteController extends Controller
 {

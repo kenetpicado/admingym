@@ -25,7 +25,7 @@ class StoreEgresoRequest extends FormRequest
     {
         return [
             'tipo' => 'required|max:50',
-            'nota' => 'required|max:20',
+            'nota' => 'required|max:50',
             'monto' => 'required|numeric|gt:0',
             'created_at' => 'required|date',
             

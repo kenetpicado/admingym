@@ -31,6 +31,6 @@ class Ucfirst implements CastsAttributes
      */
     public function set($model, string $key, $value, array $attributes)
     {
-        return trim(strtolower($value));
+        return ucfirst(trim(strtolower($value)));
     }
 }

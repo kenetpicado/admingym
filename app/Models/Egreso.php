@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Casts\Ucwords;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Casts\Ucfirst;
+use App\Casts\Ucwords;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Egreso extends Model
 {
@@ -18,4 +19,9 @@ class Egreso extends Model
         'tipo' => Ucwords::class,
         'nota' => Ucfirst::class,
     ];
+
+    public static function getMensual()
+    {
+        return DB::table('egresos')->where('created_at', '>=', date('Y-m-' . '01'))->get();
+    }
 }

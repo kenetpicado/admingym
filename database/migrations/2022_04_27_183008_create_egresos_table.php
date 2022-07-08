@@ -16,7 +16,7 @@ class CreateEgresosTable extends Migration
         Schema::create('egresos', function (Blueprint $table) {
             $table->id();
             $table->string('tipo', 50);
-            $table->string('nota', 20)->nullable();
+            $table->string('nota', 50)->nullable();
             $table->float('monto');
             $table->date('created_at')->default(date('Y-m-d'));
         });

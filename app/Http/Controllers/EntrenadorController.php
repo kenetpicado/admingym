@@ -7,29 +7,34 @@ use App\Http\Requests\StoreEntrenadorRequest;
 
 class EntrenadorController extends Controller
 {
+    //Ver entrenadores
     public function index()
     {
         $entrenadors = Entrenador::all();
         return view('entrenador.index', compact('entrenadors'));
     }
 
+    //Guardar un entrenador
     public function store(StoreEntrenadorRequest $request)
     {
         Entrenador::create($request->all());
         return redirect()->route('entrenador.index')->with('info', config('app.add'));
     }
 
-    public function show($entrenador_id)
+    //Ver eventos de un entrenador
+    public function show(Entrenador $entrenador)
     {
-        $entrenador = Entrenador::with('eventos')->find($entrenador_id);
+        $entrenador->load('eventos');
         return view('entrenador.show', compact('entrenador'));
     }
 
+    //Editar un entrenador
     public function edit(Entrenador $entrenador)
     {
         return view('entrenador.edit', compact('entrenador'));
     }
 
+    //Actualizar entrenador
     public function update(StoreEntrenadorRequest $request, Entrenador $entrenador)
     {
         $entrenador->update($request->all());

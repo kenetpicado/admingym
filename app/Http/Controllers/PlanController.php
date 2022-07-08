@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plan;
-use App\Models\Cliente;
-use App\Http\Requests\StoreCajaRequest;
-use App\Mail\Pago;
-use App\Models\Ingreso;
-use App\Models\Precio;
-use App\Models\Registro;
-use App\Models\Reporte;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Plan;
+use App\Models\Precio;
+use App\Models\Cliente;
+use App\Models\Ingreso;
+use App\Models\Reporte;
+use App\Models\Registro;
+use App\Http\Requests\StoreCajaRequest;
 
 class PlanController extends Controller
 {
@@ -28,12 +25,14 @@ class PlanController extends Controller
         return view('plan.index', compact('planes', 'reportes', 'registro'));
     }
 
+    //Pagar plan de cliente
     public function create($cliente_id)
     {
         $cliente = Cliente::find($cliente_id);
         return view('plan.create', compact('cliente'));
     }
 
+    //Guardar plan
     public function store(StoreCajaRequest $request)
     {
         Reporte::deleteByUser($request->cliente_id);
@@ -52,12 +51,8 @@ class PlanController extends Controller
             'monto' => $precio,
         ]);
 
-        $plan = Plan::create($request->all());
+        Plan::create($request->all());
         Ingreso::create($request->all());
-
-        // if ($request->email != "") {
-        //     Mail::to($request->email)->send(new Pago($plan));
-        // }
 
         return redirect()->route('clientes.index')->with('info', config('app.add'));
     }

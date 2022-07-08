@@ -18,6 +18,6 @@ class Precio extends Model
             ->where('plan', $plan)
             ->first();
 
-        return $precio = $precio == null ? 'none' : $precio->monto;
+        return $precio->monto ?? 'none';
     }
 }

@@ -21,6 +21,7 @@
             {{-- FORM STORE --}}
             <x-modal-add ruta='pesos.store' title='Peso'>
                 <x-input-form label='peso' text='Peso (lb)'></x-input-form>
+                <input type="hidden" name="created_at" value="{{ date('Y-m-d') }}">
                 <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
             </x-modal-add>
 

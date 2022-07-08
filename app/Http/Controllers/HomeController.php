@@ -2,91 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plan;
-use App\Models\Cliente;
 use App\Models\Ingreso;
-use App\Models\Reporte;
 use App\Models\Egreso;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        //OBTENER DATOS
-        $clientes = Cliente::all();
-        $cajas = Plan::all();
-        $m = $f = $activos = $porcentaje = $personas = 0;
-        $pesas = $spinning = $zumba = $taek = 0;
- 
-        if ($clientes->count() > 0) {
-            $m = HomeController::get_percent($clientes, 'sexo', 'M');
-            $f = HomeController::get_percent($clientes, 'sexo', 'F');
-        }
+        //Obtener datos
+        $clientes = DB::table('clientes')->get(['id', 'sexo']);
+        $planes = DB::table('planes')->get();
 
-        if ($cajas->count() > 0) {
-            $pesas = HomeController::get_percent($cajas, 'servicio', 'PESAS');
-            $spinning = HomeController::get_percent($cajas, 'servicio', 'SPINNING');
-            $zumba = HomeController::get_percent($cajas, 'servicio', 'ZUMBA');
-            $taek = HomeController::get_percent($cajas, 'servicio', 'ZUMBA+PESAS');
-            
-            $activos = round(Cliente::has('planes')->get(['id'])->count() * 100 / $clientes->count(), 1);
-            $porcentaje = HomeController::percent_becas();
-            $personas = HomeController::personas();
-        }
+        $ingresos = Ingreso::getMensual();
+        $egresos = Egreso::getMensual();
+
+        //Porcentaje de sexo
         $sexo = ([
-            'M' => $m,
-            'F' => $f
-        ]);
-        $servicios = ([
-            'PESAS' => $pesas,
-            'SPINNING' => $spinning,
-            'ZUMBA' => $zumba,
-            'ZUMBA+PESAS' => $taek,
+            'M' => $this->porcentaje($clientes, 'sexo', 'M'),
+            'F' => $this->porcentaje($clientes, 'sexo', 'F'),
         ]);
 
+        //Porcentaje de servicios
+        $servicios = ([
+            'PESAS' => $this->porcentaje($planes, 'servicio', 'PESAS'),
+            'ZUMBA' => $this->porcentaje($planes, 'servicio', 'ZUMBA'),
+            'ZUMBA+PESAS' => $this->porcentaje($planes, 'servicio', 'ZUMBA+PESAS'),
+        ]);
+
+        //Datos generales
         $ver = ([
             'clientes' => $clientes->count(),
-            'cajas' => $cajas->count(),
-            'activos' => $activos,
-            'ingresos' => HomeController::suma_mensual('monto'),
-            'egresos' => Egreso::where('created_at', '>=', date('Y-m-' . '01'))->get()->sum('monto'),
-            'becas' => HomeController::suma_mensual('beca'),
-            'porcentaje' => $porcentaje,
-            'personas' => $personas,
+            'planes' => $planes->count(),
+            'ingresos' => $ingresos->sum('monto'),
+            'egresos' => $egresos->sum('monto'),
+            'sum_becas' => $ingresos->sum('beca'),
+            'count_becas' => $ingresos->where('beca', '>', '0')->count(),
             'mes' => $this->current_month(),
+            'activos' => $this->getActivos($clientes->count(), $planes->count()),
         ]);
 
-        //$reportes = Reporte::all();
         return view('index', compact('sexo', 'servicios', 'ver'));
     }
 
-    //PERSONAS QUE TIENEN BECA
-    public function personas()
+    //Porcentaje de personas activas
+    public function getActivos($clientes, $planes)
     {
-        return Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->where('beca', '>', '0')->get('id')->count();
+        if ($clientes == 0 || $planes == 0)
+            return '0';
+
+        return round(($planes * 100) / $clientes, 1);
     }
 
-    //SUMA MENSUAL DE UN CAMPO
-    public function suma_mensual($field)
+    //Obtener porcentaje
+    public function porcentaje($modelo, $columna, $valor)
     {
-        return Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->get(['id', $field])->sum($field);
+        return $modelo->count() > 0
+            ? round($modelo->where($columna, $valor)->count() * 100 / $modelo->count(), 1)
+            : '0';
     }
 
-    public function percent_becas()
-    {
-        $monto = HomeController::suma_mensual('monto');
-        $beca = HomeController::suma_mensual('beca');
-
-        $total = $monto + $beca;
-        return round($beca * 100 / $total, 1);
-    }
-
-    //FUNCION PARA OBTENER EL PORCENTAJE
-    public function get_percent($objeto, $columna, $valor)
-    {
-        return round($objeto->where($columna, $valor)->count() * 100 / $objeto->count(), 1);
-    }
-
+    //Obtener el mes actual
     public static function current_month()
     {
         $meses = array("ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE");
