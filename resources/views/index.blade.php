@@ -5,6 +5,10 @@
 @section('contenido')
     <div class="container-fluid">
 
+        <div class="alert alert-danger" role="alert">
+            Cierre del sistema: Viernes 05 de Agosto 11:59
+        </div>
+
         <!-- Content Row -->
         <div class="row">
 
