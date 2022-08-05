@@ -25,6 +25,7 @@ class IngresoController extends Controller
         return view('ingreso.index', compact('ver', 'ingresos'));
     }
 
+    //Agregar un nuevo ingreso
     public function create()
     {
         return view('ingreso.create');
