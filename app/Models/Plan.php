@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Cliente;
 use App\Models\Reporte;
 use App\Casts\Ucfirst;
+use App\Casts\Ucwords;
+use App\Casts\Upper;
 use Illuminate\Support\Facades\DB;
 
 class Plan extends Model
@@ -28,6 +30,7 @@ class Plan extends Model
 
     protected $casts = [
         'nota' => Ucfirst::class,
+        'cliente_nombre' => Ucwords::class
     ];
 
     //Borrar expirados
