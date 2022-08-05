@@ -10,22 +10,27 @@ use App\Http\Controllers\IngresoController;
 use App\Http\Controllers\EgresoController;
 use App\Http\Controllers\PesoController;
 use App\Http\Controllers\PrecioController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('eventos-entrenador/{id}/crear', [EventoController::class, 'create'])->name('eventos.create');
+
+    Route::get('clientes-pesos/{id}/agregar', [PesoController::class, 'create'])->name('pesos.create');
     Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
     Route::resource('reportes',  ReporteController::class)->only(['index', 'destroy']);
     Route::resource('clientes', ClienteController::class)->except(['destroy']);
-    Route::resource('entrenador', EntrenadorController::class)->except(['create', 'destroy']);
+    Route::resource('entrenador', EntrenadorController::class)->except(['destroy']);
     Route::resource('precios', PrecioController::class)->only(['index', 'edit', 'update']);
     Route::resource('eventos', EventoController::class)->only(['store']);
-    Route::resource('ingresos', IngresoController::class)->except(['create', 'show', 'destroy']);
-    Route::resource('egresos', EgresoController::class)->except(['create', 'show', 'destroy']);
+    Route::resource('ingresos', IngresoController::class)->except(['show', 'destroy']);
+    Route::resource('egresos', EgresoController::class)->except(['show', 'destroy']);
     Route::resource('/', HomeController::class);
     Route::get('planes/{cliente}/create', [PlanController::class, 'create'])->name('planes.create');
-    Route::resource('planes', PlanController::class)->except(['create']);
+    Route::resource('planes', PlanController::class)->except(['create'])->parameters(['planes' => 'plan']);
+    Route::resource('user', UserController::class);
 
     //INGRESOS
     Route::view('rango/ingresos', 'ingreso.rango')->name('ingresos.rango');
@@ -40,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('rango/egresos', [EgresoController::class, 'get_rango'])->name('egresos.getrango');
     Route::post('categorias/egresos', [EgresoController::class, 'get_categorias'])->name('egresos.getcategorias');
+    Route::put('password/{id}', [UserController::class, 'password'])->name('password');
 });
 
 Auth::routes(['register' => false]);

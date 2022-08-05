@@ -23,7 +23,7 @@ class CreateReportesTable extends Migration
                 ->on('clientes')
                 ->onDelete('cascade');
 
-            $table->date('created_at')->default(date('Y-m-d'));
+            $table->date('created_at');
         });
     }
 

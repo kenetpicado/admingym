@@ -2,36 +2,22 @@
 
 @section('title', 'Editar ingreso')
 
+@section('bread')
+    <li class="breadcrumb-item"><a href="{{ route('ingresos.index') }}">Ingresos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar</li>
+@endsection
+
 @section('contenido')
-    <div class="container-fluid">
+    <div class="card">
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('index') }}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('ingresos.index') }}">Ingresos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Editar</li>
-            </ol>
-        </nav>
+        <x-header-0>Editar</x-header-0>
 
-        <div class="card mb-4">
-            <x-header-0 text='Editar'></x-header-0>
-
-            {{-- FORM EDIT --}}
-            <x-edit-form ruta='ingresos.update' :id="$ingreso->id">
-                <div class="row">
-                    <x-input-list label='nombre' text="Concepto" :val="$ingreso->nombre" class="col-lg-6"
-                        list="ingresos-categorias"></x-input-list>
-                </div>
-                <div class="row">
-                    <x-input-form label='servicio' text="Descripción" :val="$ingreso->servicio" class="col-lg-6"></x-input-form>
-                </div>
-                <div class="row">
-                    <x-input-form label='monto' :val="$ingreso->monto" class="col-lg-3"></x-input-form>
-                    <x-input-form label='created_at' type='date' text="Fecha" :val="$ingreso->created_at" class="col-lg-3">
-                    </x-input-form>
-                </div>
-            </x-edit-form>
+        <x-edit-form ruta='ingresos.update' :id="$ingreso->id">
+            <x-input-list name='concepto' list="ingresos-categorias" :val="$ingreso->concepto"></x-input-list>
+            <x-input name='descripcion' text="Descripción" :val="$ingreso->descripcion"></x-input>
+            <x-input name='monto' :val="$ingreso->monto"></x-input>
+            <x-input name='created_at' :val="$ingreso->created_at" type='date' label="Fecha" :val="date('Y-m-d')"></x-input>
             <x-cat-ingresos></x-cat-ingresos>
-        </div>
+        </x-edit-form>
     </div>
 @endsection

@@ -14,9 +14,9 @@ return [
     */
 
     'name' => env('APP_NAME', 'Alonso Gym'),
-    'add' => 'Guardado',
-    'update' => 'Actualizado',
-    'deleted' => 'Eliminado',
+    'add' => 'Registro guardado correctamente',
+    'update' => 'Registro actualizado correctamente',
+    'deleted' => 'Registro eliminado correctamente',
     'noprice' => 'No hay precio para el plan seleccionado',
 
     /*

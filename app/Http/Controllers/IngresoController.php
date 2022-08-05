@@ -7,21 +7,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ConsultaRequest;
 use App\Http\Requests\StoreIngresoRequest;
+use App\Services\my_services;
 
 class IngresoController extends Controller
 {
     //Ver ingresos
     public function index()
     {
-        $ingresos = DB::table('ingresos')->latest('id')->get();
+        $ingresos = Ingreso::latest('id')->get();
 
         $ver = ([
             'total' => $ingresos->sum('monto'),
             'activo' => $ingresos->where('created_at', '>=', date('Y-m-' . '01'))->sum('monto'),
-            'mes' => HomeController::current_month(),
+            'mes' => (new my_services)->current_month(),
         ]);
 
         return view('ingreso.index', compact('ver', 'ingresos'));
+    }
+
+    public function create()
+    {
+        return view('ingreso.create');
     }
 
     //Guardar ingreso

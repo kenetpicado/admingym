@@ -17,9 +17,4 @@ class Entrenador extends Model
         'nombre' => Ucwords::class,
         'horario' => Ucfirst::class,
     ];
-
-    public function eventos()
-    {
-        return $this->hasMany('App\Models\Evento');
-    }
 }

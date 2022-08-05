@@ -24,7 +24,6 @@ class UpdatePrecioRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'monto' => 'required|numeric|gt:0'
         ];
     }

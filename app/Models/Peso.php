@@ -12,13 +12,4 @@ class Peso extends Model
 
     protected $fillable = ['peso', 'cliente_id', 'created_at'];
     public $timestamps = false;
-
-    public function cliente(){
-        return $this->belongsTo(Cliente::class);
-    }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return date('d F Y', strtotime($value));
-    }
 }

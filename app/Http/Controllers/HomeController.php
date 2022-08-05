@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ingreso;
 use App\Models\Egreso;
+use App\Services\my_services;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -38,7 +39,7 @@ class HomeController extends Controller
             'egresos' => $egresos->sum('monto'),
             'sum_becas' => $ingresos->sum('beca'),
             'count_becas' => $ingresos->where('beca', '>', '0')->count(),
-            'mes' => $this->current_month(),
+            'mes' => (new my_services)->current_month(),
             'activos' => $this->getActivos($clientes->count(), $planes->count()),
         ]);
 
@@ -60,12 +61,5 @@ class HomeController extends Controller
         return $modelo->count() > 0
             ? round($modelo->where($columna, $valor)->count() * 100 / $modelo->count(), 1)
             : '0';
-    }
-
-    //Obtener el mes actual
-    public static function current_month()
-    {
-        $meses = array("ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE");
-        return $meses[date('n') - 1];
     }
 }

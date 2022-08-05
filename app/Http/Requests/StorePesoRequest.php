@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePesoRequest extends FormRequest
 {
@@ -25,6 +26,8 @@ class StorePesoRequest extends FormRequest
     {
         return [
             'peso' => 'required|numeric|gt:0',
+            'cliente_id' => ['integer', Rule::requiredIf($this->isMethod('POST'))],
+            'created_at' => 'required|date'
         ];
     }
 }

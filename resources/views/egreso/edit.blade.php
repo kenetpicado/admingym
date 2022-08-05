@@ -1,37 +1,23 @@
 @extends('layout')
 
-@section('title', 'Editar ingreso')
+@section('title', 'Editar egreso')
+
+@section('bread')
+    <li class="breadcrumb-item"><a href="{{ route('egresos.index') }}">Egresos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar</li>
+@endsection
 
 @section('contenido')
-    <div class="container-fluid">
+    <div class="card">
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('index') }}">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('egresos.index') }}">Egresos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Editar</li>
-            </ol>
-        </nav>
+        <x-header-0>Editar</x-header-0>
 
-        <div class="card mb-4">
-            <x-header-0 text='Editar'></x-header-0>
-
-            {{-- FORM EDIT --}}
-            <x-edit-form ruta='egresos.update' :id="$egreso->id">
-                <div class="row">
-                    <x-input-list label='tipo' text="Concepto" :val="$egreso->tipo" class="col-lg-6"
-                        list="egresos-categorias"></x-input-list>
-                </div>
-                <div class="row">
-                    <x-input-form label='nota' text="Descripción" :val="$egreso->nota" class="col-lg-6"></x-input-form>
-                </div>
-                <div class="row">
-                    <x-input-form label='monto' :val="$egreso->monto" class="col-lg-3"></x-input-form>
-                    <x-input-form label='created_at' type='date' text="Fecha" :val="$egreso->created_at" class="col-lg-3">
-                    </x-input-form>
-                </div>
-            </x-edit-form>
+        <x-edit-form ruta='egresos.update' :id="$egreso->id">
+            <x-input-list name='concepto' list="egresos-categorias" :val="$egreso->concepto"></x-input-list>
+            <x-input name='descripcion' text="Descripción" :val="$egreso->descripcion"></x-input>
+            <x-input name='monto' :val="$egreso->monto"></x-input>
+            <x-input name='created_at' :val="$egreso->created_at" type='date' label="Fecha" :val="date('Y-m-d')"></x-input>
             <x-cat-egresos></x-cat-egresos>
-        </div>
+        </x-edit-form>
     </div>
 @endsection

@@ -15,8 +15,8 @@ class CreateEventosTable extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipo', ['PAGO', 'INASISTENCIA']);
-            $table->float('monto')->default(0)->nullable();
+            $table->string('tipo', 20);
+            $table->float('monto')->nullable();
             $table->string('nota', 50)->nullable();
 
             $table->unsignedBigInteger('entrenador_id');
@@ -25,7 +25,7 @@ class CreateEventosTable extends Migration
                 ->on('entrenadors')
                 ->onDelete('cascade');
 
-            $table->date('created_at')->default(date('Y-m-d'));
+            $table->date('created_at');
         });
     }
 

@@ -14,7 +14,7 @@ class Reporte extends Model
     protected $fillable = ['mensaje', 'cliente_id', 'created_at'];
     public $timestamps = false;
 
-    public static function getReportes()
+    public static function index()
     {
         return DB::table('reportes')
             ->select([
@@ -27,25 +27,5 @@ class Reporte extends Model
             ->join('clientes', 'reportes.cliente_id', '=', 'clientes.id')
             ->latest('reportes.id')
             ->get();
-    }
-
-    public static function deleteByUser($cliente_id)
-    {
-        Reporte::where('cliente_id', $cliente_id)->delete();
-    }
-
-    public function getMensajeAttribute($value)
-    {
-        return ucfirst(strtolower($value));
-    }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return date('d F Y', strtotime($value));
-    }
-
-    public function cliente()
-    {
-        return $this->belongsTo(Cliente::class);
     }
 }

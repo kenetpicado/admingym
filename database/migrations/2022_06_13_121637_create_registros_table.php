@@ -15,7 +15,7 @@ class CreateRegistrosTable extends Migration
     {
         Schema::create('registros', function (Blueprint $table) {
             $table->id();
-            $table->string('status', 15)->default('inspected');
+            $table->integer('status');
             $table->date('created_at');
         });
     }

@@ -1,94 +1,66 @@
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-4 shadow-sm static-top">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold text-primary" href="/">{{ config('app.name') }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <ul class="navbar-nav ml-auto">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item mx-1">
+                    <a class="nav-link {{ request()->is('clientes*') ? 'active' : '' }}"
+                        href="{{ route('clientes.index') }}">Clientes</a>
+                </li>
 
-        @if (isset($reportes))
+                <li class="nav-item mx-1">
+                    <a class="nav-link {{ request()->is('planes*') ? 'active' : '' }}"
+                        href="{{ route('planes.index') }}">Planes</a>
+                </li>
 
-            <li class="nav-item dropdown no-arrow mx-1">
-                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-bell fa-fw"></i>
+                <li class="nav-item mx-1">
+                    <a class="nav-link {{ request()->is('reportes*') ? 'active' : '' }}"
+                        href="{{ route('reportes.index') }}">Reportes
+                    </a>
+                </li>
+                <li class="nav-item dropdown mx-1">
+                    <a class="nav-link" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        Administracion
+                    </a>
+                    <div class="dropdown-menu mx-1">
+                        <a class="dropdown-item" href="{{ route('entrenador.index') }}">Entrenadores</a>
+                        <a class="dropdown-item" href="{{ route('precios.index') }}">Precios</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown mx-1">
+                    <a class="nav-link" href="#" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        Contabilidad
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('ingresos.index') }}">Ingresos</a>
+                        <a class="dropdown-item" href="{{ route('egresos.index') }}">Egresos</a>
+                    </div>
+                </li>
+            </ul>
 
-                    @if (count($reportes) > 0)
-                        <span class="badge badge-danger badge-counter">
-                            +{{ $registro->status ?? ''}}
-                        </span>
-                    @endif
+            <div class="nav-item dropdown">
+                <a class="nav-link" href="#" role="button" data-toggle="dropdown"
+                    aria-expanded="false">
+                    {{ auth()->user()->name }}
                 </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('user.edit', auth()->user()->id) }}">Perfil</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 
-                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                    aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">Reportes</h6>
-
-
-                    @if (count($reportes) > 0)
-                        <div class="" style="max-height:350px; overflow-y: scroll;">
-                            @foreach ($reportes as $reporte)
-                                <div class="dropdown-item d-flex align-items-center ">
-                                    <div class="mr-2">
-                                        <form action="{{ route('reportes.destroy', $reporte->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash text-white"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">
-                                            {{ $reporte->created_at }}
-                                        </div>
-                                        <a href="{{ route('planes.create', $reporte->cliente_id) }}"
-                                            class="text-gray-800">
-                                            {{ ucwords(strtolower($reporte->cliente_nombre)) }}
-                                            <small>({{ $reporte->mensaje }})</small>
-
-                                        </a>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <a class="dropdown-item text-center small text-gray-800" href="{{ route('reportes.index') }}">Ver todo</a>
-                    @else
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <div class="mr-3">
-                                <div class="icon-circle bg-danger">
-                                    <i class="fas fa-exclamation text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">{{ date('Y-m-d') }}</div>
-                                <span class="font-weight-bold">No hay notificaciones</span>
-                            </div>
-                        </a>
-                    @endif
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
-            </li>
-        @endif
-
-        <div class="topbar-divider d-none d-sm-block"></div>
-
-        <!-- Nav Item - User Information -->
-        <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    @if (Auth::user())
-                        {{ Auth::user()->name }}
-                    @endif
-                </span>
-                <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
-            </a>
-            <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">Logout</a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
             </div>
-        </li>
-    </ul>
+
+        </div>
+    </div>
 </nav>

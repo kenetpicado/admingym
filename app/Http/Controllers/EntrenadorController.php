@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entrenador;
 use App\Http\Requests\StoreEntrenadorRequest;
+use App\Models\Evento;
 
 class EntrenadorController extends Controller
 {
@@ -14,6 +15,12 @@ class EntrenadorController extends Controller
         return view('entrenador.index', compact('entrenadors'));
     }
 
+    //Agregar un nuevo entrenador
+    public function create()
+    {
+        return view('entrenador.create');
+    }
+
     //Guardar un entrenador
     public function store(StoreEntrenadorRequest $request)
     {
@@ -22,10 +29,10 @@ class EntrenadorController extends Controller
     }
 
     //Ver eventos de un entrenador
-    public function show(Entrenador $entrenador)
+    public function show($entrenador_id)
     {
-        $entrenador->load('eventos');
-        return view('entrenador.show', compact('entrenador'));
+        $eventos = Evento::where('entrenador_id', $entrenador_id)->get();
+        return view('entrenador.show', compact('eventos', 'entrenador_id'));
     }
 
     //Editar un entrenador

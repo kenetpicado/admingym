@@ -15,11 +15,11 @@ class CreateIngresosTable extends Migration
     {
         Schema::create('ingresos', function (Blueprint $table) {
             $table->id();
+            $table->string('concepto', 50);
+            $table->string('descripcion', 50)->nullable();
             $table->float('monto');
-            $table->string('nombre', 50);
             $table->float('beca')->default(0);
-            $table->string('servicio', 50);
-            $table->date('created_at')->default(date('Y-m-d'));
+            $table->date('created_at');
         });
     }
 

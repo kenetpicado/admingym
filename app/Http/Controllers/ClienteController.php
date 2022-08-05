@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Http\Requests\StoreClienteRequest;
-use App\Http\Requests\UpdateClienteRequest;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
     //Ver todos los Clientes
     public function index()
     {
-        $clientes = Cliente::getClientes();
+        $clientes = Cliente::index();
         return view('cliente.index', compact('clientes'));
+    }
+
+    public function create()
+    {
+        return view('cliente.create');
     }
 
     //Guardar un Cliente
@@ -23,9 +28,10 @@ class ClienteController extends Controller
     }
 
     //Ver pesos de un cliente
-    public function show(Cliente $cliente)
+    public function show($cliente_id)
     {
-        return view('cliente.show', compact('cliente'));
+        $pesos = DB::table('pesos')->where('cliente_id', $cliente_id)->get();
+        return view('cliente.show', compact('pesos', 'cliente_id'));
     }
 
     //Editar un cliente
@@ -35,7 +41,7 @@ class ClienteController extends Controller
     }
 
     //Actualizar cliente
-    public function update(UpdateClienteRequest $request, Cliente $cliente)
+    public function update(StoreClienteRequest $request, Cliente $cliente)
     {
         $cliente->update($request->all());
         return redirect()->route('clientes.index')->with('info', config('app.update'));

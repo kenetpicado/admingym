@@ -23,13 +23,4 @@ class Evento extends Model
     protected $casts = [
         'nota' => Ucfirst::class,
     ];
-
-    public function entrenador(){
-        return $this->belongsTo('App\Models\Entrenador');
-    }
-
-    public function getCreatedAtAttribute($value)
-    {
-        return date('d F Y', strtotime($value));
-    }
 }

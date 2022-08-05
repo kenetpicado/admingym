@@ -24,8 +24,8 @@ class StoreIngresoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required|max:50',
-            'servicio' => 'required|max:50',
+            'concepto' => 'required|max:50',
+            'descripcion' => 'nullable|max:50',
             'monto' => 'required|numeric|gt:0',
             'created_at' => 'required|date',
         ];
@@ -34,8 +34,6 @@ class StoreIngresoRequest extends FormRequest
     public function attributes()
     {
         return [
-            'nombre' => 'concepto',
-            'servicio' => 'descripción',
             'created_at' => 'fecha',
         ];   
     }

@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 class Plan extends Model
 {
     use HasFactory;
-
     protected $table = "planes";
     public $timestamps = false;
 
@@ -25,6 +24,10 @@ class Plan extends Model
         'fecha_fin',
         'created_at',
         'cliente_id'
+    ];
+
+    protected $casts = [
+        'nota' => Ucfirst::class,
     ];
 
     //Borrar expirados
@@ -49,31 +52,29 @@ class Plan extends Model
         return $registro;
     }
 
-    public static function getPlanes()
+    public static function index()
     {
-        return DB::table('planes')
-            ->select([
-                'planes.id',
-                'clientes.id as cliente_id',
-                'clientes.nombre as cliente_nombre',
-                'monto',
-                'beca',
-                'created_at',
-                'fecha_fin',
-                'nota',
-                'servicio'
-            ])
+        return Plan::select([
+            'planes.id',
+            'clientes.nombre as cliente_nombre',
+            'created_at',
+            'fecha_fin',
+            'nota',
+            'servicio'
+        ])
             ->join('clientes', 'planes.cliente_id', '=', 'clientes.id')
             ->orderBy('fecha_fin')
             ->get();
     }
 
-    public function cliente()
+    public static function show($plan_id)
     {
-        return $this->belongsTo(Cliente::class);
+        return Plan::where('planes.id', $plan_id)
+            ->select([
+                'planes.*',
+                'clientes.nombre as cliente'
+            ])
+            ->join('clientes', 'planes.cliente_id', '=', 'clientes.id')
+            ->first();
     }
-
-    protected $casts = [
-        'nota' => Ucfirst::class,
-    ];
 }

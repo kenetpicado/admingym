@@ -11,7 +11,7 @@ class ReporteController extends Controller
     public function index()
     {
         $registro = Registro::getToday();
-        $reportes = Reporte::getReportes();
+        $reportes = Reporte::index();
         return view('reporte.index', compact('reportes', 'registro'));
     }
 

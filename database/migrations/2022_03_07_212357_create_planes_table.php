@@ -15,18 +15,16 @@ class CreatePlanesTable extends Migration
     {
         Schema::create('planes', function (Blueprint $table) {
             $table->id();
-
             $table->string('servicio', 30);
             $table->string('plan', 30);
             $table->float('monto'); 
             $table->float('beca')->default(0); 
             $table->string('nota', 30)->nullable();
+            $table->date('created_at');
             $table->date('fecha_fin');
             
             $table->unsignedBigInteger('cliente_id');
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-
-            $table->date('created_at')->default(date('Y-m-d'));
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade'); 
         });
     }
 

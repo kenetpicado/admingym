@@ -24,7 +24,6 @@ class StoreEntrenadorRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'nombre' => 'required|max:50',
             'telefono' => 'required|numeric|digits:8',
             'horario' => 'required|max:20'

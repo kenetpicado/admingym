@@ -25,10 +25,10 @@ class StoreCajaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'beca' => 'required|numeric|min:0',
             'nota' => 'nullable|max:30',
-            'servicio' => 'required|max:30',
+            'servicio' => 'required',
+            'plan' => 'required',
             'created_at' => 'required|date'
         ];
     }
@@ -36,7 +36,6 @@ class StoreCajaRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
             'created_at' => 'inicia',
         ];
     }

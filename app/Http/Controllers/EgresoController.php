@@ -6,6 +6,7 @@ use App\Models\Egreso;
 use Illuminate\Http\Request;
 use App\Http\Requests\ConsultaRequest;
 use App\Http\Requests\StoreEgresoRequest;
+use App\Services\my_services;
 
 class EgresoController extends Controller
 {
@@ -16,10 +17,15 @@ class EgresoController extends Controller
         $ver = ([
             'total' => $egresos->sum('monto'),
             'activo' => $egresos->where('created_at', '>=', date('Y-m-' . '01'))->sum('monto'),
-            'mes' => HomeController::current_month(),
+            'mes' => (new my_services)->current_month(),
         ]);
 
         return view('egreso.index', compact('ver', 'egresos'));
+    }
+
+    public function create()
+    {
+        return view('egreso.create');
     }
 
     public function store(StoreEgresoRequest $request)
@@ -52,7 +58,7 @@ class EgresoController extends Controller
 
     public function get_categorias(Request $request)
     {
-        $egresos = Egreso::where('tipo', 'like', '%' . $request->categoria . '%')->get();
+        $egresos = Egreso::where('concepto', 'like', '%' . $request->categoria . '%')->get();
         $total = $egresos->sum('monto');
 
         return redirect()->route('egresos.categorias')

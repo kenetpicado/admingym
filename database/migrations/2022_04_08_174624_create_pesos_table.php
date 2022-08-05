@@ -16,11 +16,14 @@ class CreatePesosTable extends Migration
         Schema::create('pesos', function (Blueprint $table) {
             $table->id();
             $table->float('peso');
-            
+
             $table->unsignedBigInteger('cliente_id');
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-            
-            $table->date('created_at')->default(date('Y-m-d'));
+            $table->foreign('cliente_id')
+                ->references('id')
+                ->on('clientes')
+                ->onDelete('cascade');
+
+            $table->date('created_at');
         });
     }
 
