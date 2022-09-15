@@ -14,7 +14,7 @@ class PlanObserver
 
         Ingreso::create([
             'concepto' => $plan->servicio . ' - ' . $plan->plan,
-            'descripcion' => "Cliente: " . substr(str_repeat(0, 4) . $plan->cliente_id, -4),
+            'descripcion' => "Cliente: " . $plan->cliente_id,
             'monto' => $plan->monto,
             'beca' => $plan->beca,
             'created_at' => now()->format('Y-m-d')

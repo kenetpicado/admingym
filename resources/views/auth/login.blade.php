@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('img/logo-ag.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} - Login</title>
-    <link href="css/sb.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
 </head>
 
 <body class="bg-primary">
@@ -40,7 +40,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
+                                <button type="submit" class="btn btn-primary float-right mb-5">Login</button>
                             </form>
                         </div>
                     </div>

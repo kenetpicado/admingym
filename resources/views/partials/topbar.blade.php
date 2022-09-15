@@ -30,11 +30,12 @@
                 </li>
             </ul>
 
-            <div class="nav-item no-arrow mx-1">
+            <div class="nav-item mx-1">
                 <a class="nav-link" href="{{ route('reportes.index') }}">
                     <i class="fas fa-bell fa-fw"></i>
                 </a>
             </div>
+
             <div class="nav-item dropdown">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                     {{ auth()->user()->name }}

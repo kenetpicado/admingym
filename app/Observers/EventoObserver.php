@@ -12,7 +12,7 @@ class EventoObserver
         if ($evento->tipo == 'PAGO') {
             Egreso::create([
                 'concepto' => 'Salario',
-                'descripcion' => "Entrenador: " . substr(str_repeat(0, 4) . $evento->entrenador_id, -4),
+                'descripcion' => "Entrenador: " . $evento->entrenador_id,
                 'monto' => $evento->monto,
                 'created_at' => now()->format('Y-m-d')
             ]);

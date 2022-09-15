@@ -21,7 +21,7 @@
             <tbody>
                 @foreach ($entrenadors as $entrenador)
                     <tr>
-                        <td>{{ substr(str_repeat(0, 4) . $entrenador->id, -4) }}</td>
+                        <td>{{ $entrenador->id }}</td>
                         <td>{{ $entrenador->nombre }}</td>
                         <td>{{ $entrenador->telefono }}</td>
                         <td>{{ $entrenador->horario }}</td>

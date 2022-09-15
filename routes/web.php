@@ -19,12 +19,23 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('eventos-entrenador/{id}/crear', [EventoController::class, 'create'])->name('eventos.create');
+
+    Route::post('clientes', [ClienteController::class, 'search'])
+        ->name('clientes.search');
+
+    Route::get('eventos-entrenador/{id}/crear', [EventoController::class, 'create'])
+        ->name('eventos.create');
 
     Route::get('clientes-pesos/{id}/agregar', [PesoController::class, 'create'])->name('pesos.create');
     Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
     Route::resource('reportes',  ReporteController::class)->only(['index', 'destroy']);
-    Route::resource('clientes', ClienteController::class)->except(['destroy']);
+
+    Route::resource('clientes', ClienteController::class)
+        ->except(['destroy', 'store']);
+
+    Route::post('save/clientes', [ClienteController::class, 'store'])
+        ->name('clientes.store');
+
     Route::resource('entrenador', EntrenadorController::class)->except(['destroy']);
     Route::resource('precios', PrecioController::class)->only(['index', 'edit', 'update']);
     Route::resource('eventos', EventoController::class)->only(['store']);
@@ -53,21 +64,21 @@ Route::middleware(['auth'])->group(function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('mantenimiento', function () {
-    $egresos = Ingreso::all();
+// Route::get('mantenimiento', function () {
+//     $egresos = Ingreso::all();
 
-    // $este = Ingreso::find(12)->concepto;
-    // return utf8_decode(strtolower($este));
-    // return ($este);
+//     // $este = Ingreso::find(12)->concepto;
+//     // return utf8_decode(strtolower($este));
+//     // return ($este);
 
-    foreach ($egresos as $key => $egreso) {
-        try {
-            $egreso->update([
-                'concepto' => utf8_decode(strtolower($egreso->concepto)),
-                'descripcion' => utf8_decode(strtolower($egreso->descripcion)),
-            ]);
-        } catch (Exception $e) {
-            return dd($egreso);
-        }
-    }
-});
+//     foreach ($egresos as $key => $egreso) {
+//         try {
+//             $egreso->update([
+//                 'concepto' => utf8_decode(strtolower($egreso->concepto)),
+//                 'descripcion' => utf8_decode(strtolower($egreso->descripcion)),
+//             ]);
+//         } catch (Exception $e) {
+//             return dd($egreso);
+//         }
+//     }
+// });

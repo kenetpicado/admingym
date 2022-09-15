@@ -9,6 +9,19 @@
 @section('contenido')
     <div class="card">
         <x-header-1 ruta="clientes.create">Clientes</x-header-1>
+        <div class="card-body">
+            <div class="row">
+                <form method="POST" action="{{ route('clientes.search') }}" class="col-12 col-sm-6">
+                    @csrf
+                    <div class="input-group">
+                        <input type="search" class="form-control" name="search" placeholder="Buscar por nombre o ID">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <x-table-head>
             <x-slot name='title'>
@@ -20,9 +33,9 @@
                 <th>Editar</th>
             </x-slot>
             <tbody>
-                @foreach ($clientes as $cliente)
+                @forelse ($clientes as $cliente)
                     <tr>
-                        <td data-title="ID">{{ substr(str_repeat(0, 4) . $cliente->id, -4) }}</td>
+                        <td data-title="ID">{{ $cliente->id }}</td>
                         <td data-title="Nombre">
                             @if ($cliente->planes_count > 0)
                                 <i class="fas fa-check-circle fa-sm text-success"></i>
@@ -42,7 +55,11 @@
                             <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-sm btn-secondary">Editar</a>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="6" class="text-center">No hay registros</td>
+                    </tr>
+                @endforelse
             </tbody>
         </x-table-head>
         <div class="mx-auto small">
