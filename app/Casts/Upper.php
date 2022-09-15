@@ -17,7 +17,7 @@ class Upper implements CastsAttributes
      */
     public function get($model, string $key, $value, array $attributes)
     {
-        return trim(strtoupper($value));
+        return $value;
     }
 
     /**

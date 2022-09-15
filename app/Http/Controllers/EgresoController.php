@@ -7,20 +7,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ConsultaRequest;
 use App\Http\Requests\StoreEgresoRequest;
 use App\Services\my_services;
+use Illuminate\Support\Facades\DB;
 
 class EgresoController extends Controller
 {
     public function index()
     {
-        $egresos = Egreso::latest('id')->get();
-        
-        $ver = ([
-            'total' => $egresos->sum('monto'),
-            'activo' => $egresos->where('created_at', '>=', date('Y-m-' . '01'))->sum('monto'),
-            'mes' => (new my_services)->current_month(),
-        ]);
-
-        return view('egreso.index', compact('ver', 'egresos'));
+        $egresos = DB::table('egresos')->latest('id')->paginate(20);
+        return view('egreso.index', compact('egresos'));
     }
 
     public function create()

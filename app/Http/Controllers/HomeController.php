@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         //Obtener datos
         $clientes = DB::table('clientes')->get(['id', 'sexo']);
-        $planes = DB::table('planes')->get();
+        $planes = DB::table('planes')->get('servicio');
 
         $ingresos = Ingreso::getMensual();
         $egresos = Egreso::getMensual();

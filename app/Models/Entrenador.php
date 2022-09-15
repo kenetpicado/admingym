@@ -14,7 +14,6 @@ class Entrenador extends Model
     public $timestamps = false;
 
     protected $casts = [
-        'nombre' => Ucwords::class,
-        'horario' => Ucfirst::class,
+        'nombre' => Ucwords::class
     ];
 }

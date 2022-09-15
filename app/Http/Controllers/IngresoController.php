@@ -4,25 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Ingreso;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ConsultaRequest;
 use App\Http\Requests\StoreIngresoRequest;
-use App\Services\my_services;
+use Illuminate\Support\Facades\DB;
 
 class IngresoController extends Controller
 {
     //Ver ingresos
     public function index()
     {
-        $ingresos = Ingreso::latest('id')->get();
+        $ingresos = DB::table('ingresos')
+            ->latest('id')
+            ->paginate(20);
 
-        $ver = ([
-            'total' => $ingresos->sum('monto'),
-            'activo' => $ingresos->where('created_at', '>=', date('Y-m-' . '01'))->sum('monto'),
-            'mes' => (new my_services)->current_month(),
-        ]);
-
-        return view('ingreso.index', compact('ver', 'ingresos'));
+        return view('ingreso.index', compact('ingresos'));
     }
 
     //Agregar un nuevo ingreso

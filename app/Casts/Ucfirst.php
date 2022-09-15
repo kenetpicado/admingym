@@ -17,7 +17,7 @@ class Ucfirst implements CastsAttributes
      */
     public function get($model, string $key, $value, array $attributes)
     {
-        return ucfirst(strtolower($value));
+        return $value;
     }
 
     /**

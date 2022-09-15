@@ -6,6 +6,7 @@ use App\Casts\Ucfirst;
 use App\Casts\Upper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 
 class Ingreso extends Model
 {
@@ -22,12 +23,14 @@ class Ingreso extends Model
 
     protected $casts = [
         'concepto' => Upper::class,
-        'descripcion' => Ucfirst::class,
+        'descripcion' => Upper::class,
     ];
 
     public static function getMensual()
     {
-        return Ingreso::where('created_at', '>=', date('Y-m-' . '01'))->get();
+        return DB::table('ingresos')
+            ->where('created_at', '>=', date('Y-m-' . '01'))
+            ->get(['monto', 'beca']);
     }
 
     public static function getBetween($request)

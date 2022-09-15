@@ -43,5 +43,8 @@
                 @endforeach
             </tbody>
         </x-table-head>
+        <div class="mx-auto small">
+            {!! $reportes->links() !!}
+        </div>
     </div>
 @endsection

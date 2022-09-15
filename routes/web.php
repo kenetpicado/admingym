@@ -11,6 +11,9 @@ use App\Http\Controllers\EgresoController;
 use App\Http\Controllers\PesoController;
 use App\Http\Controllers\PrecioController;
 use App\Http\Controllers\UserController;
+use App\Models\Cliente;
+use App\Models\Egreso;
+use App\Models\Ingreso;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,3 +52,22 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Auth::routes(['register' => false]);
+
+Route::get('mantenimiento', function () {
+    $egresos = Ingreso::all();
+
+    // $este = Ingreso::find(12)->concepto;
+    // return utf8_decode(strtolower($este));
+    // return ($este);
+
+    foreach ($egresos as $key => $egreso) {
+        try {
+            $egreso->update([
+                'concepto' => utf8_decode(strtolower($egreso->concepto)),
+                'descripcion' => utf8_decode(strtolower($egreso->descripcion)),
+            ]);
+        } catch (Exception $e) {
+            return dd($egreso);
+        }
+    }
+});

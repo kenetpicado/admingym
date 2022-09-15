@@ -15,13 +15,15 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Sexo</th>
-                <th>Opciones</th>
+                <th>Pagar</th>
+                <th>Pesos</th>
+                <th>Editar</th>
             </x-slot>
             <tbody>
                 @foreach ($clientes as $cliente)
                     <tr>
-                        <td>{{ substr(str_repeat(0, 4) . $cliente->id, -4) }}</td>
-                        <td>
+                        <td data-title="ID">{{ substr(str_repeat(0, 4) . $cliente->id, -4) }}</td>
+                        <td data-title="Nombre">
                             @if ($cliente->planes_count > 0)
                                 <i class="fas fa-check-circle fa-sm text-success"></i>
                             @else
@@ -29,23 +31,22 @@
                             @endif
                             {{ $cliente->nombre }}
                         </td>
-                        <td>{{ $cliente->sexo }}</td>
+                        <td data-title="Sexo">{{ $cliente->sexo }}</td>
                         <td>
-                            <div class="dropdown">
-                                <a class="btn btn-primary btn-sm dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-expanded="false">
-                                    Opciones
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a href="{{ route('planes.create', $cliente->id) }}" class="dropdown-item">Pagar</a>
-                                    <a href="{{ route('clientes.show', $cliente->id) }}" class="dropdown-item">Pesos</a>
-                                    <a href="{{ route('clientes.edit', $cliente->id) }}" class="dropdown-item">Editar</a>
-                                </div>
-                            </div>
+                            <a href="{{ route('planes.create', $cliente->id) }}" class="btn btn-sm btn-primary">Pagar</a>
+                        </td>
+                        <td>
+                            <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-sm btn-primary">Pesos</a>
+                        </td>
+                        <td>
+                            <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-sm btn-secondary">Editar</a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </x-table-head>
+        <div class="mx-auto small">
+            {!! $clientes->links() !!}
+        </div>
     </div>
 @endsection

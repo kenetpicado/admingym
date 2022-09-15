@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Casts\Ucfirst;
 use App\Casts\Upper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 
 class Egreso extends Model
 {
@@ -16,11 +16,13 @@ class Egreso extends Model
 
     protected $casts = [
         'concepto' => Upper::class,
-        'descripcion' => Ucfirst::class,
+        'descripcion' => Upper::class,
     ];
 
     public static function getMensual()
     {
-        return Egreso::where('created_at', '>=', date('Y-m-' . '01'))->get();
+        return DB::table('egresos')
+            ->where('created_at', '>=', date('Y-m-' . '01'))
+            ->get(['monto']);
     }
 }

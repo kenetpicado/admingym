@@ -12,42 +12,31 @@
                     <a class="nav-link {{ request()->is('clientes*') ? 'active' : '' }}"
                         href="{{ route('clientes.index') }}">Clientes</a>
                 </li>
-
                 <li class="nav-item mx-1">
                     <a class="nav-link {{ request()->is('planes*') ? 'active' : '' }}"
                         href="{{ route('planes.index') }}">Planes</a>
                 </li>
-
-                <li class="nav-item mx-1">
-                    <a class="nav-link {{ request()->is('reportes*') ? 'active' : '' }}"
-                        href="{{ route('reportes.index') }}">Reportes
-                    </a>
-                </li>
                 <li class="nav-item dropdown mx-1">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown"
-                        aria-expanded="false">
+                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                         Administracion
                     </a>
                     <div class="dropdown-menu mx-1">
                         <a class="dropdown-item" href="{{ route('entrenador.index') }}">Entrenadores</a>
                         <a class="dropdown-item" href="{{ route('precios.index') }}">Precios</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown mx-1">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown"
-                        aria-expanded="false">
-                        Contabilidad
-                    </a>
-                    <div class="dropdown-menu">
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('ingresos.index') }}">Ingresos</a>
                         <a class="dropdown-item" href="{{ route('egresos.index') }}">Egresos</a>
                     </div>
                 </li>
             </ul>
 
+            <div class="nav-item no-arrow mx-1">
+                <a class="nav-link" href="{{ route('reportes.index') }}">
+                    <i class="fas fa-bell fa-fw"></i>
+                </a>
+            </div>
             <div class="nav-item dropdown">
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown"
-                    aria-expanded="false">
+                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                     {{ auth()->user()->name }}
                 </a>
                 <div class="dropdown-menu">

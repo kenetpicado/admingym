@@ -17,7 +17,7 @@ class Ucwords implements CastsAttributes
      */
     public function get($model, string $key, $value, array $attributes)
     {
-        return ucwords(strtolower($value));
+        return $value;
     }
 
     /**
@@ -31,6 +31,6 @@ class Ucwords implements CastsAttributes
      */
     public function set($model, string $key, $value, array $attributes)
     {
-        return ucwords(trim(strtolower($value)));
+        return ucwords(trim(utf8_decode(strtolower($value))));
     }
 }

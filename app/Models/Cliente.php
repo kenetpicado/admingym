@@ -19,7 +19,14 @@ class Cliente extends Model
 
     public static function index()
     {
-        return Cliente::withCount('planes')->get();
+        return DB::table('clientes')
+            ->select([
+                'id',
+                'nombre',
+                'sexo',
+                DB::raw('(select count(*) from planes where clientes.id = planes.cliente_id) as planes_count')
+            ])
+            ->paginate(20);
     }
 
     public function planes()
