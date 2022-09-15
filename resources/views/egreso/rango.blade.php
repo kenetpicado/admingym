@@ -18,11 +18,16 @@
                         @csrf
                         <x-input name='inicio' type='date'></x-input>
                         <x-input name='fin' type='date' :val="date('Y-m-d')"></x-input>
-                        <button type="submit" class="btn btn-primary float-right">Ver registros</button>
+                        <button type="submit" class="btn btn-primary btn-sm float-right">Ver</button>
                     </form>
                 </div>
             </div>
         </div>
+        @if (session('total'))
+            <div class="card-body">
+                Se han encontrado {{ count(session('egresos')) }} registros con un total de C$ {{ session('total') }}
+            </div>
+        @endif
 
         <x-table-head>
             <x-slot name='title'>

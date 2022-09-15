@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Caja')
+@section('title', 'Planes')
 
 @section('bread')
     <li class="breadcrumb-item active" aria-current="page">Planes</li>
@@ -27,7 +27,7 @@
                 <th>Editar</th>
             </x-slot>
             <tbody>
-                @foreach ($planes as $plan)
+                @forelse ($planes as $plan)
                     <tr>
                         <td>{{ $plan->cliente_nombre }}</td>
                         <td>{{ $plan->servicio }}</td>
@@ -43,7 +43,11 @@
                         <td><a href="{{ route('planes.show', $plan->id) }}" class="btn btn-sm btn-primary">Detalles</a></td>
                         <td><a href="{{ route('planes.edit', $plan->id) }}" class="btn btn-sm btn-secondary">Editar</a></td>
                     </tr>
-                @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center">No hay registros</td>
+                    </tr>
+                @endforelse
             </tbody>
         </x-table-head>
         <div class="mx-auto small">

@@ -15,12 +15,6 @@ class EntrenadorController extends Controller
         return view('entrenador.index', compact('entrenadors'));
     }
 
-    //Agregar un nuevo entrenador
-    public function create()
-    {
-        return view('entrenador.create');
-    }
-
     //Guardar un entrenador
     public function store(StoreEntrenadorRequest $request)
     {

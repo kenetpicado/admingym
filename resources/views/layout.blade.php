@@ -38,7 +38,7 @@
 
     @if ($errors->any())
         <script>
-            $('#agregar').modal('show')
+            $('#createModal').modal('show')
         </script>
     @endif
 </body>

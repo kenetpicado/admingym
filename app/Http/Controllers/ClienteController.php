@@ -16,11 +16,6 @@ class ClienteController extends Controller
         return view('cliente.index', compact('clientes'));
     }
 
-    public function create()
-    {
-        return view('cliente.create');
-    }
-
     //Guardar un Cliente
     public function store(StoreClienteRequest $request)
     {

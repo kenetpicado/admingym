@@ -7,12 +7,6 @@ use App\Http\Requests\StorePesoRequest;
 
 class PesoController extends Controller
 {
-    //Agregar nuevo peso
-    public function create($cliente_id)
-    {
-        return view('peso.create', compact('cliente_id'));
-    }
-
     //Guadar peso
     public function store(StorePesoRequest $request)
     {

@@ -19,13 +19,7 @@ class IngresoController extends Controller
 
         return view('ingreso.index', compact('ingresos'));
     }
-
-    //Agregar un nuevo ingreso
-    public function create()
-    {
-        return view('ingreso.create');
-    }
-
+    
     //Guardar ingreso
     public function store(StoreIngresoRequest $request)
     {

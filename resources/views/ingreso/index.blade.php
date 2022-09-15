@@ -8,7 +8,16 @@
 
 @section('contenido')
     <div class="card">
-        <x-header-1 ruta="ingresos.create">Ingresos</x-header-1>
+        <x-header-modal>Ingresos</x-header-modal>
+
+        <x-modal title="Ingreso" route="ingresos.store">
+            <x-input-list name='concepto' list="ingresos-categorias"></x-input-list>
+            <x-input name='descripcion' text="Descripción"></x-input>
+            <x-input name='monto'></x-input>
+            <x-input name='created_at' type='date' label="Fecha" :val="date('Y-m-d')"></x-input>
+            <x-cat-ingresos></x-cat-ingresos>
+        </x-modal>
+
         <x-table-head>
             <div class="card-title">
                 <a href="{{ route('ingresos.rango') }}" class="p-2">Consulta por rango de fechas</a>

@@ -8,7 +8,15 @@
 
 @section('contenido')
     <div class="card">
-        <x-header-1 ruta="egresos.create">Egresos</x-header-1>
+        <x-header-modal>Egresos</x-header-modal>
+
+        <x-modal title="Egreso" route="egresos.store">
+            <x-input-list name='concepto' list="egresos-categorias"></x-input-list>
+            <x-input name='descripcion' text="Descripción"></x-input>
+            <x-input name='monto'></x-input>
+            <x-input name='created_at' type='date' label="Fecha" :val="date('Y-m-d')"></x-input>
+            <x-cat-egresos></x-cat-egresos>
+        </x-modal>
 
         <x-table-head>
             <div class="card-title">

@@ -9,7 +9,22 @@
 
 @section('contenido')
     <div class="card">
-        <x-header-1 ruta="eventos.create" :id="$entrenador_id">Eventos</x-header-1>
+        <x-header-modal>Eventos</x-header-modal>
+
+        <x-modal title="Evento" route="eventos.store">
+            <div class="form-group">
+                <label>Seleccione un evento</label>
+                <select name="tipo" class="form-control" required>
+                    <option selected value="PAGO">REGISTRAR PAGO</option>
+                    <option value="INASISTENCIA">INASISTENCIA</option>
+                </select>
+            </div>
+
+            <x-input name='monto' type="number"></x-input>
+            <x-input name='nota'></x-input>
+            <x-input name='created_at' label="Fecha" type="date" :val="date('Y-m-d')"></x-input>
+            <input type="hidden" name="entrenador_id" value="{{ $entrenador_id }}">
+        </x-modal>
 
         <x-table-head>
             <x-slot name='title'>
@@ -23,7 +38,7 @@
                     <tr>
                         <td>{{ $evento->created_at }}</td>
                         <td>{{ $evento->tipo}}</td>
-                        <td>C$ {{ $evento->monto}}</td>
+                        <td>C$ {{ $evento->monto ?? "-"}}</td>
                         <td>{{ $evento->nota }}</td>
                     </tr>
                 @endforeach

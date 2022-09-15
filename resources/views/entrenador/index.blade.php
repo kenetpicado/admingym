@@ -8,7 +8,14 @@
 
 @section('contenido')
     <div class="card">
-        <x-header-1 ruta="entrenador.create">Entrenadores</x-header-1>
+        <x-header-modal>Entrenadores</x-header-modal>
+
+        <x-modal title="Entrenador" route="entrenador.store">
+            <x-input name='nombre'></x-input>
+            <x-input name='telefono' type="number"></x-input>
+            <x-input name='horario'></x-input>
+        </x-modal>
+
         <x-table-head>
             <x-slot name='title'>
                 <th>ID</th>

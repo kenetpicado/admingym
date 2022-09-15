@@ -8,7 +8,8 @@
 
 @section('contenido')
     <div class="card">
-        <x-header-1 ruta="clientes.create">Clientes</x-header-1>
+        <x-header-modal>Clientes</x-header-modal>
+
         <div class="card-body">
             <div class="row">
                 <form method="POST" action="{{ route('clientes.search') }}" class="col-12 col-sm-6">
@@ -22,6 +23,25 @@
                 </form>
             </div>
         </div>
+
+        <x-modal title="Cliente" route="clientes.store">
+            <x-input name='nombre'></x-input>
+            <x-input name='email' type='email'></x-input>
+            <x-input name='fecha' type='date' label='Fecha de nacimiento'></x-input>
+
+            <div class="form-group">
+                <div class="custom-control custom-radio custom-control-inline ">
+                    <input type="radio" id="customRadioInline1" name="sexo" class="custom-control-input" value="M"
+                        checked>
+                    <label class="custom-control-label" for="customRadioInline1">Masculino</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" name="sexo" class="custom-control-input"
+                        value="F">
+                    <label class="custom-control-label" for="customRadioInline2">Femenino</label>
+                </div>
+            </div>
+        </x-modal>
 
         <x-table-head>
             <x-slot name='title'>

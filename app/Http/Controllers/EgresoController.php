@@ -17,11 +17,6 @@ class EgresoController extends Controller
         return view('egreso.index', compact('egresos'));
     }
 
-    public function create()
-    {
-        return view('egreso.create');
-    }
-
     public function store(StoreEgresoRequest $request)
     {
         Egreso::create($request->all());
