@@ -7,6 +7,8 @@ use App\Models\Precio;
 use App\Models\Registro;
 use App\Http\Requests\StoreCajaRequest;
 use App\Services\my_services;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
 {
@@ -19,6 +21,25 @@ class PlanController extends Controller
 
         $planes = Plan::index();
         return view('plan.index', compact('planes', 'registro'));
+    }
+
+    public function search(Request $request)
+    {
+        $planes = Plan::join('clientes', 'planes.cliente_id', '=', 'clientes.id')
+            ->orderBy('fecha_fin')
+            ->where('clientes.id', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('clientes.nombre', 'LIKE', '%' . $request->search . '%')
+            ->select([
+                'planes.id',
+                'clientes.nombre as cliente_nombre',
+                'created_at',
+                'fecha_fin',
+                'nota',
+                'servicio'
+            ])
+            ->paginate(20);
+
+        return view('plan.index', compact('planes'));
     }
 
     //Pagar plan de cliente

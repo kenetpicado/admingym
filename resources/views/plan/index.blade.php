@@ -10,7 +10,7 @@
 
     <div class="card">
         <x-header-0>Planes</x-header-0>
-
+        <x-search route="planes.search"></x-search>
         <x-table-head>
             <div class="card-title">
                 <div class="alert alert-danger" role="alert">

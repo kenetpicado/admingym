@@ -11,6 +11,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('clientes', [ClienteController::class, 'search'])
         ->name('clientes.search');
 
+    Route::post('planes', [PlanController::class, 'search'])
+        ->name('planes.search');
+
     Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
     Route::resource('reportes',  ReporteController::class)->only(['index', 'destroy']);
 
@@ -23,8 +26,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('entrenador', EntrenadorController::class)
         ->except(['destroy', 'create']);
 
-    Route::resource('precios', PrecioController::class)->only(['index', 'edit', 'update']);
-    Route::resource('eventos', EventoController::class)->only(['store']);
+    Route::resource('precios', PrecioController::class)
+        ->only(['index', 'edit', 'update']);
+    Route::resource('eventos', EventoController::class)
+        ->only(['store']);
 
     Route::resource('ingresos', IngresoController::class)
         ->except(['show', 'destroy', 'create']);
@@ -32,9 +37,17 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('egresos', EgresoController::class)
         ->except(['show', 'destroy', 'create']);
 
+    Route::get('planes/{cliente}/create', [PlanController::class, 'create'])
+        ->name('planes.create');
+
+    Route::resource('planes', PlanController::class)
+        ->except(['create', 'store'])
+        ->parameters(['planes' => 'plan']);
+
+    Route::post('save/planes', [PlanController::class, 'store'])
+        ->name('planes.store');
+
     Route::resource('/', HomeController::class);
-    Route::get('planes/{cliente}/create', [PlanController::class, 'create'])->name('planes.create');
-    Route::resource('planes', PlanController::class)->except(['create'])->parameters(['planes' => 'plan']);
     Route::resource('user', UserController::class);
 
     //INGRESOS
