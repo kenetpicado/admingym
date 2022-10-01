@@ -1,16 +1,16 @@
 @extends('layout')
 
-@section('title', 'Entrenadores')
+@section('title', 'Personal')
 
 @section('bread')
-    <li class="breadcrumb-item active" aria-current="page">Entrenadores</li>
+    <li class="breadcrumb-item active" aria-current="page">Personal</li>
 @endsection
 
 @section('contenido')
     <div class="card">
-        <x-header-modal>Entrenadores</x-header-modal>
+        <x-header-modal>Personal</x-header-modal>
 
-        <x-modal title="Entrenador" route="entrenador.store">
+        <x-modal title="Personal" route="personal.store">
             <x-input name='nombre'></x-input>
             <x-input name='telefono' type="number"></x-input>
             <x-input name='horario'></x-input>
@@ -33,11 +33,11 @@
                         <td>{{ $entrenador->telefono }}</td>
                         <td>{{ $entrenador->horario }}</td>
                         <td>
-                            <a href="{{ route('entrenador.show', $entrenador->id) }}"
+                            <a href="{{ route('personal.show', $entrenador->id) }}"
                                 class="btn btn-primary btn-sm">Eventos</a>
                         </td>
                         <td>
-                            <a href="{{ route('entrenador.edit', $entrenador) }}" class="btn btn-secondary btn-sm">Editar</a>
+                            <a href="{{ route('personal.edit', $entrenador) }}" class="btn btn-secondary btn-sm">Editar</a>
                         </td>
                     </tr>
                 @endforeach

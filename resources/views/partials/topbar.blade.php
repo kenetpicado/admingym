@@ -21,7 +21,7 @@
                         Administracion
                     </a>
                     <div class="dropdown-menu mx-1">
-                        <a class="dropdown-item" href="{{ route('entrenador.index') }}">Entrenadores</a>
+                        <a class="dropdown-item" href="{{ route('personal.index') }}">Personal</a>
                         <a class="dropdown-item" href="{{ route('precios.index') }}">Precios</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('ingresos.index') }}">Ingresos</a>

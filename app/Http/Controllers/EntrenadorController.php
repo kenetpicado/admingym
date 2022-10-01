@@ -19,7 +19,7 @@ class EntrenadorController extends Controller
     public function store(StoreEntrenadorRequest $request)
     {
         Entrenador::create($request->all());
-        return redirect()->route('entrenador.index')->with('info', config('app.add'));
+        return redirect()->route('personal.index')->with('info', config('app.add'));
     }
 
     //Ver eventos de un entrenador
@@ -39,6 +39,6 @@ class EntrenadorController extends Controller
     public function update(StoreEntrenadorRequest $request, Entrenador $entrenador)
     {
         $entrenador->update($request->all());
-        return redirect()->route('entrenador.index')->with('info', config('app.update'));
+        return redirect()->route('personal.index')->with('info', config('app.update'));
     }
 }

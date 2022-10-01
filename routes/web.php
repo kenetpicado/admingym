@@ -23,7 +23,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('save/clientes', [ClienteController::class, 'store'])
         ->name('clientes.store');
 
-    Route::resource('entrenador', EntrenadorController::class)
+    Route::resource('personal', EntrenadorController::class)
+        ->parameters(['personal' => 'entrenador'])
         ->except(['destroy', 'create']);
 
     Route::resource('precios', PrecioController::class)

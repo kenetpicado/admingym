@@ -3,7 +3,7 @@
 @section('title', 'Eventos')
 
 @section('bread')
-    <li class="breadcrumb-item"><a href="{{ route('entrenador.index') }}">Entrenadores</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('personal.index') }}">Personal</a></li>
     <li class="breadcrumb-item active" aria-current="page">Eventos</li>
 @endsection
 
