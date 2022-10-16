@@ -3,7 +3,7 @@
 <div class="form-group">
     <label>{{ ucfirst($label) }}</label>
     <input type={{ $type }} class="form-control @error($name) is-invalid @enderror" name="{{ $name }}"
-        autocomplete="off" value="{{ old($name, $val) }}">
+        wire:model.defer="{{ $name }}">
 
     @error($name)
         <span class="invalid-feedback" role="alert">

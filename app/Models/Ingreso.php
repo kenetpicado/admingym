@@ -32,16 +32,4 @@ class Ingreso extends Model
             ->where('created_at', '>=', date('Y-m-' . '01'))
             ->get(['monto', 'beca']);
     }
-
-    public static function getBetween($request)
-    {
-        return Ingreso::whereBetween('created_at', [$request->inicio, $request->fin])
-            ->oldest('created_at')
-            ->get();
-    }
-
-    public static function getCategoria($request)
-    {
-        return Ingreso::where('concepto', 'like', '%' . $request->categoria . '%')->get();
-    }
 }

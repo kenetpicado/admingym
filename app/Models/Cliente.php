@@ -17,18 +17,6 @@ class Cliente extends Model
         'nombre' => Ucwords::class,
     ];
 
-    public static function index()
-    {
-        return DB::table('clientes')
-            ->select([
-                'id',
-                'nombre',
-                'sexo',
-                DB::raw('(select count(*) from planes where clientes.id = planes.cliente_id) as planes_count')
-            ])
-            ->paginate(20);
-    }
-
     public function planes()
     {
         return $this->hasMany(Plan::class);

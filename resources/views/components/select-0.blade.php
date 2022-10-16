@@ -2,17 +2,9 @@
 
 <div class="form-group">
     <label>{{ ucfirst($label) }}</label>
-    <select name="{{ $name }}" class="form-control @error($name) is-invalid @enderror" autofocus>
-
-        <option selected disabled value="">Seleccionar</option>
-
-        @foreach ($items as $item)
-            <option value="{{ $item->id }}"
-                {{ old($name) == $item->id || $old == $item->id ? 'selected' : '' }}>
-                {{ $item->nombre }}
-            </option>
-        @endforeach
-
+    <select name="{{ $name }}" class="form-control @error($name) is-invalid @enderror" autofocus
+        wire:model.defer="{{ $name }}">
+        {{ $slot }}
     </select>
 
     @error($name)
