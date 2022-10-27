@@ -3,11 +3,14 @@
 namespace App\Http\Livewire;
 
 use App\Models\Precio;
+use App\Traits\MyAlerts;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Precios extends Component
 {
+    use MyAlerts;
+    
     public $sub_id, $servicio, $plan, $monto;
 
     public function resetInputFields()
@@ -41,8 +44,8 @@ class Precios extends Component
         ]);
 
         Precio::updateOrCreate(['id' => $this->sub_id], $data);
-        session()->flash('message',  config('app.add'));
-        $this->reset();
+        $this->success(1);
+        $this->resetInputFields();
         $this->emit('close-create-modal');
     }
 }

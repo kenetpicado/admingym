@@ -15,11 +15,8 @@
 
     <x-table-head>
         @slot('header')
-            <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <div class="alert alert-secondary" role="alert">
                 Pesos del cliente: {{ $cliente->nombre }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
         @endslot
 
@@ -35,7 +32,18 @@
                     <td>{{ $peso->peso }} libras</td>
                     <td>{{ $peso->created_at }}</td>
                     <td>
-                        <button wire:click="edit({{ $peso->id }})" class="btn btn-secondary btn-sm">Editar</button>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Acciones
+                            </button>
+                            <div class="dropdown-menu">
+                                <button type="button" class="dropdown-item"
+                                    wire:click="edit({{ $peso->id }})">Editar</button>
+                                <button type="button" class="dropdown-item"
+                                    onclick="delete_element({{ $peso->id }})">Eliminar</button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @empty

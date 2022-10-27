@@ -7,6 +7,7 @@ use App\Models\Precio;
 use App\Models\Registro;
 use App\Models\Reporte;
 use App\Services\my_services;
+use App\Traits\MyAlerts;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,6 +15,7 @@ use Livewire\WithPagination;
 class Reportes extends Component
 {
     use WithPagination;
+    use MyAlerts;
     protected $paginationTheme = 'bootstrap';
 
     public $servicio = "PESAS";
@@ -40,10 +42,10 @@ class Reportes extends Component
         return view('livewire.reportes', compact('reportes', 'registro'));
     }
 
-    public function delete($reporte_id)
+    public function delete_reporte($reporte_id)
     {
         Reporte::find($reporte_id)->delete();
-        session()->flash('message',  config('app.deleted'));
+        $this->delete();
     }
 
     /* Cargar modal para relizar un pago */
@@ -75,7 +77,7 @@ class Reportes extends Component
         ]);
 
         Plan::create($data);
-        session()->flash('message',  config('app.add'));
+        $this->success();
         $this->resetInputFields();
         $this->emit('close-pagar-modal');
     }

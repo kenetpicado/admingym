@@ -2,7 +2,7 @@
 
 <div class="form-group">
     <label>{{ ucfirst($label) }}</label>
-    <input list={{ $list }} type={{ $type }} class="form-control @error($name) is-invalid @enderror"
+    <input list="categorias" type={{ $type }} class="form-control @error($name) is-invalid @enderror"
         name="{{ $name }}" autocomplete="off" value="{{ old($name, $val) }}">
 
     @error($name)

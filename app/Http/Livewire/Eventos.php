@@ -4,11 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Entrenador;
 use App\Models\Evento;
+use App\Traits\MyAlerts;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Eventos extends Component
 {
+    use MyAlerts;
     public $persona, $entrenador_id;
     public $sub_id, $nota, $created_at;
     public $monto = 0;
@@ -50,7 +52,7 @@ class Eventos extends Component
         $data = $this->validate();
 
         Evento::updateOrCreate(['id' => $this->sub_id], $data);
-        session()->flash('message', $this->sub_id ?  config('app.update') : config('app.add'));
+        $this->success($this->sub_id);
         $this->resetInputFields();
         $this->emit('close-create-modal');
     }

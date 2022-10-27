@@ -4,11 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Models\Cliente;
 use App\Models\Peso;
+use App\Traits\MyAlerts;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Pesos extends Component
 {
+    use MyAlerts;
+
     public $cliente, $peso, $created_at, $sub_id, $cliente_id;
 
     public function resetInputFields()
@@ -16,6 +19,8 @@ class Pesos extends Component
         $this->reset(['peso', 'sub_id']);
         $this->resetErrorBag();
     }
+
+    protected $listeners = ['delete_element'];
 
     public function mount($cliente_id)
     {
@@ -40,7 +45,7 @@ class Pesos extends Component
         ]);
 
         Peso::updateOrCreate(['id' => $this->sub_id], $data);
-        session()->flash('message', $this->sub_id ?  config('app.update') : config('app.add'));
+        $this->success($this->sub_id);
         $this->resetInputFields();
         $this->emit('close-create-modal');
     }
@@ -53,5 +58,11 @@ class Pesos extends Component
         $this->peso = $peso->peso;
         $this->created_at = $peso->created_at;
         $this->emit('open-create-modal');
+    }
+
+    public function delete_element($id)
+    {
+        Peso::find($id)->delete();
+        $this->delete();
     }
 }

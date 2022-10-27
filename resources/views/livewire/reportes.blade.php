@@ -59,7 +59,7 @@
                             class="btn btn-primary  btn-sm rounded-3">Renovar</button>
                     </td>
                     <td>
-                        <button wire:click="delete({{ $reporte->id }})"
+                        <button wire:click="delete_reporte({{ $reporte->id }})"
                             class="btn btn-secondary btn-sm rounded-3">Eliminar</button>
                     </td>
                 </tr>

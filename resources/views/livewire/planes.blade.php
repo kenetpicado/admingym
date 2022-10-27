@@ -69,7 +69,19 @@
                         </div>
                     </td>
                     <td>{{ $plan->nota }}</td>
-                    <td><button wire:click="edit({{ $plan->id }})" class="btn btn-sm btn-secondary">Editar</button>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Acciones
+                            </button>
+                            <div class="dropdown-menu">
+                                <button type="button" class="dropdown-item"
+                                    wire:click="edit({{ $plan->id }})">Editar</button>
+                                <button type="button" class="dropdown-item"
+                                    onclick="delete_element({{ $plan->id }})">Eliminar</button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @empty

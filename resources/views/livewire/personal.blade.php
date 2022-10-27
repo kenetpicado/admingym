@@ -37,7 +37,18 @@
                         <a href="{{ route('eventos', $persona->id) }}" class="btn btn-primary btn-sm">Eventos</a>
                     </td>
                     <td>
-                        <button wire:click="edit({{ $persona->id }})" class="btn btn-secondary btn-sm">Editar</button>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Acciones
+                            </button>
+                            <div class="dropdown-menu">
+                                <button type="button" class="dropdown-item"
+                                    wire:click="edit({{ $persona->id }})">Editar</button>
+                                <button type="button" class="dropdown-item"
+                                    onclick="delete_element({{ $persona->id }})">Eliminar</button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach

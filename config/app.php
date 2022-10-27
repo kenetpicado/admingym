@@ -17,6 +17,7 @@ return [
     'add' => 'Registro guardado correctamente',
     'update' => 'Registro actualizado correctamente',
     'deleted' => 'Registro eliminado correctamente',
+    'undeleted' => 'No es posible eliminar este registro',
     'noprice' => 'No hay precio para el plan seleccionado',
 
     /*

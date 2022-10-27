@@ -6,6 +6,7 @@ use App\Models\Plan;
 use App\Models\Precio;
 use App\Models\Registro;
 use App\Services\my_services;
+use App\Traits\MyAlerts;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,10 +14,13 @@ use Livewire\WithPagination;
 class Planes extends Component
 {
     use WithPagination;
+    use MyAlerts;
     protected $paginationTheme = 'bootstrap';
 
     public $search;
     public $sub_id, $servicio, $plan, $beca, $created_at, $nota, $fecha_fin, $monto;
+
+    protected $listeners = ['delete_element'];
 
     public function resetInputFields()
     {
@@ -84,8 +88,14 @@ class Planes extends Component
 
         Plan::find($this->sub_id)->update($data);
 
-        session()->flash('message',  config('app.update'));
-        $this->reset();
+        $this->success(1);
+        $this->resetInputFields();
         $this->emit('close-create-modal');
+    }
+
+    public function delete_element($id)
+    {
+        Plan::find($id)->delete();
+        $this->delete();
     }
 }

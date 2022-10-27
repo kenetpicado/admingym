@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Plan;
 use App\Models\Precio;
 use App\Services\my_services;
+use App\Traits\MyAlerts;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,6 +14,7 @@ use Livewire\WithPagination;
 class Clientes extends Component
 {
     use WithPagination;
+    use MyAlerts;
     protected $paginationTheme = 'bootstrap';
 
     public $search;
@@ -32,9 +34,12 @@ class Clientes extends Component
         'sexo' => 'required|in:M,F'
     ];
 
+    protected $listeners = ['delete_element'];
+
     public function mount()
     {
         $this->created_at = date('Y-m-d');
+        $this->fecha = date('Y-m-d');
     }
 
     public function render()
@@ -57,23 +62,24 @@ class Clientes extends Component
 
     public function resetInputFields()
     {
-        $this->resetExcept(['created_at']);
+        $this->resetExcept(['created_at', 'fecha']);
         $this->resetErrorBag();
     }
 
-     /* Guardar cliente */
+    /* Guardar cliente */
     public function store()
     {
         $data = $this->validate();
 
         Cliente::updateOrCreate(['id' => $this->sub_id], $data);
 
-        session()->flash('message', $this->sub_id ?  config('app.update') : config('app.add') );
+        $this->success($this->sub_id);
+
         $this->resetInputFields();
         $this->emit('close-create-modal');
     }
 
-     /* Cargar modal para editar un cliente */
+    /* Cargar modal para editar un cliente */
     public function edit($cliente_id)
     {
         $cliente = DB::table('clientes')->find($cliente_id);
@@ -93,7 +99,7 @@ class Clientes extends Component
         $this->emit('open-pagar-modal');
     }
 
-     /* Guardar pago */
+    /* Guardar pago */
     public function pagar_store()
     {
         $this->monto = Precio::getPrice($this->servicio, $this->plan);
@@ -113,8 +119,20 @@ class Clientes extends Component
         ]);
 
         Plan::create($data);
-        session()->flash('message',  'Pago guardado correctamente');
+        $this->alert('success', config('app.add'));
         $this->resetInputFields();
         $this->emit('close-pagar-modal');
+    }
+
+    public function delete_element($id)
+    {
+        $cliente = Cliente::find($id);
+
+        if ($cliente->planes->count() > 0) {
+            $this->delete(0);
+        } else {
+            $cliente->delete();
+            $this->delete();
+        }
     }
 }

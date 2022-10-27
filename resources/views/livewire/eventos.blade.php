@@ -24,11 +24,8 @@
 
     <x-table-head>
         @slot('header')
-            <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+            <div class="alert alert-secondary" role="alert">
                 Eventos de: {{ $persona->nombre }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
         @endslot
 
@@ -40,14 +37,18 @@
         @endslot
 
         <tbody>
-            @foreach ($eventos as $evento)
+            @forelse ($eventos as $evento)
                 <tr>
                     <td>{{ $evento->created_at }}</td>
                     <td>{{ $evento->tipo }}</td>
                     <td>C$ {{ $evento->monto ?? '-' }}</td>
                     <td>{{ $evento->nota }}</td>
                 </tr>
-            @endforeach
+                @empty
+                <tr class="text-center">
+                    <td colspan="4">No hay registros</td>
+                </tr>
+            @endforelse
         </tbody>
         @slot('links')
         @endslot

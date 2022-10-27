@@ -3,11 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\Entrenador;
+use App\Traits\MyAlerts;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Personal extends Component
 {
+    use MyAlerts;
     public $sub_id, $nombre, $telefono, $horario;
 
     public function resetInputFields()
@@ -15,6 +17,8 @@ class Personal extends Component
         $this->reset();
         $this->resetErrorBag();
     }
+
+    protected $listeners = ['delete_element'];
 
     public function render()
     {
@@ -34,8 +38,8 @@ class Personal extends Component
         ]);
 
         Entrenador::updateOrCreate(['id' => $this->sub_id], $data);
-        session()->flash('message', $this->sub_id ?  config('app.update') : config('app.add'));
-        $this->reset();
+        $this->success($this->sub_id);
+        $this->resetInputFields();
         $this->emit('close-create-modal');
     }
 
@@ -48,5 +52,11 @@ class Personal extends Component
         $this->telefono = $persona->telefono;
         $this->horario = $persona->horario;
         $this->emit('open-create-modal');
+    }
+
+    public function delete_element($id)
+    {
+        Entrenador::find($id)->delete();
+        $this->delete();
     }
 }

@@ -8,7 +8,19 @@
     <x-header-modal>Contabilidad</x-header-modal>
 
     <x-modal.create label="Registro">
-        <x-input name='concepto'></x-input>
+        <span>
+            Agregando un nuevo registro a la tabla
+            <h5 class="font-weight-bold text-uppercase mb-3">{{ $table }}</h5>
+        </span>
+
+        <x-input-list name="concepto"></x-input-list>
+
+        @if ($table == 'ingresos')
+            <x-cat-ingresos></x-cat-ingresos>
+        @else
+            <x-cat-egresos></x-cat-egresos>
+        @endif
+
         <x-input name='descripcion' text="Descripción"></x-input>
         <x-input name='monto'></x-input>
         <x-input name='created_at' type='date' label="Fecha"></x-input>
@@ -29,15 +41,14 @@
                 <div class="col-3">
                     <input type="date" class="form-control " wire:model="end">
                 </div>
-
+                <div class="col-3">
+                    <input type="search" placeholder="Buscar Concepto" class="form-control" list="categorias" wire:model="search_concepto">
+                </div>
             </div>
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <div class="alert alert-primary" role="alert">
                 De {{ $start }} hasta {{ $end }} se han encontrado {{ $registros->count() }}
                 {{ $table }} con un total de
                 C$ {{ $registros->sum('monto') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
         @endslot
         @slot('title')
@@ -52,7 +63,7 @@
                 <tr>
                     <td>{{ $registro->concepto }}</td>
                     <td>{{ $registro->descripcion }}</td>
-                    <td>{{ $registro->monto }}</td>
+                    <td>C$ {{ $registro->monto }}</td>
                     <td>{{ $registro->created_at }}</td>
                     <td>
                         <button wire:click="edit({{ $registro->id }})" class="btn btn-secondary btn-sm">Editar</button>

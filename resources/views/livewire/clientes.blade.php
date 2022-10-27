@@ -75,9 +75,9 @@
                     <td data-title="ID">{{ $cliente->id }}</td>
                     <td data-title="Nombre">
                         @if ($cliente->planes_count > 0)
-                            <i class="fas fa-check-circle fa-sm text-success"></i>
+                            <i class="fas fa-circle fa-sm mr-2 text-success"></i>
                         @else
-                            <i class="fas fa-circle fa-sm text-secondary"></i>
+                            <i class="fas fa-circle fa-sm mr-2 text-secondary"></i>
                         @endif
                         {{ $cliente->nombre }}
                     </td>
@@ -89,7 +89,18 @@
                         <a href="{{ route('pesos', $cliente->id) }}" class="btn btn-sm btn-primary">Pesos</a>
                     </td>
                     <td>
-                        <button wire:click="edit({{ $cliente->id }})" class="btn btn-sm btn-secondary">Editar</button>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Acciones
+                            </button>
+                            <div class="dropdown-menu">
+                                <button type="button" class="dropdown-item"
+                                    wire:click="edit({{ $cliente->id }})">Editar</button>
+                                <button type="button" class="dropdown-item"
+                                    onclick="delete_element({{ $cliente->id }})">Eliminar</button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @empty

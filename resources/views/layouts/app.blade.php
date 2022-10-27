@@ -9,6 +9,18 @@
     <title>{{ config('app.name') }} - @yield('title')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
+
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -29,7 +41,16 @@
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
     @livewireScripts
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <x-livewire-alert::scripts />
     <script>
+         function delete_element($id) {
+            $result = confirm("¿Desea eliminar este registro? Esta opcion no se puede deshacer");
+            if ($result)
+                Livewire.emit('delete_element', $id)
+        };
+
         Livewire.on('close-create-modal', function() {
             document.getElementById("close-create-modal").click();
         });

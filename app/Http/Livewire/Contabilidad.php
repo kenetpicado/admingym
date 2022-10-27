@@ -10,6 +10,7 @@ class Contabilidad extends Component
     public $table = "ingresos";
     public $start, $end;
     public $table_insert = "ingresos";
+    public $search_concepto = null;
 
     public $sub_id, $concepto, $descripcion, $monto, $created_at;
 
@@ -35,6 +36,9 @@ class Contabilidad extends Component
     {
         $registros = DB::table($this->table)
             ->whereBetween('created_at', [$this->start, $this->end])
+            ->when($this->search_concepto, function ($q) {
+                $q->where('concepto', 'like', "%" . $this->search_concepto . "%");
+            })
             ->latest('id')
             ->get();
 
