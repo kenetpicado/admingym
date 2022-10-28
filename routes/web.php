@@ -27,8 +27,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('contabilidad',  Contabilidad::class)->name('contabilidad');
 
-    Route::resource('user', UserController::class);
-    Route::put('password/{id}', [UserController::class, 'password'])->name('password');
+    Route::get('perfil',  Perfil::class)->name('perfil');
 });
 
 Auth::routes(['register' => false]);

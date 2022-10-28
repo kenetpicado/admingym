@@ -25,8 +25,6 @@
                         <a class="dropdown-item" href="{{ route('precios') }}">Precios</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('contabilidad') }}">Contabilidad</a>
-                        {{-- <a class="dropdown-item" href="{{ route('ingresos.index') }}">Ingresos</a>
-                        <a class="dropdown-item" href="{{ route('egresos.index') }}">Egresos</a> --}}
                     </div>
                 </li>
             </ul>
@@ -42,7 +40,7 @@
                     {{ auth()->user()->name }}
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('user.edit', auth()->user()->id) }}">Perfil</a>
+                    <a class="dropdown-item" href="{{ route('perfil') }}">Perfil</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 

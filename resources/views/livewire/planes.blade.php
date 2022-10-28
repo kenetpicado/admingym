@@ -95,5 +95,4 @@
             {!! $planes->links() !!}
         @endslot
     </x-table-head>
-
 </div>
