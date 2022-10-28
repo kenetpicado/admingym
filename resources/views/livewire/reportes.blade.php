@@ -35,6 +35,11 @@
 
     <x-table-head>
         @slot('header')
+            <div class="row mb-3">
+                <div class="col-3">
+                    <input type="search" class="form-control " wire:model="search" placeholder="Buscar Cliente">
+                </div>
+            </div>
             <div class="card-title">
                 <div class="alert alert-danger" role="alert">
                     {{ $registro->status ?? '0' }} nuevos planes expirados.

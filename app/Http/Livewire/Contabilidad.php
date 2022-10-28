@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Traits\MyAlerts;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Contabilidad extends Component
 {
+    use MyAlerts;
+
     public $table = "ingresos";
     public $start, $end;
     public $table_insert = "ingresos";
@@ -20,6 +23,8 @@ class Contabilidad extends Component
         'monto' => 'required|numeric|gt:0',
         'created_at' => 'required|date',
     ];
+
+    protected $listeners = ['delete_element'];
 
     public function resetInputFields()
     {
@@ -64,8 +69,14 @@ class Contabilidad extends Component
         $data = $this->validate();
         DB::table($this->table)->updateOrInsert(['id' => $this->sub_id], $data);
 
-        session()->flash('message', $this->sub_id ?  config('app.update') : config('app.add'));
+        $this->success($this->sub_id);
         $this->resetInputFields();
         $this->emit('close-create-modal');
+    }
+
+    public function delete_element($id)
+    {
+        DB::table($this->table)->delete($id);
+        $this->delete();
     }
 }

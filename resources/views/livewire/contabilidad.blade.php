@@ -66,7 +66,18 @@
                     <td>C$ {{ $registro->monto }}</td>
                     <td>{{ $registro->created_at }}</td>
                     <td>
-                        <button wire:click="edit({{ $registro->id }})" class="btn btn-secondary btn-sm">Editar</button>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Acciones
+                            </button>
+                            <div class="dropdown-menu">
+                                <button type="button" class="dropdown-item"
+                                    wire:click="edit({{ $registro->id }})">Editar</button>
+                                <button type="button" class="dropdown-item"
+                                    onclick="delete_element({{ $registro->id }})">Eliminar</button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @empty

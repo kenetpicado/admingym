@@ -30,6 +30,6 @@ class Reporte extends Model
         ])
             ->join('clientes', 'reportes.cliente_id', '=', 'clientes.id')
             ->latest('reportes.id')
-            ->paginate(10);
+            ->paginate(20);
     }
 }

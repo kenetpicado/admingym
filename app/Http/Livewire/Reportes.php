@@ -24,6 +24,8 @@ class Reportes extends Component
     public $created_at, $nota, $fecha_fin, $monto, $nombre;
     public $cliente_id;
 
+    public $search = null;
+
     public function mount()
     {
         $this->created_at = date('Y-m-d');
@@ -38,7 +40,23 @@ class Reportes extends Component
     public function render()
     {
         $registro = Registro::getToday();
-        $reportes = Reporte::index();
+        //$reportes = Reporte::index();
+
+        $reportes =  Reporte::select([
+            'reportes.id',
+            'mensaje',
+            'created_at',
+            'clientes.id as cliente_id',
+            'clientes.nombre as cliente_nombre',
+        ])
+            ->join('clientes', 'reportes.cliente_id', '=', 'clientes.id')
+            ->latest('reportes.id')
+            ->when($this->search, function ($q) {
+                $q->where('clientes.nombre', 'like', '%' . $this->search . '%')
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+            })
+            ->paginate(20);
+
         return view('livewire.reportes', compact('reportes', 'registro'));
     }
 
