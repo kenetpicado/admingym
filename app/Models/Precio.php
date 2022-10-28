@@ -15,6 +15,6 @@ class Precio extends Model
     {
         return Precio::where('servicio', $servicio)
             ->where('plan', $plan)
-            ->first();
+            ->value('monto');
     }
 }

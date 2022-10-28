@@ -1,4 +1,4 @@
-<datalist id="egresos-categorias">
+<datalist id="categorias">
     <option value="Agua">
     <option value="Articulos-Limpieza">
     <option value="Bebidas">

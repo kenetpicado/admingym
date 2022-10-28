@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -8,82 +9,25 @@ use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::post('clientes', [ClienteController::class, 'search'])
-        ->name('clientes.search');
+    Route::get('/', Home::class)->name('index');
 
-    Route::post('planes', [PlanController::class, 'search'])
-        ->name('planes.search');
+    Route::get('planes', Planes::class)->name('planes');
 
-    Route::resource('pesos', PesoController::class)->only(['store', 'edit', 'update']);
-    Route::resource('reportes',  ReporteController::class)->only(['index', 'destroy']);
+    Route::get('clientes', Clientes::class)->name('clientes');
 
-    Route::resource('clientes', ClienteController::class)
-        ->except(['destroy', 'store', 'create']);
+    Route::get('precios', Precios::class)->name('precios');
 
-    Route::post('save/clientes', [ClienteController::class, 'store'])
-        ->name('clientes.store');
+    Route::get('pesos/{cliente_id}', Pesos::class)->name('pesos');
 
-    Route::resource('personal', EntrenadorController::class)
-        ->parameters(['personal' => 'entrenador'])
-        ->except(['destroy', 'create']);
+    Route::get('personal', Personal::class)->name('personal');
 
-    Route::resource('precios', PrecioController::class)
-        ->only(['index', 'edit', 'update']);
-    Route::resource('eventos', EventoController::class)
-        ->only(['store']);
+    Route::get('eventos/{persona_id}', Eventos::class)->name('eventos');
 
-    Route::resource('ingresos', IngresoController::class)
-        ->except(['show', 'destroy', 'create']);
+    Route::get('reportes',  Reportes::class)->name('reportes');
 
-    Route::resource('egresos', EgresoController::class)
-        ->except(['show', 'destroy', 'create']);
+    Route::get('contabilidad',  Contabilidad::class)->name('contabilidad');
 
-    Route::get('planes/{cliente}/create', [PlanController::class, 'create'])
-        ->name('planes.create');
-
-    Route::resource('planes', PlanController::class)
-        ->except(['create', 'store'])
-        ->parameters(['planes' => 'plan']);
-
-    Route::post('save/planes', [PlanController::class, 'store'])
-        ->name('planes.store');
-
-    Route::resource('/', HomeController::class);
-    Route::resource('user', UserController::class);
-
-    //INGRESOS
-    Route::view('rango/ingresos', 'ingreso.rango')->name('ingresos.rango');
-    Route::view('categorias/ingresos', 'ingreso.categorias')->name('ingresos.categorias');
-
-    Route::post('rango/ingresos', [IngresoController::class, 'get_rango'])->name('ingresos.getrango');
-    Route::post('categorias/ingresos', [IngresoController::class, 'get_categorias'])->name('ingresos.getcategorias');
-
-    //EGRESOS
-    Route::view('rango/egresos', 'egreso.rango')->name('egresos.rango');
-    Route::view('categorias/egresos', 'egreso.categorias')->name('egresos.categorias');
-
-    Route::post('rango/egresos', [EgresoController::class, 'get_rango'])->name('egresos.getrango');
-    Route::post('categorias/egresos', [EgresoController::class, 'get_categorias'])->name('egresos.getcategorias');
-    Route::put('password/{id}', [UserController::class, 'password'])->name('password');
+    Route::get('perfil',  Perfil::class)->name('perfil');
 });
 
 Auth::routes(['register' => false]);
-
-// Route::get('mantenimiento', function () {
-//     $egresos = Ingreso::all();
-
-//     // $este = Ingreso::find(12)->concepto;
-//     // return utf8_decode(strtolower($este));
-//     // return ($este);
-
-//     foreach ($egresos as $key => $egreso) {
-//         try {
-//             $egreso->update([
-//                 'concepto' => utf8_decode(strtolower($egreso->concepto)),
-//                 'descripcion' => utf8_decode(strtolower($egreso->descripcion)),
-//             ]);
-//         } catch (Exception $e) {
-//             return dd($egreso);
-//         }
-//     }
-// });

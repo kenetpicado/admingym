@@ -10,28 +10,27 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item mx-1">
                     <a class="nav-link {{ request()->is('clientes*') ? 'active' : '' }}"
-                        href="{{ route('clientes.index') }}">Clientes</a>
+                        href="{{ route('clientes') }}">Clientes</a>
                 </li>
                 <li class="nav-item mx-1">
                     <a class="nav-link {{ request()->is('planes*') ? 'active' : '' }}"
-                        href="{{ route('planes.index') }}">Planes</a>
+                        href="{{ route('planes') }}">Planes</a>
                 </li>
                 <li class="nav-item dropdown mx-1">
                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                         Administracion
                     </a>
                     <div class="dropdown-menu mx-1">
-                        <a class="dropdown-item" href="{{ route('personal.index') }}">Personal</a>
-                        <a class="dropdown-item" href="{{ route('precios.index') }}">Precios</a>
+                        <a class="dropdown-item" href="{{ route('personal') }}">Personal</a>
+                        <a class="dropdown-item" href="{{ route('precios') }}">Precios</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('ingresos.index') }}">Ingresos</a>
-                        <a class="dropdown-item" href="{{ route('egresos.index') }}">Egresos</a>
+                        <a class="dropdown-item" href="{{ route('contabilidad') }}">Contabilidad</a>
                     </div>
                 </li>
             </ul>
 
             <div class="nav-item mx-1">
-                <a class="nav-link" href="{{ route('reportes.index') }}">
+                <a class="nav-link" href="{{ route('reportes') }}">
                     <i class="fas fa-bell fa-fw"></i>
                 </a>
             </div>
@@ -41,7 +40,7 @@
                     {{ auth()->user()->name }}
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('user.edit', auth()->user()->id) }}">Perfil</a>
+                    <a class="dropdown-item" href="{{ route('perfil') }}">Perfil</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 

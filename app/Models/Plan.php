@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Reporte;
-use Illuminate\Support\Facades\DB;
 
 class Plan extends Model
 {
@@ -44,31 +43,5 @@ class Plan extends Model
         }
 
         return $registro;
-    }
-
-    public static function index()
-    {
-        return Plan::join('clientes', 'planes.cliente_id', '=', 'clientes.id')
-            ->orderBy('fecha_fin')
-            ->select([
-                'planes.id',
-                'clientes.nombre as cliente_nombre',
-                'created_at',
-                'fecha_fin',
-                'nota',
-                'servicio'
-            ])
-            ->paginate(20);
-    }
-
-    public static function show($plan_id)
-    {
-        return Plan::where('planes.id', $plan_id)
-            ->select([
-                'planes.*',
-                'clientes.nombre as cliente'
-            ])
-            ->join('clientes', 'planes.cliente_id', '=', 'clientes.id')
-            ->first();
     }
 }

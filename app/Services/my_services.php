@@ -13,29 +13,10 @@ class my_services
         return $meses[date('n') - 1];
     }
 
-    public function servicios()
-    {
-        $servicios = [];
-        array_push($servicios, new Items('PESAS'));
-        array_push($servicios, new Items('ZUMBA'));
-        array_push($servicios, new Items('SPINNING'));
-        array_push($servicios, new Items('ZUMBA+PESAS'));
-        return $servicios;
-    }
-
-    public function planes()
-    {
-        $servicios = [];
-        array_push($servicios, new Items('MENSUAL'));
-        array_push($servicios, new Items('QUINCENAL'));
-        array_push($servicios, new Items('SEMANAL'));
-        array_push($servicios, new Items('DIA'));
-        return $servicios;
-    }
-
     public function get_end($value, $fecha)
     {
         $date =  Carbon::create($fecha);
+        $new = null;
 
         switch ($value) {
             case 'MENSUAL':
