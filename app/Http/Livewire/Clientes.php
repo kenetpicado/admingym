@@ -29,9 +29,17 @@ class Clientes extends Component
     public $cliente_id;
 
     protected $rules = [
-        'nombre' => 'required|max:50',
-        'fecha' => 'required|date',
-        'sexo' => 'required|in:M,F'
+        'nombre'    => 'required|max:50',
+        'fecha'     => 'required|date',
+        'sexo'      => 'required|in:M,F',
+
+        'servicio'  => 'required',
+        'plan'      => 'required',
+        'beca'      => 'required|numeric|min:0',
+        'created_at'=> 'required|date',
+        'fecha_fin' => 'required|date',
+        'nota'      => 'nullable|max:30',
+        'monto'     => 'required'
     ];
 
     protected $listeners = ['delete_element'];
@@ -55,6 +63,7 @@ class Clientes extends Component
                 $q->where('nombre', 'like', '%' . $this->search . '%')
                     ->orWhere('id', 'like', '%' . $this->search . '%');
             })
+            ->latest('id')
             ->paginate(20);
 
         return view('livewire.clientes', compact('clientes'));
@@ -69,9 +78,14 @@ class Clientes extends Component
     /* Guardar cliente */
     public function store()
     {
+        $this->monto = Precio::getPrice($this->servicio, $this->plan);
+        $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
+
         $data = $this->validate();
 
-        Cliente::updateOrCreate(['id' => $this->sub_id], $data);
+        $cliente = Cliente::updateOrCreate(['id' => $this->sub_id], $data);
+
+        $cliente->planes()->create($data);
 
         $this->success($this->sub_id);
 
@@ -106,20 +120,20 @@ class Clientes extends Component
         $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
 
         $data = $this->validate([
-            'servicio' => 'required',
-            'plan' => 'required',
-            'beca' => 'required|numeric|min:0',
-            'created_at' => 'required|date',
+            'servicio'  => 'required',
+            'plan'      => 'required',
+            'beca'      => 'required|numeric|min:0',
+            'created_at'=> 'required|date',
             'fecha_fin' => 'required|date',
-            'nota' => 'nullable|max:30',
-            'monto' => 'required',
-            'cliente_id' => 'required',
+            'nota'      => 'nullable|max:30',
+            'monto'     => 'required',
+            'cliente_id'=> 'required',
         ], [
             'monto.required' => 'No hay un precio para el servicio y plan seleccionado.'
         ]);
 
         Plan::create($data);
-        $this->alert('success', config('app.add'));
+        $this->success();
         $this->resetInputFields();
         $this->emit('close-pagar-modal');
     }
