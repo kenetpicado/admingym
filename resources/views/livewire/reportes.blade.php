@@ -57,8 +57,14 @@
         <tbody>
             @foreach ($reportes as $reporte)
                 <tr>
-                    <td>Ha expirado el plan {{ $reporte->mensaje }} de {{ $reporte->cliente_nombre }}</td>
-                    <td>{{ $reporte->created_at }}</td>
+                    <td>
+                        <div class="d-block">
+                            <div class="text-xs mb-1">Plan expirado</div>
+                            <div class="font-weight-bold h6 mb-1">{{ $reporte->cliente_nombre }}</div>
+                            <div class="text-primary text-xs">{{ $reporte->mensaje }}</div>
+                        </div>
+                    </td>
+                    <td class="text-danger">{{ $reporte->created_at }}</td>
                     <td>
                         <button wire:click="pagar({{ $reporte->cliente_id }})"
                             class="btn btn-primary  btn-sm rounded-3">Renovar</button>

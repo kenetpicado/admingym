@@ -28,18 +28,24 @@ class Clientes extends Component
     public $created_at, $nota, $fecha_fin, $monto;
     public $cliente_id;
 
-    protected $rules = [
+    public $user_rules = [
         'nombre'    => 'required|max:50',
         'fecha'     => 'required|date',
         'sexo'      => 'required|in:M,F',
+    ];
 
+    public $payment_rules = [
         'servicio'  => 'required',
         'plan'      => 'required',
         'beca'      => 'required|numeric|min:0',
-        'created_at'=> 'required|date',
+        'created_at' => 'required|date',
         'fecha_fin' => 'required|date',
         'nota'      => 'nullable|max:30',
         'monto'     => 'required'
+    ];
+
+    protected $messages = [
+        'monto.required' => 'No hay un precio para el servicio y plan seleccionado.'
     ];
 
     protected $listeners = ['delete_element'];
@@ -81,11 +87,17 @@ class Clientes extends Component
         $this->monto = Precio::getPrice($this->servicio, $this->plan);
         $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
 
-        $data = $this->validate();
+        if ($this->sub_id) {
 
-        $cliente = Cliente::updateOrCreate(['id' => $this->sub_id], $data);
+            $data = $this->validate($this->user_rules);
+            Cliente::find($this->sub_id)->update($data);
+        } else {
 
-        $cliente->planes()->create($data);
+            $data = $this->validate($this->user_rules + $this->payment_rules);
+
+            $cliente = Cliente::create($data);
+            $cliente->planes()->create($data);
+        }
 
         $this->success($this->sub_id);
 
@@ -119,18 +131,7 @@ class Clientes extends Component
         $this->monto = Precio::getPrice($this->servicio, $this->plan);
         $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
 
-        $data = $this->validate([
-            'servicio'  => 'required',
-            'plan'      => 'required',
-            'beca'      => 'required|numeric|min:0',
-            'created_at'=> 'required|date',
-            'fecha_fin' => 'required|date',
-            'nota'      => 'nullable|max:30',
-            'monto'     => 'required',
-            'cliente_id'=> 'required',
-        ], [
-            'monto.required' => 'No hay un precio para el servicio y plan seleccionado.'
-        ]);
+        $data = $this->validate($this->payment_rules);
 
         Plan::create($data);
         $this->success();
@@ -140,7 +141,7 @@ class Clientes extends Component
 
     public function delete_element($id)
     {
-        $cliente = Cliente::find($id);
+        $cliente = Cliente::find($id, ['id']);
 
         if ($cliente->planes->count() > 0) {
             $this->delete(0);

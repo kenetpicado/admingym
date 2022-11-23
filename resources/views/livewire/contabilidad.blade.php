@@ -42,11 +42,13 @@
                     <input type="date" class="form-control " wire:model="end">
                 </div>
                 <div class="col-3">
-                    <input type="search" placeholder="Buscar Concepto" class="form-control" list="categorias" wire:model="search_concepto">
+                    <input type="search" placeholder="Buscar Concepto" class="form-control" list="categorias"
+                        wire:model="search_concepto">
                 </div>
             </div>
             <div class="alert alert-primary" role="alert">
-                De {{ $start }} hasta {{ $end }} se han encontrado {{ $registros->count() }}
+                De {{ date('d F y', strtotime($start)) }}, hasta {{ date('d F y', strtotime($end)) }},  se han encontrado
+                {{ $registros->count() }}
                 {{ $table }} con un total de
                 C$ {{ $registros->sum('monto') }}
             </div>
@@ -64,7 +66,7 @@
                     <td>{{ $registro->concepto }}</td>
                     <td>{{ $registro->descripcion }}</td>
                     <td>C$ {{ $registro->monto }}</td>
-                    <td>{{ $registro->created_at }}</td>
+                    <td>{{ date('d F y', strtotime($registro->created_at)) }}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"

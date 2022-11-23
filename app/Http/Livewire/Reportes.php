@@ -42,7 +42,7 @@ class Reportes extends Component
         $registro = Registro::getToday();
         //$reportes = Reporte::index();
 
-        $reportes =  Reporte::select([
+        $reportes = Reporte::select([
             'reportes.id',
             'mensaje',
             'created_at',

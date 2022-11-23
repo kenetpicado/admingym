@@ -19,17 +19,8 @@ class Reporte extends Model
         'cliente_nombre' => Upper::class
     ];
 
-    public static function index()
+    public function getCreatedAtAttribute($value)
     {
-        return Reporte::select([
-            'reportes.id',
-            'mensaje',
-            'created_at',
-            'clientes.id as cliente_id',
-            'clientes.nombre as cliente_nombre',
-        ])
-            ->join('clientes', 'reportes.cliente_id', '=', 'clientes.id')
-            ->latest('reportes.id')
-            ->paginate(20);
+        return date('d F y', strtotime($value));
     }
 }
