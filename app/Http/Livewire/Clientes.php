@@ -28,6 +28,8 @@ class Clientes extends Component
     public $created_at, $nota, $fecha_fin, $monto;
     public $cliente_id;
 
+    public $cliente = null;
+
     public $user_rules = [
         'nombre'    => 'required|max:50',
         'fecha'     => 'required|date',
@@ -133,7 +135,7 @@ class Clientes extends Component
 
         $data = $this->validate($this->payment_rules);
 
-        Plan::create($data);
+        Cliente::find($this->cliente_id)->planes()->create($data);
         $this->success();
         $this->resetInputFields();
         $this->emit('close-pagar-modal');
