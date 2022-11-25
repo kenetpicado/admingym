@@ -58,8 +58,8 @@
             @forelse ($planes as $plan)
                 <tr>
                     <td>{{ $plan->cliente_nombre }}</td>
-                    <td>{{ $plan->servicio }}</td>
-                    <td>{{ $plan->plan }}</td>
+                    <td class="text-primary">{{ $plan->servicio }}</td>
+                    <td class="text-primary">{{ $plan->plan }}</td>
                     <td>
                         <div class="badge badge-light">
                             {{ date('d-m-Y', strtotime($plan->created_at)) }}

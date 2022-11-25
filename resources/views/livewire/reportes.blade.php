@@ -37,7 +37,14 @@
         @slot('header')
             <div class="row mb-3">
                 <div class="col-3">
-                    <input type="search" class="form-control " wire:model="search" placeholder="Buscar Cliente">
+                    <input type="search" class="form-control" wire:model="search" placeholder="Buscar Cliente">
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-primary"
+                        onclick="confirm('Actualizar la lista planes vencidos?') || event.stopImmediatePropagation()"
+                        wire:click="refresh()">
+                        Actualizar Lista
+                    </button>
                 </div>
             </div>
             <div class="card-title">
@@ -49,6 +56,7 @@
 
         @slot('title')
             <th>Mensaje</th>
+            <th>Plan</th>
             <th>Fecha expiración</th>
             <th>Renovar</th>
             <th>Eliminar</th>
@@ -60,9 +68,11 @@
                     <td>
                         <div class="d-block">
                             <div class="text-xs mb-1">Plan expirado</div>
-                            <div class="font-weight-bold h6 mb-1">{{ $reporte->cliente_nombre }}</div>
-                            <div class="text-primary text-xs">{{ $reporte->mensaje }}</div>
+                            <div class="font-weight-bold h6 text-primary">{{ $reporte->cliente_nombre }}</div>
                         </div>
+                    </td>
+                    <td>
+                        {{ $reporte->mensaje }}
                     </td>
                     <td class="text-danger">{{ $reporte->created_at }}</td>
                     <td>
@@ -80,4 +90,12 @@
             {!! $reportes->links() !!}
         @endslot
     </x-table-head>
+
+    <script>
+        function refresh() {
+            result = confirm("Desea actualizar la lista de planes expirados?")
+            if (result)
+                Livewire.emit('refresh')
+        }
+    </script>
 </div>

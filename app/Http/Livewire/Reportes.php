@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Cliente;
 use App\Models\Plan;
 use App\Models\Precio;
 use App\Models\Registro;
@@ -40,7 +41,6 @@ class Reportes extends Component
     public function render()
     {
         $registro = Registro::getToday();
-        //$reportes = Reporte::index();
 
         $reportes = Reporte::select([
             'reportes.id',
@@ -98,5 +98,13 @@ class Reportes extends Component
         $this->success();
         $this->resetInputFields();
         $this->emit('close-pagar-modal');
+    }
+
+    public function refresh()
+    {
+        $clientes = Cliente::has('planes')->pluck('id');
+        Reporte::whereIn('cliente_id', $clientes)->delete();
+
+        $this->lista_actualizada();
     }
 }
