@@ -21,8 +21,6 @@ class Planes extends Component
     public float $beca = 0;
     public $sub_id, $servicio, $plan, $created_at, $nota, $fecha_fin, $monto;
 
-    protected $listeners = ['delete_element'];
-
     public function resetInputFields()
     {
         $this->reset();
@@ -97,9 +95,10 @@ class Planes extends Component
         $this->emit('close-create-modal');
     }
 
-    public function delete_element($id)
+    public function destroy(Plan $plan)
     {
-        Plan::find($id)->delete();
+        $plan->delete();
+
         $this->delete();
     }
 }

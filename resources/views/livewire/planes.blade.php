@@ -51,13 +51,19 @@
             <th>Servicio</th>
             <th>Plan</th>
             <th>Rango</th>
-            <th>Nota</th>
             <th>Editar</th>
         </x-slot>
         <tbody>
             @forelse ($planes as $plan)
                 <tr>
-                    <td>{{ $plan->cliente_nombre }}</td>
+                    <td>
+                        {{ $plan->cliente_nombre }}
+                        @isset($plan->nota)
+                            <div class="small text-primary">
+                                {{ $plan->nota }}
+                            </div>
+                        @endisset
+                    </td>
                     <td class="text-primary">{{ $plan->servicio }}</td>
                     <td class="text-primary">{{ $plan->plan }}</td>
                     <td>
@@ -68,7 +74,6 @@
                             {{ date('d-m-Y', strtotime($plan->fecha_fin)) }}
                         </div>
                     </td>
-                    <td>{{ $plan->nota }}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
@@ -78,8 +83,11 @@
                             <div class="dropdown-menu">
                                 <button type="button" class="dropdown-item"
                                     wire:click="edit({{ $plan->id }})">Editar</button>
-                                <button type="button" class="dropdown-item"
-                                    onclick="delete_element({{ $plan->id }})">Eliminar</button>
+
+                                <button type="button" wire:click="destroy({{ $plan->id }})" class="dropdown-item"
+                                    onclick="confirm_delete()">
+                                    Eliminar
+                                </button>
                             </div>
                         </div>
                     </td>
@@ -90,7 +98,6 @@
                 </tr>
             @endforelse
         </tbody>
-
         @slot('links')
             {!! $planes->links() !!}
         @endslot
