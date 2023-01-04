@@ -24,7 +24,7 @@ class Clientes extends Component
 
     public $servicio = "PESAS";
     public $plan = "MENSUAL";
-    public $beca = 0;
+    public float $beca = 0;
     public $created_at, $nota, $fecha_fin, $monto;
     public $cliente_id;
 
@@ -89,12 +89,13 @@ class Clientes extends Component
         $this->monto = Precio::getPrice($this->servicio, $this->plan);
         $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
 
-        if ($this->sub_id) {
+        if ($this->beca > 0)
+            $this->monto = $this->monto - $this->beca;
 
+        if ($this->sub_id) {
             $data = $this->validate($this->user_rules);
             Cliente::find($this->sub_id)->update($data);
         } else {
-
             $data = $this->validate($this->user_rules + $this->payment_rules);
 
             $cliente = Cliente::create($data);
@@ -132,6 +133,9 @@ class Clientes extends Component
     {
         $this->monto = Precio::getPrice($this->servicio, $this->plan);
         $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
+
+        if ($this->beca > 0)
+            $this->monto = $this->monto - $this->beca;
 
         $data = $this->validate($this->payment_rules);
 

@@ -18,7 +18,8 @@ class Planes extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search;
-    public $sub_id, $servicio, $plan, $beca, $created_at, $nota, $fecha_fin, $monto;
+    public float $beca = 0;
+    public $sub_id, $servicio, $plan, $created_at, $nota, $fecha_fin, $monto;
 
     protected $listeners = ['delete_element'];
 
@@ -73,6 +74,9 @@ class Planes extends Component
     {
         $this->monto = Precio::getPrice($this->servicio, $this->plan);
         $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
+
+        if ($this->beca > 0)
+            $this->monto = $this->monto - $this->beca;
 
         $data = $this->validate([
             'servicio' => 'required',
