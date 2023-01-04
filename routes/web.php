@@ -21,7 +21,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('personal', Personal::class)->name('personal');
 
-    Route::get('eventos/{persona_id}', Eventos::class)->name('eventos');
+    Route::get('eventos/{entrenador}', Eventos::class)->name('eventos');
 
     Route::get('reportes',  Reportes::class)->name('reportes');
 

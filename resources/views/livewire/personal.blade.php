@@ -8,9 +8,9 @@
     <x-header-modal>Personal</x-header-modal>
 
     <x-modal.create label="Personal">
-        <x-input name='entrenador.nombre'></x-input>
-        <x-input name='entrenador.telefono' type="number"></x-input>
-        <x-input name='entrenador.horario'></x-input>
+        <x-input name='entrenador.nombre' label="Nombre completo"></x-input>
+        <x-input name='entrenador.telefono' type="number" label="Telefono"></x-input>
+        <x-input name='entrenador.horario' label="Horario"></x-input>
     </x-modal.create>
 
     <x-table-head>
@@ -25,7 +25,11 @@
             @foreach ($personal as $persona)
                 <tr>
                     <td>{{ $persona->nombre }}</td>
-                    <td>{{ $persona->telefono }}</td>
+                    <td>
+                        <a target="_blank" href="https://wa.me/505{{ $persona->telefono }}">
+                            {{ $persona->telefono }} <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </td>
                     <td>{{ $persona->horario }}</td>
                     <td>
                         <a href="{{ route('eventos', $persona->id) }}" class="btn btn-primary btn-sm">Eventos</a>

@@ -20,6 +20,10 @@
         input[type="number"] {
             -moz-appearance: textfield;
         }
+
+        .table td, th {
+            vertical-align: middle !important;
+        }
     </style>
 </head>
 

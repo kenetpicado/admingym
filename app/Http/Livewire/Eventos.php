@@ -5,55 +5,63 @@ namespace App\Http\Livewire;
 use App\Models\Entrenador;
 use App\Models\Evento;
 use App\Traits\MyAlerts;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Eventos extends Component
 {
     use MyAlerts;
-    public $persona, $entrenador_id;
-    public $sub_id, $nota, $created_at;
-    public $monto = 0;
-    public $tipo = "PAGO";
+
+    public $entrenador  = null;
+    public $evento      = null;
+    public $isUpdate    = false;
+
+    public function mount(Entrenador $entrenador)
+    {
+        $this->entrenador = $entrenador;
+        $this->create_instance();
+    }
 
     protected $rules = [
-        'tipo' => 'required',
-        'monto' => 'required|numeric|min:0',
-        'nota' => 'nullable',
-        'created_at' => 'required|date',
-        'entrenador_id' => 'required'
+        'evento.tipo'           => 'required',
+        'evento.monto'          => 'required|numeric|min:0',
+        'evento.nota'           => 'nullable|max:50',
+        'evento.created_at'     => 'required|date',
+        'evento.entrenador_id'  => 'required'
     ];
-
-    public function resetInputFields()
-    {
-        $this->resetExcept(['persona', 'entrenador_id', 'created_at']);
-        $this->resetErrorBag();
-    }
-
-    public function mount($persona_id)
-    {
-        $this->created_at = date('Y-m-d');
-        $this->entrenador_id = $persona_id;
-        $this->persona = Entrenador::find($persona_id, ['id', 'nombre']);
-    }
 
     public function render()
     {
-        $eventos = DB::table('eventos')
-            ->where('entrenador_id', $this->entrenador_id)
-            ->latest('id')
-            ->get();
-        return view('livewire.eventos', compact('eventos'));
+        return view('livewire.eventos', [
+            'eventos' => Evento::entrenador($this->entrenador->id)->latest('id')->get()
+        ]);
+    }
+
+    public function resetInputFields()
+    {
+        $this->reset(['isUpdate', 'evento']);
+        $this->resetErrorBag();
+
+        $this->create_instance();
     }
 
     /* Guardar evento */
     public function store()
     {
         $data = $this->validate();
+        $this->evento->save($data);
 
-        Evento::updateOrCreate(['id' => $this->sub_id], $data);
-        $this->success($this->sub_id);
+        $this->success($this->isUpdate);
+
         $this->resetInputFields();
         $this->emit('close-create-modal');
+    }
+
+    public function create_instance()
+    {
+        $this->evento = new Evento();
+        $this->evento->monto = 0;
+        $this->evento->tipo = "PAGO";
+        $this->evento->created_at = date('Y-m-d');
+        $this->evento->entrenador_id = $this->entrenador->id;
     }
 }

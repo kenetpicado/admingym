@@ -11,46 +11,56 @@
     <x-modal.create label="Evento">
         <div class="form-group">
             <label>Seleccione un evento</label>
-            <select name="tipo" class="form-control" required wire:model.defer="tipo">
-                <option value="PAGO">REGISTRAR PAGO</option>
+            <select name="evento.tipo" class="form-control" required wire:model.defer="evento.tipo">
+                <option value="PAGO">PAGO</option>
                 <option value="INASISTENCIA">INASISTENCIA</option>
             </select>
         </div>
 
-        <x-input name='monto' type="number"></x-input>
-        <x-input name='nota'></x-input>
-        <x-input name='created_at' label="Fecha" type="date"></x-input>
+        <x-input label="Monto" name='evento.monto' type="number"></x-input>
+        <x-input label="Nota (Opcional)" name='evento.nota'></x-input>
+        <x-input label="Fecha" name='evento.created_at' label="Fecha" type="date"></x-input>
     </x-modal.create>
 
     <x-table-head>
         @slot('header')
             <div class="alert alert-secondary" role="alert">
-                Eventos de: {{ $persona->nombre }}
+                Eventos de: {{ $entrenador->nombre }}
             </div>
         @endslot
 
         @slot('title')
-            <th>Fecha</th>
             <th>Evento</th>
             <th>Monto</th>
-            <th>Nota</th>
+            <th>Fecha</th>
         @endslot
 
         <tbody>
             @forelse ($eventos as $evento)
                 <tr>
-                    <td>{{ $evento->created_at }}</td>
-                    <td>{{ $evento->tipo }}</td>
-                    <td>C$ {{ $evento->monto ?? '-' }}</td>
-                    <td>{{ $evento->nota }}</td>
+                    <td>
+                        {{ $evento->tipo }}
+                        @isset($evento->nota)
+                            <div class="small text-primary">
+                                {{ $evento->nota }}
+                            </div>
+                        @endisset
+                    </td>
+                    <td>C$ {{ $evento->monto }}</td>
+                    <td class="d-block">
+                        <div>
+                            {{ $evento->created }}
+                        </div>
+                        <div class="text-muted">
+                            {{ $evento->ago }}
+                        </div>
+                    </td>
                 </tr>
-                @empty
+            @empty
                 <tr class="text-center">
                     <td colspan="4">No hay registros</td>
                 </tr>
             @endforelse
         </tbody>
-        @slot('links')
-        @endslot
     </x-table-head>
 </div>
