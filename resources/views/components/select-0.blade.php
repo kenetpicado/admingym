@@ -3,7 +3,7 @@
 <div class="form-group">
     <label>{{ ucfirst($label) }}</label>
     <select name="{{ $name }}" class="form-control @error($name) is-invalid @enderror" autofocus
-        wire:model.defer="{{ $name }}">
+        wire:model.defer="{{ $name }}" {{ $attributes }}>
         {{ $slot }}
     </select>
 

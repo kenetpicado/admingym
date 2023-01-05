@@ -38,8 +38,8 @@ class Precios extends Component
 
     public function store()
     {
-        $data = $this->validate();
-        $this->precio->save($data);
+        $this->validate();
+        $this->precio->save();
 
         $this->success(true);
         $this->resetInputFields();

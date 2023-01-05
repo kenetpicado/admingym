@@ -11,7 +11,7 @@ class Precio extends Model
     public $timestamps = false;
     protected $fillable = ['monto'];
 
-    public static function getPrice($servicio, $plan)
+    public static function getMonto($servicio, $plan)
     {
         return Precio::where('servicio', $servicio)
             ->where('plan', $plan)

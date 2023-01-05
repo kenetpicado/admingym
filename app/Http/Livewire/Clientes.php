@@ -86,7 +86,7 @@ class Clientes extends Component
     /* Guardar cliente */
     public function store()
     {
-        $this->monto = Precio::getPrice($this->servicio, $this->plan);
+        $this->monto = Precio::getMonto($this->servicio, $this->plan);
         $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
 
         if ($this->beca > 0)
@@ -131,7 +131,7 @@ class Clientes extends Component
     /* Guardar pago */
     public function pagar_store()
     {
-        $this->monto = Precio::getPrice($this->servicio, $this->plan);
+        $this->monto = Precio::getMonto($this->servicio, $this->plan);
         $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
 
         if ($this->beca > 0)

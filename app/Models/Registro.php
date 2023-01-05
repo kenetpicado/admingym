@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Registro extends Model
 {
     use HasFactory;
+
     protected $fillable = ['created_at', 'status'];
+    
     public $timestamps = false;
 
-    public static function getToday()
+    public function scopeFromToday($query)
     {
-        return Registro::where('created_at', now()->format('Y-m-d'))
-            ->latest('id')
-            ->first();
+        return $query->where('created_at', date('Y-m-d'))->latest('id')->first() ?? false;
     }
 }

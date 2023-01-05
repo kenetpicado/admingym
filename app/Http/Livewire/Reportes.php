@@ -40,7 +40,7 @@ class Reportes extends Component
 
     public function render()
     {
-        $registro = Registro::getToday();
+        $registro = Registro::fromToday();
 
         $reportes = Reporte::select([
             'reportes.id',
@@ -78,7 +78,7 @@ class Reportes extends Component
     /* Guardar pago */
     public function pagar_store()
     {
-        $this->monto = Precio::getPrice($this->servicio, $this->plan);
+        $this->monto = Precio::getMonto($this->servicio, $this->plan);
         $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
 
         $data = $this->validate([

@@ -21,7 +21,8 @@
             -moz-appearance: textfield;
         }
 
-        .table td, th {
+        .table td,
+        th {
             vertical-align: middle !important;
         }
     </style>

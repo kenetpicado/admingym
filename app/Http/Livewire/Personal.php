@@ -40,8 +40,8 @@ class Personal extends Component
 
     public function store()
     {
-        $data = $this->validate();
-        $this->entrenador->save($data);
+        $this->validate();
+        $this->entrenador->save();
 
         $this->success($this->isUpdate);
 
