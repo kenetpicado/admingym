@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Cliente;
 use App\Models\Reporte;
 
 class ReporteService
@@ -19,5 +20,11 @@ class ReporteService
         }
         
         Reporte::insert($reportes);
+    }
+
+    public function refresh()
+    {
+        $clientes = Cliente::has('planes')->pluck('id');
+        Reporte::whereIn('cliente_id', $clientes)->delete();
     }
 }

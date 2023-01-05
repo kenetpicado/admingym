@@ -9,7 +9,12 @@ class Peso extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['peso', 'cliente_id', 'created_at'];
+    protected $fillable = [
+        'peso',
+        'cliente_id',
+        'created_at'
+    ];
+
     public $timestamps = false;
 
     public function scopeCliente($query, $cliente_id)

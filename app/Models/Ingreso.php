@@ -28,8 +28,6 @@ class Ingreso extends Model
 
     public static function getMensual()
     {
-        return DB::table('ingresos')
-            ->where('created_at', '>=', date('Y-m-' . '01'))
-            ->get(['monto', 'beca']);
+        return DB::table('ingresos')->where('created_at', '>=', date('Y-m-' . '01'))->get(['monto', 'beca']);
     }
 }

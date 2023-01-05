@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Precio extends Model
 {
     use HasFactory;
+
     public $timestamps = false;
+    
     protected $fillable = ['monto'];
 
     public static function getMonto($servicio, $plan)

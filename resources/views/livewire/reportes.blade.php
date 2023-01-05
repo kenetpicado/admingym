@@ -7,31 +7,34 @@
 <div class="card">
     <x-header-0>Reportes</x-header-0>
 
-    <x-modal.pagar label="{{ $nombre }}">
-        <x-select-0 name="servicio">
+    <x-modal.create label="{{ $nombre }}">
+        <x-select-0 name="plan.servicio" label="Servicio">
             <option value="PESAS">PESAS</option>
             <option value="ZUMBA">ZUMBA</option>
             <option value="SPINNING">SPINNING</option>
             <option value="ZUMBA+PESAS">ZUMBA+PESAS</option>
         </x-select-0>
 
-        <x-select-0 name="plan">
+        <x-select-0 name="plan.plan" label="Plan">
             <option value="MENSUAL">MENSUAL</option>
             <option value="QUINCENAL">QUINCENAL</option>
             <option value="SEMANAL">SEMANAL</option>
             <option value="DIA">DIA</option>
         </x-select-0>
 
-        <x-input name='beca' type='number' val="0"></x-input>
-        <x-input name='created_at' type='date' :val="date('Y-m-d')" label="Inicia"></x-input>
-        <x-input name='nota'></x-input>
+        <x-input label="Beca" name='plan.beca' type='number' val="0"></x-input>
+        <x-input name='plan.created_at' type='date' label="Inicia"></x-input>
+        <p class="text-primary">
+            La fecha de vecimiento del ultimo plan fue: {{ $created_at ?? ''}}
+        </p>
+        <x-input label="Nota (Opcional)" name='plan.nota'></x-input>
 
-        @error('monto')
+        @error('plan.monto')
             <span class="feedback small" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
             </span>
         @enderror
-    </x-modal.pagar>
+    </x-modal.create>
 
     <x-table-head>
         @slot('header')
@@ -45,11 +48,6 @@
                         wire:click="refresh()">
                         Actualizar Lista
                     </button>
-                </div>
-            </div>
-            <div class="card-title">
-                <div class="alert alert-danger" role="alert">
-                    {{ $registro->status ?? '0' }} nuevos planes expirados.
                 </div>
             </div>
         @endslot
@@ -66,21 +64,23 @@
             @foreach ($reportes as $reporte)
                 <tr>
                     <td>
-                        <div class="d-block">
-                            <div class="text-xs mb-1">Plan expirado</div>
-                            <div class="font-weight-bold h6 text-primary">{{ $reporte->cliente_nombre }}</div>
+                        <div>
+                            {{ $reporte->cliente->nombre }}
+                            <div class="text-primary mt-2">
+                                Plan expirado
+                            </div>
                         </div>
                     </td>
                     <td>
                         {{ $reporte->mensaje }}
                     </td>
-                    <td class="text-danger">{{ $reporte->created_at }}</td>
+                    <td>{{ $reporte->created_at }}</td>
                     <td>
-                        <button wire:click="pagar({{ $reporte->cliente_id }})"
+                        <button wire:click="create({{ $reporte->cliente->id }}, '{{ $reporte->created_at }}')"
                             class="btn btn-primary  btn-sm rounded-3">Renovar</button>
                     </td>
                     <td>
-                        <button wire:click="delete_reporte({{ $reporte->id }})"
+                        <button onclick="confirm_delete()" wire:click="destroy({{ $reporte->id }})"
                             class="btn btn-secondary btn-sm rounded-3">Eliminar</button>
                     </td>
                 </tr>
@@ -90,12 +90,4 @@
             {!! $reportes->links() !!}
         @endslot
     </x-table-head>
-
-    <script>
-        function refresh() {
-            result = confirm("Desea actualizar la lista de planes expirados?")
-            if (result)
-                Livewire.emit('refresh')
-        }
-    </script>
 </div>

@@ -9,8 +9,11 @@ class Registro extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['created_at', 'status'];
-    
+    protected $fillable = [
+        'created_at',
+        'status'
+    ];
+
     public $timestamps = false;
 
     public function scopeFromToday($query)

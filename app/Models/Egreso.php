@@ -11,7 +11,13 @@ class Egreso extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['concepto', 'descripcion', 'monto', 'created_at'];
+    protected $fillable = [
+        'concepto',
+        'descripcion',
+        'monto',
+        'created_at'
+    ];
+
     public $timestamps = false;
 
     protected $casts = [
@@ -21,8 +27,6 @@ class Egreso extends Model
 
     public static function getMensual()
     {
-        return DB::table('egresos')
-            ->where('created_at', '>=', date('Y-m-' . '01'))
-            ->get(['monto']);
+        return DB::table('egresos')->where('created_at', '>=', date('Y-m-' . '01'))->get(['monto']);
     }
 }
