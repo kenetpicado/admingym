@@ -44,15 +44,14 @@ class Eventos extends Component
         $this->create_instance();
     }
 
-    /* Guardar evento */
     public function store()
     {
-        $data = $this->validate();
-        $this->evento->save($data);
+        $this->validate();
+        $this->evento->save();
 
         $this->success($this->isUpdate);
-
         $this->resetInputFields();
+
         $this->emit('close-create-modal');
     }
 
