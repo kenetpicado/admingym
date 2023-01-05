@@ -8,30 +8,28 @@
     <x-header-modal>Personal</x-header-modal>
 
     <x-modal.create label="Personal">
-        <x-input name='nombre'></x-input>
-        <x-input name='telefono' type="number"></x-input>
-        <x-input name='horario'></x-input>
+        <x-input name='entrenador.nombre' label="Nombre completo"></x-input>
+        <x-input name='entrenador.telefono' type="number" label="Telefono"></x-input>
+        <x-input name='entrenador.horario' label="Horario"></x-input>
     </x-modal.create>
 
     <x-table-head>
-        @slot('header')
-        @endslot
-
         @slot('title')
-            <th>ID</th>
             <th>Nombre</th>
             <th>Teléfono</th>
             <th>Horario</th>
             <th>Eventos</th>
             <th>Editar</th>
         @endslot
-
         <tbody>
             @foreach ($personal as $persona)
                 <tr>
-                    <td>{{ $persona->id }}</td>
                     <td>{{ $persona->nombre }}</td>
-                    <td>{{ $persona->telefono }}</td>
+                    <td>
+                        <a target="_blank" href="https://wa.me/505{{ $persona->telefono }}">
+                            {{ $persona->telefono }} <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </td>
                     <td>{{ $persona->horario }}</td>
                     <td>
                         <a href="{{ route('eventos', $persona->id) }}" class="btn btn-primary btn-sm">Eventos</a>
@@ -45,15 +43,15 @@
                             <div class="dropdown-menu">
                                 <button type="button" class="dropdown-item"
                                     wire:click="edit({{ $persona->id }})">Editar</button>
-                                <button type="button" class="dropdown-item"
-                                    onclick="delete_element({{ $persona->id }})">Eliminar</button>
+                                <button type="button" wire:click="destroy({{ $persona->id }})" class="dropdown-item"
+                                    onclick="confirm_delete()">
+                                    Eliminar
+                                </button>
                             </div>
                         </div>
                     </td>
                 </tr>
             @endforeach
         </tbody>
-        @slot('links')
-        @endslot
     </x-table-head>
 </div>

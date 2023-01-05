@@ -8,14 +8,11 @@
     <x-header-0>Precios</x-header-0>
 
     <x-modal.create label="Precio">
-        <p>{{ $servicio }} - {{ $plan }}</p>
-        <x-input name='monto' type='number'></x-input>
+        <strong>{{ $precio->servicio }} - {{ $precio->plan }}</strong>
+        <x-input label="Monto" name='precio.monto' type='number'></x-input>
     </x-modal.create>
 
     <x-table-head>
-        @slot('header')
-        @endslot
-
         @slot('title')
             <th>#</th>
             <th>Servicio</th>
@@ -38,7 +35,5 @@
                 </tr>
             @endforeach
         </tbody>
-        @slot('links')
-        @endslot
     </x-table-head>
 </div>
