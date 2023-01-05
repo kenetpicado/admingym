@@ -31,17 +31,17 @@ class Planes extends Component
         'plan.monto.required' => 'No hay un precio para el servicio y plan seleccionado.'
     ];
 
-    public function mount()
-    {
-        $this->plan = new Plan();
-    }
-
     public function render()
     {
         return view('livewire.planes', [
             'registro' => (new RegistroService)->getCurrent(),
             'planes' => Plan::withCliente()->orderBy('fecha_fin')->searching($this->search)->paginate(20)
         ]);
+    }
+
+    public function mount()
+    {
+        $this->plan = new Plan();
     }
 
     public function resetInputFields()

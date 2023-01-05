@@ -13,11 +13,6 @@ class Personal extends Component
     public $entrenador = null;
     public bool $isUpdate = false;
 
-    public function mount()
-    {
-        $this->entrenador = new Entrenador();
-    }
-
     protected $rules = [
         'entrenador.nombre'     => 'required|max:50',
         'entrenador.telefono'   => 'required|numeric|digits:8',
@@ -26,9 +21,12 @@ class Personal extends Component
 
     public function render()
     {
-        return view('livewire.personal', [
-            'personal' => Entrenador::latest('id')->get(),
-        ]);
+        return view('livewire.personal', ['personal' => Entrenador::latest('id')->get()]);
+    }
+
+    public function mount()
+    {
+        $this->entrenador = new Entrenador();
     }
 
     public function resetInputFields()

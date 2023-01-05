@@ -12,6 +12,11 @@ class Precios extends Component
 
     public $precio = null;
 
+    public function render()
+    {
+        return view('livewire.precios', ['precios' => Precio::all()]);
+    }
+
     public function mount()
     {
         $this->precio = new Precio();
@@ -22,14 +27,7 @@ class Precios extends Component
         'precio.servicio'   => 'required',
         'precio.plan'       => 'required'
     ];
-
-    public function render()
-    {
-        return view('livewire.precios', [
-            'precios' => Precio::all()
-        ]);
-    }
-
+    
     public function edit(Precio $precio)
     {
         $this->precio = $precio;

@@ -11,9 +11,9 @@ class Eventos extends Component
 {
     use MyAlerts;
 
-    public $entrenador  = null;
-    public $evento      = null;
-    public $isUpdate    = false;
+    public $entrenador      = null;
+    public $evento          = null;
+    public bool $isUpdate    = false;
 
     public function mount(Entrenador $entrenador)
     {

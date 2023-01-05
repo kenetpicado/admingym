@@ -5,64 +5,68 @@ namespace App\Http\Livewire;
 use App\Models\Cliente;
 use App\Models\Peso;
 use App\Traits\MyAlerts;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Pesos extends Component
 {
     use MyAlerts;
 
-    public $cliente, $peso, $created_at, $sub_id, $cliente_id;
+    public $peso            = null;
+    public $cliente         = null;
+    public bool $isUpdate   = false;
 
-    public function resetInputFields()
-    {
-        $this->reset(['peso', 'sub_id']);
-        $this->resetErrorBag();
-    }
-
-    protected $listeners = ['delete_element'];
-
-    public function mount($cliente_id)
-    {
-        $this->created_at = date('Y-m-d');
-        $this->cliente = Cliente::find($cliente_id);
-        $this->cliente_id = $cliente_id;
-    }
+    protected $rules = [
+        'peso.peso'        => 'required|numeric',
+        'peso.created_at'  => 'required|date',
+        'peso.cliente_id'  => 'required'
+    ];
 
     public function render()
     {
-        $pesos = DB::table('pesos')->where('cliente_id', $this->cliente->id)->get();
-        return view('livewire.pesos', compact('pesos'));
+        return view('livewire.pesos', ['pesos' => Peso::cliente($this->cliente->id)->get()]);
     }
 
-    /* Guardar peso */
+    public function resetInputFields()
+    {
+        $this->resetExcept(['cliente']);
+        $this->resetErrorBag();
+        $this->create_instance();
+    }
+
+    public function mount(Cliente $cliente)
+    {
+        $this->cliente = $cliente;
+        $this->create_instance();
+    }
+
     public function store()
     {
-        $data = $this->validate([
-            'peso' => 'required|numeric|min:0',
-            'created_at' => 'required|date',
-            'cliente_id' => 'required'
-        ]);
+        $this->validate();
+        $this->peso->save();
 
-        Peso::updateOrCreate(['id' => $this->sub_id], $data);
-        $this->success($this->sub_id);
+        $this->success($this->isUpdate);
         $this->resetInputFields();
+
         $this->emit('close-create-modal');
     }
 
-    /* Cargar modal para editar un peso */
-    public function edit($peso_id)
+    public function edit(Peso $peso)
     {
-        $peso = DB::table('pesos')->find($peso_id);
-        $this->sub_id = $peso->id;
-        $this->peso = $peso->peso;
-        $this->created_at = $peso->created_at;
+        $this->peso = $peso;
+        $this->isUpdate = true;
         $this->emit('open-create-modal');
     }
 
-    public function delete_element($id)
+    public function destroy(Peso $peso)
     {
-        Peso::find($id)->delete();
+        $peso->delete();
         $this->delete();
+    }
+
+    public function create_instance()
+    {
+        $this->peso = new Peso();
+        $this->peso->created_at = date('Y-m-d');
+        $this->peso->cliente_id = $this->cliente->id;
     }
 }

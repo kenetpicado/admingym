@@ -17,7 +17,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('precios', Precios::class)->name('precios');
 
-    Route::get('pesos/{cliente_id}', Pesos::class)->name('pesos');
+    Route::get('pesos/{cliente}', Pesos::class)->name('pesos');
 
     Route::get('personal', Personal::class)->name('personal');
 
