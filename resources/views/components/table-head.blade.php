@@ -8,12 +8,14 @@
         </thead>
         {{ $slot }}
     </table>
-    <div class="small">
-        {{ $links }}
-    </div>
-<style>
-    .table td {
-        vertical-align: middle;
-    }
-</style>
+    @isset($links)
+        <div class="small">
+            {{ $links }}
+        </div>
+    @endisset
+    <style>
+        .table td {
+            vertical-align: middle;
+        }
+    </style>
 </div>
