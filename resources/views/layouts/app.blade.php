@@ -20,6 +20,11 @@
         input[type="number"] {
             -moz-appearance: textfield;
         }
+
+        .table td,
+        th {
+            vertical-align: middle !important;
+        }
     </style>
 </head>
 
@@ -45,7 +50,7 @@
 
     <x-livewire-alert::scripts />
     <script>
-         function delete_element($id) {
+        function delete_element($id) {
             $result = confirm("¿Desea eliminar este registro? Esta opcion no se puede deshacer");
             if ($result)
                 Livewire.emit('delete_element', $id)
@@ -66,6 +71,10 @@
         Livewire.on('close-pagar-modal', function() {
             $('#pagarModal').modal('hide')
         });
+
+        const confirm_delete = () => {
+            confirm('Desea eliminar este registro?') || event.stopImmediatePropagation()
+        }
     </script>
 </body>
 

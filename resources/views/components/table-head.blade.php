@@ -1,5 +1,8 @@
 <div class="card-body">
-    {{ $header }}
+    @isset($header)
+        {{ $header }}
+    @endisset
+    
     <table class="table table-borderless table-striped" id="dataTable" width="100%" cellspacing="0" role="grid">
         <thead>
             <tr class="text-primary text-uppercase small">

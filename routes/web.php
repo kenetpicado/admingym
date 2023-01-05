@@ -17,11 +17,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('precios', Precios::class)->name('precios');
 
-    Route::get('pesos/{cliente_id}', Pesos::class)->name('pesos');
+    Route::get('pesos/{cliente}', Pesos::class)->name('pesos');
 
     Route::get('personal', Personal::class)->name('personal');
 
-    Route::get('eventos/{persona_id}', Eventos::class)->name('eventos');
+    Route::get('eventos/{entrenador}', Eventos::class)->name('eventos');
 
     Route::get('reportes',  Reportes::class)->name('reportes');
 

@@ -9,8 +9,8 @@
     <x-header-modal>Pesos</x-header-modal>
 
     <x-modal.create label="Peso">
-        <x-input name='peso' label='Peso en libras'></x-input>
-        <x-input name='created_at' type="date" label='Fecha de registro'></x-input>
+        <x-input name='peso.peso' label='Peso en libras'></x-input>
+        <x-input name='peso.created_at' type="date" label='Fecha de registro'></x-input>
     </x-modal.create>
 
     <x-table-head>
@@ -27,10 +27,17 @@
         @endslot
 
         <tbody>
-            @forelse ($pesos as $peso)
+            @forelse ($pesos as $key => $peso)
                 <tr>
-                    <td>{{ $peso->peso }} libras</td>
-                    <td>{{ $peso->created_at }}</td>
+                    <td>
+                        {{ $peso->peso }} libras
+                        @if ($key > 0)
+                            <div class="text-primary">
+                                {{ $peso->peso - $pesos[$key - 1]->peso  }}
+                            </div>
+                        @endif
+                    </td>
+                    <td>{{ $peso->created }}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
@@ -40,8 +47,10 @@
                             <div class="dropdown-menu">
                                 <button type="button" class="dropdown-item"
                                     wire:click="edit({{ $peso->id }})">Editar</button>
-                                <button type="button" class="dropdown-item"
-                                    onclick="delete_element({{ $peso->id }})">Eliminar</button>
+                                <button type="button" wire:click="destroy({{ $peso->id }})" class="dropdown-item"
+                                    onclick="confirm_delete()">
+                                    Eliminar
+                                </button>
                             </div>
                         </div>
                     </td>
@@ -52,7 +61,5 @@
                 </tr>
             @endforelse
         </tbody>
-        @slot('links')
-        @endslot
     </x-table-head>
 </div>

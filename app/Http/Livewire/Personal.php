@@ -4,59 +4,61 @@ namespace App\Http\Livewire;
 
 use App\Models\Entrenador;
 use App\Traits\MyAlerts;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Personal extends Component
 {
     use MyAlerts;
-    public $sub_id, $nombre, $telefono, $horario;
+
+    public $entrenador = null;
+    public bool $isUpdate = false;
+
+    protected $rules = [
+        'entrenador.nombre'     => 'required|max:50',
+        'entrenador.telefono'   => 'required|numeric|digits:8',
+        'entrenador.horario'    => 'required|max:20'
+    ];
+
+    public function render()
+    {
+        return view('livewire.personal', ['personal' => Entrenador::latest('id')->get()]);
+    }
+
+    public function mount()
+    {
+        $this->entrenador = new Entrenador();
+    }
 
     public function resetInputFields()
     {
         $this->reset();
         $this->resetErrorBag();
+        $this->entrenador = new Entrenador();
     }
 
-    protected $listeners = ['delete_element'];
-
-    public function render()
-    {
-        $personal = DB::table('entrenadors')
-            ->orderBy('nombre')
-            ->get();
-        return view('livewire.personal', compact('personal'));
-    }
-
-    /* Guardar personal */
     public function store()
     {
-        $data = $this->validate([
-            'nombre' => 'required|max:50',
-            'telefono' => 'required|numeric|digits:8',
-            'horario' => 'required|max:20'
-        ]);
+        $this->validate();
+        $this->entrenador->save();
 
-        Entrenador::updateOrCreate(['id' => $this->sub_id], $data);
-        $this->success($this->sub_id);
+        $this->success($this->isUpdate);
+
         $this->resetInputFields();
         $this->emit('close-create-modal');
     }
 
-    /* Cargar modal para editar un personal */
-    public function edit($persona_id)
+    public function edit(Entrenador $entrenador)
     {
-        $persona = DB::table('entrenadors')->find($persona_id);
-        $this->sub_id = $persona->id;
-        $this->nombre = $persona->nombre;
-        $this->telefono = $persona->telefono;
-        $this->horario = $persona->horario;
+        $this->entrenador = $entrenador;
+        $this->isUpdate = true;
+
         $this->emit('open-create-modal');
     }
 
-    public function delete_element($id)
+    public function destroy(Entrenador $entrenador)
     {
-        Entrenador::find($id)->delete();
+        $entrenador->delete();
+
         $this->delete();
     }
 }

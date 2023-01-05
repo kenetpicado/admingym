@@ -8,25 +8,26 @@
     <x-header-0>Planes</x-header-0>
 
     <x-modal.create label="Plan">
-        <x-select-0 name="servicio">
+        <x-select-0 label="Servicio" name="plan.servicio">
             <option value="PESAS">PESAS</option>
             <option value="ZUMBA">ZUMBA</option>
             <option value="SPINNING">SPINNING</option>
             <option value="ZUMBA+PESAS">ZUMBA+PESAS</option>
         </x-select-0>
 
-        <x-select-0 name="plan">
+        <x-select-0 label="Plan" name="plan.plan" id="plan">
             <option value="MENSUAL">MENSUAL</option>
             <option value="QUINCENAL">QUINCENAL</option>
             <option value="SEMANAL">SEMANAL</option>
             <option value="DIA">DIA</option>
         </x-select-0>
 
-        <x-input name='beca' type='number'></x-input>
-        <x-input name='created_at' type='date' :val="date('Y-m-d')" label="Inicia"></x-input>
-        <x-input name='nota'></x-input>
+        <x-input label="Beca" name='plan.beca' type='number'></x-input>
+        <x-input label="Inicia" name='plan.created_at' type='date'></x-input>
 
-        @error('monto')
+        <x-input label="Nota (Opcional)" name='plan.nota'></x-input>
+
+        @error('plan.monto')
             <span class="feedback small" role="alert">
                 <strong class="text-danger">{{ $message }}</strong>
             </span>
@@ -51,13 +52,19 @@
             <th>Servicio</th>
             <th>Plan</th>
             <th>Rango</th>
-            <th>Nota</th>
             <th>Editar</th>
         </x-slot>
         <tbody>
             @forelse ($planes as $plan)
                 <tr>
-                    <td>{{ $plan->cliente_nombre }}</td>
+                    <td>
+                        {{ $plan->cliente->nombre }}
+                        @isset($plan->nota)
+                            <div class="small text-primary">
+                                {{ $plan->nota }}
+                            </div>
+                        @endisset
+                    </td>
                     <td class="text-primary">{{ $plan->servicio }}</td>
                     <td class="text-primary">{{ $plan->plan }}</td>
                     <td>
@@ -68,7 +75,6 @@
                             {{ date('d-m-Y', strtotime($plan->fecha_fin)) }}
                         </div>
                     </td>
-                    <td>{{ $plan->nota }}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
@@ -78,8 +84,11 @@
                             <div class="dropdown-menu">
                                 <button type="button" class="dropdown-item"
                                     wire:click="edit({{ $plan->id }})">Editar</button>
-                                <button type="button" class="dropdown-item"
-                                    onclick="delete_element({{ $plan->id }})">Eliminar</button>
+
+                                <button type="button" wire:click="destroy({{ $plan->id }})" class="dropdown-item"
+                                    onclick="confirm_delete()">
+                                    Eliminar
+                                </button>
                             </div>
                         </div>
                     </td>
@@ -90,7 +99,6 @@
                 </tr>
             @endforelse
         </tbody>
-
         @slot('links')
             {!! $planes->links() !!}
         @endslot
