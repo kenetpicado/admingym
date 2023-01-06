@@ -7,7 +7,7 @@
 <div class="card">
     <x-header-0>Reportes</x-header-0>
 
-    <x-modal.create label="{{ $nombre }}">
+    <x-modal.create label="{{ $cliente->nombre ?? ''}}">
         <x-select-0 name="plan.servicio" label="Servicio">
             <option value="PESAS">PESAS</option>
             <option value="ZUMBA">ZUMBA</option>

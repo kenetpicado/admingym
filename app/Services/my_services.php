@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Classes\Items;
+use App\Models\User;
 use Carbon\Carbon;
 
 class my_services
@@ -20,17 +21,17 @@ class my_services
 
         switch ($value) {
             case 'MENSUAL':
-                $new = $date->addMonth(1)->format('Y-m-d');
-                break;
+            $new = $date->addMonth(1)->format('Y-m-d');
+            break;
             case 'QUINCENAL':
-                $new = $date->addDays(15)->format('Y-m-d');
-                break;
+            $new = $date->addDays(15)->format('Y-m-d');
+            break;
             case 'SEMANAL':
-                $new = $date->addDays(7)->format('Y-m-d');
-                break;
+            $new = $date->addDays(7)->format('Y-m-d');
+            break;
             case 'DIA':
-                $new = $date->addDay()->format('Y-m-d');
-                break;
+            $new = $date->addDay()->format('Y-m-d');
+            break;
         }
         return $new;
     }

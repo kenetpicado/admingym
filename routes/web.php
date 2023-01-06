@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', Home::class)->name('index');
+    Route::get('/', Home::class)->name('index'); //PARTIAL
 
     Route::get('planes', Planes::class)->name('planes');
 
@@ -25,7 +25,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('reportes',  Reportes::class)->name('reportes');
 
-    Route::get('contabilidad',  Contabilidad::class)->name('contabilidad');
+    Route::get('contabilidad',  Contabilidad::class)->name('contabilidad'); //TODO
 
     Route::get('perfil',  Perfil::class)->name('perfil');
 });

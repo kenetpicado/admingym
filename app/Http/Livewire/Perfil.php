@@ -11,20 +11,28 @@ class Perfil extends Component
 {
     use MyAlerts;
 
-    public $name = null;
-    public $username = null;
+    public $users = null;
     public $password = null;
 
     public function mount()
     {
-        $this->name = auth()->user()->name;
-        $this->username = auth()->user()->username;
+        $this->users = auth()->user();
+    }
+
+    protected function rules()
+    {
+        return [
+            'users.name' => 'required|max:50',
+            'users.username' => ['required', 'max:20', Rule::unique('users')->ignore($this->users->id)]
+        ];
     }
 
     public function resetInputFields()
     {
         $this->reset(['password']);
         $this->resetErrorBag();
+
+        $this->user = auth()->user();
     }
 
     public function render()
@@ -34,31 +42,22 @@ class Perfil extends Component
 
     public function store()
     {
-        $this->validate([
-            'name' => 'required|max:50',
-            'username' => ['required', 'max:20', Rule::unique('users')->ignore(auth()->user()->id)]
-        ]);
+        $this->validate();
+        $this->users->save();
 
-        User::find(auth()->user()->id)->update([
-            'name' => $this->name,
-            'username' => $this->username
-        ]);
-
-        $this->resetInputFields();
         $this->success();
+        return redirect()->route('index');
     }
 
-    public function password()
+    /* No Implementado */
+    public function password(User $user)
     {
-        $this->validate([
-            'password' => 'required|min:6|alpha_dash|confirmed',
-        ]);
+        $this->validate(['password' => 'required|min:8|confirmed']);
 
-        User::find(auth()->user()->id)->update([
-            'password' => bcrypt($this->password)
-        ]);
+        $user->password = bcrypt($this->password);
+        $user->save();
 
-        $this->resetInputFields();
         $this->success();
+        return redirect()->route('index');
     }
 }

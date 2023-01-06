@@ -4,10 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Cliente;
 use App\Models\Plan;
-use App\Models\Precio;
-use App\Services\my_services;
+use App\Services\PlanService;
 use App\Traits\MyAlerts;
-use Illuminate\Support\Facades\DB;
+use App\Traits\RulesTraits;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,145 +14,112 @@ class Clientes extends Component
 {
     use WithPagination;
     use MyAlerts;
+    use RulesTraits;
     protected $paginationTheme = 'bootstrap';
 
-    public $search;
-
-    public $sub_id, $nombre, $fecha;
-    public $sexo = "F";
-
-    public $servicio = "PESAS";
-    public $plan = "MENSUAL";
-    public float $beca = 0;
-    public $created_at, $nota, $fecha_fin, $monto;
-    public $cliente_id;
+    public string $search = '';
 
     public $cliente = null;
+    public $plan = null;
 
-    public $user_rules = [
+    public bool $savePlan = true;
+    public bool $saveCliente = true;
+
+    public string $nombre = "";
+    public string $fecha = "";
+    public string $sexo = "F";
+
+    protected $rulesCliente = [
         'nombre'    => 'required|max:50',
         'fecha'     => 'required|date',
         'sexo'      => 'required|in:M,F',
     ];
 
-    public $payment_rules = [
-        'servicio'  => 'required',
-        'plan'      => 'required',
-        'beca'      => 'required|numeric|min:0',
-        'created_at' => 'required|date',
-        'fecha_fin' => 'required|date',
-        'nota'      => 'nullable|max:30',
-        'monto'     => 'required'
-    ];
-
-    protected $messages = [
-        'monto.required' => 'No hay un precio para el servicio y plan seleccionado.'
-    ];
-
-    protected $listeners = ['delete_element'];
-
-    public function mount()
-    {
-        $this->created_at = date('Y-m-d');
-        $this->fecha = date('Y-m-d');
-    }
-
     public function render()
     {
-        $clientes = DB::table('clientes')
-            ->select([
-                'id',
-                'nombre',
-                'sexo',
-                DB::raw('(select count(*) from planes where clientes.id = planes.cliente_id) as planes_count')
-            ])
-            ->when($this->search, function ($q) {
-                $q->where('nombre', 'like', '%' . $this->search . '%')
-                    ->orWhere('id', 'like', '%' . $this->search . '%');
-            })
-            ->latest('id')
-            ->paginate(20);
+        $clientes = Cliente::where('nombre', 'like', "%{$this->search}%")
+            ->orWhere('id', 'like', "%{$this->search}%")
+            ->orderBy('id', 'desc')
+            ->withCount('planes')
+            ->paginate(10);
 
         return view('livewire.clientes', compact('clientes'));
     }
 
-    public function resetInputFields()
+    public function mount()
     {
-        $this->resetExcept(['created_at', 'fecha']);
-        $this->resetErrorBag();
+        $this->createClienteInstance();
+        $this->createPlanInstance();
     }
 
-    /* Guardar cliente */
     public function store()
     {
-        $this->monto = Precio::getMonto($this->servicio, $this->plan);
-        $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
+        if ($this->saveCliente)
+            $this->storeCliente();
 
-        if ($this->beca > 0)
-            $this->monto = $this->monto - $this->beca;
+        if ($this->savePlan)
+            $this->storePlan();
 
-        if ($this->sub_id) {
-            $data = $this->validate($this->user_rules);
-            Cliente::find($this->sub_id)->update($data);
-        } else {
-            $data = $this->validate($this->user_rules + $this->payment_rules);
-
-            $cliente = Cliente::create($data);
-            $cliente->planes()->create($data);
-        }
-
-        $this->success($this->sub_id);
-
+        $this->success();
         $this->resetInputFields();
         $this->emit('close-create-modal');
     }
 
-    /* Cargar modal para editar un cliente */
-    public function edit($cliente_id)
+    public function storeCliente()
     {
-        $cliente = DB::table('clientes')->find($cliente_id);
-        $this->sub_id = $cliente->id;
+        $data = $this->validate($this->rulesCliente);
+        $this->cliente = Cliente::updateOrCreate(['id' => $this->cliente->id], $data);
+    }
+
+    public function storePlan()
+    {
+        $this->plan->addMissingData();
+        $this->validate();
+        $this->cliente->planes()->save($this->plan);
+    }
+
+    public function edit(Cliente $cliente)
+    {
+        $this->cliente = $cliente;
         $this->nombre = $cliente->nombre;
         $this->fecha = $cliente->fecha;
         $this->sexo = $cliente->sexo;
+        $this->savePlan = false;
+
         $this->emit('open-create-modal');
     }
 
-    /* Cargar modal para relizar un pago */
-    public function pagar($cliente_id)
+    public function pagar(Cliente $cliente)
     {
-        $cliente = DB::table('clientes')->find($cliente_id, ['id', 'nombre']);
-        $this->cliente_id = $cliente->id;
-        $this->nombre = $cliente->nombre;
-        $this->emit('open-pagar-modal');
+        $this->cliente = $cliente;
+        $this->saveCliente = false;
+        $this->emit('open-create-modal');
     }
 
-    /* Guardar pago */
-    public function pagar_store()
+    public function resetInputFields()
     {
-        $this->monto = Precio::getMonto($this->servicio, $this->plan);
-        $this->fecha_fin = (new my_services)->get_end($this->plan, $this->created_at);
-
-        if ($this->beca > 0)
-            $this->monto = $this->monto - $this->beca;
-
-        $data = $this->validate($this->payment_rules);
-
-        Cliente::find($this->cliente_id)->planes()->create($data);
-        $this->success();
-        $this->resetInputFields();
-        $this->emit('close-pagar-modal');
+        $this->reset();
+        $this->resetErrorBag();
+        $this->mount();
     }
 
-    public function delete_element($id)
+    public function destroy(Cliente $cliente)
     {
-        $cliente = Cliente::find($id, ['id']);
-
-        if ($cliente->planes->count() > 0) {
-            $this->delete(0);
-        } else {
+        if (($result = $cliente->planes->count()) == 0)
             $cliente->delete();
-            $this->delete();
-        }
+
+        $this->delete(!$result);
+    }
+
+    public function createClienteInstance()
+    {
+        $this->cliente = new Cliente();
+        $this->fecha = date('Y-m-d');
+    }
+
+    public function createPlanInstance()
+    {
+        $this->plan = new Plan();
+        (new PlanService)->buildInstance($this->plan);
     }
 }
