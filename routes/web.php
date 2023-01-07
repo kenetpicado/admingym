@@ -6,10 +6,9 @@ namespace App\Http\Livewire;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', Home::class)->name('index'); //PARTIAL
+    Route::get('/', Home::class)->name('index');
 
     Route::get('planes', Planes::class)->name('planes');
 

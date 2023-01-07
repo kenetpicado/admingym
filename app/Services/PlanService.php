@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Plan;
+use Illuminate\Support\Facades\DB;
 
 class PlanService
 {
@@ -27,5 +28,24 @@ class PlanService
         }
 
         return $expired->count();
+    }
+
+    public function groupByServicio()
+    {
+        return DB::table('planes')
+            ->groupBy('servicio')
+            ->orderBy('total', 'desc')
+            ->get(['servicio', DB::raw('count(*) as total')]);
+    }
+
+    public function getLastDays()
+    {
+        return DB::table('planes')
+            ->where('created_at', '>=', date('Y-m-' . '01'))
+            ->where('created_at', '<=', date('Y-m-d'))
+            ->groupBy('created_at')
+            ->orderBy('created_at', 'desc')
+            ->limit(7)
+            ->get(DB::raw("CONCAT(DAYNAME(created_at), ' ', DAY(created_at)) as day, count(*) as total"));
     }
 }

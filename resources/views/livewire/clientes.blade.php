@@ -7,69 +7,6 @@
 <div class="card">
     <x-header-modal>Clientes</x-header-modal>
 
-    {{-- <x-modal.create label="Cliente">
-        <span class="font-weight-bold">Información del Cliente</span>
-        <hr>
-        <div class="row">
-            <div class="col-lg-6">
-                <x-input name='cliente.nombre' label="Nombre completo"></x-input>
-            </div>
-            <div class="col-lg-6">
-                <x-input name='cliente.fecha' type='date' label='Fecha de nacimiento'></x-input>
-            </div>
-        </div>
-        <div class="form-group mb-4">
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline1" name="cliente.sexo" class="custom-control-input"
-                wire:model.defer="cliente.sexo" value="M">
-                <label class="custom-control-label" for="customRadioInline1">Masculino</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline2" name="cliente.sexo" class="custom-control-input"
-                wire:model.defer="cliente.sexo" value="F">
-                <label class="custom-control-label" for="customRadioInline2">Femenino</label>
-            </div>
-        </div> --}}
-{{--         @if (!$sub_id)
-        <span class="font-weight-bold">Información del Servicio</span>
-        <hr>
-        <div class="row">
-            <div class="col-lg-6">
-                <x-select-0 name="servicio">
-                    <option value="PESAS">PESAS</option>
-                    <option value="ZUMBA">ZUMBA</option>
-                    <option value="SPINNING">SPINNING</option>
-                    <option value="ZUMBA+PESAS">ZUMBA+PESAS</option>
-                </x-select-0>
-            </div>
-            <div class="col-lg-6">
-                <x-select-0 name="plan">
-                    <option value="MENSUAL">MENSUAL</option>
-                    <option value="QUINCENAL">QUINCENAL</option>
-                    <option value="SEMANAL">SEMANAL</option>
-                    <option value="DIA">DIA</option>
-                </x-select-0>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <x-input name='beca' type='number' val="0"></x-input>
-            </div>
-            <div class="col-lg-6">
-                <x-input name='created_at' type='date' :val="date('Y-m-d')" label="Inicia"></x-input>
-            </div>
-        </div>
-
-        <x-input name='nota'></x-input>
-
-        @error('monto')
-        <span class="feedback small" role="alert">
-            <strong class="text-danger">{{ $message }}</strong>
-        </span>
-        @enderror
-        @endif --}}
-    {{-- </x-modal.create> --}}
-
     <x-modal.create label="{{ $cliente->nombre }}">
         @if ($saveCliente)
             <span class="font-weight-bold">Información del Cliente</span>

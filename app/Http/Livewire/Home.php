@@ -4,49 +4,41 @@ namespace App\Http\Livewire;
 
 use App\Models\Egreso;
 use App\Models\Ingreso;
+use App\Services\ClienteService;
 use App\Services\DateService;
+use App\Services\EgresoService;
+use App\Services\IngresoService;
+use App\Services\PercentageService;
+use App\Services\PlanService;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use App\Services\PercentageService;
 
 class Home extends Component
 {
     public function render()
     {
-        $percentageService = new PercentageService();
+        $planes = (new PlanService)->groupByServicio();
 
-        //Obtener datos
-        $clientes = DB::table('clientes')->get(['id', 'sexo']);
-        $planes = DB::table('planes')->get('servicio');
+        $planes_month = (new PlanService)->getLastDays();
 
-        $ingresos = Ingreso::getMensual();
-        $egresos = Egreso::getMensual();
+        $clientes = (new ClienteService)->groupBySexo();
 
-        //Porcentaje de sexo
-        $sexo = ([
-            'M' => $percentageService->getWithCondition($clientes, 'sexo', 'M'),
-            'F' => $percentageService->getWithCondition($clientes, 'sexo', 'F')
-        ]);
+        $ingresos = (new IngresoService)->getThisMonth();
 
-        //Porcentaje de servicios
-        $servicios = ([
-            'PESAS' => $percentageService->getWithCondition($planes, 'servicio', 'PESAS'),
-            'ZUMBA' => $percentageService->getWithCondition($planes, 'servicio', 'ZUMBA'),
-            'ZUMBA+PESAS' => $percentageService->getWithCondition($planes, 'servicio', 'ZUMBA+PESAS'),
-        ]);
+        $egresos = (new EgresoService)->getThisMonth();
 
-        //Datos generales
+        //Build array
         $ver = ([
-            'clientes'      => $clientes->count(),
-            'planes'        => $planes->count(),
+            'clientes'      => $clientes->sum('total'),
+            'planes'        => $planes->sum('total'),
             'ingresos'      => $ingresos->sum('monto'),
-            'egresos'       => $egresos->sum('monto'),
+            'egresos'       => $egresos,
             'sum_becas'     => $ingresos->sum('beca'),
             'count_becas'   => $ingresos->where('beca', '>', '0')->count(),
             'mes'           => (new DateService)->current_month(),
-            'activos'       => $percentageService->get($clientes->count(), $planes->count()),
+            'activos'       => (new PercentageService)->get($clientes->sum('total'), $planes->sum('total')),
         ]);
 
-        return view('livewire.home', compact('sexo', 'servicios', 'ver'));
+        return view('livewire.home', compact('ver', 'planes', 'clientes', 'planes_month'));
     }
 }

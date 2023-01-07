@@ -25,9 +25,4 @@ class Ingreso extends Model
         'concepto' => Upper::class,
         'descripcion' => Upper::class,
     ];
-
-    public static function getMensual()
-    {
-        return DB::table('ingresos')->where('created_at', '>=', date('Y-m-' . '01'))->get(['monto', 'beca']);
-    }
 }

@@ -44,6 +44,7 @@
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/chart.js/Chart.min.js') }}"></script>
 
     @livewireScripts
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -64,18 +65,11 @@
             $('#createModal').modal('show')
         });
 
-        Livewire.on('open-pagar-modal', function() {
-            $('#pagarModal').modal('show')
-        });
-
-        Livewire.on('close-pagar-modal', function() {
-            $('#pagarModal').modal('hide')
-        });
-
         const confirm_delete = () => {
             confirm('Desea eliminar este registro?') || event.stopImmediatePropagation()
         }
     </script>
+    @stack('scripts')
 </body>
 
 </html>
