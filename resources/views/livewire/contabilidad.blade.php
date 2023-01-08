@@ -30,27 +30,34 @@
         @slot('header')
             <div class="row mb-3">
                 <div class="col-3">
+                    <label class="form-label">Tipo</label>
                     <select class="form-control" role="search" wire:model="table">
                         <option value="ingresos">INGRESOS</option>
                         <option value="egresos">EGRESOS</option>
                     </select>
                 </div>
                 <div class="col-3">
+                    <label class="form-label">Desde</label>
                     <input type="date" class="form-control " wire:model="start">
                 </div>
                 <div class="col-3">
+                    <label class="form-label">Hasta</label>
                     <input type="date" class="form-control " wire:model="end">
                 </div>
                 <div class="col-3">
+                    <label class="form-label">Buscar</label>
                     <input type="search" placeholder="Buscar Concepto" class="form-control" list="categorias"
                         wire:model="search_concepto">
                 </div>
             </div>
             <div class="alert alert-primary" role="alert">
-                De {{ date('d F y', strtotime($start)) }}, hasta {{ date('d F y', strtotime($end)) }},  se han encontrado
-                {{ $registros->count() }}
-                {{ $table }} con un total de
-                C$ {{ $registros->sum('monto') }}
+                @if($start == $end)
+                    Hoy
+                @else
+                    De {{ date('d-m-Y', strtotime($start)) }}, hasta {{ date('d-m-Y', strtotime($end)) }}
+                @endif
+                se han encontrado {{ $registros->count() }} {{ $table }}
+                con un total de C$ {{ $registros->sum('monto') }}
             </div>
         @endslot
         @slot('title')
@@ -66,7 +73,7 @@
                     <td>{{ $registro->concepto }}</td>
                     <td>{{ $registro->descripcion }}</td>
                     <td>C$ {{ $registro->monto }}</td>
-                    <td>{{ date('d F y', strtotime($registro->created_at)) }}</td>
+                    <td>{{ date('d-m-Y', strtotime($registro->created_at)) }}</td>
                     <td>
                         <div class="dropdown">
                             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
@@ -90,7 +97,5 @@
                 </tr>
             @endforelse
         </tbody>
-        @slot('links')
-        @endslot
     </x-table-head>
 </div>

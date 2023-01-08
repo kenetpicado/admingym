@@ -12,7 +12,6 @@ class Contabilidad extends Component
 
     public $table = "ingresos";
     public $start, $end;
-    public $table_insert = "ingresos";
     public $search_concepto = null;
 
     public $sub_id, $concepto, $descripcion, $monto, $created_at;
@@ -26,7 +25,7 @@ class Contabilidad extends Component
 
     public function resetInputFields()
     {
-        $this->resetExcept(['table', 'start', 'end', 'table_insert', 'created_at']);
+        $this->resetExcept(['table', 'start', 'end', 'created_at']);
         $this->resetErrorBag();
     }
 
@@ -48,17 +47,16 @@ class Contabilidad extends Component
         return view('livewire.contabilidad', compact('registros'));
     }
 
-    /* Cargar modal para editar un cliente */
     public function edit($registro_id)
     {
         $registro = DB::table($this->table)->find($registro_id);
+
         $this->sub_id = $registro->id;
         $this->concepto = $registro->concepto;
         $this->descripcion = $registro->descripcion;
         $this->monto = $registro->monto;
         $this->created_at = $registro->created_at;
 
-        $this->table_insert = $this->table;
         $this->emit('open-create-modal');
     }
 

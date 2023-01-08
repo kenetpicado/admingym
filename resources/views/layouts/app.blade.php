@@ -51,12 +51,6 @@
 
     <x-livewire-alert::scripts />
     <script>
-        function delete_element($id) {
-            $result = confirm("¿Desea eliminar este registro? Esta opcion no se puede deshacer");
-            if ($result)
-                Livewire.emit('delete_element', $id)
-        };
-
         Livewire.on('close-create-modal', function() {
             document.getElementById("close-create-modal").click();
         });
