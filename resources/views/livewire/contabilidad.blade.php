@@ -75,9 +75,11 @@
                             </button>
                             <div class="dropdown-menu">
                                 <button type="button" class="dropdown-item"
-                                    wire:click="edit({{ $registro->id }})">Editar</button>
-                                <button type="button" class="dropdown-item"
-                                    onclick="delete_element({{ $registro->id }})">Eliminar</button>
+                                wire:click="edit({{ $registro->id }})">Editar</button>
+                                <button type="button" wire:click="destroy({{ $registro->id }})" class="dropdown-item"
+                                    onclick="confirm_delete()">
+                                    Eliminar
+                                </button>
                             </div>
                         </div>
                     </td>

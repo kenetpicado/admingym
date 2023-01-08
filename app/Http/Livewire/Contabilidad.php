@@ -24,8 +24,6 @@ class Contabilidad extends Component
         'created_at' => 'required|date',
     ];
 
-    protected $listeners = ['delete_element'];
-
     public function resetInputFields()
     {
         $this->resetExcept(['table', 'start', 'end', 'table_insert', 'created_at']);
@@ -74,7 +72,7 @@ class Contabilidad extends Component
         $this->emit('close-create-modal');
     }
 
-    public function delete_element($id)
+    public function destroy($id)
     {
         DB::table($this->table)->delete($id);
         $this->delete();

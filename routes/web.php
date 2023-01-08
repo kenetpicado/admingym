@@ -27,6 +27,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('contabilidad',  Contabilidad::class)->name('contabilidad'); //TODO
 
     Route::get('perfil',  Perfil::class)->name('perfil');
+
+    Route::get('historial/{cliente}', Historial::class)->name('historial');
 });
 
 Auth::routes(['register' => false]);

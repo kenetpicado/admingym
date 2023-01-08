@@ -111,6 +111,7 @@
                         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Acciones</button>
 
                         <div class="dropdown-menu">
+                            <a href="{{ route('historial', $cliente->id) }}" class="dropdown-item">Historial</a>
                             <button type="button" class="dropdown-item" wire:click="edit({{ $cliente->id }})">Editar</button>
                             <button type="button" wire:click="destroy({{ $cliente->id }})" class="dropdown-item"
                                 onclick="confirm_delete()">
