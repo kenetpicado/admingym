@@ -20,7 +20,7 @@ class Historial extends Component
         return view('livewire.historial', [
             'registros' => DB::table('ingresos')
                 ->where('concepto', 'like', "%{$this->cliente->nombre}%")
-                ->orWhere('descripcion', 'like', "%{$this->cliente->id}%")
+                ->orWhere('descripcion', 'CLIENTE: ' . $this->cliente->id)
                 ->latest('id')
                 ->get()
         ]);
