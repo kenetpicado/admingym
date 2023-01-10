@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Route;
@@ -22,13 +23,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('eventos/{entrenador}', Eventos::class)->name('eventos');
 
-    Route::get('reportes',  Reportes::class)->name('reportes');
+    Route::get('reportes', Reportes::class)->name('reportes');
 
-    Route::get('contabilidad',  Contabilidad::class)->name('contabilidad'); //TODO
+    Route::get('contabilidad', Contabilidad::class)->name('contabilidad'); //TODO
 
-    Route::get('perfil',  Perfil::class)->name('perfil');
+    Route::get('perfil', Perfil::class)->name('perfil');
 
     Route::get('historial/{cliente}', Historial::class)->name('historial');
+
+    Route::get('estadisticas', Estadisticas::class)->name('estadisticas');
 });
 
 Auth::routes(['register' => false]);

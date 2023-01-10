@@ -27,6 +27,10 @@
                         <a class="dropdown-item" href="{{ route('contabilidad') }}">Contabilidad</a>
                     </div>
                 </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link {{ request()->is('estadisticas*') ? 'active' : '' }}"
+                        href="{{ route('estadisticas') }}">Estadisticas</a>
+                </li>
             </ul>
 
             <div class="nav-item mx-1">
