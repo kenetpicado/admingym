@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body">
                     <div class="chart-bar">
-                        <canvas id="chart2022"></canvas>
+                        <canvas id="ingresos2022"></canvas>
                     </div>
                     <hr>
                     Ingresos mensuales del año 2022
@@ -32,7 +32,7 @@
             backgroundColor: "rgb(255,255,255)",
             bodyFontColor: "#858796",
             borderColor: '#dddfeb',
-            borderWidth: 1,
+            borderWidth: 5,
             xPadding: 15,
             yPadding: 15,
             displayColors: false,
@@ -49,7 +49,7 @@
         const scale = {
             xAxes: [{
                 time: {
-                    unit: 'money'
+                    unit: 'month'
                 },
                 gridLines: {
                     display: false,
@@ -57,9 +57,6 @@
                 },
                 ticks: {
                     maxTicksLimit: 12,
-                    // callback: function(value, index, values) {
-                    //     return 'C$ ' + number_format(value);
-                    // }
                 },
                 maxBarThickness: 20,
             }],
@@ -123,17 +120,10 @@
         }
 
         draw_bars(
-            'chart2022',
+            'ingresos2022',
             pluck(ingresos, 'total'),
             pluck(ingresos, 'mes'),
         );
-
-        // draw_bars(
-        //     'egresos2022',
-        //     pluck(egresos, 'total'),
-        //     pluck(egresos, 'mes'),
-        //     "#e74a3b"
-        // );
 
         function draw_bars(id, data, label,  color = "#4e73df") {
             var ctx = document.getElementById(id);

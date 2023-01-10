@@ -20,15 +20,6 @@ class Estadisticas extends Component
             ];
         });
 
-        // for ($i = 1; $i <= 12; ++$i) {
-        //     // $ingresos[$i] = DB::table('ingresos')
-        //     //     ->whereYear('created_at', '2022')
-        //     //     ->whereMonth('created_at', $i)
-        //     //     ->sum('monto');
-
-        //     array_push($ingresos, ['mes' => (new DateService)->monthName($i), 'total' => 2]);
-        // }
-
         return view('livewire.estadisticas', [
             'ingresos' => $ingresos
         ]);
