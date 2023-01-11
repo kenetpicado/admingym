@@ -21,7 +21,6 @@ class PlanService
         $expired = Plan::expired()->get();
 
         if (!$expired->isEmpty()) {
-
             (new ReporteService)->buildAndSave($expired);
 
             Plan::deleteIds($expired->pluck('id'));
@@ -45,7 +44,7 @@ class PlanService
             ->where('created_at', '<=', date('Y-m-d'))
             ->groupBy('created_at')
             ->orderBy('created_at', 'desc')
-            ->limit(7)
+            ->limit(10)
             ->get(DB::raw("CONCAT(DAYNAME(created_at), ' ', DAY(created_at)) as day, count(*) as total"));
     }
 }

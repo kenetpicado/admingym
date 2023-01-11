@@ -114,7 +114,7 @@
                 </div>
                 <div class="card-body">
                     <div class="chart-pie pt-4">
-                        <canvas id="sexoChartId"></canvas>
+                        <canvas id="sexoChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="card-body">
                     <div class="chart-pie pt-4">
-                        <canvas id="serviciosChartId"></canvas>
+                        <canvas id="serviciosChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -134,153 +134,46 @@
         <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Ultimos 7 dias</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Planes contratados en los ultimos 10 dias</h6>
                 </div>
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="areaChart"></canvas>
+                        <canvas id="planesChart"></canvas>
                     </div>
-                    <hr>
-                    Cantidad de planes contratados en los ultimos 7 dias
                 </div>
             </div>
         </div>
     </div>
 @push('scripts')
+
+<script src="{{ asset('js/chart.js/chart-doughnut.js') }}"></script>
+<script src="{{ asset('js/chart.js/chart-area.js') }}"></script>
+
 <script>
     const pluck = (arr, key) => arr.map((i) => i[key]);
 
-    const options = {
-        maintainAspectRatio: true,
-        tooltips: {
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            borderColor: '#dddfeb',
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            caretPadding: 10,
-        },
-        legend: {
-            display: true
-        },
-        cutoutPercentage: 80,
+    var clientes = @json($clientes);
+    var planes = @json($planes);
+    var planes_month = @json($planes_month);
 
-    };
-
-    var clientes = <?php echo $clientes; ?>;
-    var planes = <?php echo $planes; ?>;
-    var planes_month = <?php echo $planes_month; ?>;
-
-    paint_graph(
+    draw_doughnut_graph(
         pluck(planes, 'servicio'),
         pluck(planes, 'total'),
-        "serviciosChartId"
+        "serviciosChart"
         );
 
-    paint_graph(
+    draw_doughnut_graph(
         pluck(clientes, 'sexo'),
         pluck(clientes, 'total'),
-        "sexoChartId"
+        "sexoChart"
         );
 
-    function paint_graph(labels, data, id) {
-        var element = document.getElementById(id);
-        var chart = new Chart(element, {
-            type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: data,
-                    backgroundColor: ['#4e73df', '#1cc88a', '#e74a3b'],
-                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#8b2015'],
-                    hoverBorderColor: "rgba(234, 236, 244, 1)",
-                }],
-            },
-            options: options,
-        });
-    }
-
-
-    var ctx = document.getElementById("areaChart");
-    var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: pluck(planes_month, 'day').reverse(),
-            datasets: [{
-                label: "Planes",
-                lineTension: 0.3,
-                backgroundColor: "rgba(78, 115, 223, 0.2)",
-                borderColor: "rgba(78, 115, 223, 1)",
-                pointRadius: 3,
-                pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                pointBorderColor: "rgba(78, 115, 223, 1)",
-                pointHoverRadius: 3,
-                pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                pointHitRadius: 10,
-                pointBorderWidth: 2,
-                data: pluck(planes_month, 'total').reverse(),
-            }],
-        },
-        options: {
-            maintainAspectRatio: true,
-            layout: {
-                padding: {
-                    left: 10,
-                    right: 30,
-                    top: 30,
-                    bottom: 30
-                },
-            },
-            scales: {
-                xAxes: [{
-                    time: {
-                        unit: 'date'
-                    },
-                    gridLines: {
-                        display: false,
-                        drawBorder: false
-                    },
-                    ticks: {
-                        maxTicksLimit: 7
-                    }
-                }],
-                yAxes: [{
-                    ticks: {
-                        maxTicksLimit: 5,
-                        padding: 10,
-                    },
-                    gridLines: {
-                        color: "rgb(234, 236, 244)",
-                        zeroLineColor: "rgb(234, 236, 244)",
-                        drawBorder: false,
-                        borderDash: [2],
-                        zeroLineBorderDash: [2]
-                    }
-                }],
-            },
-            legend: {
-                display: false
-            },
-            tooltips: {
-                backgroundColor: "rgb(255,255,255)",
-                bodyFontColor: "#858796",
-                titleMarginBottom: 10,
-                titleFontColor: '#6e707e',
-                titleFontSize: 16,
-                borderColor: '#dddfeb',
-                borderWidth: 1,
-                xPadding: 15,
-                yPadding: 15,
-                displayColors: false,
-                intersect: false,
-                mode: 'index',
-                caretPadding: 10,
-            }
-        }
-    });
+    draw_area_graph(
+        pluck(planes_month, 'day').reverse(),
+        pluck(planes_month, 'total').reverse(),
+        "planesChart",
+        "Planes contratados"
+        );
 </script>
 @endpush
 </div>

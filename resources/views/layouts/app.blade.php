@@ -47,9 +47,11 @@
     <script src="{{ asset('js/chart.js/Chart.min.js') }}"></script>
 
     @livewireScripts
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <x-livewire-alert::scripts />
+
     <script>
         Livewire.on('close-create-modal', function() {
             document.getElementById("close-create-modal").click();
@@ -63,6 +65,7 @@
             confirm('Desea eliminar este registro?') || event.stopImmediatePropagation()
         }
     </script>
+
     @stack('scripts')
 </body>
 
