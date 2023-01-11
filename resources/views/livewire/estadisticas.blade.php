@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-12">
 
-            <!-- Ingresos -->
+            <!-- Ingresos 2022 -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Ingresos 2022</h6>
@@ -33,6 +33,14 @@
         "Ingresos",
         "C$ "
         );
+
+    // draw_area_graph(
+    //     pluck(ingresos2023, 'mes'),
+    //     pluck(ingresos2023, 'total'),
+    //     "chartIngresos2023",
+    //     "Ingresos",
+    //     "C$ "
+    //     );
 </script>
 @endpush
 </div>
