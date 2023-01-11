@@ -22,4 +22,14 @@ class IngresoService
             ->orderBy('mes')
             ->get();
     }
+
+    public function buildDescripcion($plan)
+    {
+        return "CLIENTE: " . $plan->cliente_id;
+    }
+
+    public function buildConcepto($plan)
+    {
+        return substr($plan->cliente->nombre . ', ' . $plan->servicio . ', ' . $plan->plan, 0, 50);
+    }
 }

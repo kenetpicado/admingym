@@ -18,7 +18,8 @@ class Ingreso extends Model
         'descripcion',
         'monto',
         'beca',
-        'created_at'
+        'created_at',
+        'plan_id'
     ];
 
     protected $casts = [

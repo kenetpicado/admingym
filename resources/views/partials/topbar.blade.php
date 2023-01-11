@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4 shadow-sm static-top">
     <div class="container">
-        <a class="navbar-brand font-weight-bold text-primary" href="/">{{ config('app.name') }}</a>
+        <a class="navbar-brand font-weight-bold text-primary" href="/">
+            <img class="mr-1" src="{{ asset('img/logo-ag.png') }}" width="30" height="auto" alt="Alonso Gym Logo">
+            {{ config('app.name') }}
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

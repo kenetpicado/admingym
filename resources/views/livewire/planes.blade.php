@@ -32,6 +32,11 @@
                 <strong class="text-danger">{{ $message }}</strong>
             </span>
         @enderror
+        <div class="alert alert-primary" role="alert">
+            <small>
+            Los ingresos creados con fecha anterior a 11-01-2023 no pueden ser sincronizados automaticamente al editar su plan.
+            </small>
+      </div>
     </x-modal.create>
 
     <x-table-head>

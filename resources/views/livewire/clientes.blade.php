@@ -71,8 +71,8 @@
 
     <x-table-head>
         <x-slot name="header">
-            <div class="row">
-                <div class="col-3">
+            <div class="row mb-2">
+                <div class="col-12 col-lg-3">
                     <input type="search" class="form-control " wire:model="search" placeholder="Buscar">
                 </div>
             </div>
