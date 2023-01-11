@@ -10,11 +10,13 @@ class PlanObserver
 {
     public function created(Plan $plan)
     {
+        $plan->load('cliente:id,nombre');
+
         Reporte::where('cliente_id', $plan->cliente_id)->delete();
 
         Ingreso::create([
-            'concepto' => $plan->servicio . ' - ' . $plan->plan,
-            'descripcion' => "Cliente: " . $plan->cliente_id,
+            'concepto' => substr($plan->cliente->nombre . ', ' . $plan->servicio . ', ' . $plan->plan, 0, 50),
+            'descripcion' => "CLIENTE: " . $plan->cliente_id,
             'monto' => $plan->monto,
             'beca' => $plan->beca,
             'created_at' => now()->format('Y-m-d')

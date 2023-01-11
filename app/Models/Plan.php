@@ -35,8 +35,9 @@ class Plan extends Model
     {
         $this->monto = Precio::getMonto($this->servicio, $this->plan);
 
-        if ($this->beca > 0)
+        if ($this->beca > 0) {
             $this->monto = $this->monto - $this->beca;
+        }
 
         $this->fecha_fin = (new DateService)->getEndDate($this->plan, $this->created_at);
     }

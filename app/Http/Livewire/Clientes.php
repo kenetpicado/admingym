@@ -41,7 +41,7 @@ class Clientes extends Component
             ->orWhere('id', 'like', "%{$this->search}%")
             ->orderBy('id', 'desc')
             ->withCount('planes')
-            ->paginate(10);
+            ->paginate(20);
 
         return view('livewire.clientes', compact('clientes'));
     }

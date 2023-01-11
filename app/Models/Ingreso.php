@@ -23,6 +23,5 @@ class Ingreso extends Model
 
     protected $casts = [
         'concepto' => Upper::class,
-        'descripcion' => Upper::class,
     ];
 }
