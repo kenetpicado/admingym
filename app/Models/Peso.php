@@ -22,8 +22,8 @@ class Peso extends Model
         return $query->where('cliente_id', $cliente_id);
     }
 
-    public function getCreatedAttribute()
+    public function getFormatCreatedAtAttribute()
     {
-        return date('d-m-Y', strtotime($this->attributes['created_at']));
+        return date('d/m/Y', strtotime($this->created_at));
     }
 }

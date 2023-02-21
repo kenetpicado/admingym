@@ -20,4 +20,11 @@ class Cliente extends Model
     {
         return $this->hasMany(Plan::class);
     }
+
+    public function scopeSearching($query, $search)
+    {
+        if ($search) {
+            $query->where('nombre', 'like', "%" . $search . "%");
+        }
+    }
 }

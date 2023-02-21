@@ -25,4 +25,9 @@ class Ingreso extends Model
     protected $casts = [
         'concepto' => Upper::class,
     ];
+
+    public function getFormatCreatedAtAttribute()
+    {
+        return date('d/m/Y', strtotime($this->created_at));
+    }
 }

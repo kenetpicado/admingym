@@ -19,7 +19,6 @@
             @forelse ($registros as $registro)
                 <tr>
                     <td>
-                        <i class="fas fa-check text-success"></i>
                         {{ $registro->concepto }}
                     </td>
                     <td>{{ $registro->descripcion }}</td>
@@ -29,7 +28,7 @@
                             C$ {{ $registro->beca }}
                         @endif
                     </td>
-                    <td>{{ date('d-m-Y', strtotime($registro->created_at)) }}</td>
+                    <td>{{ $registro->format_created_at }}</td>
                 </tr>
             @empty
                 <tr>

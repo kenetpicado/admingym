@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -47,9 +48,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPassword()
+    public function setPassword($password)
     {
-        $this->password = bcrypt('12345678');
+        $this->password = Hash::make($password);
     }
 
     public function addUsername()

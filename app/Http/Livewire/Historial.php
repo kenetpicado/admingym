@@ -3,8 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cliente;
-use Livewire\Component;
+use App\Models\Ingreso;
 use Illuminate\Support\Facades\DB;
+use Livewire\Component;
 
 class Historial extends Component
 {
@@ -17,12 +18,14 @@ class Historial extends Component
 
     public function render()
     {
+        $ingresos = Ingreso::query()
+            ->where('concepto', 'like', "%" . $this->cliente->nombre . "%")
+            ->orWhere('descripcion', 'CLIENTE: ' . $this->cliente->id)
+            ->latest('id')
+            ->get();
+
         return view('livewire.historial', [
-            'registros' => DB::table('ingresos')
-                ->where('concepto', 'like', "%{$this->cliente->nombre}%")
-                ->orWhere('descripcion', 'CLIENTE: ' . $this->cliente->id)
-                ->latest('id')
-                ->get()
+            'registros' => $ingresos
         ]);
     }
 }

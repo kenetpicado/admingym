@@ -22,9 +22,9 @@ class Planes extends Component
     public function render()
     {
         $planes = Plan::withCliente()
-                ->orderBy('fecha_fin')
-                ->searching($this->search)
-                ->paginate(20);
+            ->orderBy('fecha_fin')
+            ->searching($this->search)
+            ->paginate(20);
 
         return view('livewire.planes', [
             'registro' => (new RegistroService)->getCurrent(),

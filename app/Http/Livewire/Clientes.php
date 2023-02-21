@@ -37,9 +37,9 @@ class Clientes extends Component
 
     public function render()
     {
-        $clientes = Cliente::where('nombre', 'like', "%{$this->search}%")
-            ->orWhere('id', 'like', "%{$this->search}%")
-            ->orderBy('id', 'desc')
+        $clientes = Cliente::query()
+            ->searching($this->search)
+            ->latest('id')
             ->withCount('planes')
             ->paginate(20);
 
@@ -54,11 +54,13 @@ class Clientes extends Component
 
     public function store()
     {
-        if ($this->saveCliente)
+        if ($this->saveCliente) {
             $this->storeCliente();
+        }
 
-        if ($this->savePlan)
+        if ($this->savePlan) {
             $this->storePlan();
+        }
 
         $this->success();
         $this->resetInputFields();
@@ -105,8 +107,9 @@ class Clientes extends Component
 
     public function destroy(Cliente $cliente)
     {
-        if (($result = $cliente->planes->count()) == 0)
+        if (($result = $cliente->planes->count()) == 0) {
             $cliente->delete();
+        }
 
         $this->delete(!$result);
     }

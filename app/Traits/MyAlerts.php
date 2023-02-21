@@ -20,6 +20,6 @@ trait MyAlerts
 
     public function delete($deleted = true)
     {
-        $this->alert('error',  $deleted ? config('app.deleted') : config('app.undeleted'));
+        $this->alert('error', $deleted ? config('app.deleted') : config('app.undeleted'));
     }
 }

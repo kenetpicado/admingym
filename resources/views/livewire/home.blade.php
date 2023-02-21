@@ -27,7 +27,7 @@
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Planes activos
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                {{ $ver['planes'] }} <small> {{ $ver['activos'] }}%</small>
+                                {{ $ver['planes'] }}
                             </div>
                         </div>
                         <div class="col-auto">
