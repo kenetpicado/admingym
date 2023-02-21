@@ -41,7 +41,7 @@ class PlanService
     {
         return DB::table('planes')
             ->where('created_at', '>=', date('Y-m-' . '01'))
-            ->where('created_at', '<=', date('Y-m-d'))
+            ->where('created_at', '<=', date('Y-m-t'))
             ->groupBy('created_at')
             ->orderBy('created_at', 'desc')
             ->limit(10)

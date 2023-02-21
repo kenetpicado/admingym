@@ -18,7 +18,7 @@ class Eventos extends Component
     public function mount(Entrenador $entrenador)
     {
         $this->entrenador = $entrenador;
-        $this->create_instance();
+        $this->createEventoInstance();
     }
 
     protected $rules = [
@@ -41,7 +41,7 @@ class Eventos extends Component
         $this->reset(['isUpdate', 'evento']);
         $this->resetErrorBag();
 
-        $this->create_instance();
+        $this->createEventoInstance();
     }
 
     public function store()
@@ -55,7 +55,7 @@ class Eventos extends Component
         $this->emit('close-create-modal');
     }
 
-    public function create_instance()
+    public function createEventoInstance()
     {
         $this->evento = new Evento();
         $this->evento->monto = 0;

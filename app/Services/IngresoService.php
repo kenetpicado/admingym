@@ -13,6 +13,7 @@ class IngresoService
             ->get(['monto', 'beca']);
     }
 
+    // NO IMPLEMENTADO
     public function getForStats($year = 2022)
     {
         return DB::table('ingresos')
