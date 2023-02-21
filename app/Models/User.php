@@ -47,6 +47,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function setPassword()
+    {
+        $this->password = bcrypt('12345678');
+    }
+
+    public function addUsername()
+    {
+        $this->username = explode('@', $this->email)[0];
+    }
+
     public function scopeNoRootUsers($query)
     {
         $query->whereIn('id', function ($query) {

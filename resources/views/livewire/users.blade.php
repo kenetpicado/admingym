@@ -10,11 +10,14 @@
     <x-modal.create label="Agregar Usuario">
         <x-input name='user.name' label="Nombre" type="email"></x-input>
         <x-input name='user.email' label="Email" type="email" ></x-input>
-        <x-select-0 label="Rol" name="user_roles">
+        <x-select-0 label="Rol" name="user_role">
             @foreach ($roles as $role)
-                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                <option value="{{ $role->name }}">{{ $role->name }}</option>
             @endforeach
         </x-select-0>
+        <small class="text-primary">
+            Se enviara un correo al usuario con su contraseña.
+        </small>
     </x-modal.create>
 
     <x-table-head>

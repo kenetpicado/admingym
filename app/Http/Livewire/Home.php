@@ -35,7 +35,6 @@ class Home extends Component
             'egresos'       => $egresos,
             'sum_becas'     => $ingresos->sum('beca'),
             'count_becas'   => $ingresos->where('beca', '>', '0')->count(),
-            'mes'           => (new DateService)->current_month(),
             'activos'       => (new PercentageService)->get($clientes->sum('total'), $planes->sum('total')),
         ]);
 

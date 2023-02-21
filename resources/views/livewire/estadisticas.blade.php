@@ -3,8 +3,6 @@
 <div>
     <div class="row justify-content-center">
         <div class="col-lg-12">
-
-            <!-- Ingresos 2022 -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Ingresos 2022</h6>
@@ -20,29 +18,22 @@
         </div>
     </div>
 
-@push('scripts')
-<script src="{{ asset('js/chart.js/chart-area.js') }}"></script>
-<script>
-    const pluck = (arr, key) => arr.map((i) => i[key]);
-    var ingresos = @json($ingresos);
+    @push('scripts')
+        <script src="{{ asset('js/chart.js/chart-area.js') }}"></script>
 
-    draw_area_graph(
-        pluck(ingresos, 'mes'),
-        pluck(ingresos, 'total'),
-        "chartIngresos2022",
-        "Ingresos",
-        "C$ "
-        );
+        <script>
+            const meses = ['ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+            const ingresos = [4650, 58600, 73000, 59900, 64400, 62500, 54600, 46700];
 
-    // draw_area_graph(
-    //     pluck(ingresos2023, 'mes'),
-    //     pluck(ingresos2023, 'total'),
-    //     "chartIngresos2023",
-    //     "Ingresos",
-    //     "C$ "
-    //     );
-</script>
-@endpush
+            draw_area_graph(
+                meses,
+                ingresos,
+                "chartIngresos2022",
+                "Ingresos",
+                "C$ "
+            );
+        </script>
+    @endpush
 </div>
 
 

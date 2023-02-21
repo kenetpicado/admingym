@@ -43,7 +43,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Ingresos {{ $ver['mes'] }}</div>
+                            Ingresos {{ date('M') }}</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">C$ {{ number_format($ver['ingresos']) }}
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                            Egresos {{ $ver['mes'] }}</div>
+                            Egresos {{ date('M') }}</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">C$ {{ number_format($ver['egresos']) }}
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                            Ganancia {{ $ver['mes'] }}</div>
+                            Ganancia {{ date('M') }}</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                             C$ {{ number_format($ver['ingresos'] - $ver['egresos']) }}</div>
                         </div>
@@ -94,7 +94,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                            Becas {{ $ver['mes'] }}</div>
+                            Becas {{ date('M') }}</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">C$
                             {{ $ver['sum_becas'] }} ({{ number_format($ver['count_becas']) }})</div>
                         </div>

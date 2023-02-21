@@ -30,13 +30,13 @@ class Pesos extends Component
     {
         $this->resetExcept(['cliente']);
         $this->resetErrorBag();
-        $this->create_instance();
+        $this->createPesoInstance();
     }
 
     public function mount(Cliente $cliente)
     {
         $this->cliente = $cliente;
-        $this->create_instance();
+        $this->createPesoInstance();
     }
 
     public function store()
@@ -63,7 +63,7 @@ class Pesos extends Component
         $this->delete();
     }
 
-    public function create_instance()
+    public function createPesoInstance()
     {
         $this->peso = new Peso();
         $this->peso->created_at = date('Y-m-d');
