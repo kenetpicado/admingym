@@ -28,6 +28,8 @@
                         <a class="dropdown-item" href="{{ route('precios') }}">Precios</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('contabilidad') }}">Contabilidad</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('users') }}">Usuarios</a>
                     </div>
                 </li>
                 <li class="nav-item mx-1">

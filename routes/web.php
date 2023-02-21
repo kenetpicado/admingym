@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('historial/{cliente}', Historial::class)->name('historial');
 
     Route::get('estadisticas', Estadisticas::class)->name('estadisticas');
+
+    Route::get('users', Users::class)->name('users');
 });
 
 Auth::routes(['register' => false]);

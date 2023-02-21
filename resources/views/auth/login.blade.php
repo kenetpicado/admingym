@@ -23,7 +23,7 @@
                     <h4 class="text-center mb-2 text-primary font-weight-bold">{{ config('app.name') }}</h4>
                     <h6 class="text-center text-muted mb-4">Dashboard</h6>
 
-                    <x-input name="username" type="text"></x-input>
+                    <x-input name="email" type="email"></x-input>
                     <x-input name="password" type="password"></x-input>
                     <div class="form-check mb-4">
                         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>

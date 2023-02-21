@@ -63,7 +63,7 @@
             @forelse ($planes as $plan)
                 <tr>
                     <td>
-                        {{ $plan->cliente->nombre }}
+                        {{ $plan->cliente_nombre }}
                         @isset($plan->nota)
                             <div class="small text-primary">
                                 {{ $plan->nota }}

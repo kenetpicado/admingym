@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Cliente;
+use App\Services\DateService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Plan extends Model
@@ -60,6 +61,10 @@ class Plan extends Model
 
     public function scopeWithCliente($query)
     {
-        return $query->with('cliente:id,nombre');
+        return $query->addSelect([
+            'cliente_nombre' => Cliente::select('nombre')
+                ->whereColumn('clientes.id', 'planes.cliente_id')
+                ->limit(1)
+        ]);
     }
 }
