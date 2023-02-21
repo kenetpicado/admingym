@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,39 +11,26 @@
     <link href="css/app.css" rel="stylesheet">
 </head>
 
-<body class="bg-primary">
+<body class="bg-light">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <div class="p-5">
-                            <div class="text-center mb-4">
-                                <img src="{{ asset('img/logo-ag.png') }}" alt="" srcset="" width="15%">
-                            </div>
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">{{ config('app.name') }}</h1>
-                            </div>
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <x-input name="username" label="Usuario"></x-input>
-                                <x-input name="password" label="Contraseña" type="password"></x-input>
-
-                                <div class="form-group">
-                                    <div class="form-check ml-2">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                            {{ old('remember') ? 'checked' : '' }}>
-
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('Recordarme') }}
-                                        </label>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary float-right mb-5">Login</button>
-                            </form>
-                        </div>
+        <div class="d-flex flex-column">
+            <div style="display: grid; place-items: center; min-height: 100vh;">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="text-center mb-4">
+                        <img src="{{ asset('img/logo-ag.png') }}" alt="" srcset="" width="50px">
                     </div>
-                </div>
+                    <h4 class="text-center mb-2 text-primary font-weight-bold">{{ config('app.name') }}</h4>
+                    <h6 class="text-center text-muted mb-4">Dashboard</h6>
+
+                    <x-input name="username" type="text"></x-input>
+                    <x-input name="password" type="password"></x-input>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <label class="form-check-label" for="remember">Recordarme</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block w-100">Entrar</button>
+                </form>
             </div>
         </div>
     </div>
