@@ -46,7 +46,13 @@ class Plan extends Model
     /* SCOPES */
     public function scopeSearching($query, $search)
     {
-        return $query->when($search, fn ($q) => $q->whereHas('cliente', fn ($q) => $q->where('nombre', 'like', '%' . $search . '%')));
+        if ($search) {
+            $query->whereIn('cliente_id', function ($q) use ($search) {
+                $q->select('id')
+                    ->from('clientes')
+                    ->where('nombre', 'like', '%' . $search . '%');
+            });
+        }
     }
 
     public function scopeExpired($query)

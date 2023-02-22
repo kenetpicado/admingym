@@ -12,23 +12,25 @@
             <th>Concepto</th>
             <th>Descripcion</th>
             <th>Monto C$</th>
-            <th>Beca C$</th>
-            <th>Fecha</th>
         @endslot
         <tbody>
             @forelse ($registros as $registro)
                 <tr>
                     <td>
-                        {{ $registro->concepto }}
+                        <span class="text-muted small">
+                            {{ $registro->format_created_at }}
+                        </span>
+                        <div class="my-1 text-dark break-45-ch">
+                            {{ $registro->concepto }}
+                        </div>
                     </td>
                     <td>{{ $registro->descripcion }}</td>
-                    <td>C$ {{ $registro->monto }}</td>
                     <td>
+                        C$ {{ $registro->monto }}
                         @if($registro->beca > 0)
-                            C$ {{ $registro->beca }}
+                            (Beca C$ {{ $registro->beca }})
                         @endif
                     </td>
-                    <td>{{ $registro->format_created_at }}</td>
                 </tr>
             @empty
                 <tr>
