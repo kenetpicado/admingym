@@ -62,15 +62,14 @@ class Users extends Component
 
         $this->user->addUsername();
         $this->user->save();
+
         $this->user->syncRoles($this->user_role);
 
-        // if ($this->isNew) {
-        //     Mail::to($this->user->email)->send(new UserRegister($this->user, $this->cleanPassword));
-        // }
-        //Mail::to($this->user->email)->send(new UserRegister($this->user, $this->cleanPassword));
+        if ($this->isNew) {
+            Mail::to($this->user->email)->send(new UserRegister($this->user, $this->cleanPassword));
+        }
 
         $this->created();
-
         $this->resetInputFields();
         $this->emit('close-create-modal');
     }
