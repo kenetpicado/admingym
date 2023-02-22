@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\ApplicationStarted;
 use App\Models\Plan;
 use App\Services\RegistroService;
 use App\Traits\MyAlerts;
@@ -24,10 +25,10 @@ class Planes extends Component
         $planes = Plan::withCliente()
             ->orderBy('fecha_fin')
             ->searching($this->search)
-            ->paginate(20);
+            ->paginate();
 
         return view('livewire.planes', [
-            'registro' => (new RegistroService)->getCurrent(),
+            'plansExpiredCount' => (new RegistroService)->plansExpiredCount(),
             'planes' => $planes
         ]);
     }
@@ -35,6 +36,7 @@ class Planes extends Component
     public function mount()
     {
         $this->plan = new Plan();
+        //ApplicationStarted::dispatch();
     }
 
     public function resetInputFields()

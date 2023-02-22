@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\Upper;
+use App\Models\Cliente;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,7 +38,11 @@ class Reporte extends Model
     /* Scopes */
     public function scopeWithCliente($query)
     {
-        return $query->with('cliente:id,nombre');
+        return $query->addSelect([
+            'cliente_nombre' => Cliente::select('nombre')
+                ->whereColumn('clientes.id', 'reportes.cliente_id')
+                ->limit(1)
+        ]);
     }
 
     public function scopeSearching($query, $search)

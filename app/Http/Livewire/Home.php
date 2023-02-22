@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\ApplicationStarted;
 use App\Models\Egreso;
 use App\Models\Ingreso;
 use App\Services\ClienteService;
@@ -26,7 +27,6 @@ class Home extends Component
         $ingresos = (new IngresoService)->getThisMonth();
         $egresos_total = (new EgresoService)->getThisMonth();
 
-        //Build array
         $generalInfo = ([
             'clientes_count' => $clientes->sum('total'),
             'planes_count' => $planes->sum('total'),
@@ -38,5 +38,10 @@ class Home extends Component
         ]);
 
         return view('livewire.home', compact('generalInfo', 'planes', 'clientes'));
+    }
+
+    public function mount()
+    {
+        ApplicationStarted::dispatch();
     }
 }

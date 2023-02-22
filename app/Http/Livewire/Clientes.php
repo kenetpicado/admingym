@@ -41,7 +41,7 @@ class Clientes extends Component
             ->searching($this->search)
             ->latest('id')
             ->withCount('planes')
-            ->paginate(20);
+            ->paginate(10);
 
         return view('livewire.clientes', compact('clientes'));
     }

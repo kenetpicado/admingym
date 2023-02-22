@@ -54,11 +54,6 @@ class Plan extends Model
         return $query->where('fecha_fin', '<=', date('Y-m-d'));
     }
 
-    public function scopeDeleteIds($query, $ids)
-    {
-        return $query->whereIn('id', $ids)->delete();
-    }
-
     public function scopeWithCliente($query)
     {
         return $query->addSelect([

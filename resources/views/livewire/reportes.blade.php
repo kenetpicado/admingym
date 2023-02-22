@@ -65,7 +65,7 @@
                 <tr>
                     <td>
                         <div>
-                            {{ $reporte->cliente->nombre }}
+                            {{ $reporte->cliente_nombre }}
                             <div class="text-primary mt-2">
                                 Plan expirado
                             </div>
@@ -76,7 +76,7 @@
                     </td>
                     <td>{{ $reporte->created_at }}</td>
                     <td>
-                        <button wire:click="create({{ $reporte->cliente->id }}, '{{ $reporte->created_at }}')"
+                        <button wire:click="create({{ $reporte->cliente_id }}, '{{ $reporte->created_at }}')"
                             class="btn btn-primary  btn-sm rounded-3">Renovar</button>
                     </td>
                     <td>
