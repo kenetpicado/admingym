@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Traits\MyAlerts;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Illuminate\Support\Facades\Hash;
 
 class Perfil extends Component
 {
@@ -13,6 +14,7 @@ class Perfil extends Component
 
     public $users = null;
     public $password = null;
+    public $password_confirmation = null;
 
     public function mount()
     {
@@ -23,7 +25,7 @@ class Perfil extends Component
     {
         return [
             'users.name' => 'required|max:50',
-            'users.username' => ['required', 'max:20', Rule::unique('users')->ignore($this->users->id)]
+            'users.email' => ['required', 'max:50', Rule::unique('users')->ignore($this->users->id)]
         ];
     }
 
@@ -50,12 +52,12 @@ class Perfil extends Component
     }
 
     /* No Implementado */
-    public function password(User $user)
+    public function password()
     {
         $this->validate(['password' => 'required|min:8|confirmed']);
 
-        $user->password = bcrypt($this->password);
-        $user->save();
+        $this->users->password = Hash::make($this->password);
+        $this->users->save();
 
         $this->created();
         return redirect()->route('index');
