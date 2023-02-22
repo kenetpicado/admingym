@@ -1,12 +1,20 @@
 @component('mail::message')
-# Introduction
+# Hola {{ $user->name }}
 
-The body of your message.
+Ha sido registrado al sistema administrativo de {{ config('app.name') }}.
 
-@component('mail::button', ['url' => ''])
-Button Text
+Puede ingresar con las siguientes credenciales:
+
+@component('mail::panel')
+Usuario: {{ $user->email }}
+<br>
+Contraseña: {{ $password }}
 @endcomponent
 
-Thanks,<br>
+@component('mail::button', ['url' => env('APP_URL')])
+Entrar
+@endcomponent
+
+Gracias,<br>
 {{ config('app.name') }}
 @endcomponent

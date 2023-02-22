@@ -5,10 +5,11 @@ namespace App\Http\Livewire;
 use App\Mail\UserRegister;
 use App\Models\User;
 use App\Traits\MyAlerts;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Mail;
 
 class Users extends Component
 {
@@ -56,7 +57,7 @@ class Users extends Component
         $this->validate();
 
         if ($this->isNew) {
-            $this->cleanPassword = '12345678';
+            $this->cleanPassword = Str::random(10);
             $this->user->setPassword($this->cleanPassword);
         }
 
@@ -66,7 +67,7 @@ class Users extends Component
         $this->user->syncRoles($this->user_role);
 
         if ($this->isNew) {
-            //Mail::to($this->user->email)->send(new UserRegister($this->user, $this->cleanPassword));
+            Mail::to($this->user->email)->send(new UserRegister($this->user, $this->cleanPassword));
         }
 
         $this->created();

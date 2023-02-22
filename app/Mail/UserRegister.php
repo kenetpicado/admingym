@@ -12,17 +12,17 @@ class UserRegister extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
-    public $cleanPassword;
+    public $password;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user, $cleanPassword)
+    public function __construct($user, $password)
     {
         $this->user = $user;
-        $this->cleanPassword = $cleanPassword;
+        $this->password = $password;
     }
 
     /**
@@ -32,6 +32,6 @@ class UserRegister extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.user-register');
+        return $this->markdown('emails.user-register')->subject('Registro de Usuario');
     }
 }

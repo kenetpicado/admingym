@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Cliente;
 use App\Models\Ingreso;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Historial extends Component

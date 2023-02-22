@@ -48,7 +48,7 @@
             </div>
             <div class="row">
                 <div class="col-3">
-                    <input type="search" class="form-control " wire:model="search" placeholder="Buscar">
+                    <input type="search" class="form-control " wire:model.debounce.500ms="search" placeholder="Buscar">
                 </div>
             </div>
         @endslot

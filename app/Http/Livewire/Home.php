@@ -3,15 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Events\ApplicationStarted;
-use App\Models\Egreso;
-use App\Models\Ingreso;
 use App\Services\ClienteService;
 use App\Services\CurrencyService;
-use App\Services\DateService;
 use App\Services\EgresoService;
 use App\Services\IngresoService;
 use App\Services\PlanService;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Home extends Component

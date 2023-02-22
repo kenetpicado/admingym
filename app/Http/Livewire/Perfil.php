@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
 use App\Traits\MyAlerts;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -34,7 +33,7 @@ class Perfil extends Component
         $this->reset(['password']);
         $this->resetErrorBag();
 
-        $this->user = auth()->user();
+        $this->users = auth()->user();
     }
 
     public function render()
