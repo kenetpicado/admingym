@@ -64,8 +64,8 @@
             $('#createModal').modal('show')
         });
 
-        const confirmAction = (msj = 'Desea eliminar este registro?') => {
-            confirm(msj) || event.stopImmediatePropagation()
+        const confirmAction = () => {
+            confirm('Desea eliminar este registro?') || event.stopImmediatePropagation()
         }
     </script>
 

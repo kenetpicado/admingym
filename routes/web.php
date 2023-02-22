@@ -13,6 +13,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('planes', Planes::class)->name('planes');
 
+    Route::get('reportes', Reportes::class)->name('reportes');
+
+    Route::get('perfil', Perfil::class)->name('perfil');
+});
+
+Route::middleware(['auth', 'role:administrador|root'])->group(function () {
+
     Route::get('clientes', Clientes::class)->name('clientes');
 
     Route::get('precios', Precios::class)->name('precios');
@@ -23,11 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('eventos/{entrenador}', Eventos::class)->name('eventos');
 
-    Route::get('reportes', Reportes::class)->name('reportes');
-
     Route::get('contabilidad', Contabilidad::class)->name('contabilidad'); //TODO
-
-    Route::get('perfil', Perfil::class)->name('perfil');
 
     Route::get('historial/{cliente}', Historial::class)->name('historial');
 

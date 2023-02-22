@@ -42,5 +42,9 @@ class Home extends Component
     public function mount()
     {
         ApplicationStarted::dispatch();
+
+        if (auth()->user()->hasRole('consultor')) {
+            return redirect()->route('planes');
+        }
     }
 }

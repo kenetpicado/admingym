@@ -25,9 +25,9 @@ class Reporte extends Model
         'cliente_nombre' => Upper::class
     ];
 
-    public function getCreatedAtAttribute($value)
+    public function getFormatCreatedAtAttribute($value)
     {
-        return date('d-m-Y', strtotime($value));
+        return date('d/m/Y', strtotime($value));
     }
 
     public function cliente(): BelongsTo
@@ -46,6 +46,13 @@ class Reporte extends Model
 
     public function scopeSearching($query, $search)
     {
-        return $query->when($search, fn ($q) => $q->whereHas('cliente', fn ($q) => $q->where('nombre', 'like', '%' . $search . '%')));
+        // return $query->when($search, fn ($q) => $q->whereHas('cliente', fn ($q) => $q->where('nombre', 'like', '%' . $search . '%')));
+        if ($search) {
+            $query->whereIn('cliente_id', function ($q) use ($search) {
+                $q->select('id')
+                    ->from('clientes')
+                    ->where('nombre', 'like', '%' . $search . '%');
+            });
+        }
     }
 }

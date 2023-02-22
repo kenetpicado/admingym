@@ -77,6 +77,6 @@ class Reportes extends Component
     public function refresh()
     {
         UpdateNotificationsList::dispatch();
-        $this->updated();
+        $this->reloadedList();
     }
 }

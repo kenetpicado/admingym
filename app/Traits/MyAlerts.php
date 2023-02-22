@@ -13,7 +13,7 @@ trait MyAlerts
         $this->alert('success', "Registro guardado correctamente");
     }
 
-    public function updated()
+    public function reloadedList()
     {
         $this->alert('success', "Registro actualizado correctamente");
     }

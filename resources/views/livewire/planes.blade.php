@@ -81,21 +81,25 @@
                         </div>
                     </td>
                     <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                data-toggle="dropdown" aria-expanded="false">
-                                Acciones
-                            </button>
-                            <div class="dropdown-menu">
-                                <button type="button" class="dropdown-item"
-                                    wire:click="edit({{ $plan->id }})">Editar</button>
-
-                                <button type="button" wire:click="destroy({{ $plan->id }})" class="dropdown-item"
-                                    onclick="confirmAction()">
-                                    Eliminar
+                        @hasanyrole('admnistrador|root')
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                    data-toggle="dropdown" aria-expanded="false">
+                                    Acciones
                                 </button>
+                                <div class="dropdown-menu">
+                                    <button type="button" class="dropdown-item"
+                                        wire:click="edit({{ $plan->id }})">Editar</button>
+
+                                    <button type="button" wire:click="destroy({{ $plan->id }})" class="dropdown-item"
+                                        onclick="confirmAction()">
+                                        Eliminar
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            No options
+                        @endhasanyrole
                     </td>
                 </tr>
             @empty
