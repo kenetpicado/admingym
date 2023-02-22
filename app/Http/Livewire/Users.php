@@ -67,9 +67,9 @@ class Users extends Component
         // if ($this->isNew) {
         //     Mail::to($this->user->email)->send(new UserRegister($this->user, $this->cleanPassword));
         // }
-        Mail::to($this->user->email)->send(new UserRegister($this->user, $this->cleanPassword));
+        //Mail::to($this->user->email)->send(new UserRegister($this->user, $this->cleanPassword));
 
-        $this->success(false);
+        $this->created();
 
         $this->resetInputFields();
         $this->emit('close-create-modal');
@@ -92,6 +92,6 @@ class Users extends Component
     public function destroy(User $user)
     {
         $user->delete();
-        $this->delete();
+        $this->deleted();
     }
 }

@@ -13,7 +13,6 @@ class Eventos extends Component
 
     public $entrenador      = null;
     public $evento          = null;
-    public bool $isUpdate    = false;
 
     public function mount(Entrenador $entrenador)
     {
@@ -38,7 +37,7 @@ class Eventos extends Component
 
     public function resetInputFields()
     {
-        $this->reset(['isUpdate', 'evento']);
+        $this->reset(['evento']);
         $this->resetErrorBag();
 
         $this->createEventoInstance();
@@ -49,7 +48,7 @@ class Eventos extends Component
         $this->validate();
         $this->evento->save();
 
-        $this->success($this->isUpdate);
+        $this->created();
         $this->resetInputFields();
 
         $this->emit('close-create-modal');

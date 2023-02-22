@@ -50,7 +50,7 @@ class Reportes extends Component
     public function destroy(Reporte $reporte)
     {
         $reporte->delete();
-        $this->delete();
+        $this->deleted();
     }
 
     public function create(Cliente $cliente, $created_at)
@@ -68,7 +68,7 @@ class Reportes extends Component
         $this->validate();
         $this->cliente->planes()->save($this->plan);
 
-        $this->success();
+        $this->created();
         $this->resetInputFields();
 
         $this->emit('close-create-modal');
@@ -77,6 +77,6 @@ class Reportes extends Component
     public function refresh()
     {
         UpdateNotificationsList::dispatch();
-        $this->lista_actualizada();
+        $this->updated();
     }
 }

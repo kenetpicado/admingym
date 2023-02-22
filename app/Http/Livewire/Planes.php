@@ -53,7 +53,7 @@ class Planes extends Component
         $this->validate();
         $this->plan->save();
 
-        $this->success();
+        $this->created();
         $this->resetInputFields();
 
         $this->emit('close-create-modal');
@@ -68,6 +68,6 @@ class Planes extends Component
     public function destroy(Plan $plan)
     {
         $plan->delete();
-        $this->delete();
+        $this->deleted();
     }
 }

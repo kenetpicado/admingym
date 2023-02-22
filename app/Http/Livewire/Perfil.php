@@ -45,7 +45,7 @@ class Perfil extends Component
         $this->validate();
         $this->users->save();
 
-        $this->success();
+        $this->created();
         return redirect()->route('index');
     }
 
@@ -57,7 +57,7 @@ class Perfil extends Component
         $user->password = bcrypt($this->password);
         $user->save();
 
-        $this->success();
+        $this->created();
         return redirect()->route('index');
     }
 }

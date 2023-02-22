@@ -62,7 +62,7 @@ class Clientes extends Component
             $this->storePlan();
         }
 
-        $this->success();
+        $this->created();
         $this->resetInputFields();
         $this->emit('close-create-modal');
     }
@@ -107,11 +107,13 @@ class Clientes extends Component
 
     public function destroy(Cliente $cliente)
     {
-        if (($result = $cliente->planes->count()) == 0) {
-            $cliente->delete();
+        if ($cliente->planes()->count() > 0) {
+            $this->error('No se puede eliminar el cliente');
+            return;
         }
 
-        $this->delete(!$result);
+        $cliente->delete();
+        $this->deleted();
     }
 
     public function createClienteInstance()

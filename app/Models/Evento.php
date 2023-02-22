@@ -30,13 +30,8 @@ class Evento extends Model
         return $query->where('entrenador_id', $entrenador_id);
     }
 
-    public function getCreatedAttribute()
+    public function getFormatCreatedAtAttribute()
     {
-        return date('d-m-Y', strtotime($this->attributes['created_at']));
-    }
-
-    public function getAgoAttribute()
-    {
-        return Carbon::createFromFormat('Y-m-d', $this->attributes['created_at'])->diffForHumans();
+        return date('d/m/Y', strtotime($this->created_at));
     }
 }

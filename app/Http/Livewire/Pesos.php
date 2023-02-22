@@ -13,7 +13,6 @@ class Pesos extends Component
 
     public $peso            = null;
     public $cliente         = null;
-    public bool $isUpdate   = false;
 
     protected $rules = [
         'peso.peso'        => 'required|numeric',
@@ -44,7 +43,7 @@ class Pesos extends Component
         $this->validate();
         $this->peso->save();
 
-        $this->success($this->isUpdate);
+        $this->created();
         $this->resetInputFields();
 
         $this->emit('close-create-modal');
@@ -53,14 +52,13 @@ class Pesos extends Component
     public function edit(Peso $peso)
     {
         $this->peso = $peso;
-        $this->isUpdate = true;
         $this->emit('open-create-modal');
     }
 
     public function destroy(Peso $peso)
     {
         $peso->delete();
-        $this->delete();
+        $this->deleted();
     }
 
     public function createPesoInstance()
