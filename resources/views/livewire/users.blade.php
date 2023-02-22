@@ -41,7 +41,7 @@
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-danger" wire:click="destroy({{ $user->id }})" onclick="confirm_delete()">
+                    <button type="button" class="btn btn-sm btn-danger" wire:click="destroy({{ $user->id }})" onclick="confirmAction()">
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>

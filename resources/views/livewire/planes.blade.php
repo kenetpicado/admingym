@@ -91,7 +91,7 @@
                                     wire:click="edit({{ $plan->id }})">Editar</button>
 
                                 <button type="button" wire:click="destroy({{ $plan->id }})" class="dropdown-item"
-                                    onclick="confirm_delete()">
+                                    onclick="confirmAction()">
                                     Eliminar
                                 </button>
                             </div>

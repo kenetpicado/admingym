@@ -37,7 +37,7 @@
                                 <button type="button" class="dropdown-item"
                                     wire:click="edit({{ $peso->id }})">Editar</button>
                                 <button type="button" wire:click="destroy({{ $peso->id }})" class="dropdown-item"
-                                    onclick="confirm_delete()">
+                                    onclick="confirmAction()">
                                     Eliminar
                                 </button>
                             </div>

@@ -43,10 +43,8 @@
                     <input type="search" class="form-control" wire:model="search" placeholder="Buscar Cliente">
                 </div>
                 <div class="col-3">
-                    <button type="button" class="btn btn-primary"
-                        onclick="confirm('Actualizar la lista planes vencidos?') || event.stopImmediatePropagation()"
-                        wire:click="refresh()">
-                        Actualizar Lista
+                    <button type="button" class="btn btn-primary" onclick="confirmAction('Actualizar la lista planes vencidos?')" wire:click="refresh()">
+                        Actualizar
                     </button>
                 </div>
             </div>
@@ -80,7 +78,7 @@
                             class="btn btn-primary  btn-sm rounded-3">Renovar</button>
                     </td>
                     <td>
-                        <button onclick="confirm_delete()" wire:click="destroy({{ $reporte->id }})"
+                        <button onclick="confirmAction()" wire:click="destroy({{ $reporte->id }})"
                             class="btn btn-secondary btn-sm rounded-3">Eliminar</button>
                     </td>
                 </tr>
