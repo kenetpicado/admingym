@@ -65,9 +65,9 @@
                 <tr>
                     <td>
                         <div>
-                            {{ $reporte->cliente_nombre }}
+                            Plan expirado
                             <div class="text-primary mt-2">
-                                Plan expirado
+                                {{ $reporte->cliente_nombre }}
                             </div>
                         </div>
                     </td>
