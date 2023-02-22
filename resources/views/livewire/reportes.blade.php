@@ -77,7 +77,7 @@
                     <td>{{ $reporte->format_created_at }}</td>
                     @hasanyrole('administrador|root')
                         <td>
-                            <button wire:click="create({{ $reporte->cliente_id }}, '{{ $reporte->created_at }}')"
+                            <button wire:click="create({{ $reporte->cliente_id }}, '{{ $reporte->format_created_at }}')"
                                 class="btn btn-primary  btn-sm rounded-3">Renovar</button>
                         </td>
                         <td>
