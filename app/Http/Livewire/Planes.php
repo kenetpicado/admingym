@@ -28,7 +28,7 @@ class Planes extends Component
             ->paginate();
 
         return view('livewire.planes', [
-            'plansExpiredCount' => (new RegistroService)->plansExpiredCount(),
+            'todayStatus' => (new RegistroService)->todayStatus(),
             'planes' => $planes
         ]);
     }

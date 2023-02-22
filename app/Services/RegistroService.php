@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\Registro;
 use Illuminate\Support\Facades\DB;
 
 class RegistroService
 {
-    public function plansExpiredCount()
+    public function todayStatus()
     {
         return DB::table('registros')
             ->where('created_at', date('Y-m-d'))

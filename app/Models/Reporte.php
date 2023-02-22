@@ -35,7 +35,6 @@ class Reporte extends Model
         return $this->belongsTo('App\Models\Cliente');
     }
 
-    /* Scopes */
     public function scopeWithCliente($query)
     {
         return $query->addSelect([

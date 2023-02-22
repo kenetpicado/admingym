@@ -12,14 +12,4 @@ class EgresoService
             ->where('created_at', '>=', date('Y-m-' . '01'))
             ->sum('monto');
     }
-
-    public function getForStats($year = 2022)
-    {
-        return DB::table('egresos')
-            ->select(DB::raw("MONTH(created_at) as mes, sum(monto) as total"))
-            ->whereYear('created_at', $year)
-            ->groupByRaw('MONTH(created_at)')
-            ->orderBy('mes')
-            ->get();
-    }
 }
