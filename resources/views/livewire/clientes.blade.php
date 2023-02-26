@@ -73,7 +73,7 @@
         <x-slot name="header">
             <div class="row mb-2">
                 <div class="col-12 col-lg-3">
-                    <input type="search" class="form-control " wire:model="search" placeholder="Buscar">
+                    <input type="search" class="form-control " wire:model.debounce.500ms="search" placeholder="Buscar">
                 </div>
             </div>
         </x-slot>
@@ -114,7 +114,7 @@
                             <a href="{{ route('historial', $cliente->id) }}" class="dropdown-item">Historial</a>
                             <button type="button" class="dropdown-item" wire:click="edit({{ $cliente->id }})">Editar</button>
                             <button type="button" wire:click="destroy({{ $cliente->id }})" class="dropdown-item"
-                                onclick="confirm_delete()">
+                                onclick="confirmAction()">
                                 Eliminar
                             </button>
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\ApplicationStarted;
 use App\Models\Plan;
 use App\Services\RegistroService;
 use App\Traits\MyAlerts;
@@ -21,15 +22,21 @@ class Planes extends Component
 
     public function render()
     {
+        $planes = Plan::withCliente()
+            ->orderBy('fecha_fin')
+            ->searching($this->search)
+            ->paginate();
+
         return view('livewire.planes', [
-            'registro' => (new RegistroService)->getCurrent(),
-            'planes' => Plan::withCliente()->orderBy('fecha_fin')->searching($this->search)->paginate(20)
+            'todayStatus' => (new RegistroService)->todayStatus(),
+            'planes' => $planes
         ]);
     }
 
     public function mount()
     {
         $this->plan = new Plan();
+        //ApplicationStarted::dispatch();
     }
 
     public function resetInputFields()
@@ -46,7 +53,7 @@ class Planes extends Component
         $this->validate();
         $this->plan->save();
 
-        $this->success();
+        $this->created();
         $this->resetInputFields();
 
         $this->emit('close-create-modal');
@@ -61,6 +68,6 @@ class Planes extends Component
     public function destroy(Plan $plan)
     {
         $plan->delete();
-        $this->delete();
+        $this->deleted();
     }
 }

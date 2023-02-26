@@ -26,12 +26,6 @@ class DateService
         return $meses[$month_number - 1];
     }
 
-    public static function current_month()
-    {
-        $meses = array("ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE");
-        return $meses[date('n') - 1];
-    }
-
     public function getEndDate($period, $original_start_date)
     {
         $start_date = Carbon::create($original_start_date);

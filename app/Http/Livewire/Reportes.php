@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Jobs\UpdateNotificationsList;
 use App\Models\Cliente;
 use App\Models\Plan;
 use App\Models\Reporte;
 use App\Services\PlanService;
-use App\Services\ReporteService;
 use App\Traits\MyAlerts;
 use App\Traits\RulesTraits;
 use Livewire\Component;
@@ -28,7 +28,10 @@ class Reportes extends Component
     public function render()
     {
         return view('livewire.reportes', [
-            'reportes' => Reporte::withCliente()->searching($this->search)->latest('id')->paginate(20),
+            'reportes' => Reporte::withCliente()
+                ->searching($this->search)
+                ->latest('id')
+                ->paginate(),
         ]);
     }
 
@@ -47,7 +50,7 @@ class Reportes extends Component
     public function destroy(Reporte $reporte)
     {
         $reporte->delete();
-        $this->delete();
+        $this->deleted();
     }
 
     public function create(Cliente $cliente, $created_at)
@@ -65,7 +68,7 @@ class Reportes extends Component
         $this->validate();
         $this->cliente->planes()->save($this->plan);
 
-        $this->success();
+        $this->created();
         $this->resetInputFields();
 
         $this->emit('close-create-modal');
@@ -73,7 +76,7 @@ class Reportes extends Component
 
     public function refresh()
     {
-        (new ReporteService)->refresh();
-        $this->lista_actualizada();
+        UpdateNotificationsList::dispatch();
+        $this->reloadedList();
     }
 }

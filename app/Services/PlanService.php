@@ -16,19 +16,6 @@ class PlanService
         $plan->created_at = date('Y-m-d');
     }
 
-    public function deleteExpired(): int
-    {
-        $expired = Plan::expired()->get();
-
-        if (!$expired->isEmpty()) {
-            (new ReporteService)->buildAndSave($expired);
-
-            Plan::deleteIds($expired->pluck('id'));
-        }
-
-        return $expired->count();
-    }
-
     public function groupByServicio()
     {
         return DB::table('planes')
@@ -41,7 +28,7 @@ class PlanService
     {
         return DB::table('planes')
             ->where('created_at', '>=', date('Y-m-' . '01'))
-            ->where('created_at', '<=', date('Y-m-d'))
+            ->where('created_at', '<=', date('Y-m-t'))
             ->groupBy('created_at')
             ->orderBy('created_at', 'desc')
             ->limit(10)

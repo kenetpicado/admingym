@@ -37,11 +37,11 @@ class Clientes extends Component
 
     public function render()
     {
-        $clientes = Cliente::where('nombre', 'like', "%{$this->search}%")
-            ->orWhere('id', 'like', "%{$this->search}%")
-            ->orderBy('id', 'desc')
+        $clientes = Cliente::query()
+            ->searching($this->search)
+            ->latest('id')
             ->withCount('planes')
-            ->paginate(20);
+            ->paginate(10);
 
         return view('livewire.clientes', compact('clientes'));
     }
@@ -54,13 +54,15 @@ class Clientes extends Component
 
     public function store()
     {
-        if ($this->saveCliente)
+        if ($this->saveCliente) {
             $this->storeCliente();
+        }
 
-        if ($this->savePlan)
+        if ($this->savePlan) {
             $this->storePlan();
+        }
 
-        $this->success();
+        $this->created();
         $this->resetInputFields();
         $this->emit('close-create-modal');
     }
@@ -105,10 +107,13 @@ class Clientes extends Component
 
     public function destroy(Cliente $cliente)
     {
-        if (($result = $cliente->planes->count()) == 0)
-            $cliente->delete();
+        if ($cliente->planes()->count() > 0) {
+            $this->error('No se puede eliminar el cliente');
+            return;
+        }
 
-        $this->delete(!$result);
+        $cliente->delete();
+        $this->deleted();
     }
 
     public function createClienteInstance()

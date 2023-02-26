@@ -13,12 +13,11 @@ class Eventos extends Component
 
     public $entrenador      = null;
     public $evento          = null;
-    public bool $isUpdate    = false;
 
     public function mount(Entrenador $entrenador)
     {
         $this->entrenador = $entrenador;
-        $this->create_instance();
+        $this->createEventoInstance();
     }
 
     protected $rules = [
@@ -38,10 +37,10 @@ class Eventos extends Component
 
     public function resetInputFields()
     {
-        $this->reset(['isUpdate', 'evento']);
+        $this->reset(['evento']);
         $this->resetErrorBag();
 
-        $this->create_instance();
+        $this->createEventoInstance();
     }
 
     public function store()
@@ -49,13 +48,13 @@ class Eventos extends Component
         $this->validate();
         $this->evento->save();
 
-        $this->success($this->isUpdate);
+        $this->created();
         $this->resetInputFields();
 
         $this->emit('close-create-modal');
     }
 
-    public function create_instance()
+    public function createEventoInstance()
     {
         $this->evento = new Evento();
         $this->evento->monto = 0;

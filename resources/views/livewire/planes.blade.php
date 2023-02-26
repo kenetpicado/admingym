@@ -43,12 +43,12 @@
         @slot('header')
             <div class="card-title">
                 <div class="alert alert-danger" role="alert">
-                    {{ $registro->status ?? '0' }} nuevos planes expirados.
+                    {{ $todayStatus ?? '0' }} nuevos planes expirados.
                 </div>
             </div>
             <div class="row">
                 <div class="col-3">
-                    <input type="search" class="form-control " wire:model="search" placeholder="Buscar">
+                    <input type="search" class="form-control " wire:model.debounce.500ms="search" placeholder="Buscar">
                 </div>
             </div>
         @endslot
@@ -63,7 +63,7 @@
             @forelse ($planes as $plan)
                 <tr>
                     <td>
-                        {{ $plan->cliente->nombre }}
+                        {{ $plan->cliente_nombre }}
                         @isset($plan->nota)
                             <div class="small text-primary">
                                 {{ $plan->nota }}
@@ -81,21 +81,25 @@
                         </div>
                     </td>
                     <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                data-toggle="dropdown" aria-expanded="false">
-                                Acciones
-                            </button>
-                            <div class="dropdown-menu">
-                                <button type="button" class="dropdown-item"
-                                    wire:click="edit({{ $plan->id }})">Editar</button>
-
-                                <button type="button" wire:click="destroy({{ $plan->id }})" class="dropdown-item"
-                                    onclick="confirm_delete()">
-                                    Eliminar
+                        @hasanyrole('admnistrador|root')
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                    data-toggle="dropdown" aria-expanded="false">
+                                    Acciones
                                 </button>
+                                <div class="dropdown-menu">
+                                    <button type="button" class="dropdown-item"
+                                        wire:click="edit({{ $plan->id }})">Editar</button>
+
+                                    <button type="button" wire:click="destroy({{ $plan->id }})" class="dropdown-item"
+                                        onclick="confirmAction()">
+                                        Eliminar
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            No options
+                        @endhasanyrole
                     </td>
                 </tr>
             @empty

@@ -39,7 +39,7 @@ class Precios extends Component
         $this->validate();
         $this->precio->save();
 
-        $this->success(true);
+        $this->created();
         $this->resetInputFields();
 
         $this->emit('close-create-modal');

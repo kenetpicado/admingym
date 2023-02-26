@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Cliente;
+use App\Services\DateService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Services\DateService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Plan extends Model
@@ -45,7 +46,13 @@ class Plan extends Model
     /* SCOPES */
     public function scopeSearching($query, $search)
     {
-        return $query->when($search, fn ($q) => $q->whereHas('cliente', fn ($q) => $q->where('nombre', 'like', '%' . $search . '%')));
+        if ($search) {
+            $query->whereIn('cliente_id', function ($q) use ($search) {
+                $q->select('id')
+                    ->from('clientes')
+                    ->where('nombre', 'like', '%' . $search . '%');
+            });
+        }
     }
 
     public function scopeExpired($query)
@@ -53,13 +60,12 @@ class Plan extends Model
         return $query->where('fecha_fin', '<=', date('Y-m-d'));
     }
 
-    public function scopeDeleteIds($query, $ids)
-    {
-        return $query->whereIn('id', $ids)->delete();
-    }
-
     public function scopeWithCliente($query)
     {
-        return $query->with('cliente:id,nombre');
+        return $query->addSelect([
+            'cliente_nombre' => Cliente::select('nombre')
+                ->whereColumn('clientes.id', 'planes.cliente_id')
+                ->limit(1)
+        ]);
     }
 }

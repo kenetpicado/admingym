@@ -16,7 +16,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="d-none" id="close-create-modal" data-dismiss="modal"></button>
-                    <button type="submit" wire:loading.attr="disabled" class="btn btn-primary">Guardar</button>
+                    <button type="submit" wire:loading.attr="disabled" class="btn btn-primary">
+                        <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Guardar
+                    </button>
                 </div>
             </form>
         </div>

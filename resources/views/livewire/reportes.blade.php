@@ -43,10 +43,8 @@
                     <input type="search" class="form-control" wire:model="search" placeholder="Buscar Cliente">
                 </div>
                 <div class="col-3">
-                    <button type="button" class="btn btn-primary"
-                        onclick="confirm('Actualizar la lista planes vencidos?') || event.stopImmediatePropagation()"
-                        wire:click="refresh()">
-                        Actualizar Lista
+                    <button type="button" class="btn btn-primary" onclick="confirmAction('Actualizar la lista planes vencidos?')" wire:click="refresh()">
+                        Actualizar
                     </button>
                 </div>
             </div>
@@ -56,8 +54,10 @@
             <th>Mensaje</th>
             <th>Plan</th>
             <th>Fecha expiración</th>
-            <th>Renovar</th>
-            <th>Eliminar</th>
+            @hasanyrole('administrador|root')
+                <th>Renovar</th>
+                <th>Eliminar</th>
+            @endhasanyrole
         @endslot
 
         <tbody>
@@ -65,24 +65,26 @@
                 <tr>
                     <td>
                         <div>
-                            {{ $reporte->cliente->nombre }}
+                            Plan expirado
                             <div class="text-primary mt-2">
-                                Plan expirado
+                                {{ $reporte->cliente_nombre }}
                             </div>
                         </div>
                     </td>
                     <td>
                         {{ $reporte->mensaje }}
                     </td>
-                    <td>{{ $reporte->created_at }}</td>
-                    <td>
-                        <button wire:click="create({{ $reporte->cliente->id }}, '{{ $reporte->created_at }}')"
-                            class="btn btn-primary  btn-sm rounded-3">Renovar</button>
-                    </td>
-                    <td>
-                        <button onclick="confirm_delete()" wire:click="destroy({{ $reporte->id }})"
-                            class="btn btn-secondary btn-sm rounded-3">Eliminar</button>
-                    </td>
+                    <td>{{ $reporte->format_created_at }}</td>
+                    @hasanyrole('administrador|root')
+                        <td>
+                            <button wire:click="create({{ $reporte->cliente_id }}, '{{ $reporte->format_created_at }}')"
+                                class="btn btn-primary  btn-sm rounded-3">Renovar</button>
+                        </td>
+                        <td>
+                            <button onclick="confirmAction()" wire:click="destroy({{ $reporte->id }})"
+                                class="btn btn-secondary btn-sm rounded-3">Eliminar</button>
+                        </td>
+                    @endhasanyrole
                 </tr>
             @endforeach
         </tbody>

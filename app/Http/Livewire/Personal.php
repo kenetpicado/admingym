@@ -11,7 +11,6 @@ class Personal extends Component
     use MyAlerts;
 
     public $entrenador = null;
-    public bool $isUpdate = false;
 
     protected $rules = [
         'entrenador.nombre'     => 'required|max:50',
@@ -41,7 +40,7 @@ class Personal extends Component
         $this->validate();
         $this->entrenador->save();
 
-        $this->success($this->isUpdate);
+        $this->created();
 
         $this->resetInputFields();
         $this->emit('close-create-modal');
@@ -50,8 +49,6 @@ class Personal extends Component
     public function edit(Entrenador $entrenador)
     {
         $this->entrenador = $entrenador;
-        $this->isUpdate = true;
-
         $this->emit('open-create-modal');
     }
 
@@ -59,6 +56,6 @@ class Personal extends Component
     {
         $entrenador->delete();
 
-        $this->delete();
+        $this->deleted();
     }
 }

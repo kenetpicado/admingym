@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Services\DateService;
-use Illuminate\Support\Facades\DB;
 
 class CollectionService
 {

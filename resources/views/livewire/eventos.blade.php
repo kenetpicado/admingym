@@ -6,7 +6,7 @@
 @endsection
 
 <div class="card">
-    <x-header-modal>Eventos</x-header-modal>
+    <x-header-modal>Eventos: {{ $entrenador->nombre }}</x-header-modal>
 
     <x-modal.create label="Evento">
         <div class="form-group">
@@ -23,12 +23,6 @@
     </x-modal.create>
 
     <x-table-head>
-        @slot('header')
-            <div class="alert alert-secondary" role="alert">
-                Eventos de: {{ $entrenador->nombre }}
-            </div>
-        @endslot
-
         @slot('title')
             <th>Evento</th>
             <th>Monto</th>
@@ -47,14 +41,7 @@
                         @endisset
                     </td>
                     <td>C$ {{ $evento->monto }}</td>
-                    <td class="d-block">
-                        <div>
-                            {{ $evento->created }}
-                        </div>
-                        <div class="text-muted">
-                            {{ $evento->ago }}
-                        </div>
-                    </td>
+                    <td>{{ $evento->format_created_at }}</td>
                 </tr>
             @empty
                 <tr class="text-center">

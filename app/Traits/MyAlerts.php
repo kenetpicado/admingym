@@ -8,18 +8,23 @@ trait MyAlerts
 {
     use LivewireAlert;
 
-    public function success($is_update = false)
+    public function created()
     {
-        $this->alert('success',  $is_update ?  config('app.update') : config('app.add'));
+        $this->alert('success', "Registro guardado correctamente");
     }
 
-    public function lista_actualizada()
+    public function reloadedList()
     {
-        $this->alert('success', "Lista actualizada correctamente");
+        $this->alert('success', "Registro actualizado correctamente");
     }
 
-    public function delete($deleted = true)
+    public function deleted()
     {
-        $this->alert('error',  $deleted ? config('app.deleted') : config('app.undeleted'));
+        $this->alert('info', "Registro eliminado correctamente");
+    }
+
+    public function error($msj)
+    {
+        $this->alert('error', $msj);
     }
 }
