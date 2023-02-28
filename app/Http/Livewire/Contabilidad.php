@@ -11,10 +11,15 @@ class Contabilidad extends Component
     use MyAlerts;
 
     public $table = "ingresos";
-    public $start, $end;
+    public $start = null;
+    public $end = null;
     public $search_concepto = null;
 
-    public $sub_id, $concepto, $descripcion, $monto, $created_at;
+    public $sub_id = null;
+    public $concepto = null;
+    public $descripcion = null;
+    public $monto = null;
+    public $created_at = null;
 
     protected $rules = [
         'concepto' => 'required|max:50',
@@ -65,7 +70,7 @@ class Contabilidad extends Component
         $data = $this->validate();
         DB::table($this->table)->updateOrInsert(['id' => $this->sub_id], $data);
 
-        $this->success($this->sub_id);
+        $this->created();
         $this->resetInputFields();
         $this->emit('close-create-modal');
     }
