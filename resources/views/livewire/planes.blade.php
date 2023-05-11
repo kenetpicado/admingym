@@ -48,7 +48,23 @@
             </div>
             <div class="row">
                 <div class="col-3">
+                    <label for="" class="form-label">Buscar</label>
                     <input type="search" class="form-control " wire:model.debounce.500ms="search" placeholder="Buscar">
+                </div>
+                <div class="col-3">
+                    <x-select-realtime label="Servicio" name="serviceFilter">
+                        <option value="">All</option>
+                        <option value="PESAS">PESAS</option>
+                        <option value="ZUMBA">ZUMBA</option>
+                        <option value="SPINNING">SPINNING</option>
+                        <option value="ZUMBA+PESAS">ZUMBA+PESAS</option>
+                    </x-select-realtime>
+                </div>
+                <div class="col-3">
+                    <label for="">Total</label>
+                    <div class="form-control">
+                        {{ $planes->total() }}
+                    </div>
                 </div>
             </div>
         @endslot

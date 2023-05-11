@@ -19,11 +19,15 @@ class Planes extends Component
 
     public $search = null;
     public $plan = null;
+    public $serviceFilter = null;
 
     public function render()
     {
         $planes = Plan::withCliente()
             ->orderBy('fecha_fin')
+            ->when($this->serviceFilter, function ($query) {
+                $query->where('servicio', $this->serviceFilter);
+            })
             ->searching($this->search)
             ->paginate();
 

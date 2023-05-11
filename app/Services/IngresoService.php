@@ -22,4 +22,14 @@ class IngresoService
     {
         return substr($plan->cliente->nombre . ', ' . $plan->servicio . ', ' . $plan->plan, 0, 50);
     }
+
+    public function getForStats($year = 2022)
+    {
+        return DB::table('ingresos')
+            ->select(DB::raw("MONTH(created_at) as mes, sum(monto) as total"))
+            ->whereYear('created_at', $year)
+            ->groupByRaw('MONTH(created_at)')
+            ->orderBy('mes')
+            ->get();
+    }
 }
