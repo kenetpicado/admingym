@@ -97,7 +97,7 @@
                         </div>
                     </td>
                     <td>
-                        @hasanyrole('admnistrador|root')
+                        @hasanyrole('administrador|root')
                             <div class="dropdown">
                                 <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
                                     data-toggle="dropdown" aria-expanded="false">
